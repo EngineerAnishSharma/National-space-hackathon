@@ -1,0 +1,2001 @@
+Item ID,Name,Width,Depth,Height,Mass,Priority,Expiry Date,Usage Limit,Preferred Zone
+item0001,Dehydrated Meal Pack,18,29,60,12,11,N/A,78,Docking Area 2
+item0002,Hygiene Kit,12,38,94,74,29,N/A,14,Crew Quarters
+item0003,Oxygen Cylinder,90,22,31,60,16,2026-01-30,69,Cupola
+item0004,Experiment Sample,79,46,62,88,74,N/A,18,Docking Area 2
+item0005,Experiment Sample,20,12,58,66,49,N/A,51,Docking Area 1
+item0006,Solar Panel Part,47,59,59,43,41,N/A,69,Crew Quarters
+item0007,Microgravity Experiment Setup,25,22,43,93,36,2026-03-02,95,Storage Area 2
+item0008,Hygiene Kit,93,37,50,29,16,N/A,58,Airlock
+item0009,Microgravity Experiment Setup,8,57,7,30,0,2025-04-06,16,Russian Laboratory
+item0010,Solar Panel Part,89,75,76,46,25,2025-12-20,73,Storage Area 3
+item0011,Oxygen Cylinder,18,93,30,25,22,N/A,95,US Laboratory
+item0012,Dehydrated Meal Pack,18,48,36,98,42,N/A,25,Docking Area 1
+item0013,Water Container,88,46,55,78,93,2025-05-23,2,Airlock
+item0014,Communication Device,30,23,44,44,40,2025-11-04,22,Service Module
+item0015,Oxygen Cylinder,70,66,88,94,34,2025-11-25,40,Docking Area 1
+item0016,Spare Part,26,82,26,71,86,N/A,76,Crew Quarters
+item0017,Medical Supply Kit,66,5,96,32,41,2025-12-12,13,Docking Area 3
+item0018,Oxygen Cylinder,13,69,97,8,86,2025-12-06,17,European Laboratory
+item0019,Solar Panel Part,43,80,73,40,89,2025-08-12,87,Airlock
+item0020,Water Container,79,55,63,54,17,2025-10-14,66,Storage Area 1
+item0021,Tool Kit,82,55,53,93,15,N/A,12,Storage Area 1
+item0022,Battery Pack,87,46,62,1,56,N/A,29,Storage Area 1
+item0023,Oxygen Cylinder,49,11,29,4,74,N/A,67,Docking Area 4
+item0024,Spare Part,29,85,67,3,50,2026-02-11,13,Japanese Laboratory
+item0025,Scientific Instrument,86,77,47,38,28,N/A,36,Crew Quarters
+item0026,Water Container,7,91,14,42,99,N/A,59,Airlock
+item0027,Dehydrated Meal Pack,79,36,70,10,65,N/A,86,US Laboratory
+item0028,Medical Supply Kit,57,22,97,93,97,N/A,84,Storage Area 1
+item0029,Water Container,61,20,22,96,63,2025-05-23,67,Crew Quarters
+item0030,Microgravity Experiment Setup,81,44,26,64,52,N/A,91,European Laboratory
+item0031,Solar Panel Part,84,9,33,3,99,2025-12-23,25,European Laboratory
+item0032,Battery Pack,7,58,92,71,17,2026-03-08,49,Airlock
+item0033,Dehydrated Meal Pack,5,41,18,73,93,2025-08-31,29,Airlock
+item0034,Communication Device,5,76,31,76,35,N/A,71,Cupola
+item0035,Tool Kit,63,38,32,66,88,N/A,43,Russian Laboratory
+item0036,Microgravity Experiment Setup,32,63,51,48,13,2026-03-18,7,Russian Laboratory
+item0037,Medical Supply Kit,77,64,41,62,3,2026-03-07,64,Storage Area 2
+item0038,Spare Part,86,37,58,11,89,2025-11-12,82,Japanese Laboratory
+item0039,Scientific Instrument,77,24,43,54,42,N/A,64,Airlock
+item0040,Communication Device,24,36,20,95,35,N/A,39,Airlock
+item0041,Spare Part,78,27,5,99,6,2025-09-15,96,Crew Quarters
+item0042,Experiment Sample,29,76,37,21,52,2025-12-26,33,Docking Area 1
+item0043,Water Container,17,27,42,8,22,2025-11-14,100,Storage Area 2
+item0044,Scientific Instrument,80,84,33,46,45,N/A,23,Docking Area 1
+item0045,Experiment Sample,39,14,9,75,66,2025-06-03,89,Crew Quarters
+item0046,First Aid Kit,81,44,41,29,7,N/A,39,Airlock
+item0047,Experiment Sample,61,92,21,87,25,N/A,49,Service Module
+item0048,Experiment Sample,59,53,75,38,8,2025-11-29,25,Crew Quarters
+item0049,Hygiene Kit,8,34,7,24,35,2025-09-27,35,Docking Area 4
+item0050,Spare Part,76,81,18,82,46,2025-12-05,69,Storage Area 1
+item0051,Battery Pack,29,25,86,16,52,2026-03-16,17,Docking Area 1
+item0052,Tool Kit,64,62,15,30,10,N/A,7,Storage Area 3
+item0053,Spare Part,96,36,23,67,81,N/A,58,Airlock
+item0054,Hygiene Kit,23,62,58,94,96,2026-01-15,67,Docking Area 2
+item0055,Microgravity Experiment Setup,46,9,5,87,77,N/A,31,Russian Laboratory
+item0056,Medical Supply Kit,53,51,88,94,74,N/A,66,Storage Area 1
+item0057,Food Ration,39,36,73,13,98,2026-01-08,92,European Laboratory
+item0058,Medical Supply Kit,64,28,57,92,21,N/A,52,Storage Area 2
+item0059,Scientific Instrument,32,59,83,30,94,2025-06-05,58,Airlock
+item0060,Solar Panel Part,54,88,15,33,5,N/A,15,Crew Quarters
+item0061,Scientific Instrument,41,36,62,26,25,N/A,75,Storage Area 3
+item0062,Water Container,18,87,58,10,2,2025-05-23,24,Storage Area 1
+item0063,Dehydrated Meal Pack,55,78,78,71,72,N/A,20,Docking Area 2
+item0064,Food Ration,28,97,19,38,23,2025-06-18,51,Storage Area 1
+item0065,Experiment Sample,75,60,96,98,54,2026-01-14,27,Storage Area 2
+item0066,Solar Panel Part,70,23,9,95,38,N/A,99,US Laboratory
+item0067,Communication Device,77,61,79,53,70,2026-01-05,95,European Laboratory
+item0068,Solar Panel Part,10,24,73,60,98,N/A,30,Storage Area 2
+item0069,Dehydrated Meal Pack,54,81,76,81,49,N/A,28,Japanese Laboratory
+item0070,Communication Device,64,90,22,27,62,N/A,65,Storage Area 1
+item0071,Experiment Sample,80,73,31,6,84,N/A,73,Service Module
+item0072,Medical Supply Kit,74,72,75,94,67,2025-10-24,84,Docking Area 2
+item0073,Battery Pack,9,33,82,10,2,N/A,65,Service Module
+item0074,Hygiene Kit,10,84,24,69,61,N/A,31,Storage Area 2
+item0075,Experiment Sample,29,35,71,42,10,N/A,78,Docking Area 4
+item0076,Dehydrated Meal Pack,79,42,56,61,20,2025-11-16,14,European Laboratory
+item0077,Experiment Sample,90,83,57,71,66,N/A,65,Docking Area 2
+item0078,Food Ration,9,38,64,81,15,2025-04-17,96,Airlock
+item0079,Dehydrated Meal Pack,92,23,9,69,5,2026-03-26,56,Storage Area 3
+item0080,Battery Pack,62,27,96,44,53,2025-08-28,58,Cupola
+item0081,Solar Panel Part,97,18,53,95,47,N/A,4,Storage Area 2
+item0082,Battery Pack,86,99,11,5,19,2025-09-29,90,European Laboratory
+item0083,Water Container,96,10,10,48,17,N/A,88,Docking Area 1
+item0084,Water Container,39,72,13,5,19,N/A,67,Airlock
+item0085,Communication Device,28,33,23,38,99,2025-04-01,83,Russian Laboratory
+item0086,Battery Pack,33,15,57,29,41,N/A,3,US Laboratory
+item0087,Water Container,19,8,67,10,76,2025-12-21,32,Airlock
+item0088,First Aid Kit,29,9,90,29,62,N/A,29,Storage Area 3
+item0089,Microgravity Experiment Setup,58,33,17,100,57,N/A,25,Storage Area 1
+item0090,Microgravity Experiment Setup,10,21,85,73,69,2025-04-10,61,Storage Area 3
+item0091,Solar Panel Part,15,91,61,22,25,2025-06-10,28,Cupola
+item0092,Hygiene Kit,83,100,19,17,27,N/A,81,European Laboratory
+item0093,Food Ration,32,97,61,31,49,N/A,64,Airlock
+item0094,Communication Device,46,33,95,44,53,N/A,5,Russian Laboratory
+item0095,Oxygen Cylinder,9,26,76,39,42,N/A,54,Service Module
+item0096,Oxygen Cylinder,55,34,78,84,84,2025-10-13,80,Storage Area 2
+item0097,Microgravity Experiment Setup,78,100,51,10,38,N/A,46,Storage Area 2
+item0098,Battery Pack,78,87,82,56,11,N/A,83,Crew Quarters
+item0099,Water Container,13,54,32,54,78,2025-11-10,30,Cupola
+item0100,Solar Panel Part,83,34,24,83,84,2025-12-10,79,Docking Area 1
+item0101,Scientific Instrument,17,7,77,99,91,2025-10-19,90,Docking Area 3
+item0102,Medical Supply Kit,13,8,33,42,29,N/A,72,Crew Quarters
+item0103,Dehydrated Meal Pack,11,60,91,53,33,N/A,46,Japanese Laboratory
+item0104,Hygiene Kit,76,66,41,60,100,N/A,7,Docking Area 3
+item0105,Medical Supply Kit,93,86,16,44,80,N/A,61,Service Module
+item0106,Dehydrated Meal Pack,62,67,73,10,54,2025-07-25,86,Japanese Laboratory
+item0107,Hygiene Kit,38,95,60,21,68,2025-10-31,29,Storage Area 3
+item0108,Tool Kit,25,71,93,56,56,N/A,58,European Laboratory
+item0109,Medical Supply Kit,85,42,55,25,39,N/A,99,Japanese Laboratory
+item0110,Hygiene Kit,74,74,64,53,22,2025-10-30,7,Russian Laboratory
+item0111,Hygiene Kit,61,47,87,18,64,N/A,29,Crew Quarters
+item0112,Spare Part,8,47,74,78,62,N/A,25,Storage Area 2
+item0113,Food Ration,12,73,97,66,58,2025-05-06,54,Storage Area 3
+item0114,First Aid Kit,72,78,17,25,76,2025-08-20,41,European Laboratory
+item0115,First Aid Kit,65,65,9,2,83,2025-06-14,98,Airlock
+item0116,Spare Part,60,55,10,28,52,2025-05-28,50,Cupola
+item0117,First Aid Kit,76,26,65,87,28,N/A,85,Crew Quarters
+item0118,Medical Supply Kit,26,76,38,77,28,2025-11-24,77,Crew Quarters
+item0119,Oxygen Cylinder,99,21,88,40,6,2025-11-03,11,Storage Area 2
+item0120,Dehydrated Meal Pack,97,97,61,26,52,N/A,89,Service Module
+item0121,Microgravity Experiment Setup,27,13,61,54,83,N/A,39,Storage Area 1
+item0122,Medical Supply Kit,63,53,60,23,31,2025-04-16,37,Storage Area 1
+item0123,Food Ration,99,99,98,70,57,2025-08-07,92,Storage Area 1
+item0124,Microgravity Experiment Setup,22,95,18,83,68,N/A,96,Storage Area 1
+item0125,Tool Kit,76,74,55,77,32,N/A,6,US Laboratory
+item0126,Solar Panel Part,53,13,34,24,40,2025-08-15,35,Cupola
+item0127,Battery Pack,97,77,50,63,62,N/A,95,Docking Area 4
+item0128,Food Ration,72,99,46,68,39,2025-09-08,78,Service Module
+item0129,Oxygen Cylinder,10,97,76,54,17,2025-11-23,52,Docking Area 3
+item0130,Tool Kit,27,8,11,97,67,N/A,14,Crew Quarters
+item0131,Spare Part,16,75,90,45,69,2025-07-30,58,Cupola
+item0132,Food Ration,88,65,25,7,42,2025-12-05,88,Docking Area 3
+item0133,Hygiene Kit,67,24,59,84,26,2025-07-15,78,European Laboratory
+item0134,Solar Panel Part,87,13,52,62,43,2025-06-01,31,Service Module
+item0135,Water Container,41,47,16,30,13,2025-05-21,71,Docking Area 4
+item0136,Dehydrated Meal Pack,40,29,94,73,0,2025-09-15,41,Russian Laboratory
+item0137,Tool Kit,89,23,22,49,84,N/A,31,Docking Area 3
+item0138,Communication Device,72,29,45,67,2,2025-10-07,51,Service Module
+item0139,Solar Panel Part,57,63,6,28,20,N/A,15,Airlock
+item0140,Solar Panel Part,17,42,61,24,81,N/A,85,European Laboratory
+item0141,Oxygen Cylinder,50,5,49,42,24,2025-07-26,49,Japanese Laboratory
+item0142,Battery Pack,93,82,43,86,69,2025-04-07,11,US Laboratory
+item0143,Communication Device,51,12,41,11,19,2025-07-27,90,Service Module
+item0144,Solar Panel Part,66,96,28,21,20,N/A,20,Docking Area 2
+item0145,Dehydrated Meal Pack,97,50,59,76,26,N/A,84,Airlock
+item0146,Food Ration,98,89,94,2,75,N/A,38,Airlock
+item0147,Food Ration,10,47,93,99,79,N/A,51,Storage Area 1
+item0148,Food Ration,53,46,82,47,49,2025-04-20,26,Airlock
+item0149,Battery Pack,63,24,76,39,67,N/A,49,Cupola
+item0150,Battery Pack,85,40,13,7,68,2025-06-19,78,Docking Area 3
+item0151,Water Container,61,68,91,12,17,N/A,53,Storage Area 3
+item0152,First Aid Kit,69,90,63,23,59,2026-01-16,67,Service Module
+item0153,Battery Pack,70,20,11,91,63,N/A,55,Docking Area 1
+item0154,Water Container,28,12,30,90,29,N/A,89,Cupola
+item0155,Microgravity Experiment Setup,46,90,61,25,95,N/A,68,Storage Area 1
+item0156,Experiment Sample,72,93,100,43,81,2025-10-02,65,Storage Area 2
+item0157,Spare Part,9,31,31,80,13,2025-07-01,67,Japanese Laboratory
+item0158,Oxygen Cylinder,59,86,40,33,93,N/A,64,Russian Laboratory
+item0159,Dehydrated Meal Pack,34,78,22,32,69,2025-10-15,32,Service Module
+item0160,Hygiene Kit,99,9,23,46,95,2025-10-19,89,Russian Laboratory
+item0161,Communication Device,18,59,15,65,20,N/A,35,Docking Area 1
+item0162,Scientific Instrument,17,99,94,98,31,N/A,36,European Laboratory
+item0163,Water Container,56,36,80,1,55,N/A,26,Docking Area 4
+item0164,Water Container,53,70,26,81,37,N/A,59,Crew Quarters
+item0165,Food Ration,74,74,8,70,77,N/A,95,Docking Area 1
+item0166,Hygiene Kit,35,24,12,69,34,N/A,15,Docking Area 1
+item0167,Experiment Sample,29,60,13,71,31,2025-12-04,34,US Laboratory
+item0168,Communication Device,51,91,90,14,64,N/A,80,Docking Area 1
+item0169,Scientific Instrument,81,39,11,10,68,N/A,89,Crew Quarters
+item0170,Communication Device,67,71,36,11,50,N/A,15,US Laboratory
+item0171,Tool Kit,75,43,92,14,21,2025-11-09,54,US Laboratory
+item0172,Tool Kit,93,21,48,20,76,N/A,68,Service Module
+item0173,Dehydrated Meal Pack,15,37,68,74,91,N/A,86,Docking Area 2
+item0174,Oxygen Cylinder,60,17,71,89,58,N/A,45,European Laboratory
+item0175,Hygiene Kit,43,6,75,64,76,2026-01-30,63,European Laboratory
+item0176,Communication Device,49,76,11,19,28,2025-09-21,56,Airlock
+item0177,Communication Device,91,78,17,76,0,2026-01-08,45,Airlock
+item0178,Scientific Instrument,39,67,74,31,85,N/A,95,Storage Area 1
+item0179,Solar Panel Part,73,75,61,50,83,N/A,64,Docking Area 1
+item0180,Hygiene Kit,15,5,23,8,82,2025-06-11,47,Service Module
+item0181,Solar Panel Part,65,26,37,14,43,N/A,61,Docking Area 4
+item0182,Food Ration,92,11,77,30,50,2025-05-28,53,Russian Laboratory
+item0183,Battery Pack,59,93,33,19,50,2026-03-23,51,Storage Area 3
+item0184,Solar Panel Part,66,83,49,52,10,2025-11-08,97,European Laboratory
+item0185,Food Ration,22,85,98,3,57,2025-12-08,83,Docking Area 4
+item0186,Dehydrated Meal Pack,63,50,44,32,50,N/A,33,Storage Area 1
+item0187,Medical Supply Kit,45,54,71,98,71,2026-03-05,30,Service Module
+item0188,Tool Kit,63,90,14,40,21,N/A,17,Docking Area 4
+item0189,Dehydrated Meal Pack,10,38,47,54,88,N/A,100,Airlock
+item0190,Communication Device,40,73,15,27,36,2026-03-21,1,Storage Area 2
+item0191,Dehydrated Meal Pack,34,22,76,35,80,2025-05-31,23,Russian Laboratory
+item0192,Tool Kit,25,67,14,45,40,2025-06-14,61,Storage Area 2
+item0193,Oxygen Cylinder,25,51,43,24,99,2025-07-03,76,Russian Laboratory
+item0194,Hygiene Kit,37,18,40,58,45,N/A,39,Docking Area 2
+item0195,Oxygen Cylinder,20,33,63,53,10,2025-07-17,75,Cupola
+item0196,Water Container,65,56,38,12,21,N/A,59,Russian Laboratory
+item0197,Hygiene Kit,91,24,17,59,38,2025-08-24,96,Cupola
+item0198,Medical Supply Kit,28,84,7,61,99,N/A,70,Japanese Laboratory
+item0199,First Aid Kit,95,44,26,1,29,2025-05-28,28,Service Module
+item0200,Tool Kit,48,15,9,75,52,N/A,78,Docking Area 1
+item0201,Oxygen Cylinder,20,72,45,8,59,N/A,62,Service Module
+item0202,Spare Part,89,37,18,15,42,2025-04-09,75,Japanese Laboratory
+item0203,First Aid Kit,61,47,84,99,82,N/A,82,Docking Area 4
+item0204,Tool Kit,56,60,68,53,86,N/A,62,Docking Area 1
+item0205,Food Ration,32,87,40,32,88,N/A,27,Japanese Laboratory
+item0206,Medical Supply Kit,64,86,74,20,2,N/A,50,Docking Area 4
+item0207,Microgravity Experiment Setup,8,5,10,12,51,2025-05-05,58,Russian Laboratory
+item0208,Spare Part,89,20,72,54,19,2025-11-08,35,Crew Quarters
+item0209,Water Container,91,27,8,38,34,2026-01-05,29,Cupola
+item0210,Medical Supply Kit,100,83,80,47,25,N/A,75,Service Module
+item0211,Water Container,71,14,67,90,85,N/A,54,Storage Area 3
+item0212,Experiment Sample,68,99,7,20,86,N/A,26,Airlock
+item0213,Communication Device,79,95,33,9,25,2025-10-06,48,Cupola
+item0214,Water Container,97,45,89,71,32,N/A,10,Docking Area 2
+item0215,Spare Part,6,58,96,5,72,N/A,37,US Laboratory
+item0216,Experiment Sample,89,9,7,71,96,2025-05-05,54,Service Module
+item0217,Spare Part,93,33,21,13,64,2025-10-11,20,Docking Area 1
+item0218,Water Container,91,89,71,49,0,2025-11-15,25,US Laboratory
+item0219,Microgravity Experiment Setup,87,61,63,89,88,N/A,58,European Laboratory
+item0220,Solar Panel Part,96,73,12,16,6,2025-07-20,78,Japanese Laboratory
+item0221,Spare Part,30,46,22,32,35,2025-05-23,11,US Laboratory
+item0222,Spare Part,48,17,96,12,48,N/A,55,Storage Area 1
+item0223,Experiment Sample,70,31,17,41,9,N/A,71,Japanese Laboratory
+item0224,Battery Pack,15,33,57,89,60,N/A,86,Airlock
+item0225,Hygiene Kit,75,34,82,44,81,2025-11-06,64,Storage Area 3
+item0226,Hygiene Kit,57,21,65,99,61,2026-03-24,29,Docking Area 2
+item0227,Microgravity Experiment Setup,79,11,92,20,4,N/A,93,Cupola
+item0228,Communication Device,51,55,36,33,95,2025-10-12,39,Crew Quarters
+item0229,Experiment Sample,44,46,55,95,33,N/A,57,Japanese Laboratory
+item0230,Microgravity Experiment Setup,100,14,59,78,23,2026-01-27,18,Airlock
+item0231,Microgravity Experiment Setup,52,62,43,10,50,2025-06-18,97,European Laboratory
+item0232,Water Container,39,82,98,11,17,2025-11-05,50,Cupola
+item0233,Solar Panel Part,77,18,29,28,17,2026-03-20,24,US Laboratory
+item0234,Food Ration,6,33,77,53,42,2026-02-11,73,Airlock
+item0235,Medical Supply Kit,61,25,55,43,0,2025-06-24,48,Airlock
+item0236,Microgravity Experiment Setup,100,35,36,96,91,2026-02-13,59,Crew Quarters
+item0237,Water Container,39,38,35,49,17,2026-02-23,82,Storage Area 3
+item0238,Hygiene Kit,55,29,74,63,28,2025-11-09,13,Storage Area 1
+item0239,Water Container,30,29,17,71,3,N/A,84,Russian Laboratory
+item0240,Spare Part,69,43,81,32,71,2025-08-24,28,Docking Area 2
+item0241,Tool Kit,57,84,10,25,35,2025-06-22,47,Russian Laboratory
+item0242,Dehydrated Meal Pack,66,8,22,74,46,N/A,15,Service Module
+item0243,First Aid Kit,11,16,28,84,62,2026-03-02,74,Russian Laboratory
+item0244,Medical Supply Kit,91,42,78,79,31,2026-01-12,23,Crew Quarters
+item0245,First Aid Kit,50,30,35,94,23,N/A,29,Service Module
+item0246,Communication Device,10,65,79,38,23,N/A,69,Airlock
+item0247,Battery Pack,54,75,38,66,85,N/A,87,Airlock
+item0248,Solar Panel Part,13,66,42,19,24,2025-07-08,45,Cupola
+item0249,Battery Pack,54,19,73,17,72,2025-04-13,10,Storage Area 1
+item0250,Spare Part,33,87,68,13,88,2025-09-03,71,Storage Area 2
+item0251,First Aid Kit,68,29,87,98,52,N/A,95,Cupola
+item0252,Microgravity Experiment Setup,43,40,34,81,57,2026-03-06,45,Docking Area 4
+item0253,Communication Device,7,5,41,37,18,2025-05-04,53,Docking Area 4
+item0254,Solar Panel Part,12,31,43,73,62,N/A,51,Cupola
+item0255,Hygiene Kit,69,77,33,51,63,2025-06-11,41,Storage Area 3
+item0256,Medical Supply Kit,45,45,93,37,16,N/A,2,Crew Quarters
+item0257,Communication Device,71,19,31,95,95,N/A,27,Cupola
+item0258,Oxygen Cylinder,38,81,10,84,36,N/A,50,Cupola
+item0259,Experiment Sample,86,41,96,31,17,N/A,10,Docking Area 3
+item0260,Battery Pack,91,94,60,76,36,N/A,8,Docking Area 3
+item0261,Scientific Instrument,42,96,66,82,1,N/A,34,Storage Area 1
+item0262,Microgravity Experiment Setup,23,92,32,68,17,N/A,38,Service Module
+item0263,First Aid Kit,92,34,55,55,40,N/A,55,Airlock
+item0264,Microgravity Experiment Setup,86,62,7,51,24,2025-08-02,34,Cupola
+item0265,Medical Supply Kit,94,43,39,9,79,N/A,86,Storage Area 1
+item0266,First Aid Kit,17,72,47,78,30,N/A,55,Storage Area 3
+item0267,Food Ration,23,55,23,19,62,2025-09-07,94,Docking Area 1
+item0268,Dehydrated Meal Pack,78,70,28,35,38,N/A,56,Japanese Laboratory
+item0269,Tool Kit,68,45,68,81,32,2025-07-04,12,Japanese Laboratory
+item0270,Experiment Sample,72,76,25,33,54,2025-11-15,74,Crew Quarters
+item0271,Tool Kit,26,27,37,44,31,N/A,56,European Laboratory
+item0272,Experiment Sample,30,6,5,90,53,2025-07-02,38,Storage Area 2
+item0273,Dehydrated Meal Pack,91,82,24,59,41,2025-09-17,23,Japanese Laboratory
+item0274,First Aid Kit,78,12,84,95,67,N/A,33,US Laboratory
+item0275,Communication Device,44,56,43,43,85,2026-02-13,57,European Laboratory
+item0276,Battery Pack,73,81,37,89,85,2025-10-09,71,Docking Area 2
+item0277,Solar Panel Part,18,21,93,10,82,N/A,15,Docking Area 1
+item0278,Medical Supply Kit,77,54,25,47,17,2026-03-11,91,European Laboratory
+item0279,Hygiene Kit,19,68,51,97,37,N/A,8,Docking Area 2
+item0280,First Aid Kit,86,48,84,89,73,2025-08-25,46,Cupola
+item0281,Oxygen Cylinder,86,11,39,100,52,2025-05-16,43,US Laboratory
+item0282,Solar Panel Part,78,89,28,98,70,2025-04-11,59,Japanese Laboratory
+item0283,Communication Device,92,96,19,8,54,N/A,67,Docking Area 3
+item0284,Tool Kit,42,10,93,70,76,N/A,84,Docking Area 3
+item0285,Spare Part,92,87,9,8,16,N/A,52,Cupola
+item0286,Microgravity Experiment Setup,75,90,64,82,61,2025-06-25,44,Docking Area 1
+item0287,Experiment Sample,7,68,80,45,95,N/A,11,Storage Area 2
+item0288,Oxygen Cylinder,65,53,46,22,31,N/A,65,Storage Area 1
+item0289,Dehydrated Meal Pack,55,79,42,6,98,N/A,83,Docking Area 2
+item0290,First Aid Kit,100,12,14,52,60,N/A,46,Crew Quarters
+item0291,First Aid Kit,7,18,21,20,0,2025-07-16,84,US Laboratory
+item0292,Microgravity Experiment Setup,41,89,85,68,97,N/A,79,Crew Quarters
+item0293,Experiment Sample,84,68,100,31,18,2025-05-27,41,Docking Area 1
+item0294,Hygiene Kit,96,91,84,81,5,2026-02-11,34,Docking Area 4
+item0295,Water Container,27,97,86,33,84,N/A,54,Service Module
+item0296,Microgravity Experiment Setup,16,68,91,53,9,2026-01-24,58,US Laboratory
+item0297,Solar Panel Part,15,84,13,44,34,N/A,44,Storage Area 1
+item0298,Solar Panel Part,57,59,40,36,26,N/A,36,US Laboratory
+item0299,Solar Panel Part,26,31,77,96,92,2026-01-05,39,Crew Quarters
+item0300,Medical Supply Kit,53,78,99,58,43,2025-08-08,46,European Laboratory
+item0301,Dehydrated Meal Pack,53,98,74,19,50,2025-07-02,38,Docking Area 1
+item0302,Hygiene Kit,83,85,7,86,11,N/A,41,Cupola
+item0303,Scientific Instrument,44,97,25,5,69,N/A,52,Russian Laboratory
+item0304,Tool Kit,74,5,70,53,52,N/A,12,Airlock
+item0305,Solar Panel Part,32,32,36,60,5,2025-10-06,82,Docking Area 4
+item0306,Oxygen Cylinder,60,72,72,15,81,N/A,69,Docking Area 2
+item0307,Spare Part,71,71,61,21,77,2025-05-28,22,Storage Area 1
+item0308,Battery Pack,27,52,15,39,14,2025-08-04,63,Storage Area 1
+item0309,Medical Supply Kit,37,35,31,31,51,2025-11-08,33,European Laboratory
+item0310,Battery Pack,73,8,94,36,30,2026-03-16,58,Airlock
+item0311,Solar Panel Part,31,95,76,65,92,2025-08-08,49,Storage Area 2
+item0312,Dehydrated Meal Pack,83,69,88,89,57,N/A,85,Storage Area 3
+item0313,Communication Device,72,59,12,40,41,2025-11-11,35,European Laboratory
+item0314,Medical Supply Kit,44,50,48,78,5,N/A,68,Storage Area 2
+item0315,Hygiene Kit,78,5,95,66,33,2025-06-26,8,Russian Laboratory
+item0316,Solar Panel Part,12,77,38,36,61,2025-07-17,71,Docking Area 4
+item0317,Solar Panel Part,55,100,15,28,26,N/A,21,Airlock
+item0318,Food Ration,30,68,47,100,49,2026-01-23,7,Crew Quarters
+item0319,Oxygen Cylinder,19,19,47,48,79,2025-10-27,20,Docking Area 4
+item0320,Scientific Instrument,78,56,59,29,85,2026-03-28,96,Docking Area 3
+item0321,First Aid Kit,97,63,21,58,75,2025-12-27,95,Service Module
+item0322,Microgravity Experiment Setup,23,29,16,44,71,2025-08-19,19,Storage Area 2
+item0323,Experiment Sample,49,46,58,56,35,N/A,98,Cupola
+item0324,Dehydrated Meal Pack,88,87,41,26,3,2025-05-04,41,Docking Area 2
+item0325,First Aid Kit,64,81,80,11,94,2025-04-23,35,Airlock
+item0326,Oxygen Cylinder,85,17,81,6,33,N/A,7,Russian Laboratory
+item0327,Communication Device,38,92,73,50,65,N/A,84,Cupola
+item0328,Medical Supply Kit,79,78,81,77,8,N/A,60,Cupola
+item0329,First Aid Kit,100,15,72,92,50,N/A,63,Docking Area 3
+item0330,Experiment Sample,47,47,49,100,38,N/A,86,Docking Area 3
+item0331,Hygiene Kit,83,30,98,27,73,2025-12-01,94,Storage Area 2
+item0332,Communication Device,82,71,35,56,51,N/A,6,Docking Area 1
+item0333,Scientific Instrument,76,9,33,97,97,N/A,7,Russian Laboratory
+item0334,Spare Part,53,65,17,22,64,2025-11-12,10,Docking Area 2
+item0335,Oxygen Cylinder,52,21,62,1,50,N/A,50,US Laboratory
+item0336,Dehydrated Meal Pack,47,49,40,61,51,2026-01-28,41,Docking Area 4
+item0337,Microgravity Experiment Setup,52,80,61,78,54,N/A,47,Storage Area 1
+item0338,Tool Kit,88,8,91,87,91,2025-04-16,5,US Laboratory
+item0339,Dehydrated Meal Pack,88,92,99,67,54,N/A,48,Airlock
+item0340,First Aid Kit,65,61,88,90,57,2025-12-16,90,Japanese Laboratory
+item0341,Scientific Instrument,9,62,7,31,30,N/A,80,Docking Area 1
+item0342,Battery Pack,98,24,88,23,78,N/A,45,Cupola
+item0343,Scientific Instrument,18,58,77,6,45,2025-12-05,88,Docking Area 1
+item0344,Experiment Sample,60,10,50,32,99,N/A,89,Storage Area 3
+item0345,Experiment Sample,64,21,24,28,6,2025-08-25,11,Russian Laboratory
+item0346,Solar Panel Part,80,68,90,20,100,N/A,58,Japanese Laboratory
+item0347,Solar Panel Part,28,42,25,80,84,2026-01-22,24,Japanese Laboratory
+item0348,Solar Panel Part,96,40,88,6,32,2026-03-20,32,Storage Area 2
+item0349,Food Ration,49,68,6,22,25,2025-10-26,20,Storage Area 3
+item0350,Food Ration,32,84,55,70,67,N/A,32,Storage Area 2
+item0351,Battery Pack,60,50,41,36,67,N/A,70,Storage Area 1
+item0352,Microgravity Experiment Setup,71,70,5,100,94,2026-02-14,92,Russian Laboratory
+item0353,First Aid Kit,91,89,94,57,37,2026-03-16,34,Crew Quarters
+item0354,Tool Kit,64,27,86,5,79,2025-05-15,99,US Laboratory
+item0355,Experiment Sample,27,16,71,91,14,2025-06-17,73,Docking Area 4
+item0356,Food Ration,22,52,10,18,13,N/A,36,Storage Area 2
+item0357,First Aid Kit,10,89,53,27,95,N/A,75,European Laboratory
+item0358,First Aid Kit,23,27,45,45,74,2026-01-25,66,Docking Area 4
+item0359,Communication Device,38,76,38,72,55,2025-09-24,67,Crew Quarters
+item0360,Scientific Instrument,31,21,30,86,4,N/A,55,European Laboratory
+item0361,First Aid Kit,46,52,7,25,71,N/A,27,European Laboratory
+item0362,Medical Supply Kit,62,38,27,15,98,N/A,19,Storage Area 3
+item0363,Oxygen Cylinder,99,96,25,60,14,N/A,93,Docking Area 2
+item0364,Hygiene Kit,51,46,56,16,93,N/A,61,US Laboratory
+item0365,Dehydrated Meal Pack,21,12,19,49,95,N/A,74,Storage Area 1
+item0366,Communication Device,55,70,85,54,33,2025-10-18,12,Docking Area 2
+item0367,Microgravity Experiment Setup,38,61,85,53,75,2025-09-07,16,US Laboratory
+item0368,Hygiene Kit,55,78,38,27,23,N/A,62,Japanese Laboratory
+item0369,Microgravity Experiment Setup,65,48,77,49,52,2025-10-01,57,Storage Area 3
+item0370,Medical Supply Kit,84,61,87,44,38,N/A,69,Docking Area 1
+item0371,Water Container,13,73,66,53,46,N/A,89,Cupola
+item0372,Hygiene Kit,89,11,53,44,98,N/A,6,European Laboratory
+item0373,Experiment Sample,21,76,30,50,16,2025-11-11,85,Docking Area 2
+item0374,Oxygen Cylinder,66,26,82,38,3,2025-06-01,78,Cupola
+item0375,First Aid Kit,6,5,69,42,80,N/A,18,Docking Area 1
+item0376,Food Ration,16,42,52,29,6,N/A,100,Docking Area 4
+item0377,Hygiene Kit,9,83,5,10,36,N/A,25,European Laboratory
+item0378,Dehydrated Meal Pack,94,90,90,12,80,N/A,37,Crew Quarters
+item0379,Experiment Sample,47,39,8,6,35,2025-04-21,7,Airlock
+item0380,Tool Kit,67,88,42,99,1,2025-07-21,22,European Laboratory
+item0381,Scientific Instrument,77,91,53,17,81,2025-07-02,87,US Laboratory
+item0382,Spare Part,8,72,17,96,34,2025-10-12,56,Docking Area 2
+item0383,Dehydrated Meal Pack,98,58,31,28,61,N/A,59,Docking Area 2
+item0384,Spare Part,61,98,13,80,19,N/A,73,Airlock
+item0385,Communication Device,31,44,11,28,78,2025-09-20,24,Docking Area 3
+item0386,Communication Device,5,57,35,32,11,2026-03-02,37,Service Module
+item0387,Microgravity Experiment Setup,24,79,70,73,95,2026-01-18,16,Airlock
+item0388,Microgravity Experiment Setup,74,94,69,29,67,2025-08-13,90,US Laboratory
+item0389,Oxygen Cylinder,31,82,62,97,43,2025-05-07,83,Service Module
+item0390,Tool Kit,17,60,53,26,18,2026-01-10,64,US Laboratory
+item0391,Scientific Instrument,71,67,70,25,38,N/A,97,Storage Area 1
+item0392,Oxygen Cylinder,86,23,72,57,35,N/A,73,Russian Laboratory
+item0393,First Aid Kit,36,9,86,5,87,2025-04-03,86,Storage Area 3
+item0394,Spare Part,68,88,69,39,3,N/A,75,Cupola
+item0395,Spare Part,74,42,79,12,66,N/A,6,Japanese Laboratory
+item0396,Water Container,40,28,23,63,50,N/A,34,Docking Area 2
+item0397,Water Container,40,85,59,98,21,N/A,56,Docking Area 4
+item0398,Solar Panel Part,17,85,32,13,8,2025-06-03,85,Cupola
+item0399,Microgravity Experiment Setup,60,6,37,8,99,N/A,28,Japanese Laboratory
+item0400,Solar Panel Part,54,80,44,64,48,N/A,43,Storage Area 1
+item0401,Scientific Instrument,95,60,53,42,3,2025-10-31,84,Airlock
+item0402,Battery Pack,32,25,80,99,80,2025-11-12,79,Docking Area 4
+item0403,Tool Kit,33,7,79,87,22,N/A,30,Docking Area 3
+item0404,Medical Supply Kit,26,100,81,63,100,N/A,76,Docking Area 2
+item0405,Tool Kit,57,15,27,70,10,N/A,46,Japanese Laboratory
+item0406,Medical Supply Kit,63,39,40,26,36,N/A,13,Service Module
+item0407,Oxygen Cylinder,13,23,74,73,86,N/A,64,Storage Area 1
+item0408,Spare Part,88,6,22,76,35,2025-09-01,12,Docking Area 3
+item0409,Oxygen Cylinder,39,81,29,12,29,2026-03-27,17,Russian Laboratory
+item0410,Communication Device,14,98,17,88,12,2025-09-09,98,Storage Area 2
+item0411,Battery Pack,90,22,23,22,81,2026-01-25,69,Service Module
+item0412,Tool Kit,84,57,72,39,98,2025-11-03,68,Docking Area 4
+item0413,Water Container,79,72,96,100,97,2026-03-06,75,Docking Area 3
+item0414,Battery Pack,25,99,8,87,90,2025-07-22,28,Cupola
+item0415,Water Container,63,52,90,40,13,2025-09-23,19,Storage Area 2
+item0416,Solar Panel Part,99,31,29,66,9,2026-01-02,57,Service Module
+item0417,Food Ration,28,44,5,50,39,N/A,16,Russian Laboratory
+item0418,Hygiene Kit,66,51,15,8,20,2025-04-27,7,Docking Area 3
+item0419,Hygiene Kit,54,98,44,1,64,2025-08-11,32,Storage Area 1
+item0420,Dehydrated Meal Pack,49,19,47,94,63,2025-09-03,96,Crew Quarters
+item0421,Experiment Sample,78,61,20,74,28,2026-01-05,25,Docking Area 4
+item0422,Medical Supply Kit,54,100,31,58,30,N/A,53,Docking Area 1
+item0423,Tool Kit,62,60,66,78,83,N/A,8,European Laboratory
+item0424,Solar Panel Part,85,60,22,95,31,2025-10-06,60,Storage Area 1
+item0425,Dehydrated Meal Pack,58,33,76,27,32,N/A,61,Crew Quarters
+item0426,Tool Kit,63,63,67,27,87,2025-09-28,55,European Laboratory
+item0427,Dehydrated Meal Pack,16,60,37,38,55,N/A,88,Docking Area 2
+item0428,Tool Kit,22,55,71,96,95,2025-12-27,42,Russian Laboratory
+item0429,Hygiene Kit,59,84,93,92,69,2025-12-02,96,Docking Area 1
+item0430,Oxygen Cylinder,12,36,48,84,72,N/A,19,Docking Area 2
+item0431,Scientific Instrument,52,76,100,58,24,2025-07-28,96,Storage Area 1
+item0432,Oxygen Cylinder,79,12,68,16,98,N/A,86,Cupola
+item0433,Experiment Sample,57,59,28,94,30,N/A,56,Storage Area 3
+item0434,Dehydrated Meal Pack,82,85,39,44,69,N/A,56,Docking Area 4
+item0435,Hygiene Kit,62,33,8,96,68,2025-11-29,76,Russian Laboratory
+item0436,Food Ration,33,12,27,23,86,2025-12-13,22,Storage Area 2
+item0437,Communication Device,18,89,39,99,100,N/A,8,US Laboratory
+item0438,Microgravity Experiment Setup,15,66,35,40,19,N/A,30,Storage Area 3
+item0439,Scientific Instrument,56,99,100,86,38,2025-06-28,37,Storage Area 2
+item0440,Spare Part,34,21,30,34,54,N/A,57,Storage Area 3
+item0441,First Aid Kit,63,10,59,22,80,N/A,43,Docking Area 3
+item0442,Microgravity Experiment Setup,6,90,66,81,74,2025-05-09,65,Docking Area 3
+item0443,Solar Panel Part,97,71,87,98,68,2026-03-26,59,Docking Area 2
+item0444,Spare Part,9,6,20,97,16,N/A,92,Airlock
+item0445,Hygiene Kit,33,16,19,3,54,N/A,66,Storage Area 1
+item0446,Water Container,81,68,77,67,43,2025-06-07,2,Japanese Laboratory
+item0447,Experiment Sample,65,59,14,85,42,N/A,19,Airlock
+item0448,Water Container,48,45,37,99,88,2025-10-23,15,Storage Area 2
+item0449,Dehydrated Meal Pack,27,90,36,79,18,2025-04-20,78,Docking Area 3
+item0450,Solar Panel Part,22,68,35,30,45,N/A,98,Crew Quarters
+item0451,Food Ration,60,58,52,58,35,N/A,32,US Laboratory
+item0452,Hygiene Kit,49,60,73,82,24,N/A,53,Airlock
+item0453,Solar Panel Part,99,37,6,56,7,N/A,30,Docking Area 2
+item0454,Scientific Instrument,45,98,32,35,48,2025-04-12,77,Airlock
+item0455,Tool Kit,63,40,30,78,23,N/A,81,Docking Area 4
+item0456,First Aid Kit,98,10,49,97,85,N/A,39,Docking Area 2
+item0457,First Aid Kit,77,23,59,67,7,2025-07-17,100,Service Module
+item0458,Food Ration,13,30,81,55,35,2025-12-16,97,Docking Area 4
+item0459,Dehydrated Meal Pack,40,32,80,37,53,N/A,87,European Laboratory
+item0460,Battery Pack,50,20,73,70,26,2025-11-27,40,Russian Laboratory
+item0461,Spare Part,25,39,96,76,36,2025-05-25,69,Docking Area 1
+item0462,Microgravity Experiment Setup,31,96,98,24,47,N/A,72,Russian Laboratory
+item0463,Food Ration,26,75,34,70,45,2025-09-05,9,Docking Area 2
+item0464,Hygiene Kit,100,91,15,86,1,2025-12-25,98,Docking Area 1
+item0465,Oxygen Cylinder,40,85,49,19,43,N/A,98,Airlock
+item0466,Battery Pack,36,66,80,7,28,2025-06-07,19,Storage Area 2
+item0467,Scientific Instrument,13,42,22,91,91,2025-07-31,27,Docking Area 3
+item0468,Microgravity Experiment Setup,60,52,12,38,24,N/A,98,Docking Area 1
+item0469,Water Container,77,38,100,40,18,2025-10-19,22,Cupola
+item0470,Scientific Instrument,79,9,85,14,94,N/A,90,Storage Area 2
+item0471,Medical Supply Kit,20,61,64,86,12,N/A,66,Docking Area 3
+item0472,Experiment Sample,86,98,63,55,77,N/A,31,Docking Area 3
+item0473,Scientific Instrument,50,25,93,25,48,N/A,13,Docking Area 1
+item0474,Microgravity Experiment Setup,50,11,80,97,17,N/A,34,Storage Area 1
+item0475,Food Ration,69,84,85,20,36,2026-02-05,25,Storage Area 1
+item0476,Tool Kit,36,9,16,100,79,N/A,47,Crew Quarters
+item0477,Spare Part,89,68,70,24,56,N/A,37,Docking Area 4
+item0478,First Aid Kit,52,47,69,90,38,2025-06-04,74,Cupola
+item0479,Microgravity Experiment Setup,49,54,81,54,97,2026-03-27,25,Storage Area 1
+item0480,Water Container,49,91,8,10,32,N/A,19,Docking Area 4
+item0481,First Aid Kit,67,87,72,48,69,N/A,13,Storage Area 3
+item0482,Food Ration,30,81,27,4,28,N/A,91,US Laboratory
+item0483,Communication Device,25,69,40,40,35,N/A,91,Storage Area 1
+item0484,Experiment Sample,23,31,81,79,24,2026-03-28,10,Docking Area 4
+item0485,Medical Supply Kit,58,59,54,31,79,2025-09-28,20,US Laboratory
+item0486,Food Ration,17,67,70,9,66,2025-08-29,90,Storage Area 3
+item0487,Spare Part,48,98,27,43,89,2025-04-14,15,Russian Laboratory
+item0488,Oxygen Cylinder,19,54,94,66,59,2026-03-21,42,Crew Quarters
+item0489,Food Ration,72,62,20,64,38,2025-05-23,28,Docking Area 4
+item0490,Microgravity Experiment Setup,75,49,72,3,63,N/A,21,Crew Quarters
+item0491,First Aid Kit,28,82,48,78,75,2025-06-20,47,Crew Quarters
+item0492,Tool Kit,49,19,52,46,75,2025-08-02,51,European Laboratory
+item0493,Spare Part,6,76,12,46,16,2026-01-05,31,Docking Area 1
+item0494,Microgravity Experiment Setup,9,51,93,68,22,2025-07-21,10,Docking Area 1
+item0495,First Aid Kit,13,29,57,73,27,2025-11-26,59,Storage Area 2
+item0496,Communication Device,17,32,98,26,44,N/A,16,Crew Quarters
+item0497,Dehydrated Meal Pack,65,92,71,94,5,2026-03-07,60,US Laboratory
+item0498,Battery Pack,9,40,81,81,61,N/A,91,Airlock
+item0499,Medical Supply Kit,67,15,88,77,67,N/A,73,Crew Quarters
+item0500,Tool Kit,24,26,20,19,58,N/A,41,US Laboratory
+item0501,Solar Panel Part,86,45,74,50,54,2025-12-14,55,Storage Area 2
+item0502,Solar Panel Part,32,78,18,94,31,N/A,82,Docking Area 3
+item0503,Food Ration,18,92,32,55,6,2025-06-07,4,Japanese Laboratory
+item0504,Spare Part,96,22,32,21,79,N/A,36,Docking Area 2
+item0505,Spare Part,90,94,79,59,98,2025-08-20,7,Docking Area 1
+item0506,First Aid Kit,12,74,85,9,87,N/A,84,Storage Area 2
+item0507,Microgravity Experiment Setup,21,24,10,57,70,2026-01-08,29,Crew Quarters
+item0508,Spare Part,28,89,30,53,12,N/A,23,Cupola
+item0509,Oxygen Cylinder,92,19,45,10,87,2025-08-09,50,Storage Area 1
+item0510,Water Container,64,32,25,15,91,N/A,93,Russian Laboratory
+item0511,Medical Supply Kit,69,53,80,73,10,N/A,41,Crew Quarters
+item0512,Communication Device,46,29,30,17,33,N/A,12,Docking Area 4
+item0513,Communication Device,49,93,32,31,4,N/A,37,Storage Area 1
+item0514,Food Ration,80,70,55,75,27,2026-02-13,44,Storage Area 3
+item0515,Dehydrated Meal Pack,46,27,49,3,48,N/A,5,Docking Area 1
+item0516,Microgravity Experiment Setup,10,15,97,36,70,N/A,50,Storage Area 2
+item0517,Solar Panel Part,91,73,84,22,46,2026-02-13,98,Storage Area 1
+item0518,Experiment Sample,24,30,81,8,19,2025-12-17,53,European Laboratory
+item0519,Tool Kit,68,87,72,64,13,N/A,37,Crew Quarters
+item0520,Scientific Instrument,92,38,78,9,9,N/A,65,Russian Laboratory
+item0521,Microgravity Experiment Setup,69,15,79,49,51,N/A,82,Service Module
+item0522,Communication Device,67,31,42,66,11,N/A,71,Service Module
+item0523,Spare Part,94,96,23,56,31,N/A,63,Service Module
+item0524,Food Ration,9,65,50,38,100,2026-02-27,51,Storage Area 3
+item0525,Water Container,18,48,100,95,66,2025-09-07,67,Docking Area 4
+item0526,Solar Panel Part,70,25,61,35,7,2025-09-10,85,Docking Area 1
+item0527,Microgravity Experiment Setup,85,82,71,67,46,2025-06-20,94,Docking Area 3
+item0528,Experiment Sample,62,63,38,98,58,N/A,20,Cupola
+item0529,Battery Pack,45,63,55,15,41,N/A,6,US Laboratory
+item0530,Battery Pack,79,20,96,16,17,2025-11-16,31,Storage Area 3
+item0531,First Aid Kit,33,18,57,64,67,N/A,63,Docking Area 4
+item0532,Communication Device,50,28,21,23,24,N/A,63,Docking Area 2
+item0533,Water Container,50,45,28,47,71,2025-07-05,20,Docking Area 4
+item0534,Dehydrated Meal Pack,31,81,45,41,98,2025-09-21,26,Crew Quarters
+item0535,Food Ration,21,19,36,10,89,N/A,81,Docking Area 1
+item0536,Experiment Sample,25,97,98,85,46,2025-07-08,65,Docking Area 4
+item0537,Experiment Sample,53,5,53,50,74,2025-05-22,41,Russian Laboratory
+item0538,Experiment Sample,72,38,93,32,73,N/A,40,Russian Laboratory
+item0539,Tool Kit,58,49,97,26,76,N/A,2,Cupola
+item0540,Medical Supply Kit,21,20,28,46,16,N/A,7,Airlock
+item0541,Medical Supply Kit,22,76,41,1,37,2025-07-10,7,Japanese Laboratory
+item0542,Dehydrated Meal Pack,95,66,80,62,32,2025-07-16,32,Japanese Laboratory
+item0543,Oxygen Cylinder,65,60,100,41,53,2025-08-18,37,Docking Area 2
+item0544,Oxygen Cylinder,90,91,97,60,100,2025-05-28,30,Storage Area 3
+item0545,Oxygen Cylinder,5,13,100,25,23,2025-11-09,35,Docking Area 1
+item0546,Spare Part,39,23,89,48,80,N/A,34,Cupola
+item0547,Experiment Sample,19,81,50,74,32,2025-10-26,11,Docking Area 1
+item0548,Dehydrated Meal Pack,59,23,46,48,5,2026-03-08,88,Russian Laboratory
+item0549,Water Container,32,88,17,85,98,2025-07-02,64,Storage Area 1
+item0550,Tool Kit,27,40,66,50,51,N/A,9,Airlock
+item0551,Microgravity Experiment Setup,39,94,25,52,14,2025-09-03,3,European Laboratory
+item0552,Medical Supply Kit,27,92,81,33,40,N/A,36,Storage Area 3
+item0553,Dehydrated Meal Pack,14,9,35,4,48,2025-07-20,70,Docking Area 3
+item0554,Spare Part,81,86,87,47,34,2025-06-18,74,Storage Area 3
+item0555,Experiment Sample,11,90,33,77,100,2025-12-19,47,Service Module
+item0556,Microgravity Experiment Setup,38,49,49,75,12,N/A,56,Crew Quarters
+item0557,Spare Part,45,44,75,67,80,2025-09-03,28,Docking Area 4
+item0558,Microgravity Experiment Setup,33,97,71,11,10,N/A,86,Docking Area 3
+item0559,Medical Supply Kit,9,91,66,31,82,2025-11-10,5,Cupola
+item0560,First Aid Kit,10,5,64,99,88,2025-11-17,65,Docking Area 4
+item0561,Battery Pack,74,91,63,83,25,2026-03-16,75,Crew Quarters
+item0562,Water Container,52,65,60,99,32,2025-05-17,43,US Laboratory
+item0563,Experiment Sample,28,71,93,14,5,2025-10-19,21,Cupola
+item0564,Medical Supply Kit,27,98,60,98,12,N/A,43,Docking Area 4
+item0565,Battery Pack,8,87,58,28,39,N/A,66,Crew Quarters
+item0566,Battery Pack,18,49,12,59,39,N/A,46,Storage Area 2
+item0567,Medical Supply Kit,72,15,40,47,56,2025-10-11,74,Crew Quarters
+item0568,Microgravity Experiment Setup,37,22,45,55,85,2026-01-26,3,Crew Quarters
+item0569,Medical Supply Kit,67,85,93,83,16,2025-05-26,23,Crew Quarters
+item0570,Hygiene Kit,9,100,79,88,1,2026-01-26,30,US Laboratory
+item0571,Microgravity Experiment Setup,26,41,44,96,50,2025-06-30,64,Airlock
+item0572,Battery Pack,10,74,92,47,53,2026-02-09,18,Crew Quarters
+item0573,Battery Pack,89,9,68,23,35,2025-09-09,78,Russian Laboratory
+item0574,Spare Part,40,49,9,12,41,N/A,58,US Laboratory
+item0575,Food Ration,36,26,62,93,87,2026-03-13,89,Docking Area 2
+item0576,Medical Supply Kit,27,88,29,11,52,N/A,79,Docking Area 3
+item0577,Battery Pack,52,18,83,83,24,N/A,48,Docking Area 1
+item0578,Tool Kit,9,89,68,48,15,N/A,93,Crew Quarters
+item0579,Solar Panel Part,85,17,40,32,22,2025-07-22,94,Japanese Laboratory
+item0580,Medical Supply Kit,69,45,49,22,92,N/A,100,Storage Area 1
+item0581,Tool Kit,27,94,90,91,95,2025-05-13,16,Storage Area 1
+item0582,Battery Pack,27,90,16,55,83,N/A,79,Docking Area 2
+item0583,Spare Part,59,44,55,8,92,N/A,25,Docking Area 4
+item0584,Tool Kit,23,55,39,25,66,N/A,45,Russian Laboratory
+item0585,Oxygen Cylinder,70,19,95,76,2,2026-02-18,36,Storage Area 2
+item0586,First Aid Kit,84,86,92,100,52,2026-02-27,83,Service Module
+item0587,Solar Panel Part,54,57,6,14,93,2025-10-08,98,Service Module
+item0588,Solar Panel Part,13,69,91,10,36,2025-11-23,10,Docking Area 1
+item0589,First Aid Kit,53,44,46,7,43,2026-03-09,17,European Laboratory
+item0590,Medical Supply Kit,42,23,42,11,0,2025-11-20,23,Docking Area 4
+item0591,Experiment Sample,83,10,38,98,26,N/A,83,Cupola
+item0592,Water Container,52,47,41,80,61,N/A,78,Storage Area 3
+item0593,Oxygen Cylinder,20,11,92,42,77,2025-10-01,85,Japanese Laboratory
+item0594,Communication Device,71,87,7,7,84,2025-08-21,76,Crew Quarters
+item0595,Tool Kit,31,78,41,98,99,2025-09-04,2,Storage Area 3
+item0596,Dehydrated Meal Pack,72,82,13,61,72,2025-05-24,18,Crew Quarters
+item0597,Food Ration,30,36,97,76,78,N/A,87,Storage Area 2
+item0598,Microgravity Experiment Setup,79,81,15,7,58,2026-01-04,96,Crew Quarters
+item0599,Experiment Sample,96,55,100,6,49,N/A,19,Airlock
+item0600,First Aid Kit,93,10,60,31,51,2025-04-16,67,Storage Area 1
+item0601,Solar Panel Part,52,55,90,78,30,2025-08-04,7,Japanese Laboratory
+item0602,Dehydrated Meal Pack,26,42,41,49,54,2025-04-15,42,Airlock
+item0603,Medical Supply Kit,46,95,19,77,12,N/A,60,Docking Area 4
+item0604,Communication Device,60,84,9,26,39,2026-03-11,98,Docking Area 4
+item0605,Medical Supply Kit,61,7,97,57,78,2025-10-05,94,Docking Area 4
+item0606,Spare Part,42,48,63,25,1,N/A,66,Docking Area 3
+item0607,Battery Pack,88,78,42,39,99,N/A,78,Service Module
+item0608,Tool Kit,9,25,98,12,17,2026-01-07,40,European Laboratory
+item0609,Communication Device,76,62,40,11,73,2025-09-21,80,Crew Quarters
+item0610,Tool Kit,7,19,49,6,92,N/A,52,Docking Area 4
+item0611,Tool Kit,83,85,69,81,19,N/A,24,Airlock
+item0612,Food Ration,58,73,82,67,31,N/A,49,Docking Area 1
+item0613,Tool Kit,29,100,63,66,9,2025-10-25,20,Docking Area 2
+item0614,Medical Supply Kit,89,80,62,88,49,2025-08-05,8,Crew Quarters
+item0615,Tool Kit,23,82,77,13,59,2025-11-05,15,Russian Laboratory
+item0616,Dehydrated Meal Pack,58,11,44,26,88,N/A,16,Docking Area 1
+item0617,Water Container,5,80,5,72,8,N/A,18,Docking Area 1
+item0618,Medical Supply Kit,32,79,15,99,23,2026-01-24,100,Docking Area 1
+item0619,Oxygen Cylinder,11,12,88,21,10,N/A,1,Storage Area 2
+item0620,Spare Part,37,65,53,25,42,2026-03-04,50,Service Module
+item0621,Scientific Instrument,93,11,65,46,27,N/A,30,Russian Laboratory
+item0622,Food Ration,56,40,36,100,95,2025-10-30,51,Docking Area 4
+item0623,Dehydrated Meal Pack,40,11,60,61,35,N/A,98,Docking Area 1
+item0624,Solar Panel Part,26,44,70,72,83,2025-06-05,64,Airlock
+item0625,Scientific Instrument,11,27,6,72,69,N/A,46,Docking Area 4
+item0626,Scientific Instrument,35,88,5,90,40,2026-01-07,36,Docking Area 4
+item0627,Experiment Sample,40,44,88,94,48,N/A,14,Russian Laboratory
+item0628,Experiment Sample,14,87,45,38,26,N/A,73,US Laboratory
+item0629,Spare Part,44,74,8,25,27,N/A,21,Storage Area 2
+item0630,Oxygen Cylinder,23,60,65,93,84,N/A,21,Storage Area 2
+item0631,Food Ration,69,77,19,81,89,2025-09-15,99,Docking Area 3
+item0632,Dehydrated Meal Pack,21,44,21,73,40,N/A,95,Crew Quarters
+item0633,Medical Supply Kit,39,96,41,14,87,N/A,27,Docking Area 3
+item0634,Tool Kit,54,53,49,18,28,2026-01-19,96,US Laboratory
+item0635,Communication Device,45,7,47,39,59,2026-03-08,8,Japanese Laboratory
+item0636,Water Container,75,80,56,71,25,N/A,73,European Laboratory
+item0637,Water Container,99,85,13,77,31,2025-11-01,29,Docking Area 2
+item0638,First Aid Kit,29,49,91,17,87,N/A,36,European Laboratory
+item0639,Microgravity Experiment Setup,100,23,69,88,3,N/A,73,Docking Area 4
+item0640,Oxygen Cylinder,16,81,12,59,89,N/A,49,Russian Laboratory
+item0641,Hygiene Kit,26,83,96,89,1,2025-10-16,43,Service Module
+item0642,Battery Pack,75,91,33,20,83,2025-05-01,92,Cupola
+item0643,Medical Supply Kit,6,61,29,34,77,N/A,98,US Laboratory
+item0644,Tool Kit,99,28,14,68,45,N/A,45,US Laboratory
+item0645,Microgravity Experiment Setup,95,18,67,61,89,N/A,81,Japanese Laboratory
+item0646,Communication Device,84,54,46,75,86,2026-03-22,59,Japanese Laboratory
+item0647,Spare Part,26,24,40,83,76,N/A,30,Docking Area 2
+item0648,Communication Device,66,40,80,79,27,N/A,13,European Laboratory
+item0649,Experiment Sample,20,67,95,18,98,N/A,55,Docking Area 3
+item0650,Dehydrated Meal Pack,56,46,97,44,73,2025-06-14,19,Russian Laboratory
+item0651,Dehydrated Meal Pack,98,96,49,63,23,N/A,49,Storage Area 3
+item0652,Scientific Instrument,72,77,23,5,42,N/A,13,Airlock
+item0653,Dehydrated Meal Pack,90,63,53,70,61,N/A,48,Japanese Laboratory
+item0654,Food Ration,96,63,5,45,31,N/A,93,Service Module
+item0655,Dehydrated Meal Pack,53,69,80,49,21,2025-08-27,42,Service Module
+item0656,Scientific Instrument,24,29,61,71,98,N/A,65,Japanese Laboratory
+item0657,Dehydrated Meal Pack,66,100,16,35,75,2025-11-16,24,Docking Area 3
+item0658,Oxygen Cylinder,78,56,85,19,56,2025-12-18,65,Airlock
+item0659,Hygiene Kit,62,24,55,2,14,N/A,64,Storage Area 3
+item0660,Hygiene Kit,18,68,30,56,61,N/A,82,European Laboratory
+item0661,Water Container,16,31,19,98,4,N/A,15,US Laboratory
+item0662,Microgravity Experiment Setup,68,96,11,85,64,N/A,39,Service Module
+item0663,Hygiene Kit,50,74,46,17,49,2025-09-03,38,Docking Area 1
+item0664,First Aid Kit,6,48,64,11,71,N/A,65,Docking Area 1
+item0665,First Aid Kit,59,18,58,3,64,N/A,37,Docking Area 1
+item0666,Dehydrated Meal Pack,5,96,11,97,34,2025-05-12,19,Airlock
+item0667,Communication Device,55,25,46,83,58,2025-12-06,65,Storage Area 1
+item0668,Microgravity Experiment Setup,52,53,86,56,16,2026-02-15,13,US Laboratory
+item0669,Food Ration,15,72,69,92,21,N/A,73,Docking Area 4
+item0670,Battery Pack,19,47,43,1,57,N/A,68,European Laboratory
+item0671,Water Container,96,55,45,73,12,N/A,45,Storage Area 3
+item0672,Scientific Instrument,92,91,50,17,47,2026-01-12,90,Docking Area 3
+item0673,Experiment Sample,56,38,50,16,85,2026-02-06,30,Docking Area 2
+item0674,First Aid Kit,31,40,68,69,39,2026-01-22,7,Russian Laboratory
+item0675,Scientific Instrument,36,29,37,13,5,N/A,34,Crew Quarters
+item0676,Microgravity Experiment Setup,86,31,48,64,68,2025-05-08,25,Docking Area 2
+item0677,Water Container,18,94,94,51,11,N/A,93,European Laboratory
+item0678,Experiment Sample,67,13,60,38,9,N/A,91,Docking Area 2
+item0679,Dehydrated Meal Pack,26,73,32,56,51,N/A,92,Docking Area 3
+item0680,Scientific Instrument,35,6,8,2,27,N/A,83,US Laboratory
+item0681,Communication Device,14,86,44,27,52,N/A,33,Storage Area 3
+item0682,Spare Part,59,67,85,66,16,2025-05-24,97,Japanese Laboratory
+item0683,Battery Pack,74,71,74,35,67,N/A,32,Airlock
+item0684,Communication Device,9,25,51,43,93,2026-02-14,32,Cupola
+item0685,Battery Pack,28,56,69,58,98,2025-10-05,97,Docking Area 3
+item0686,Water Container,28,50,74,98,3,N/A,77,Cupola
+item0687,Food Ration,98,81,67,32,52,N/A,54,Storage Area 1
+item0688,Hygiene Kit,94,82,44,31,22,N/A,10,Airlock
+item0689,Solar Panel Part,14,93,95,63,82,2025-07-07,1,Service Module
+item0690,Scientific Instrument,31,6,45,58,8,N/A,75,Storage Area 3
+item0691,Oxygen Cylinder,99,89,49,74,4,N/A,59,Airlock
+item0692,Experiment Sample,13,100,88,46,0,N/A,58,Airlock
+item0693,Medical Supply Kit,32,19,13,18,25,2025-04-09,21,Service Module
+item0694,Food Ration,99,83,85,63,77,2025-09-14,5,Service Module
+item0695,Scientific Instrument,9,45,6,48,27,2025-10-16,96,Russian Laboratory
+item0696,Dehydrated Meal Pack,75,18,34,31,98,N/A,66,Cupola
+item0697,Microgravity Experiment Setup,78,62,55,74,54,2025-12-05,49,Japanese Laboratory
+item0698,First Aid Kit,61,93,55,20,22,N/A,43,Crew Quarters
+item0699,Dehydrated Meal Pack,41,18,80,42,66,N/A,79,US Laboratory
+item0700,Food Ration,64,78,31,31,78,N/A,70,Docking Area 4
+item0701,Oxygen Cylinder,89,56,40,87,77,2025-12-27,75,Storage Area 1
+item0702,Microgravity Experiment Setup,7,19,14,5,11,2025-10-28,28,Storage Area 2
+item0703,Spare Part,83,41,80,70,6,2025-12-23,81,Docking Area 1
+item0704,Communication Device,88,5,100,98,68,2025-06-24,24,Airlock
+item0705,Spare Part,54,52,12,86,15,N/A,28,Docking Area 2
+item0706,Water Container,73,54,7,70,67,2025-05-16,60,US Laboratory
+item0707,Tool Kit,68,24,22,2,87,N/A,39,Storage Area 2
+item0708,Battery Pack,26,28,28,34,64,2025-12-17,44,Storage Area 2
+item0709,Hygiene Kit,44,13,15,46,26,N/A,13,US Laboratory
+item0710,First Aid Kit,42,42,44,81,42,N/A,7,Crew Quarters
+item0711,Experiment Sample,58,60,53,54,91,N/A,22,Japanese Laboratory
+item0712,Spare Part,57,7,22,87,8,N/A,35,Storage Area 3
+item0713,Oxygen Cylinder,54,25,14,59,18,2025-06-09,15,Crew Quarters
+item0714,Tool Kit,93,59,89,27,100,N/A,77,Russian Laboratory
+item0715,Water Container,20,90,40,14,68,2025-07-28,68,Storage Area 3
+item0716,Oxygen Cylinder,8,41,87,85,50,2025-11-13,17,European Laboratory
+item0717,Scientific Instrument,48,62,92,72,15,N/A,42,Service Module
+item0718,Food Ration,67,6,46,67,41,N/A,75,European Laboratory
+item0719,Experiment Sample,63,97,47,12,85,2025-06-09,3,Docking Area 1
+item0720,Spare Part,62,16,31,84,85,2025-09-10,65,European Laboratory
+item0721,Spare Part,30,90,10,71,34,2025-12-17,16,Storage Area 1
+item0722,Spare Part,7,40,94,55,70,2025-12-18,91,US Laboratory
+item0723,Dehydrated Meal Pack,69,24,16,47,100,2025-07-02,32,Storage Area 1
+item0724,Medical Supply Kit,75,82,49,35,54,N/A,75,Docking Area 4
+item0725,Communication Device,74,37,78,52,91,N/A,87,Airlock
+item0726,Medical Supply Kit,71,13,12,57,100,2026-03-13,88,Docking Area 2
+item0727,First Aid Kit,37,55,89,48,2,2025-11-21,44,Storage Area 1
+item0728,Battery Pack,85,93,98,11,75,N/A,13,Storage Area 1
+item0729,Dehydrated Meal Pack,74,92,88,96,12,N/A,94,Docking Area 3
+item0730,Microgravity Experiment Setup,19,88,89,70,13,N/A,78,Storage Area 1
+item0731,Experiment Sample,9,71,70,38,25,2025-07-11,69,Docking Area 1
+item0732,Communication Device,14,16,91,25,19,2025-11-01,3,Service Module
+item0733,Food Ration,78,83,91,60,34,N/A,65,Russian Laboratory
+item0734,Medical Supply Kit,28,100,89,71,75,N/A,93,Docking Area 4
+item0735,First Aid Kit,31,67,5,68,63,N/A,50,Docking Area 4
+item0736,First Aid Kit,82,38,59,21,79,2025-12-27,54,Docking Area 2
+item0737,Microgravity Experiment Setup,81,67,40,46,65,2025-06-01,90,European Laboratory
+item0738,First Aid Kit,45,89,17,52,61,N/A,83,Docking Area 4
+item0739,Oxygen Cylinder,23,32,66,68,13,N/A,96,Docking Area 4
+item0740,Experiment Sample,52,32,22,72,32,N/A,57,Storage Area 3
+item0741,Microgravity Experiment Setup,94,46,73,57,30,2025-10-18,92,Airlock
+item0742,Medical Supply Kit,47,35,87,88,55,2025-07-12,9,Storage Area 1
+item0743,First Aid Kit,27,26,42,95,74,N/A,33,Storage Area 3
+item0744,Dehydrated Meal Pack,42,31,61,20,48,2025-12-16,45,Airlock
+item0745,Food Ration,75,31,28,19,50,N/A,79,European Laboratory
+item0746,Microgravity Experiment Setup,13,85,21,94,61,2026-03-19,8,US Laboratory
+item0747,Tool Kit,71,56,37,12,95,2025-12-28,46,Russian Laboratory
+item0748,Battery Pack,36,89,87,73,98,2025-05-20,24,European Laboratory
+item0749,Experiment Sample,17,20,86,21,21,2025-05-02,20,Docking Area 3
+item0750,Dehydrated Meal Pack,77,8,76,48,13,N/A,1,Storage Area 1
+item0751,Medical Supply Kit,100,93,13,52,12,N/A,43,Service Module
+item0752,Battery Pack,26,9,90,60,71,N/A,89,Crew Quarters
+item0753,Oxygen Cylinder,93,24,56,9,24,2025-11-05,74,Russian Laboratory
+item0754,Oxygen Cylinder,28,41,14,69,79,N/A,83,Japanese Laboratory
+item0755,Spare Part,30,65,23,67,37,2026-03-05,77,US Laboratory
+item0756,Food Ration,41,80,47,48,44,2025-05-13,35,European Laboratory
+item0757,Water Container,38,41,61,18,1,N/A,22,European Laboratory
+item0758,Communication Device,72,56,94,89,14,2026-03-03,78,Docking Area 3
+item0759,Dehydrated Meal Pack,68,94,41,87,74,N/A,88,Cupola
+item0760,First Aid Kit,70,61,74,25,22,2025-04-13,82,Docking Area 2
+item0761,Communication Device,28,81,23,50,60,N/A,10,Japanese Laboratory
+item0762,Scientific Instrument,99,36,23,13,66,2025-06-06,80,Japanese Laboratory
+item0763,Spare Part,56,14,12,22,3,N/A,94,Storage Area 1
+item0764,Hygiene Kit,62,9,39,80,27,2025-08-06,89,Storage Area 2
+item0765,Hygiene Kit,15,92,80,80,36,2025-07-23,47,Docking Area 4
+item0766,Medical Supply Kit,86,30,56,8,99,N/A,99,Storage Area 2
+item0767,Experiment Sample,67,30,28,73,37,N/A,4,Crew Quarters
+item0768,Hygiene Kit,84,85,81,54,82,N/A,20,Crew Quarters
+item0769,Medical Supply Kit,62,44,77,9,31,2025-08-09,2,Russian Laboratory
+item0770,Dehydrated Meal Pack,96,8,7,1,7,2025-06-30,20,US Laboratory
+item0771,Scientific Instrument,21,23,92,73,73,2025-11-28,20,Service Module
+item0772,Water Container,70,86,56,11,39,2025-05-02,12,Japanese Laboratory
+item0773,Food Ration,39,27,45,75,77,2025-12-03,7,Docking Area 2
+item0774,Dehydrated Meal Pack,73,77,83,2,7,N/A,76,US Laboratory
+item0775,Medical Supply Kit,36,59,48,55,44,N/A,17,US Laboratory
+item0776,First Aid Kit,86,97,47,22,76,N/A,71,Storage Area 3
+item0777,Microgravity Experiment Setup,77,53,43,16,31,N/A,59,Docking Area 4
+item0778,Battery Pack,95,77,80,95,52,N/A,51,Crew Quarters
+item0779,Dehydrated Meal Pack,32,49,7,72,68,N/A,37,Storage Area 2
+item0780,Tool Kit,17,13,88,17,15,N/A,13,Storage Area 2
+item0781,Spare Part,32,42,76,82,97,2025-10-01,5,Storage Area 2
+item0782,Battery Pack,10,36,86,59,90,N/A,2,Crew Quarters
+item0783,Battery Pack,53,73,56,40,88,N/A,20,Service Module
+item0784,Food Ration,21,85,25,25,69,N/A,61,US Laboratory
+item0785,Scientific Instrument,97,49,57,57,78,N/A,38,Docking Area 3
+item0786,Tool Kit,55,9,79,43,45,N/A,29,Storage Area 3
+item0787,Scientific Instrument,27,37,88,57,9,N/A,33,Cupola
+item0788,Medical Supply Kit,61,30,61,43,88,2025-08-20,96,Cupola
+item0789,Hygiene Kit,20,37,45,50,25,N/A,35,Docking Area 1
+item0790,First Aid Kit,45,65,97,21,47,N/A,62,Cupola
+item0791,Spare Part,26,75,53,3,66,2025-07-07,36,Docking Area 2
+item0792,Tool Kit,74,100,94,55,86,2025-12-10,21,Russian Laboratory
+item0793,Tool Kit,7,70,57,31,17,2025-09-09,16,Russian Laboratory
+item0794,First Aid Kit,76,71,59,41,43,N/A,40,Storage Area 1
+item0795,Solar Panel Part,54,89,71,15,3,N/A,6,Storage Area 3
+item0796,Water Container,21,8,62,12,97,2026-01-27,46,Cupola
+item0797,Food Ration,78,55,51,52,33,N/A,31,Crew Quarters
+item0798,Hygiene Kit,68,43,97,38,83,N/A,24,US Laboratory
+item0799,First Aid Kit,28,92,95,79,30,2025-11-14,97,Docking Area 4
+item0800,Medical Supply Kit,91,8,96,59,37,2025-12-27,81,Docking Area 1
+item0801,Water Container,50,24,21,23,84,N/A,10,Cupola
+item0802,Experiment Sample,96,11,51,44,87,2025-06-01,84,US Laboratory
+item0803,Dehydrated Meal Pack,54,40,100,25,90,2025-10-23,6,Russian Laboratory
+item0804,Food Ration,33,52,34,85,46,2026-03-16,9,Cupola
+item0805,Dehydrated Meal Pack,24,77,36,9,81,2025-12-02,8,Storage Area 1
+item0806,Spare Part,79,71,66,31,88,N/A,38,Airlock
+item0807,Dehydrated Meal Pack,35,20,39,26,56,N/A,2,Crew Quarters
+item0808,Hygiene Kit,24,71,46,88,47,N/A,85,Docking Area 2
+item0809,Communication Device,57,18,94,63,97,2025-09-18,20,US Laboratory
+item0810,Dehydrated Meal Pack,46,82,95,17,40,2025-10-20,23,Docking Area 4
+item0811,Microgravity Experiment Setup,77,23,81,87,66,2026-01-29,15,European Laboratory
+item0812,Water Container,73,22,11,54,37,2025-10-18,56,Docking Area 3
+item0813,Experiment Sample,89,10,72,27,60,2025-11-29,53,Docking Area 4
+item0814,Oxygen Cylinder,50,41,29,73,88,N/A,83,Docking Area 1
+item0815,Tool Kit,87,79,57,45,75,N/A,72,Russian Laboratory
+item0816,Hygiene Kit,47,59,28,84,34,2025-05-06,59,Storage Area 2
+item0817,Dehydrated Meal Pack,71,14,52,68,82,2025-12-28,37,Crew Quarters
+item0818,First Aid Kit,44,70,31,7,4,N/A,69,Docking Area 1
+item0819,Battery Pack,98,45,99,47,88,N/A,11,Docking Area 4
+item0820,Scientific Instrument,89,36,84,15,7,N/A,8,Docking Area 4
+item0821,Water Container,81,79,17,28,5,N/A,90,Crew Quarters
+item0822,Communication Device,58,50,78,90,75,N/A,27,Cupola
+item0823,Tool Kit,36,42,29,31,82,2025-10-14,87,Storage Area 3
+item0824,Hygiene Kit,97,27,53,87,60,2026-03-16,72,Storage Area 2
+item0825,Spare Part,91,27,78,14,63,2025-08-26,25,Docking Area 2
+item0826,First Aid Kit,42,58,72,43,26,2025-05-25,2,Japanese Laboratory
+item0827,Water Container,87,10,76,10,14,N/A,66,Japanese Laboratory
+item0828,Communication Device,38,42,52,86,24,2025-06-08,8,Storage Area 1
+item0829,Oxygen Cylinder,79,44,41,37,54,2025-11-23,48,Storage Area 2
+item0830,Microgravity Experiment Setup,95,49,35,70,18,N/A,12,Crew Quarters
+item0831,Dehydrated Meal Pack,63,19,96,73,41,N/A,17,European Laboratory
+item0832,Experiment Sample,87,94,62,5,58,2025-09-10,8,Docking Area 4
+item0833,Microgravity Experiment Setup,49,34,72,11,61,2025-08-03,67,Storage Area 1
+item0834,Tool Kit,74,44,11,56,69,2026-01-31,25,Storage Area 2
+item0835,Communication Device,18,100,80,16,33,2026-02-23,24,Storage Area 2
+item0836,First Aid Kit,92,32,6,19,18,N/A,6,Storage Area 3
+item0837,Experiment Sample,25,34,33,75,75,N/A,44,Docking Area 1
+item0838,Tool Kit,57,22,38,5,89,N/A,23,Japanese Laboratory
+item0839,Solar Panel Part,90,12,77,62,23,2026-03-05,15,Cupola
+item0840,Dehydrated Meal Pack,47,78,69,6,10,2025-04-08,86,Storage Area 3
+item0841,Dehydrated Meal Pack,50,64,10,22,1,N/A,91,Russian Laboratory
+item0842,Battery Pack,96,79,21,63,31,N/A,93,Storage Area 1
+item0843,Water Container,65,11,65,65,1,N/A,89,Cupola
+item0844,Tool Kit,65,90,98,16,30,N/A,83,Russian Laboratory
+item0845,First Aid Kit,19,34,15,88,81,2025-12-12,100,Storage Area 1
+item0846,Experiment Sample,37,27,78,17,51,N/A,68,Russian Laboratory
+item0847,First Aid Kit,32,16,17,36,88,N/A,44,European Laboratory
+item0848,Microgravity Experiment Setup,66,11,99,42,20,N/A,86,Airlock
+item0849,Experiment Sample,86,26,42,48,96,N/A,84,Storage Area 3
+item0850,First Aid Kit,17,13,22,90,25,N/A,75,Russian Laboratory
+item0851,Oxygen Cylinder,22,77,56,61,30,2026-03-22,48,Cupola
+item0852,Medical Supply Kit,49,58,86,98,97,N/A,22,Russian Laboratory
+item0853,Oxygen Cylinder,62,93,15,1,3,2025-10-08,47,US Laboratory
+item0854,Dehydrated Meal Pack,8,32,37,76,67,2025-04-07,21,Storage Area 1
+item0855,Oxygen Cylinder,81,8,76,7,52,2025-12-26,56,Service Module
+item0856,Scientific Instrument,30,61,10,97,85,N/A,67,Japanese Laboratory
+item0857,First Aid Kit,31,11,30,100,84,2025-08-21,22,Airlock
+item0858,Solar Panel Part,15,78,33,96,18,2026-03-23,99,Docking Area 4
+item0859,Communication Device,100,75,75,69,87,2026-02-28,87,Docking Area 4
+item0860,Spare Part,52,44,22,15,8,2025-08-02,35,Service Module
+item0861,Dehydrated Meal Pack,43,55,97,6,41,2025-05-22,10,Docking Area 4
+item0862,Communication Device,13,29,79,86,81,2025-12-24,13,Service Module
+item0863,Battery Pack,67,75,9,9,69,N/A,90,US Laboratory
+item0864,Scientific Instrument,83,67,51,86,94,2025-10-02,17,Storage Area 1
+item0865,Food Ration,81,45,11,95,35,2025-07-15,9,Russian Laboratory
+item0866,Dehydrated Meal Pack,15,89,27,29,15,N/A,44,Storage Area 2
+item0867,First Aid Kit,54,48,9,76,79,2025-08-14,79,Storage Area 2
+item0868,Scientific Instrument,62,68,33,50,53,2025-07-15,48,Docking Area 3
+item0869,Scientific Instrument,20,67,32,64,82,2026-02-06,84,Docking Area 4
+item0870,Tool Kit,76,70,54,96,37,N/A,30,US Laboratory
+item0871,Dehydrated Meal Pack,9,100,6,58,17,2025-05-23,37,Cupola
+item0872,Water Container,65,28,77,78,85,2025-05-04,79,European Laboratory
+item0873,Dehydrated Meal Pack,9,82,65,2,28,2025-05-22,4,Docking Area 4
+item0874,Communication Device,51,21,70,30,78,2025-10-01,52,Docking Area 3
+item0875,Microgravity Experiment Setup,78,17,7,19,0,2026-03-03,61,Cupola
+item0876,Microgravity Experiment Setup,50,49,92,88,31,N/A,100,Docking Area 4
+item0877,Medical Supply Kit,43,77,59,53,46,2025-04-21,21,Docking Area 4
+item0878,Medical Supply Kit,39,44,57,16,50,N/A,43,Docking Area 2
+item0879,Dehydrated Meal Pack,99,92,74,84,29,2025-07-13,75,Storage Area 2
+item0880,Solar Panel Part,76,61,66,66,48,2026-03-15,49,Storage Area 2
+item0881,Solar Panel Part,52,86,26,44,54,N/A,16,European Laboratory
+item0882,Solar Panel Part,92,53,19,26,37,N/A,6,Service Module
+item0883,Tool Kit,64,18,65,99,34,2025-08-26,100,Docking Area 2
+item0884,Hygiene Kit,75,75,29,80,26,N/A,97,Service Module
+item0885,Dehydrated Meal Pack,18,20,93,56,83,N/A,84,Cupola
+item0886,Communication Device,97,62,53,82,9,2025-04-20,51,Docking Area 1
+item0887,Spare Part,85,12,61,100,62,2025-08-31,16,Airlock
+item0888,Spare Part,65,55,63,84,78,2025-04-07,57,Docking Area 4
+item0889,Water Container,76,45,44,52,26,2025-10-11,63,Crew Quarters
+item0890,Battery Pack,15,62,47,44,58,N/A,15,Cupola
+item0891,Food Ration,26,95,35,71,27,2026-03-09,60,Storage Area 2
+item0892,Oxygen Cylinder,54,78,36,42,21,2026-03-26,90,Storage Area 3
+item0893,Hygiene Kit,56,22,98,73,99,N/A,42,Cupola
+item0894,Food Ration,31,10,99,29,52,2025-05-09,49,Japanese Laboratory
+item0895,Tool Kit,73,17,24,58,56,N/A,28,Service Module
+item0896,First Aid Kit,87,67,24,23,47,2025-09-19,15,Japanese Laboratory
+item0897,Scientific Instrument,84,69,19,86,93,N/A,92,Airlock
+item0898,Communication Device,12,19,61,48,11,N/A,77,Cupola
+item0899,Dehydrated Meal Pack,92,65,14,91,2,N/A,30,US Laboratory
+item0900,Hygiene Kit,47,46,8,31,13,2026-01-02,8,Storage Area 2
+item0901,Battery Pack,100,50,53,54,9,2025-09-23,57,Russian Laboratory
+item0902,Food Ration,82,47,25,27,76,N/A,84,European Laboratory
+item0903,Solar Panel Part,35,22,59,73,21,2026-02-05,32,European Laboratory
+item0904,Spare Part,79,78,31,19,17,2026-01-12,84,Crew Quarters
+item0905,Spare Part,95,43,56,51,93,2025-04-22,49,Docking Area 1
+item0906,Tool Kit,18,86,14,7,51,N/A,6,Docking Area 3
+item0907,Battery Pack,57,26,73,55,2,N/A,2,Russian Laboratory
+item0908,Battery Pack,80,67,25,73,48,N/A,25,Storage Area 3
+item0909,Medical Supply Kit,63,63,80,93,81,2025-07-05,61,Airlock
+item0910,Dehydrated Meal Pack,16,12,68,84,69,2025-08-25,46,Docking Area 4
+item0911,Scientific Instrument,7,52,49,24,32,N/A,24,Storage Area 2
+item0912,First Aid Kit,67,64,51,30,6,N/A,29,Storage Area 1
+item0913,Microgravity Experiment Setup,99,52,73,12,60,2026-02-27,49,European Laboratory
+item0914,Tool Kit,13,12,33,41,73,2025-05-12,55,Storage Area 3
+item0915,Solar Panel Part,22,57,78,48,79,2025-07-02,19,Service Module
+item0916,Tool Kit,13,60,40,66,40,2026-03-10,37,Storage Area 1
+item0917,Communication Device,95,17,78,24,53,2026-01-22,66,Storage Area 2
+item0918,Experiment Sample,47,89,6,72,87,2026-01-30,94,US Laboratory
+item0919,Solar Panel Part,36,15,54,43,17,2025-04-25,46,Airlock
+item0920,First Aid Kit,18,46,39,45,52,N/A,23,Japanese Laboratory
+item0921,Experiment Sample,25,70,18,32,16,N/A,1,Docking Area 1
+item0922,Tool Kit,58,9,18,69,2,N/A,23,Storage Area 1
+item0923,Experiment Sample,72,12,5,53,59,2025-08-15,40,European Laboratory
+item0924,First Aid Kit,75,10,69,33,32,N/A,25,Service Module
+item0925,First Aid Kit,71,14,29,58,26,2025-12-09,55,Cupola
+item0926,Hygiene Kit,63,55,72,41,36,2025-07-21,14,Docking Area 4
+item0927,Food Ration,31,45,49,53,6,N/A,19,Airlock
+item0928,Solar Panel Part,92,10,97,86,100,N/A,69,Docking Area 3
+item0929,Communication Device,58,84,8,37,87,N/A,28,Docking Area 3
+item0930,Hygiene Kit,38,39,100,82,32,2026-01-07,38,Airlock
+item0931,Spare Part,24,7,71,70,1,N/A,52,Docking Area 1
+item0932,Hygiene Kit,74,77,20,22,31,2025-08-10,81,Docking Area 4
+item0933,Spare Part,12,38,100,44,20,N/A,41,Russian Laboratory
+item0934,Water Container,65,82,84,25,96,2025-09-12,28,Russian Laboratory
+item0935,Oxygen Cylinder,45,26,80,23,64,2026-02-28,11,Russian Laboratory
+item0936,First Aid Kit,24,91,44,49,60,N/A,42,Docking Area 4
+item0937,Communication Device,10,31,17,33,74,2026-03-15,23,Russian Laboratory
+item0938,Hygiene Kit,45,5,31,69,74,N/A,93,US Laboratory
+item0939,Medical Supply Kit,69,81,5,56,85,N/A,80,US Laboratory
+item0940,Scientific Instrument,44,6,6,34,61,N/A,65,Storage Area 2
+item0941,Spare Part,96,57,12,51,87,N/A,56,Storage Area 1
+item0942,Microgravity Experiment Setup,38,45,66,99,73,N/A,32,Cupola
+item0943,First Aid Kit,87,75,60,1,72,2025-04-10,11,Storage Area 1
+item0944,First Aid Kit,74,60,84,15,56,N/A,49,Docking Area 2
+item0945,Dehydrated Meal Pack,93,9,40,31,12,2026-03-15,75,European Laboratory
+item0946,Food Ration,63,73,13,9,6,N/A,65,Crew Quarters
+item0947,Tool Kit,20,39,40,13,89,2026-03-28,25,Docking Area 3
+item0948,Battery Pack,83,63,88,75,35,2025-10-13,46,Docking Area 1
+item0949,Communication Device,88,44,83,82,40,2025-10-17,29,Docking Area 3
+item0950,Hygiene Kit,14,12,79,79,39,N/A,10,Service Module
+item0951,Scientific Instrument,33,40,85,69,87,N/A,77,Storage Area 2
+item0952,Experiment Sample,84,96,23,1,49,2025-07-01,40,Cupola
+item0953,Battery Pack,94,11,66,77,5,N/A,62,Service Module
+item0954,Tool Kit,85,27,6,65,75,2025-05-18,39,Storage Area 2
+item0955,Tool Kit,64,81,83,56,65,N/A,62,Service Module
+item0956,Microgravity Experiment Setup,54,70,84,47,50,2025-08-17,51,Docking Area 2
+item0957,First Aid Kit,48,86,73,42,39,2026-03-29,10,Airlock
+item0958,Battery Pack,96,23,60,53,28,N/A,11,Docking Area 2
+item0959,Spare Part,47,23,86,34,56,2025-11-15,60,Storage Area 1
+item0960,Solar Panel Part,24,21,79,59,46,2026-01-04,39,Storage Area 3
+item0961,First Aid Kit,75,7,13,96,99,2025-09-13,58,Docking Area 4
+item0962,Scientific Instrument,91,62,42,49,97,2025-10-01,57,Crew Quarters
+item0963,Scientific Instrument,52,43,31,67,45,N/A,68,Docking Area 3
+item0964,Water Container,26,80,19,80,37,N/A,93,US Laboratory
+item0965,Hygiene Kit,18,43,69,32,46,2025-04-23,68,Storage Area 1
+item0966,Communication Device,12,83,9,86,73,2026-03-24,89,Service Module
+item0967,Solar Panel Part,47,10,24,14,31,2026-01-20,35,European Laboratory
+item0968,Battery Pack,89,91,63,67,52,2025-11-25,85,Docking Area 3
+item0969,Battery Pack,57,58,83,37,9,2025-07-07,6,Airlock
+item0970,Medical Supply Kit,99,8,44,21,87,N/A,55,Storage Area 2
+item0971,Medical Supply Kit,42,88,96,87,8,N/A,42,Docking Area 3
+item0972,Oxygen Cylinder,19,72,45,23,16,2025-07-10,45,Service Module
+item0973,Oxygen Cylinder,22,34,39,35,12,N/A,87,Airlock
+item0974,Water Container,40,82,99,31,27,2025-11-22,1,Cupola
+item0975,Medical Supply Kit,39,74,25,23,90,2025-08-17,97,Docking Area 4
+item0976,Hygiene Kit,28,20,32,88,64,N/A,7,European Laboratory
+item0977,Scientific Instrument,66,12,30,19,16,N/A,89,Airlock
+item0978,Water Container,66,19,31,65,35,2025-10-27,60,Docking Area 3
+item0979,Food Ration,49,26,69,44,43,N/A,94,European Laboratory
+item0980,Microgravity Experiment Setup,65,38,8,37,83,2025-06-25,3,Storage Area 3
+item0981,First Aid Kit,6,62,63,77,71,N/A,67,Storage Area 2
+item0982,Scientific Instrument,50,100,40,60,31,2025-04-24,76,US Laboratory
+item0983,Tool Kit,16,26,5,36,84,2026-03-18,4,Docking Area 3
+item0984,Dehydrated Meal Pack,6,74,77,85,38,2026-03-03,24,Cupola
+item0985,Water Container,96,51,15,86,37,2025-11-24,7,Docking Area 2
+item0986,Spare Part,21,41,93,60,38,N/A,1,Storage Area 3
+item0987,Medical Supply Kit,8,85,13,75,76,2026-01-30,14,Service Module
+item0988,Experiment Sample,97,56,33,92,1,N/A,72,Docking Area 4
+item0989,Communication Device,97,62,45,39,98,2026-03-02,68,Russian Laboratory
+item0990,Communication Device,37,75,95,32,45,N/A,43,European Laboratory
+item0991,Experiment Sample,33,29,65,60,52,2025-07-29,80,Japanese Laboratory
+item0992,Spare Part,63,48,95,76,5,2026-03-02,68,Airlock
+item0993,Solar Panel Part,50,56,99,64,0,N/A,70,Russian Laboratory
+item0994,Hygiene Kit,93,94,36,8,35,N/A,39,Storage Area 2
+item0995,First Aid Kit,84,36,9,26,8,2026-02-17,50,Docking Area 3
+item0996,Experiment Sample,67,25,43,8,75,2025-08-26,71,Storage Area 3
+item0997,Spare Part,55,82,31,1,17,N/A,16,Docking Area 4
+item0998,Battery Pack,17,53,85,43,7,2026-01-29,96,Docking Area 1
+item0999,Oxygen Cylinder,43,15,58,30,50,N/A,14,Russian Laboratory
+item1000,Spare Part,33,52,46,33,60,2025-06-12,61,Storage Area 3
+item1001,Solar Panel Part,69,78,86,99,96,2026-03-28,79,Docking Area 2
+item1002,Scientific Instrument,79,88,60,39,8,2025-10-27,17,US Laboratory
+item1003,Hygiene Kit,36,24,9,86,36,2025-07-20,23,Cupola
+item1004,Water Container,18,46,66,42,100,2025-03-31,19,Crew Quarters
+item1005,Spare Part,69,84,95,58,57,2025-12-07,89,European Laboratory
+item1006,Experiment Sample,79,57,52,76,5,N/A,100,Storage Area 3
+item1007,Hygiene Kit,37,10,65,63,27,N/A,63,Docking Area 1
+item1008,Tool Kit,35,33,70,7,4,N/A,52,Storage Area 1
+item1009,First Aid Kit,15,91,65,85,80,2026-01-21,55,Storage Area 2
+item1010,Tool Kit,22,17,6,50,40,N/A,35,Cupola
+item1011,Water Container,13,58,11,32,10,N/A,51,Cupola
+item1012,Food Ration,37,60,16,62,26,2025-03-31,99,Storage Area 3
+item1013,Spare Part,54,15,9,75,36,2026-03-24,65,US Laboratory
+item1014,Water Container,74,17,74,44,58,N/A,71,Russian Laboratory
+item1015,First Aid Kit,73,15,14,18,21,N/A,60,Cupola
+item1016,Experiment Sample,76,16,50,43,78,2026-02-28,47,European Laboratory
+item1017,Microgravity Experiment Setup,51,24,6,78,82,2025-05-19,48,Service Module
+item1018,First Aid Kit,37,76,90,5,92,2025-08-24,43,Cupola
+item1019,Experiment Sample,11,19,64,30,53,N/A,70,European Laboratory
+item1020,Medical Supply Kit,71,69,38,30,70,2026-02-26,86,Japanese Laboratory
+item1021,Oxygen Cylinder,30,42,52,80,14,2025-06-08,6,Docking Area 1
+item1022,Communication Device,82,17,73,91,50,2025-10-28,46,Docking Area 2
+item1023,First Aid Kit,52,81,78,73,70,N/A,82,Airlock
+item1024,Tool Kit,46,19,65,38,80,N/A,95,Docking Area 3
+item1025,Spare Part,68,17,9,79,23,2025-04-25,40,Service Module
+item1026,Food Ration,59,67,68,58,56,N/A,5,Storage Area 3
+item1027,First Aid Kit,33,60,24,51,1,N/A,6,Airlock
+item1028,Medical Supply Kit,12,49,26,99,5,2025-07-11,38,Storage Area 3
+item1029,Battery Pack,21,16,63,82,98,N/A,51,Russian Laboratory
+item1030,Oxygen Cylinder,16,59,37,64,87,N/A,7,Storage Area 3
+item1031,Spare Part,62,35,27,80,6,2025-06-26,47,US Laboratory
+item1032,Water Container,92,99,69,96,27,N/A,20,Docking Area 1
+item1033,Medical Supply Kit,52,63,38,44,82,N/A,76,Docking Area 1
+item1034,Experiment Sample,31,65,72,15,77,N/A,4,Docking Area 1
+item1035,Battery Pack,29,48,5,12,46,N/A,18,Japanese Laboratory
+item1036,Hygiene Kit,29,37,30,15,40,2025-07-11,58,European Laboratory
+item1037,Dehydrated Meal Pack,20,29,10,98,87,2026-03-15,68,Storage Area 1
+item1038,Medical Supply Kit,38,30,39,46,93,2025-04-19,84,Storage Area 2
+item1039,Microgravity Experiment Setup,25,17,35,91,73,2025-10-14,36,Docking Area 1
+item1040,Scientific Instrument,86,35,64,84,73,N/A,5,Storage Area 3
+item1041,Tool Kit,82,17,43,4,36,N/A,9,Japanese Laboratory
+item1042,Hygiene Kit,62,77,100,23,1,N/A,56,Docking Area 2
+item1043,Battery Pack,89,16,90,47,43,2025-10-08,49,Docking Area 3
+item1044,Spare Part,5,71,14,73,12,N/A,12,Japanese Laboratory
+item1045,Communication Device,36,44,45,59,66,N/A,67,Docking Area 4
+item1046,First Aid Kit,37,94,85,98,100,N/A,92,Storage Area 2
+item1047,First Aid Kit,37,19,5,14,10,N/A,33,Service Module
+item1048,Microgravity Experiment Setup,8,33,10,63,63,2025-09-24,78,Airlock
+item1049,Oxygen Cylinder,36,35,70,60,49,N/A,29,Airlock
+item1050,Tool Kit,71,60,87,95,21,2025-11-25,45,Russian Laboratory
+item1051,Hygiene Kit,100,92,63,12,51,N/A,92,Russian Laboratory
+item1052,Experiment Sample,40,71,51,26,51,N/A,87,Service Module
+item1053,Dehydrated Meal Pack,58,51,66,79,49,N/A,75,Docking Area 2
+item1054,Hygiene Kit,59,94,47,70,42,2026-03-17,34,Storage Area 1
+item1055,Spare Part,43,91,36,87,73,N/A,21,Storage Area 3
+item1056,Oxygen Cylinder,79,59,36,28,69,2025-05-13,83,Docking Area 1
+item1057,Solar Panel Part,81,35,73,25,27,2025-05-16,49,Cupola
+item1058,Tool Kit,98,50,96,23,43,N/A,47,Storage Area 1
+item1059,Oxygen Cylinder,86,43,96,64,70,2025-12-12,24,Docking Area 2
+item1060,Water Container,94,64,76,78,92,2026-01-23,32,Docking Area 1
+item1061,Scientific Instrument,35,81,8,28,96,N/A,48,Docking Area 1
+item1062,Oxygen Cylinder,65,44,94,34,83,N/A,66,Airlock
+item1063,Water Container,26,33,44,19,28,2025-04-23,85,Storage Area 3
+item1064,Spare Part,83,51,96,36,58,2025-10-13,82,Storage Area 2
+item1065,Water Container,57,35,47,74,6,N/A,30,Docking Area 2
+item1066,Oxygen Cylinder,36,80,88,29,83,N/A,1,Storage Area 3
+item1067,Dehydrated Meal Pack,82,40,18,72,73,N/A,21,Service Module
+item1068,Experiment Sample,42,73,5,65,36,2026-03-23,80,Docking Area 4
+item1069,Battery Pack,80,29,56,22,46,N/A,62,Docking Area 3
+item1070,Food Ration,10,17,75,73,73,2025-09-29,39,Storage Area 1
+item1071,Dehydrated Meal Pack,34,87,96,100,38,N/A,42,Storage Area 1
+item1072,Tool Kit,57,18,64,18,20,2025-07-21,90,Docking Area 3
+item1073,Oxygen Cylinder,46,33,18,59,93,N/A,8,Docking Area 2
+item1074,Hygiene Kit,72,42,65,42,43,2025-07-09,97,Airlock
+item1075,Battery Pack,79,86,62,45,26,N/A,26,Russian Laboratory
+item1076,Scientific Instrument,15,28,7,23,88,N/A,45,US Laboratory
+item1077,Hygiene Kit,27,51,24,48,82,2025-05-16,22,Service Module
+item1078,Water Container,14,10,56,51,76,2025-11-17,44,Storage Area 3
+item1079,Spare Part,73,38,36,53,37,N/A,32,Docking Area 4
+item1080,Solar Panel Part,54,95,37,78,66,2025-04-13,92,Docking Area 1
+item1081,Medical Supply Kit,29,67,26,14,53,2025-11-14,75,Storage Area 2
+item1082,Solar Panel Part,55,95,46,51,17,2025-04-23,30,Storage Area 3
+item1083,Tool Kit,14,50,5,96,49,2025-12-06,41,Cupola
+item1084,Oxygen Cylinder,14,17,68,27,5,2025-10-24,15,Storage Area 2
+item1085,Battery Pack,12,32,19,53,11,2025-06-04,8,Japanese Laboratory
+item1086,Oxygen Cylinder,24,35,68,57,20,N/A,51,Storage Area 3
+item1087,Communication Device,43,72,19,7,31,2026-03-22,40,Storage Area 1
+item1088,Experiment Sample,78,18,25,47,33,2025-11-07,30,Docking Area 1
+item1089,Scientific Instrument,64,56,92,22,35,N/A,20,Docking Area 4
+item1090,Communication Device,8,40,89,11,62,2025-04-16,77,Docking Area 3
+item1091,Communication Device,22,34,97,19,18,2026-01-12,68,Airlock
+item1092,First Aid Kit,63,58,53,78,75,N/A,69,Docking Area 3
+item1093,Oxygen Cylinder,42,20,35,9,91,N/A,57,Cupola
+item1094,Spare Part,98,31,58,20,71,N/A,95,Japanese Laboratory
+item1095,Scientific Instrument,20,46,25,29,93,N/A,29,Storage Area 2
+item1096,Tool Kit,27,19,64,29,90,2025-12-21,24,Crew Quarters
+item1097,Water Container,30,13,20,27,10,N/A,57,Docking Area 2
+item1098,Water Container,79,61,95,24,50,N/A,79,Service Module
+item1099,Hygiene Kit,86,67,23,5,99,N/A,46,Japanese Laboratory
+item1100,Microgravity Experiment Setup,33,9,37,98,33,N/A,69,Docking Area 1
+item1101,Water Container,66,95,14,55,74,2025-07-26,19,Service Module
+item1102,Medical Supply Kit,17,62,98,56,68,N/A,37,Docking Area 2
+item1103,Hygiene Kit,66,55,70,30,80,N/A,82,Cupola
+item1104,Solar Panel Part,76,20,64,77,38,2025-04-10,22,US Laboratory
+item1105,Solar Panel Part,96,63,89,66,45,2026-02-09,95,Crew Quarters
+item1106,Dehydrated Meal Pack,72,8,75,43,63,N/A,4,Docking Area 1
+item1107,Water Container,31,28,35,11,62,N/A,73,Russian Laboratory
+item1108,Scientific Instrument,54,24,96,2,77,N/A,33,European Laboratory
+item1109,Medical Supply Kit,99,11,50,58,77,N/A,24,Russian Laboratory
+item1110,Microgravity Experiment Setup,34,31,9,33,23,2025-10-18,1,Russian Laboratory
+item1111,Scientific Instrument,85,12,34,30,44,N/A,75,Storage Area 3
+item1112,Scientific Instrument,10,79,93,71,33,2025-08-17,94,European Laboratory
+item1113,Scientific Instrument,55,24,45,90,8,2026-03-05,20,Cupola
+item1114,Solar Panel Part,35,14,64,34,35,N/A,88,Cupola
+item1115,Water Container,41,75,47,70,19,N/A,89,Storage Area 2
+item1116,Battery Pack,89,53,19,53,1,N/A,54,Cupola
+item1117,Medical Supply Kit,22,78,53,59,9,2025-08-30,29,Docking Area 1
+item1118,Solar Panel Part,66,66,49,88,73,2025-09-10,25,Docking Area 4
+item1119,Battery Pack,70,38,14,94,39,N/A,45,European Laboratory
+item1120,Microgravity Experiment Setup,51,47,37,99,73,2025-12-30,50,Storage Area 3
+item1121,Microgravity Experiment Setup,6,97,56,4,77,N/A,79,Airlock
+item1122,Experiment Sample,41,98,78,35,35,2025-11-15,90,Service Module
+item1123,Food Ration,64,99,16,89,28,2025-04-16,8,Japanese Laboratory
+item1124,Communication Device,29,43,17,87,55,2025-06-28,11,Japanese Laboratory
+item1125,Hygiene Kit,90,92,66,48,67,N/A,28,Storage Area 1
+item1126,First Aid Kit,65,69,82,98,86,2025-12-08,75,Docking Area 4
+item1127,Battery Pack,89,33,26,53,93,2026-03-15,78,Japanese Laboratory
+item1128,Battery Pack,82,80,58,82,52,2025-10-19,81,Storage Area 2
+item1129,Scientific Instrument,49,84,47,4,86,N/A,28,Storage Area 2
+item1130,Spare Part,37,78,27,95,63,N/A,9,Docking Area 1
+item1131,First Aid Kit,63,25,20,40,13,N/A,57,Cupola
+item1132,Experiment Sample,7,42,41,40,0,N/A,55,Docking Area 2
+item1133,Medical Supply Kit,19,78,38,59,56,N/A,4,Docking Area 3
+item1134,Experiment Sample,77,52,20,69,49,2025-11-17,34,European Laboratory
+item1135,Medical Supply Kit,53,17,25,31,83,2025-10-22,87,Storage Area 2
+item1136,Water Container,13,20,99,93,93,2025-06-25,14,Cupola
+item1137,Experiment Sample,38,70,56,72,55,2025-07-01,72,Docking Area 3
+item1138,Solar Panel Part,20,8,51,30,30,N/A,89,Japanese Laboratory
+item1139,Dehydrated Meal Pack,16,73,26,83,45,2025-06-25,94,Storage Area 1
+item1140,Solar Panel Part,69,89,39,62,59,N/A,45,European Laboratory
+item1141,Oxygen Cylinder,43,78,74,4,3,N/A,100,Docking Area 3
+item1142,Battery Pack,91,61,53,83,30,N/A,39,Storage Area 3
+item1143,Microgravity Experiment Setup,66,69,70,70,86,2025-09-28,41,Airlock
+item1144,Microgravity Experiment Setup,51,100,21,9,67,2026-02-21,43,Docking Area 3
+item1145,Food Ration,80,60,16,70,73,2025-06-08,59,Docking Area 3
+item1146,Solar Panel Part,14,5,51,18,76,2025-04-27,25,Docking Area 3
+item1147,Food Ration,49,16,53,79,34,N/A,95,Russian Laboratory
+item1148,Battery Pack,97,16,84,89,68,2025-05-22,65,Japanese Laboratory
+item1149,Food Ration,22,97,5,41,83,N/A,26,Docking Area 3
+item1150,Food Ration,42,98,56,71,83,N/A,68,Docking Area 1
+item1151,Tool Kit,5,29,28,95,89,2026-01-31,10,Storage Area 3
+item1152,Medical Supply Kit,33,85,8,39,93,N/A,83,Japanese Laboratory
+item1153,Oxygen Cylinder,45,59,21,94,42,2025-07-12,98,US Laboratory
+item1154,Oxygen Cylinder,47,49,30,93,58,2025-09-02,14,Crew Quarters
+item1155,Spare Part,14,30,10,1,100,N/A,19,Docking Area 1
+item1156,First Aid Kit,80,9,93,21,72,2025-05-06,51,Docking Area 4
+item1157,Scientific Instrument,61,57,76,67,94,N/A,20,Crew Quarters
+item1158,Spare Part,13,64,28,17,56,2026-01-31,13,Storage Area 2
+item1159,Scientific Instrument,17,46,21,27,54,2025-07-24,56,Docking Area 2
+item1160,Oxygen Cylinder,42,23,53,81,90,N/A,22,Japanese Laboratory
+item1161,Medical Supply Kit,23,38,26,26,10,2025-06-30,43,Airlock
+item1162,Oxygen Cylinder,58,36,93,42,95,N/A,90,Docking Area 1
+item1163,Experiment Sample,30,100,7,76,87,N/A,4,Storage Area 2
+item1164,Communication Device,28,47,60,87,31,2025-10-24,62,Cupola
+item1165,Microgravity Experiment Setup,10,43,70,72,6,N/A,6,European Laboratory
+item1166,Water Container,78,45,24,58,81,2025-10-19,66,Docking Area 4
+item1167,Hygiene Kit,67,39,5,86,52,2025-05-12,49,Service Module
+item1168,Water Container,96,8,73,85,54,N/A,30,Cupola
+item1169,Battery Pack,63,69,22,59,66,2025-06-19,34,Storage Area 2
+item1170,Scientific Instrument,26,18,38,55,71,N/A,66,Service Module
+item1171,Communication Device,22,84,16,11,52,2025-11-23,76,European Laboratory
+item1172,Solar Panel Part,84,34,87,69,42,N/A,17,Russian Laboratory
+item1173,Food Ration,33,97,75,39,87,2026-03-22,75,Docking Area 1
+item1174,Spare Part,31,12,57,89,43,N/A,62,Russian Laboratory
+item1175,Water Container,14,48,69,32,19,N/A,3,Service Module
+item1176,Oxygen Cylinder,92,14,35,7,41,2025-11-16,31,Airlock
+item1177,Food Ration,54,75,69,84,56,2026-01-05,56,Cupola
+item1178,First Aid Kit,64,58,82,43,18,N/A,13,Service Module
+item1179,Hygiene Kit,20,37,19,9,97,N/A,21,Storage Area 2
+item1180,Dehydrated Meal Pack,77,5,86,50,23,N/A,78,Docking Area 4
+item1181,Microgravity Experiment Setup,20,36,70,68,55,N/A,97,Docking Area 4
+item1182,Medical Supply Kit,97,70,76,63,95,N/A,75,European Laboratory
+item1183,Experiment Sample,18,58,19,33,41,2026-01-31,48,Service Module
+item1184,Microgravity Experiment Setup,25,50,89,96,38,2026-01-10,33,Docking Area 1
+item1185,Solar Panel Part,31,74,79,38,44,N/A,7,Storage Area 3
+item1186,Solar Panel Part,93,36,24,46,87,2025-10-07,53,Crew Quarters
+item1187,Water Container,90,94,27,63,29,2026-03-15,31,Docking Area 3
+item1188,Spare Part,21,93,23,7,0,2025-12-30,11,Airlock
+item1189,Dehydrated Meal Pack,70,20,51,26,57,2026-03-23,1,Docking Area 2
+item1190,Dehydrated Meal Pack,60,16,13,34,76,2025-04-16,45,Storage Area 3
+item1191,Dehydrated Meal Pack,51,47,66,69,78,2026-01-19,93,Docking Area 3
+item1192,Communication Device,65,82,30,31,69,2026-02-11,23,Airlock
+item1193,Food Ration,69,81,33,26,31,2025-08-31,33,US Laboratory
+item1194,Water Container,36,83,45,61,40,N/A,41,Storage Area 2
+item1195,Oxygen Cylinder,6,69,99,6,20,N/A,84,Docking Area 1
+item1196,Oxygen Cylinder,12,66,19,72,65,2026-02-20,6,Japanese Laboratory
+item1197,Scientific Instrument,6,61,17,68,71,2025-04-18,87,Service Module
+item1198,Scientific Instrument,15,56,99,75,63,2026-03-17,3,Japanese Laboratory
+item1199,Solar Panel Part,62,30,5,48,95,N/A,40,Service Module
+item1200,Solar Panel Part,96,18,44,74,0,N/A,4,US Laboratory
+item1201,Communication Device,56,94,72,2,75,N/A,36,Japanese Laboratory
+item1202,Scientific Instrument,67,79,55,63,100,N/A,64,Storage Area 2
+item1203,Water Container,48,62,52,82,36,2026-03-17,45,Docking Area 3
+item1204,Solar Panel Part,65,44,83,56,88,N/A,6,Docking Area 1
+item1205,Oxygen Cylinder,92,56,63,38,52,2025-11-29,34,Service Module
+item1206,First Aid Kit,72,99,33,8,2,2025-10-31,9,Storage Area 3
+item1207,Hygiene Kit,66,89,50,6,16,2025-10-20,99,Japanese Laboratory
+item1208,Water Container,99,99,32,12,16,2026-02-22,58,Docking Area 1
+item1209,Tool Kit,60,86,74,90,82,2025-04-29,16,Service Module
+item1210,Scientific Instrument,46,93,35,15,99,N/A,49,Storage Area 3
+item1211,Solar Panel Part,31,47,14,72,59,N/A,24,Russian Laboratory
+item1212,Microgravity Experiment Setup,18,38,36,38,94,2026-02-17,6,Russian Laboratory
+item1213,Dehydrated Meal Pack,84,46,99,30,80,N/A,57,Docking Area 4
+item1214,Solar Panel Part,40,75,85,81,36,N/A,73,Crew Quarters
+item1215,Tool Kit,10,100,55,6,48,N/A,67,Airlock
+item1216,Microgravity Experiment Setup,82,78,33,67,26,N/A,11,Cupola
+item1217,Tool Kit,74,12,71,55,61,N/A,40,Storage Area 1
+item1218,Experiment Sample,90,71,29,37,59,N/A,100,Storage Area 3
+item1219,Microgravity Experiment Setup,95,29,18,45,9,2025-05-09,15,Service Module
+item1220,Scientific Instrument,61,76,86,17,18,2025-09-09,74,Russian Laboratory
+item1221,Hygiene Kit,49,17,76,70,3,2025-11-01,66,Crew Quarters
+item1222,Hygiene Kit,22,79,55,65,93,N/A,59,Docking Area 4
+item1223,Dehydrated Meal Pack,33,17,9,100,40,N/A,16,Storage Area 3
+item1224,Solar Panel Part,18,11,55,89,94,2025-09-06,34,Japanese Laboratory
+item1225,Communication Device,79,84,95,61,84,N/A,48,Docking Area 1
+item1226,Communication Device,35,100,5,25,52,2026-01-16,20,Docking Area 3
+item1227,Food Ration,34,20,56,60,52,N/A,27,Docking Area 3
+item1228,Battery Pack,65,88,88,18,69,N/A,34,US Laboratory
+item1229,First Aid Kit,40,38,37,46,40,N/A,86,Docking Area 4
+item1230,Spare Part,63,67,20,9,10,N/A,75,Storage Area 1
+item1231,Oxygen Cylinder,98,90,78,17,65,N/A,83,Crew Quarters
+item1232,Spare Part,99,32,48,34,8,2025-11-25,46,Cupola
+item1233,Oxygen Cylinder,64,28,63,25,79,2025-11-24,74,European Laboratory
+item1234,Food Ration,31,28,60,65,72,2025-11-11,74,Crew Quarters
+item1235,Communication Device,80,13,81,47,63,2025-12-23,10,Crew Quarters
+item1236,Scientific Instrument,17,71,72,4,57,N/A,19,Storage Area 3
+item1237,Spare Part,50,52,86,22,54,2026-03-15,22,European Laboratory
+item1238,First Aid Kit,57,39,83,40,15,2025-09-14,85,Docking Area 2
+item1239,Dehydrated Meal Pack,78,67,38,80,63,2025-06-25,17,Service Module
+item1240,Battery Pack,7,71,32,2,67,2025-05-06,42,Storage Area 2
+item1241,Hygiene Kit,17,84,17,25,73,2025-05-31,90,Storage Area 1
+item1242,Food Ration,90,74,88,11,60,N/A,62,Service Module
+item1243,Oxygen Cylinder,94,57,21,72,22,N/A,68,Storage Area 1
+item1244,Water Container,64,42,22,6,84,2025-12-30,85,Service Module
+item1245,Experiment Sample,69,38,57,54,70,2026-01-24,71,Storage Area 3
+item1246,Water Container,99,67,54,9,40,2025-04-26,83,US Laboratory
+item1247,Oxygen Cylinder,60,80,34,14,68,N/A,91,Cupola
+item1248,Tool Kit,86,25,81,3,61,2026-02-17,63,Storage Area 1
+item1249,Spare Part,17,96,61,22,33,N/A,71,Cupola
+item1250,Communication Device,78,6,32,24,42,2025-07-09,57,Crew Quarters
+item1251,Scientific Instrument,5,42,25,80,51,N/A,29,Docking Area 3
+item1252,Solar Panel Part,74,24,49,17,72,N/A,82,Japanese Laboratory
+item1253,Solar Panel Part,46,12,81,35,4,2025-04-03,54,Japanese Laboratory
+item1254,Food Ration,74,28,32,80,78,N/A,27,Docking Area 4
+item1255,Spare Part,75,22,97,78,78,2025-07-17,90,Crew Quarters
+item1256,Tool Kit,65,95,84,70,81,2025-11-05,75,Russian Laboratory
+item1257,Tool Kit,39,52,50,46,89,2025-08-28,78,Crew Quarters
+item1258,Food Ration,88,10,53,72,48,N/A,33,Japanese Laboratory
+item1259,Communication Device,61,23,96,35,29,2025-06-03,9,Docking Area 2
+item1260,First Aid Kit,91,17,73,60,18,2025-07-02,72,Russian Laboratory
+item1261,Battery Pack,23,90,19,60,61,N/A,37,US Laboratory
+item1262,Experiment Sample,16,64,73,66,2,2025-06-15,41,Storage Area 1
+item1263,Communication Device,82,83,40,75,96,N/A,16,Airlock
+item1264,Dehydrated Meal Pack,12,80,18,24,39,N/A,3,Storage Area 3
+item1265,Tool Kit,7,77,29,4,83,2026-01-29,35,Service Module
+item1266,Experiment Sample,88,75,64,57,92,2025-09-06,86,Docking Area 4
+item1267,Experiment Sample,16,53,32,84,3,N/A,85,Service Module
+item1268,Hygiene Kit,6,31,76,59,92,N/A,77,Docking Area 4
+item1269,Medical Supply Kit,74,29,65,25,79,N/A,31,Russian Laboratory
+item1270,Solar Panel Part,97,44,37,13,42,2025-12-04,77,European Laboratory
+item1271,Dehydrated Meal Pack,34,92,52,84,30,2025-08-19,75,Japanese Laboratory
+item1272,Spare Part,5,50,55,46,60,2025-09-16,33,Docking Area 2
+item1273,Oxygen Cylinder,30,7,48,100,92,N/A,15,US Laboratory
+item1274,Scientific Instrument,56,93,11,45,23,N/A,74,Storage Area 2
+item1275,Hygiene Kit,8,73,11,15,87,N/A,88,Docking Area 4
+item1276,Battery Pack,15,75,69,28,28,N/A,57,Japanese Laboratory
+item1277,Experiment Sample,86,92,54,62,35,2026-01-13,59,Docking Area 3
+item1278,Food Ration,36,62,88,24,5,2025-12-12,20,Storage Area 2
+item1279,Solar Panel Part,7,76,78,76,3,N/A,90,Storage Area 2
+item1280,Scientific Instrument,35,75,46,27,0,2025-12-02,84,Crew Quarters
+item1281,Spare Part,93,92,21,69,89,2026-02-27,92,Airlock
+item1282,Spare Part,46,86,7,34,24,N/A,72,Russian Laboratory
+item1283,Scientific Instrument,37,67,63,92,8,2025-04-18,72,Service Module
+item1284,Battery Pack,92,80,18,31,14,2025-11-03,84,Docking Area 4
+item1285,Medical Supply Kit,49,39,69,41,74,N/A,100,Docking Area 3
+item1286,Battery Pack,7,56,66,2,94,N/A,98,Storage Area 1
+item1287,Battery Pack,48,42,55,18,76,2025-03-30,69,Russian Laboratory
+item1288,Experiment Sample,91,9,34,58,22,N/A,46,Docking Area 4
+item1289,Oxygen Cylinder,99,47,94,9,35,N/A,16,Docking Area 4
+item1290,Solar Panel Part,55,23,9,2,43,2025-06-02,81,Storage Area 3
+item1291,Dehydrated Meal Pack,34,25,84,86,70,N/A,99,Cupola
+item1292,Tool Kit,50,31,73,46,12,N/A,31,Docking Area 3
+item1293,Spare Part,95,51,18,75,75,N/A,90,Storage Area 3
+item1294,Spare Part,28,28,70,21,78,2025-09-22,63,Japanese Laboratory
+item1295,Medical Supply Kit,54,77,5,43,99,N/A,34,Docking Area 2
+item1296,First Aid Kit,55,49,96,21,8,N/A,49,Storage Area 3
+item1297,Dehydrated Meal Pack,42,36,99,3,83,2025-04-07,50,Storage Area 2
+item1298,Microgravity Experiment Setup,65,43,9,98,81,N/A,59,Storage Area 1
+item1299,Solar Panel Part,38,99,11,13,58,2026-02-24,23,Japanese Laboratory
+item1300,Food Ration,76,38,6,8,78,2025-08-11,40,Airlock
+item1301,Food Ration,39,63,33,10,40,N/A,8,Docking Area 3
+item1302,Hygiene Kit,94,27,11,16,39,N/A,8,US Laboratory
+item1303,Water Container,78,70,68,44,35,2025-11-01,40,Docking Area 2
+item1304,Medical Supply Kit,27,23,71,31,84,N/A,20,Docking Area 4
+item1305,Solar Panel Part,44,52,94,27,84,N/A,96,European Laboratory
+item1306,Microgravity Experiment Setup,17,86,7,49,39,N/A,17,Cupola
+item1307,Communication Device,52,43,22,67,52,2025-08-05,13,Docking Area 3
+item1308,Solar Panel Part,66,38,49,35,62,N/A,65,Airlock
+item1309,Communication Device,97,33,70,40,5,N/A,20,Airlock
+item1310,Water Container,20,85,12,87,2,N/A,55,US Laboratory
+item1311,Dehydrated Meal Pack,67,63,67,68,86,N/A,58,Docking Area 2
+item1312,Microgravity Experiment Setup,7,56,25,14,65,N/A,38,Service Module
+item1313,Hygiene Kit,64,54,84,18,13,N/A,61,European Laboratory
+item1314,Medical Supply Kit,12,48,72,52,32,2025-05-27,84,Docking Area 2
+item1315,Spare Part,5,59,33,36,51,N/A,51,Docking Area 3
+item1316,Tool Kit,85,59,52,64,8,2025-11-01,69,Japanese Laboratory
+item1317,Communication Device,83,77,88,75,55,2025-07-19,32,Docking Area 4
+item1318,Microgravity Experiment Setup,55,69,76,6,80,N/A,37,Docking Area 2
+item1319,Tool Kit,7,13,48,28,39,N/A,38,Service Module
+item1320,Solar Panel Part,9,71,87,98,32,N/A,12,European Laboratory
+item1321,Water Container,86,37,95,18,32,2026-03-16,15,Docking Area 2
+item1322,Dehydrated Meal Pack,9,53,60,24,2,N/A,35,Storage Area 3
+item1323,Spare Part,98,81,21,89,45,2025-10-09,99,Docking Area 1
+item1324,Medical Supply Kit,30,30,50,4,43,2026-03-25,31,Russian Laboratory
+item1325,Oxygen Cylinder,100,26,59,36,86,N/A,29,Docking Area 4
+item1326,Food Ration,60,85,96,7,21,2026-03-09,21,Storage Area 3
+item1327,Experiment Sample,14,97,25,64,95,N/A,57,Docking Area 4
+item1328,Oxygen Cylinder,11,20,96,40,37,N/A,6,Docking Area 3
+item1329,First Aid Kit,72,89,62,3,26,2025-10-11,52,Storage Area 3
+item1330,Hygiene Kit,79,45,75,73,42,N/A,21,Airlock
+item1331,Experiment Sample,71,84,58,70,63,2025-05-23,10,Cupola
+item1332,Experiment Sample,78,12,40,82,51,2026-03-03,79,Russian Laboratory
+item1333,First Aid Kit,53,76,35,38,72,2026-01-04,68,Airlock
+item1334,Water Container,34,32,78,95,56,N/A,64,Docking Area 3
+item1335,Scientific Instrument,11,41,61,28,76,2026-03-11,90,Docking Area 1
+item1336,Battery Pack,75,17,40,43,39,N/A,49,Crew Quarters
+item1337,Experiment Sample,85,27,35,49,34,N/A,18,European Laboratory
+item1338,Scientific Instrument,49,26,19,12,97,2025-07-30,64,Crew Quarters
+item1339,Spare Part,70,20,48,76,77,2026-01-18,32,Storage Area 1
+item1340,Water Container,16,18,51,95,9,N/A,74,Crew Quarters
+item1341,Oxygen Cylinder,77,22,47,34,79,2025-07-30,63,Docking Area 4
+item1342,Battery Pack,25,56,26,73,29,2026-01-14,6,Service Module
+item1343,Scientific Instrument,90,90,81,42,91,2025-08-04,96,Cupola
+item1344,Tool Kit,59,50,100,71,79,2025-09-28,66,Russian Laboratory
+item1345,Solar Panel Part,28,50,9,16,19,2026-03-06,24,Cupola
+item1346,Oxygen Cylinder,55,61,51,31,28,N/A,71,Storage Area 3
+item1347,Experiment Sample,5,61,62,45,2,2026-03-08,51,Service Module
+item1348,Spare Part,83,91,16,5,20,2026-02-15,58,US Laboratory
+item1349,Spare Part,80,41,26,10,86,N/A,34,Docking Area 4
+item1350,Oxygen Cylinder,7,90,43,71,8,2025-12-26,62,Airlock
+item1351,Battery Pack,77,86,28,81,92,2025-05-08,75,Service Module
+item1352,Dehydrated Meal Pack,66,57,7,57,64,N/A,63,US Laboratory
+item1353,Medical Supply Kit,94,49,49,38,96,N/A,85,Storage Area 1
+item1354,Oxygen Cylinder,93,31,81,67,19,N/A,35,Storage Area 1
+item1355,First Aid Kit,78,58,98,15,50,2025-06-18,66,Storage Area 1
+item1356,Hygiene Kit,61,93,22,35,24,N/A,95,US Laboratory
+item1357,Scientific Instrument,45,74,84,74,48,N/A,16,European Laboratory
+item1358,Solar Panel Part,16,36,93,79,67,2025-05-29,71,Cupola
+item1359,Solar Panel Part,96,24,57,50,97,N/A,5,Service Module
+item1360,Microgravity Experiment Setup,60,53,68,37,73,2025-06-12,88,US Laboratory
+item1361,Hygiene Kit,28,59,71,97,30,N/A,49,Docking Area 3
+item1362,Oxygen Cylinder,34,39,48,3,94,2025-12-11,62,Docking Area 3
+item1363,First Aid Kit,99,98,25,41,43,2025-12-24,38,Russian Laboratory
+item1364,Microgravity Experiment Setup,26,23,14,71,1,2025-09-21,80,Cupola
+item1365,Medical Supply Kit,6,100,33,20,77,N/A,35,Docking Area 4
+item1366,Oxygen Cylinder,7,45,48,61,83,2025-10-31,64,Japanese Laboratory
+item1367,Food Ration,78,22,89,11,43,2025-10-21,100,Docking Area 1
+item1368,Experiment Sample,40,34,78,8,30,2025-06-03,17,Russian Laboratory
+item1369,First Aid Kit,26,45,84,49,90,2025-12-03,25,Storage Area 3
+item1370,Dehydrated Meal Pack,34,36,98,41,1,2025-10-27,8,Airlock
+item1371,Experiment Sample,16,84,30,5,5,2026-02-17,96,US Laboratory
+item1372,Spare Part,93,28,89,3,32,2025-07-06,99,Docking Area 1
+item1373,Solar Panel Part,84,41,77,48,65,N/A,73,Storage Area 1
+item1374,Tool Kit,69,98,13,70,66,2025-10-19,63,Storage Area 1
+item1375,Experiment Sample,11,37,57,58,35,2026-03-13,52,Docking Area 3
+item1376,Experiment Sample,77,6,39,12,67,N/A,9,Storage Area 3
+item1377,Battery Pack,48,14,55,42,22,N/A,67,Storage Area 2
+item1378,Food Ration,63,61,61,98,43,2026-01-30,30,Docking Area 1
+item1379,Tool Kit,76,47,47,58,45,2025-05-14,37,Storage Area 2
+item1380,Battery Pack,88,21,26,34,41,N/A,20,Cupola
+item1381,Water Container,38,17,81,15,61,N/A,50,Cupola
+item1382,Hygiene Kit,80,21,56,22,15,N/A,85,Service Module
+item1383,Oxygen Cylinder,66,81,52,84,97,2025-12-08,57,Russian Laboratory
+item1384,Medical Supply Kit,75,36,14,17,14,2025-09-19,94,Storage Area 1
+item1385,Oxygen Cylinder,95,83,67,83,12,2025-04-03,64,Crew Quarters
+item1386,Tool Kit,44,53,11,81,83,2025-08-13,88,Docking Area 2
+item1387,Battery Pack,15,88,9,4,43,2025-06-30,98,Airlock
+item1388,Hygiene Kit,42,69,52,22,39,N/A,38,Docking Area 1
+item1389,Medical Supply Kit,25,19,95,5,20,2025-11-14,12,Cupola
+item1390,Experiment Sample,55,40,63,16,93,N/A,21,Docking Area 3
+item1391,Microgravity Experiment Setup,86,22,51,36,66,2025-04-15,50,Crew Quarters
+item1392,Battery Pack,71,71,67,15,51,2025-08-20,75,Storage Area 2
+item1393,Microgravity Experiment Setup,23,20,27,93,6,N/A,44,Russian Laboratory
+item1394,First Aid Kit,95,100,73,55,98,N/A,69,US Laboratory
+item1395,Tool Kit,32,35,23,72,37,2025-07-05,39,US Laboratory
+item1396,Oxygen Cylinder,45,7,52,91,39,N/A,68,Storage Area 1
+item1397,Scientific Instrument,42,25,95,75,43,N/A,66,US Laboratory
+item1398,First Aid Kit,23,78,32,13,71,N/A,92,Docking Area 4
+item1399,Hygiene Kit,20,98,48,17,45,2025-05-19,77,US Laboratory
+item1400,First Aid Kit,73,90,31,85,41,2025-07-23,26,Service Module
+item1401,Experiment Sample,8,17,15,20,97,2026-01-25,41,Docking Area 1
+item1402,Experiment Sample,77,37,17,55,8,2025-06-16,22,Russian Laboratory
+item1403,Solar Panel Part,97,57,83,24,90,N/A,90,Russian Laboratory
+item1404,Medical Supply Kit,38,30,36,48,22,2025-10-02,93,US Laboratory
+item1405,Dehydrated Meal Pack,58,57,67,61,59,2025-11-20,18,Russian Laboratory
+item1406,Medical Supply Kit,43,67,15,88,9,N/A,48,Docking Area 1
+item1407,Dehydrated Meal Pack,30,39,71,48,7,2025-08-09,24,Japanese Laboratory
+item1408,Communication Device,47,100,60,58,68,2025-06-12,13,Storage Area 3
+item1409,Communication Device,12,44,82,47,87,2025-07-01,74,Storage Area 2
+item1410,First Aid Kit,88,63,40,49,38,N/A,45,Service Module
+item1411,Spare Part,72,12,22,17,48,N/A,62,Docking Area 2
+item1412,Communication Device,42,83,15,95,20,2025-11-13,75,Storage Area 2
+item1413,Hygiene Kit,94,96,100,43,43,N/A,32,Storage Area 2
+item1414,Tool Kit,14,75,44,5,11,2025-12-13,49,Cupola
+item1415,First Aid Kit,99,43,73,71,47,2025-08-23,51,Service Module
+item1416,Scientific Instrument,33,81,64,70,54,N/A,94,Cupola
+item1417,Solar Panel Part,56,99,35,60,85,N/A,26,Storage Area 3
+item1418,Experiment Sample,44,78,97,11,26,N/A,59,European Laboratory
+item1419,Battery Pack,64,86,60,5,1,N/A,7,European Laboratory
+item1420,Microgravity Experiment Setup,50,16,22,62,90,2025-09-30,34,US Laboratory
+item1421,Communication Device,34,58,75,94,49,2025-04-19,48,Storage Area 3
+item1422,Spare Part,46,77,20,100,67,2025-07-15,44,US Laboratory
+item1423,Hygiene Kit,7,7,55,97,20,2025-10-14,51,Docking Area 1
+item1424,Experiment Sample,9,15,23,48,85,2025-08-19,70,European Laboratory
+item1425,Communication Device,57,57,11,70,11,2025-07-28,32,Docking Area 2
+item1426,Dehydrated Meal Pack,48,18,16,39,95,N/A,39,Service Module
+item1427,Experiment Sample,60,77,13,58,72,2025-10-02,16,Docking Area 3
+item1428,First Aid Kit,80,74,57,38,75,N/A,92,Russian Laboratory
+item1429,Spare Part,86,52,28,14,26,2025-04-11,58,Docking Area 2
+item1430,Oxygen Cylinder,85,49,23,80,43,2025-07-05,97,Storage Area 3
+item1431,First Aid Kit,58,28,45,53,61,2026-03-12,57,Storage Area 1
+item1432,Tool Kit,8,49,21,45,1,2025-12-08,49,European Laboratory
+item1433,Oxygen Cylinder,24,72,55,60,45,N/A,87,Service Module
+item1434,Tool Kit,95,9,87,19,94,N/A,20,Service Module
+item1435,Tool Kit,42,62,52,96,92,N/A,82,Russian Laboratory
+item1436,Hygiene Kit,17,53,94,19,85,N/A,96,European Laboratory
+item1437,Medical Supply Kit,19,87,99,33,37,N/A,75,Docking Area 3
+item1438,Oxygen Cylinder,52,13,6,46,69,2025-12-27,97,Docking Area 1
+item1439,Experiment Sample,37,26,37,85,54,N/A,44,Cupola
+item1440,Tool Kit,21,34,58,73,75,N/A,28,Cupola
+item1441,Battery Pack,52,45,58,75,76,2025-04-26,38,Docking Area 1
+item1442,Communication Device,41,33,99,98,30,2025-10-29,33,Service Module
+item1443,Battery Pack,14,7,88,30,60,N/A,39,European Laboratory
+item1444,Food Ration,70,14,56,25,21,N/A,42,European Laboratory
+item1445,Medical Supply Kit,72,72,26,41,35,2025-04-14,66,Docking Area 2
+item1446,Spare Part,28,62,87,64,91,2025-08-25,86,Cupola
+item1447,Dehydrated Meal Pack,80,13,35,99,32,2026-03-07,31,European Laboratory
+item1448,Battery Pack,11,22,45,44,55,N/A,5,Crew Quarters
+item1449,Food Ration,64,7,32,82,96,2025-06-14,32,US Laboratory
+item1450,Communication Device,39,30,54,18,72,N/A,9,Docking Area 1
+item1451,Oxygen Cylinder,14,71,10,99,67,2025-07-11,40,Service Module
+item1452,Dehydrated Meal Pack,40,35,95,95,46,N/A,87,European Laboratory
+item1453,Water Container,94,45,88,14,68,2025-08-29,25,Service Module
+item1454,Communication Device,9,88,37,97,27,2025-11-17,44,Japanese Laboratory
+item1455,Experiment Sample,79,84,94,73,61,2025-11-28,79,Service Module
+item1456,Food Ration,47,91,90,12,2,N/A,68,Docking Area 1
+item1457,Experiment Sample,54,71,46,33,30,2025-11-03,97,Storage Area 2
+item1458,Solar Panel Part,92,84,82,80,81,N/A,11,Japanese Laboratory
+item1459,Hygiene Kit,36,82,68,63,75,N/A,15,Docking Area 1
+item1460,Scientific Instrument,100,57,9,31,75,2025-10-02,9,Cupola
+item1461,Dehydrated Meal Pack,95,92,97,16,74,N/A,45,Japanese Laboratory
+item1462,Food Ration,57,51,67,21,4,N/A,80,Storage Area 3
+item1463,Dehydrated Meal Pack,36,17,52,100,25,2026-02-28,68,European Laboratory
+item1464,Communication Device,67,99,56,52,85,N/A,92,Docking Area 2
+item1465,Spare Part,38,46,95,46,93,N/A,73,Docking Area 3
+item1466,Medical Supply Kit,7,40,63,98,87,2025-11-07,34,Airlock
+item1467,Scientific Instrument,87,78,17,21,33,N/A,18,Service Module
+item1468,Tool Kit,30,30,46,23,15,2025-07-01,31,Docking Area 2
+item1469,Communication Device,27,15,44,22,56,2025-05-07,74,Japanese Laboratory
+item1470,Experiment Sample,75,98,21,68,11,N/A,61,Japanese Laboratory
+item1471,Spare Part,98,5,75,34,20,N/A,64,Storage Area 1
+item1472,Food Ration,57,87,64,35,43,2025-06-11,27,Docking Area 1
+item1473,Tool Kit,89,92,29,70,49,N/A,79,European Laboratory
+item1474,Solar Panel Part,40,70,97,15,51,N/A,11,Russian Laboratory
+item1475,Medical Supply Kit,23,9,33,89,14,2025-09-10,52,Docking Area 4
+item1476,Experiment Sample,100,61,13,81,77,N/A,63,European Laboratory
+item1477,Oxygen Cylinder,25,73,51,91,5,2025-12-21,26,Russian Laboratory
+item1478,Oxygen Cylinder,64,94,68,70,72,2025-05-07,68,Storage Area 1
+item1479,Food Ration,30,8,60,27,16,N/A,28,Russian Laboratory
+item1480,Food Ration,21,65,31,88,22,N/A,94,Docking Area 1
+item1481,Microgravity Experiment Setup,75,26,23,6,62,N/A,2,Crew Quarters
+item1482,Food Ration,24,99,97,45,97,N/A,41,Docking Area 1
+item1483,Communication Device,53,52,15,80,78,N/A,71,Storage Area 3
+item1484,Microgravity Experiment Setup,41,18,99,93,86,2026-01-11,83,Docking Area 4
+item1485,Tool Kit,75,35,19,97,87,2026-02-25,46,European Laboratory
+item1486,Hygiene Kit,41,48,93,12,63,N/A,85,Storage Area 3
+item1487,Oxygen Cylinder,96,40,85,6,0,N/A,89,Docking Area 1
+item1488,Scientific Instrument,83,73,64,30,70,2025-05-24,80,Docking Area 4
+item1489,Microgravity Experiment Setup,8,56,36,81,18,2025-11-25,91,Japanese Laboratory
+item1490,Communication Device,53,36,86,48,9,N/A,82,Storage Area 2
+item1491,Hygiene Kit,10,54,71,62,15,N/A,5,Docking Area 1
+item1492,Water Container,90,60,46,18,89,N/A,26,Docking Area 1
+item1493,Solar Panel Part,41,24,79,92,39,2025-04-08,93,Japanese Laboratory
+item1494,Hygiene Kit,77,55,27,14,39,N/A,95,Docking Area 2
+item1495,Medical Supply Kit,20,54,5,7,91,N/A,72,Docking Area 2
+item1496,Solar Panel Part,51,86,60,59,98,2026-01-23,77,Docking Area 4
+item1497,Tool Kit,77,21,97,37,1,N/A,59,Cupola
+item1498,Water Container,62,20,5,33,76,2026-03-01,81,Storage Area 2
+item1499,Spare Part,84,48,17,1,96,2025-08-22,21,Crew Quarters
+item1500,Scientific Instrument,55,83,46,51,100,2025-04-30,47,Storage Area 3
+item1501,Oxygen Cylinder,43,61,58,7,74,N/A,78,Storage Area 3
+item1502,Hygiene Kit,35,55,19,74,80,2025-09-25,34,Docking Area 2
+item1503,Microgravity Experiment Setup,65,83,13,30,52,N/A,100,Service Module
+item1504,First Aid Kit,33,43,46,24,96,2026-01-06,1,Russian Laboratory
+item1505,Food Ration,41,24,67,95,55,N/A,68,Service Module
+item1506,Dehydrated Meal Pack,18,68,95,46,45,N/A,21,Docking Area 4
+item1507,Medical Supply Kit,33,65,73,41,12,2025-06-08,69,Airlock
+item1508,Hygiene Kit,21,21,69,37,32,2026-03-04,54,Docking Area 3
+item1509,Spare Part,27,9,47,88,54,N/A,64,Cupola
+item1510,Microgravity Experiment Setup,26,99,29,82,88,N/A,85,Docking Area 3
+item1511,Solar Panel Part,66,45,40,36,34,N/A,74,Docking Area 3
+item1512,Experiment Sample,81,74,82,19,39,2026-03-02,54,Docking Area 1
+item1513,Water Container,39,15,49,16,89,N/A,32,Storage Area 2
+item1514,Water Container,66,99,16,7,27,2025-09-27,12,Cupola
+item1515,Experiment Sample,65,20,84,84,97,2025-12-16,94,Crew Quarters
+item1516,Scientific Instrument,74,92,97,45,50,N/A,16,Crew Quarters
+item1517,Hygiene Kit,90,46,47,98,5,N/A,34,US Laboratory
+item1518,Water Container,9,9,13,16,6,2025-09-25,19,Docking Area 4
+item1519,Experiment Sample,80,83,45,80,98,2025-08-24,82,Docking Area 4
+item1520,Dehydrated Meal Pack,9,75,31,18,98,2025-12-19,28,US Laboratory
+item1521,Spare Part,26,56,45,57,39,2025-07-02,74,US Laboratory
+item1522,Hygiene Kit,22,58,93,73,21,N/A,17,Airlock
+item1523,Communication Device,30,56,73,55,1,2026-01-03,31,Japanese Laboratory
+item1524,Solar Panel Part,11,65,13,28,48,N/A,39,Japanese Laboratory
+item1525,Spare Part,7,75,74,73,74,N/A,98,Docking Area 1
+item1526,Water Container,12,22,26,72,77,2025-07-16,79,Russian Laboratory
+item1527,First Aid Kit,89,85,69,67,80,2026-01-23,7,Russian Laboratory
+item1528,Water Container,32,57,64,98,20,2025-08-25,18,Airlock
+item1529,Tool Kit,55,78,15,46,92,2025-09-01,14,Russian Laboratory
+item1530,Medical Supply Kit,39,36,94,57,21,N/A,75,Docking Area 4
+item1531,Solar Panel Part,66,12,17,59,43,N/A,68,US Laboratory
+item1532,First Aid Kit,87,66,40,20,70,2025-05-13,30,US Laboratory
+item1533,First Aid Kit,58,55,93,79,90,N/A,19,European Laboratory
+item1534,Oxygen Cylinder,96,79,62,78,4,N/A,43,Docking Area 4
+item1535,Tool Kit,73,33,84,49,16,N/A,22,Docking Area 1
+item1536,Water Container,23,49,38,67,73,N/A,77,Storage Area 1
+item1537,Communication Device,92,9,55,85,33,2025-05-24,70,Russian Laboratory
+item1538,Tool Kit,35,36,62,95,3,2025-12-07,1,Crew Quarters
+item1539,Experiment Sample,96,6,91,99,31,N/A,63,Crew Quarters
+item1540,Battery Pack,75,78,93,21,96,N/A,46,Docking Area 3
+item1541,Experiment Sample,26,77,84,94,51,N/A,68,Russian Laboratory
+item1542,Oxygen Cylinder,29,100,89,1,91,2025-05-22,58,Service Module
+item1543,Food Ration,74,48,60,3,78,N/A,82,Docking Area 4
+item1544,Dehydrated Meal Pack,100,8,58,86,25,2025-04-23,89,Japanese Laboratory
+item1545,First Aid Kit,82,36,64,20,100,N/A,48,Storage Area 2
+item1546,Scientific Instrument,84,61,64,12,99,N/A,3,Russian Laboratory
+item1547,Communication Device,73,60,41,67,18,2025-05-23,100,Airlock
+item1548,Tool Kit,100,71,91,65,87,N/A,46,Service Module
+item1549,Water Container,43,52,56,85,19,2025-06-28,6,Storage Area 2
+item1550,First Aid Kit,70,87,42,88,100,N/A,33,Docking Area 1
+item1551,Water Container,61,73,87,87,18,N/A,56,Docking Area 3
+item1552,Oxygen Cylinder,10,86,53,36,98,2025-09-05,16,Docking Area 1
+item1553,Oxygen Cylinder,82,98,54,44,74,2026-01-06,59,Russian Laboratory
+item1554,Hygiene Kit,61,97,56,57,95,2026-01-13,12,Airlock
+item1555,Tool Kit,97,98,89,65,0,N/A,38,US Laboratory
+item1556,First Aid Kit,27,15,74,89,91,2025-06-29,65,European Laboratory
+item1557,Hygiene Kit,56,62,60,72,50,N/A,10,Russian Laboratory
+item1558,Communication Device,37,94,75,66,96,2025-08-08,27,US Laboratory
+item1559,Microgravity Experiment Setup,62,15,64,46,100,2025-09-19,40,Service Module
+item1560,Medical Supply Kit,47,66,63,11,20,N/A,72,European Laboratory
+item1561,Dehydrated Meal Pack,43,23,93,23,34,N/A,99,Docking Area 2
+item1562,Tool Kit,41,59,36,75,94,N/A,2,Docking Area 2
+item1563,Hygiene Kit,92,60,95,43,80,N/A,26,Cupola
+item1564,First Aid Kit,63,24,25,72,85,N/A,55,Service Module
+item1565,Oxygen Cylinder,41,25,53,53,13,2025-11-15,48,Storage Area 2
+item1566,Food Ration,10,58,27,33,49,2026-01-13,89,US Laboratory
+item1567,Food Ration,66,25,81,26,2,2025-06-18,65,Storage Area 2
+item1568,Battery Pack,15,100,39,38,95,N/A,74,Crew Quarters
+item1569,Food Ration,86,100,76,66,12,2025-09-21,60,European Laboratory
+item1570,Experiment Sample,92,65,6,76,54,N/A,17,Airlock
+item1571,Scientific Instrument,59,78,34,16,94,N/A,7,European Laboratory
+item1572,Experiment Sample,9,30,67,17,78,2025-07-13,6,Docking Area 3
+item1573,Dehydrated Meal Pack,13,59,5,86,75,2025-06-11,65,Docking Area 2
+item1574,Experiment Sample,5,17,41,58,82,N/A,24,Docking Area 3
+item1575,Medical Supply Kit,75,9,64,54,89,N/A,68,Service Module
+item1576,Microgravity Experiment Setup,40,68,24,67,97,N/A,36,Airlock
+item1577,Microgravity Experiment Setup,38,88,84,12,43,2026-03-08,63,Storage Area 1
+item1578,Communication Device,78,79,36,37,25,N/A,51,US Laboratory
+item1579,Dehydrated Meal Pack,32,56,99,45,84,2025-07-26,39,Storage Area 1
+item1580,First Aid Kit,51,76,31,10,24,N/A,2,Cupola
+item1581,Hygiene Kit,17,72,47,13,32,N/A,92,European Laboratory
+item1582,Dehydrated Meal Pack,23,77,37,80,40,2025-04-08,63,Japanese Laboratory
+item1583,Experiment Sample,73,23,96,8,64,N/A,20,Storage Area 1
+item1584,Medical Supply Kit,17,19,12,41,18,N/A,46,European Laboratory
+item1585,Food Ration,50,40,81,17,26,N/A,40,Docking Area 2
+item1586,Dehydrated Meal Pack,85,49,85,61,0,N/A,100,European Laboratory
+item1587,Solar Panel Part,51,30,39,71,19,2025-09-12,27,Storage Area 3
+item1588,Oxygen Cylinder,95,73,47,43,49,N/A,30,Docking Area 1
+item1589,Solar Panel Part,29,90,26,98,71,2025-12-06,99,European Laboratory
+item1590,Battery Pack,25,93,44,94,33,2025-06-28,52,Storage Area 3
+item1591,Tool Kit,48,20,53,73,36,N/A,22,Japanese Laboratory
+item1592,Food Ration,37,48,56,63,18,2025-06-11,67,Airlock
+item1593,Communication Device,88,58,20,46,87,N/A,33,Docking Area 1
+item1594,Communication Device,87,11,81,85,72,2026-01-28,16,Crew Quarters
+item1595,Solar Panel Part,59,65,43,91,14,N/A,75,Airlock
+item1596,Water Container,35,88,80,49,61,2025-04-26,29,Russian Laboratory
+item1597,Scientific Instrument,83,29,54,90,6,N/A,46,US Laboratory
+item1598,Water Container,59,65,12,20,2,N/A,17,Docking Area 4
+item1599,Experiment Sample,49,82,52,87,20,N/A,29,Storage Area 1
+item1600,Microgravity Experiment Setup,44,71,29,1,75,N/A,20,Cupola
+item1601,Hygiene Kit,14,45,19,20,45,2025-05-27,50,Crew Quarters
+item1602,Spare Part,36,19,39,65,17,2025-08-18,42,Storage Area 2
+item1603,Experiment Sample,39,93,75,42,50,N/A,32,Docking Area 3
+item1604,Oxygen Cylinder,40,82,74,66,49,2025-06-16,80,European Laboratory
+item1605,Scientific Instrument,61,38,37,82,82,N/A,62,Cupola
+item1606,Spare Part,50,41,50,85,98,2025-08-25,47,Docking Area 4
+item1607,Food Ration,70,19,50,39,29,2025-11-18,6,Docking Area 3
+item1608,Experiment Sample,15,40,34,21,43,N/A,72,Storage Area 2
+item1609,Food Ration,91,9,58,12,37,N/A,21,Docking Area 2
+item1610,First Aid Kit,47,91,56,6,93,N/A,2,Service Module
+item1611,Solar Panel Part,86,6,70,29,13,N/A,80,Storage Area 1
+item1612,Spare Part,24,92,60,100,85,2025-08-16,7,Docking Area 4
+item1613,Food Ration,71,79,57,91,66,2025-06-23,15,US Laboratory
+item1614,Spare Part,86,95,56,80,24,N/A,6,Docking Area 3
+item1615,Dehydrated Meal Pack,51,43,22,85,64,N/A,14,Airlock
+item1616,Tool Kit,50,57,93,75,56,2025-04-03,40,European Laboratory
+item1617,Battery Pack,66,28,16,73,72,2026-02-12,35,Storage Area 3
+item1618,Hygiene Kit,69,44,11,38,0,2025-05-08,58,US Laboratory
+item1619,Food Ration,99,67,98,23,99,2025-12-21,45,Crew Quarters
+item1620,Water Container,66,72,96,100,35,N/A,71,Airlock
+item1621,Microgravity Experiment Setup,73,33,87,68,69,N/A,98,Japanese Laboratory
+item1622,Microgravity Experiment Setup,57,37,26,41,7,N/A,20,European Laboratory
+item1623,First Aid Kit,40,98,45,51,10,N/A,84,Docking Area 2
+item1624,Scientific Instrument,33,68,99,76,45,2025-08-11,49,Storage Area 3
+item1625,Food Ration,59,30,5,5,25,2025-11-22,48,Docking Area 2
+item1626,Solar Panel Part,36,35,39,34,96,N/A,34,Crew Quarters
+item1627,Hygiene Kit,5,28,10,82,55,N/A,33,US Laboratory
+item1628,First Aid Kit,49,60,35,31,15,2025-09-25,98,Crew Quarters
+item1629,Battery Pack,15,31,73,96,41,2025-08-20,100,Cupola
+item1630,Communication Device,39,64,84,76,63,2025-07-13,61,Storage Area 3
+item1631,Medical Supply Kit,14,47,65,1,6,N/A,2,Cupola
+item1632,Communication Device,24,51,60,34,90,2025-07-31,97,Docking Area 2
+item1633,Dehydrated Meal Pack,94,62,85,77,12,2025-07-02,10,Docking Area 1
+item1634,Experiment Sample,14,12,34,96,89,2026-03-13,62,Docking Area 1
+item1635,Experiment Sample,63,95,85,69,83,N/A,58,Storage Area 2
+item1636,Scientific Instrument,42,80,45,47,92,2025-12-19,76,Crew Quarters
+item1637,Scientific Instrument,52,40,8,39,75,N/A,98,Cupola
+item1638,First Aid Kit,70,26,44,50,13,N/A,73,Russian Laboratory
+item1639,First Aid Kit,47,94,80,89,42,N/A,60,European Laboratory
+item1640,Hygiene Kit,74,82,95,37,13,N/A,42,Docking Area 1
+item1641,Oxygen Cylinder,31,73,78,77,50,N/A,1,Docking Area 1
+item1642,First Aid Kit,38,5,91,97,25,2025-07-20,89,Airlock
+item1643,Solar Panel Part,50,49,7,27,28,2025-07-22,74,Docking Area 1
+item1644,Experiment Sample,20,23,57,15,54,2025-10-03,34,Docking Area 3
+item1645,Oxygen Cylinder,95,26,30,68,46,2025-04-15,84,US Laboratory
+item1646,Solar Panel Part,25,25,62,58,77,2025-05-08,82,Crew Quarters
+item1647,Dehydrated Meal Pack,96,13,26,50,5,N/A,53,Storage Area 1
+item1648,Solar Panel Part,56,67,92,55,6,2026-01-28,62,Cupola
+item1649,Food Ration,16,99,59,24,52,2025-04-23,26,Docking Area 2
+item1650,Hygiene Kit,34,91,80,43,74,N/A,53,European Laboratory
+item1651,Communication Device,30,93,27,91,10,N/A,27,Storage Area 3
+item1652,Battery Pack,69,10,85,14,98,2025-08-14,83,Docking Area 4
+item1653,Food Ration,42,98,7,52,36,N/A,19,Docking Area 4
+item1654,Solar Panel Part,71,40,61,56,46,N/A,56,US Laboratory
+item1655,Food Ration,56,96,67,86,51,2026-02-27,87,Storage Area 2
+item1656,Communication Device,98,46,77,97,83,N/A,59,European Laboratory
+item1657,Food Ration,23,84,77,97,25,2026-03-02,85,Docking Area 1
+item1658,Medical Supply Kit,61,54,7,62,69,N/A,80,Docking Area 1
+item1659,Microgravity Experiment Setup,94,28,63,46,65,2025-11-19,41,Russian Laboratory
+item1660,Oxygen Cylinder,66,100,68,96,80,N/A,16,Cupola
+item1661,Solar Panel Part,78,36,73,78,45,N/A,15,Japanese Laboratory
+item1662,Medical Supply Kit,29,61,49,44,47,2025-09-05,80,Japanese Laboratory
+item1663,Scientific Instrument,49,59,12,12,30,2025-07-23,31,Crew Quarters
+item1664,Tool Kit,47,6,49,96,55,2025-10-03,26,Storage Area 3
+item1665,Scientific Instrument,63,23,58,74,21,N/A,75,Cupola
+item1666,Battery Pack,54,55,99,3,45,2026-01-09,4,Japanese Laboratory
+item1667,Dehydrated Meal Pack,42,47,50,55,65,N/A,31,Docking Area 3
+item1668,Water Container,21,88,48,83,85,N/A,80,European Laboratory
+item1669,Water Container,17,67,76,31,17,N/A,43,Docking Area 1
+item1670,Dehydrated Meal Pack,41,33,58,29,55,N/A,65,Japanese Laboratory
+item1671,Microgravity Experiment Setup,13,9,83,42,87,N/A,21,Docking Area 3
+item1672,Oxygen Cylinder,10,78,71,20,61,2025-10-18,76,Russian Laboratory
+item1673,Oxygen Cylinder,78,64,81,80,69,2025-07-07,30,Storage Area 2
+item1674,Hygiene Kit,72,67,68,9,72,2025-10-04,62,Japanese Laboratory
+item1675,Oxygen Cylinder,91,69,79,61,0,2026-01-20,68,Russian Laboratory
+item1676,Microgravity Experiment Setup,17,67,87,22,15,2026-02-12,23,Service Module
+item1677,Spare Part,27,8,42,60,79,2025-05-31,29,Storage Area 1
+item1678,Oxygen Cylinder,39,21,20,42,25,N/A,49,Russian Laboratory
+item1679,Scientific Instrument,97,80,35,65,41,2025-05-08,42,Storage Area 1
+item1680,Communication Device,55,31,15,94,82,2025-09-26,77,Docking Area 2
+item1681,Experiment Sample,14,58,62,10,22,N/A,85,Service Module
+item1682,Experiment Sample,69,55,72,4,17,2026-01-30,3,Docking Area 4
+item1683,Tool Kit,74,9,69,88,49,2025-12-23,1,Crew Quarters
+item1684,Tool Kit,58,62,65,26,68,2025-06-18,29,Docking Area 1
+item1685,Tool Kit,82,83,17,65,46,2025-05-29,65,European Laboratory
+item1686,Solar Panel Part,91,10,31,22,2,2025-04-01,1,European Laboratory
+item1687,Medical Supply Kit,39,26,13,35,82,N/A,9,European Laboratory
+item1688,Communication Device,77,42,53,94,78,N/A,8,Docking Area 4
+item1689,Dehydrated Meal Pack,60,13,60,39,51,N/A,85,Cupola
+item1690,Microgravity Experiment Setup,27,89,89,92,72,2025-05-06,56,Docking Area 2
+item1691,Spare Part,91,21,40,64,90,2026-02-08,90,Japanese Laboratory
+item1692,Dehydrated Meal Pack,62,67,66,52,46,2025-05-04,80,Airlock
+item1693,Scientific Instrument,50,55,29,87,25,N/A,81,Japanese Laboratory
+item1694,Spare Part,50,59,11,61,43,2025-11-04,62,Crew Quarters
+item1695,Communication Device,87,43,40,22,82,N/A,7,Russian Laboratory
+item1696,Medical Supply Kit,14,18,80,17,66,N/A,80,Storage Area 1
+item1697,Dehydrated Meal Pack,57,68,62,73,33,N/A,27,Cupola
+item1698,Dehydrated Meal Pack,13,84,27,63,96,N/A,55,Airlock
+item1699,Hygiene Kit,99,71,72,73,43,N/A,46,Crew Quarters
+item1700,Microgravity Experiment Setup,75,90,47,92,92,N/A,73,Crew Quarters
+item1701,Scientific Instrument,32,43,22,76,89,N/A,3,Docking Area 2
+item1702,Communication Device,25,35,38,51,49,2025-05-21,100,Crew Quarters
+item1703,Solar Panel Part,65,90,28,38,97,N/A,77,Russian Laboratory
+item1704,Oxygen Cylinder,92,15,53,23,73,2026-02-17,85,Docking Area 3
+item1705,First Aid Kit,56,86,80,9,14,2025-12-15,13,Docking Area 4
+item1706,Medical Supply Kit,28,30,55,29,21,2025-08-09,20,Russian Laboratory
+item1707,Battery Pack,53,84,66,95,19,N/A,50,Docking Area 4
+item1708,Oxygen Cylinder,78,42,9,93,36,2025-04-23,78,Airlock
+item1709,Solar Panel Part,39,98,50,45,54,N/A,5,Cupola
+item1710,Spare Part,74,86,66,8,100,N/A,60,Docking Area 1
+item1711,Oxygen Cylinder,70,92,20,88,19,2025-05-04,99,Service Module
+item1712,First Aid Kit,96,70,17,68,55,N/A,1,Service Module
+item1713,Oxygen Cylinder,88,62,34,34,97,N/A,16,US Laboratory
+item1714,Oxygen Cylinder,12,24,29,50,36,N/A,35,Japanese Laboratory
+item1715,Oxygen Cylinder,31,29,64,73,12,2025-11-25,59,Russian Laboratory
+item1716,Hygiene Kit,83,100,72,69,35,2026-01-08,80,Service Module
+item1717,Microgravity Experiment Setup,90,83,37,94,83,2025-11-06,71,Japanese Laboratory
+item1718,Experiment Sample,91,13,43,79,64,N/A,77,US Laboratory
+item1719,Hygiene Kit,85,78,5,42,66,N/A,29,European Laboratory
+item1720,First Aid Kit,10,80,77,58,38,N/A,21,Storage Area 2
+item1721,First Aid Kit,13,62,10,88,10,2025-11-25,72,Storage Area 1
+item1722,Spare Part,6,48,79,89,14,2025-12-06,90,Russian Laboratory
+item1723,Battery Pack,29,70,50,23,63,N/A,54,Russian Laboratory
+item1724,Tool Kit,26,65,64,79,12,N/A,72,European Laboratory
+item1725,Solar Panel Part,36,86,84,33,66,2026-01-01,92,Cupola
+item1726,Tool Kit,61,72,30,61,99,2025-08-28,93,Docking Area 3
+item1727,Scientific Instrument,81,15,61,79,78,2025-07-11,40,Storage Area 3
+item1728,Water Container,11,51,16,82,54,N/A,48,Japanese Laboratory
+item1729,First Aid Kit,34,22,28,86,24,N/A,35,Storage Area 1
+item1730,Hygiene Kit,56,96,91,12,5,N/A,76,US Laboratory
+item1731,Scientific Instrument,53,73,83,20,15,N/A,51,US Laboratory
+item1732,Microgravity Experiment Setup,83,22,58,61,71,2025-08-13,72,European Laboratory
+item1733,Scientific Instrument,71,84,6,11,49,2026-01-23,46,European Laboratory
+item1734,Spare Part,50,96,78,43,46,2025-08-28,45,Japanese Laboratory
+item1735,Medical Supply Kit,32,92,12,47,45,N/A,64,European Laboratory
+item1736,Tool Kit,72,97,24,88,41,N/A,58,Storage Area 1
+item1737,Oxygen Cylinder,76,6,62,30,88,N/A,89,Cupola
+item1738,Battery Pack,99,21,19,31,99,N/A,62,Docking Area 4
+item1739,Food Ration,69,81,13,18,60,N/A,89,Crew Quarters
+item1740,Microgravity Experiment Setup,6,91,60,26,40,2025-07-26,17,European Laboratory
+item1741,Hygiene Kit,62,25,41,99,46,2026-01-16,37,Japanese Laboratory
+item1742,Food Ration,32,44,59,15,42,N/A,18,Japanese Laboratory
+item1743,Medical Supply Kit,53,91,74,86,8,2025-04-03,30,Service Module
+item1744,Spare Part,17,10,14,78,72,2025-05-10,55,Service Module
+item1745,Medical Supply Kit,8,30,59,79,66,2025-12-12,38,Storage Area 1
+item1746,Spare Part,65,69,71,28,96,N/A,75,Crew Quarters
+item1747,Hygiene Kit,68,87,5,17,97,N/A,95,US Laboratory
+item1748,Battery Pack,59,12,53,10,23,2025-04-04,46,Storage Area 3
+item1749,Microgravity Experiment Setup,16,97,9,94,98,2025-04-26,84,Storage Area 3
+item1750,First Aid Kit,98,47,45,29,20,N/A,84,Cupola
+item1751,First Aid Kit,33,10,65,47,90,N/A,59,Docking Area 4
+item1752,Water Container,92,80,78,1,40,N/A,90,US Laboratory
+item1753,Hygiene Kit,96,38,71,59,23,2025-08-01,30,Cupola
+item1754,Battery Pack,91,85,20,19,84,N/A,3,Crew Quarters
+item1755,Battery Pack,40,47,52,77,80,2025-04-05,8,European Laboratory
+item1756,Battery Pack,66,94,76,16,17,N/A,28,Japanese Laboratory
+item1757,First Aid Kit,38,87,73,18,47,N/A,16,Storage Area 1
+item1758,Dehydrated Meal Pack,15,96,64,29,78,N/A,68,Crew Quarters
+item1759,Communication Device,43,42,70,71,22,N/A,61,Service Module
+item1760,Communication Device,26,39,32,4,9,N/A,63,Docking Area 3
+item1761,Battery Pack,45,75,32,7,82,2025-08-08,28,Airlock
+item1762,Dehydrated Meal Pack,41,80,50,77,90,N/A,40,Cupola
+item1763,Battery Pack,83,27,59,65,56,2025-05-14,53,Docking Area 1
+item1764,Food Ration,21,50,67,67,21,2025-09-08,18,US Laboratory
+item1765,Communication Device,69,14,10,52,39,N/A,28,Crew Quarters
+item1766,Food Ration,67,66,95,64,42,2025-04-03,19,Service Module
+item1767,Water Container,64,80,49,42,37,2025-06-25,61,Russian Laboratory
+item1768,Experiment Sample,30,29,75,49,55,2026-02-18,72,US Laboratory
+item1769,Medical Supply Kit,33,47,55,59,1,2025-05-16,23,Storage Area 3
+item1770,Oxygen Cylinder,32,58,99,56,7,2025-07-25,54,Cupola
+item1771,Water Container,58,57,20,4,97,2025-09-15,96,European Laboratory
+item1772,Experiment Sample,45,53,8,76,55,N/A,11,Russian Laboratory
+item1773,Spare Part,73,6,66,22,25,2025-04-25,8,Storage Area 1
+item1774,Communication Device,94,61,94,74,39,N/A,36,Service Module
+item1775,Spare Part,91,19,25,24,35,2025-06-01,70,Airlock
+item1776,Experiment Sample,81,57,6,59,99,2025-09-24,99,Russian Laboratory
+item1777,Tool Kit,88,57,13,9,96,2025-09-28,58,Docking Area 3
+item1778,Food Ration,16,28,98,37,75,N/A,72,Cupola
+item1779,Battery Pack,44,47,90,71,5,2025-11-05,11,Airlock
+item1780,Experiment Sample,76,32,63,17,57,N/A,53,Service Module
+item1781,Microgravity Experiment Setup,9,74,60,68,93,2025-08-28,47,Storage Area 3
+item1782,Solar Panel Part,73,49,41,45,42,2026-01-01,24,Docking Area 1
+item1783,Spare Part,48,26,19,78,56,2025-12-29,90,Japanese Laboratory
+item1784,Solar Panel Part,87,22,88,77,27,N/A,79,Japanese Laboratory
+item1785,Solar Panel Part,32,19,45,46,95,2026-02-27,21,Service Module
+item1786,Communication Device,7,67,82,85,23,2026-01-17,79,Airlock
+item1787,Spare Part,38,76,14,76,39,2026-01-04,75,Service Module
+item1788,Experiment Sample,32,86,68,57,88,N/A,10,Russian Laboratory
+item1789,Spare Part,20,18,24,50,42,N/A,90,Docking Area 1
+item1790,First Aid Kit,16,27,52,1,52,2025-12-28,70,Airlock
+item1791,Water Container,13,73,95,62,12,N/A,82,Storage Area 2
+item1792,Battery Pack,92,70,72,35,22,N/A,93,Storage Area 1
+item1793,Oxygen Cylinder,29,32,39,52,81,2025-07-04,100,US Laboratory
+item1794,Communication Device,28,73,13,87,54,N/A,50,Storage Area 2
+item1795,Food Ration,30,51,89,12,95,N/A,87,Storage Area 2
+item1796,Tool Kit,77,19,97,67,63,2025-12-26,61,European Laboratory
+item1797,Food Ration,24,93,30,2,70,2026-03-11,62,Cupola
+item1798,Dehydrated Meal Pack,93,95,32,28,48,2025-07-12,80,Docking Area 2
+item1799,Dehydrated Meal Pack,92,59,41,70,99,N/A,37,Storage Area 3
+item1800,Dehydrated Meal Pack,97,36,17,18,89,N/A,96,Russian Laboratory
+item1801,Scientific Instrument,77,53,40,22,37,N/A,74,Docking Area 4
+item1802,Scientific Instrument,65,92,26,52,30,N/A,78,Airlock
+item1803,Microgravity Experiment Setup,66,13,14,45,46,2025-06-25,31,Japanese Laboratory
+item1804,Hygiene Kit,66,60,62,28,100,2025-08-19,37,Russian Laboratory
+item1805,Food Ration,70,7,69,99,80,N/A,20,Japanese Laboratory
+item1806,First Aid Kit,10,20,56,50,60,2025-04-14,94,Docking Area 2
+item1807,Experiment Sample,94,66,72,40,7,N/A,34,Storage Area 3
+item1808,First Aid Kit,61,84,32,91,44,N/A,52,Storage Area 3
+item1809,Communication Device,81,15,62,68,3,2025-12-10,24,Storage Area 1
+item1810,Tool Kit,88,18,75,90,60,2026-01-14,65,Japanese Laboratory
+item1811,Microgravity Experiment Setup,23,67,92,86,23,N/A,22,Storage Area 2
+item1812,Battery Pack,80,100,99,15,26,N/A,72,Storage Area 2
+item1813,Hygiene Kit,10,23,69,92,61,N/A,28,Docking Area 1
+item1814,Microgravity Experiment Setup,21,67,84,85,63,N/A,14,Storage Area 1
+item1815,Medical Supply Kit,47,24,96,25,32,2026-01-02,73,Docking Area 3
+item1816,Dehydrated Meal Pack,72,36,100,26,30,2025-07-19,63,Service Module
+item1817,Water Container,57,70,66,45,1,N/A,92,Storage Area 3
+item1818,Spare Part,88,86,33,19,58,2025-06-16,84,Docking Area 3
+item1819,Oxygen Cylinder,75,100,56,51,11,2025-06-01,59,Cupola
+item1820,Food Ration,93,9,36,24,39,N/A,84,Cupola
+item1821,Scientific Instrument,77,46,46,25,41,N/A,12,Japanese Laboratory
+item1822,Oxygen Cylinder,93,72,96,33,61,2025-10-03,50,Crew Quarters
+item1823,Water Container,69,92,14,74,89,N/A,96,Japanese Laboratory
+item1824,Experiment Sample,39,28,76,73,57,2025-05-29,95,Crew Quarters
+item1825,Battery Pack,74,66,14,96,62,N/A,40,Docking Area 2
+item1826,Tool Kit,87,54,18,26,14,2025-05-04,71,Storage Area 2
+item1827,Spare Part,24,12,72,1,64,2025-12-05,86,US Laboratory
+item1828,Microgravity Experiment Setup,42,73,45,42,82,2025-09-10,12,Docking Area 1
+item1829,Tool Kit,99,32,47,97,70,2025-05-19,46,Storage Area 3
+item1830,Hygiene Kit,93,69,81,73,23,2025-12-17,67,Storage Area 1
+item1831,Tool Kit,14,41,38,36,23,2025-06-11,4,Docking Area 2
+item1832,Tool Kit,53,22,11,55,29,2026-03-15,50,European Laboratory
+item1833,Communication Device,63,57,7,9,2,N/A,38,Storage Area 3
+item1834,Experiment Sample,99,21,65,29,72,N/A,36,Airlock
+item1835,Food Ration,17,31,36,24,1,N/A,7,Docking Area 1
+item1836,Solar Panel Part,26,9,54,32,83,N/A,20,Japanese Laboratory
+item1837,Scientific Instrument,35,78,25,63,26,2025-10-31,42,European Laboratory
+item1838,First Aid Kit,21,43,50,51,48,N/A,78,Docking Area 3
+item1839,Communication Device,37,89,70,83,25,N/A,30,Docking Area 3
+item1840,Communication Device,16,57,89,40,87,N/A,32,Japanese Laboratory
+item1841,Water Container,69,84,67,6,76,2026-02-06,12,Service Module
+item1842,First Aid Kit,82,33,43,91,9,2025-08-28,58,Storage Area 3
+item1843,Spare Part,8,12,63,43,44,2026-02-07,2,Storage Area 2
+item1844,Scientific Instrument,27,62,38,97,69,2026-02-23,100,Airlock
+item1845,Food Ration,75,38,14,26,27,N/A,75,Storage Area 3
+item1846,Experiment Sample,56,72,68,48,76,2025-09-22,13,Storage Area 3
+item1847,Tool Kit,62,96,77,100,47,2025-06-05,46,US Laboratory
+item1848,Spare Part,47,47,73,95,0,N/A,36,Airlock
+item1849,Microgravity Experiment Setup,27,14,59,91,8,2025-04-18,66,Storage Area 2
+item1850,Dehydrated Meal Pack,81,63,17,12,26,N/A,81,Docking Area 2
+item1851,Tool Kit,61,49,10,81,96,N/A,82,Service Module
+item1852,Spare Part,65,78,83,12,48,2025-10-11,13,Service Module
+item1853,Spare Part,20,97,73,27,23,2026-01-11,91,Storage Area 3
+item1854,Communication Device,84,37,79,95,57,2025-07-07,94,Cupola
+item1855,Scientific Instrument,79,27,73,70,65,N/A,76,Storage Area 3
+item1856,Tool Kit,20,29,75,32,79,N/A,1,Airlock
+item1857,Experiment Sample,56,57,83,60,41,N/A,70,Airlock
+item1858,Battery Pack,86,68,17,63,36,N/A,21,Crew Quarters
+item1859,Solar Panel Part,22,20,59,71,39,N/A,36,Docking Area 1
+item1860,Tool Kit,36,35,57,64,78,N/A,13,Japanese Laboratory
+item1861,Solar Panel Part,8,70,32,55,88,2025-10-17,63,Docking Area 1
+item1862,Microgravity Experiment Setup,16,82,18,54,43,N/A,52,Service Module
+item1863,Spare Part,16,20,72,30,60,2026-01-03,96,Storage Area 3
+item1864,Tool Kit,35,53,78,70,24,N/A,47,Docking Area 2
+item1865,Tool Kit,93,16,75,56,100,2026-01-09,69,Japanese Laboratory
+item1866,First Aid Kit,45,66,28,35,32,2025-12-07,79,Russian Laboratory
+item1867,Spare Part,60,82,58,92,19,2025-07-23,95,Docking Area 2
+item1868,Communication Device,57,72,81,20,91,2025-10-03,31,Storage Area 3
+item1869,Solar Panel Part,66,98,21,8,1,2025-08-20,36,Storage Area 3
+item1870,Hygiene Kit,27,30,75,11,16,2025-12-10,82,Russian Laboratory
+item1871,Dehydrated Meal Pack,64,44,42,27,26,N/A,34,Storage Area 3
+item1872,Dehydrated Meal Pack,7,58,57,10,6,N/A,34,Storage Area 2
+item1873,Microgravity Experiment Setup,83,90,16,29,28,2025-04-24,50,Docking Area 2
+item1874,Microgravity Experiment Setup,11,68,71,42,6,N/A,37,Docking Area 2
+item1875,Food Ration,19,54,6,99,51,N/A,39,Docking Area 1
+item1876,Battery Pack,61,17,76,62,85,2025-07-09,7,Storage Area 2
+item1877,Spare Part,53,34,97,78,28,2025-07-12,86,Storage Area 3
+item1878,Spare Part,16,57,66,26,31,N/A,46,Docking Area 3
+item1879,Communication Device,56,15,36,20,5,2025-06-26,98,Airlock
+item1880,Solar Panel Part,39,30,66,32,88,2025-10-17,20,Docking Area 2
+item1881,Microgravity Experiment Setup,86,74,34,9,32,2025-04-06,50,Docking Area 4
+item1882,Oxygen Cylinder,63,61,60,52,20,2025-08-16,44,Docking Area 2
+item1883,Scientific Instrument,81,7,12,74,28,N/A,78,Docking Area 2
+item1884,Scientific Instrument,15,91,78,99,97,2025-10-30,76,Storage Area 1
+item1885,Scientific Instrument,29,62,55,91,2,N/A,94,European Laboratory
+item1886,Battery Pack,34,17,64,44,67,N/A,37,Russian Laboratory
+item1887,Food Ration,15,81,47,31,79,2025-04-27,2,Docking Area 4
+item1888,Water Container,51,98,12,97,23,N/A,4,Storage Area 3
+item1889,Water Container,86,43,14,98,88,N/A,5,Cupola
+item1890,Microgravity Experiment Setup,56,70,7,46,20,2025-04-09,77,US Laboratory
+item1891,Scientific Instrument,27,89,32,37,43,N/A,81,European Laboratory
+item1892,Scientific Instrument,71,78,97,35,1,N/A,36,Airlock
+item1893,Communication Device,81,41,19,97,0,2025-09-13,51,US Laboratory
+item1894,Medical Supply Kit,6,89,47,98,90,2025-08-01,66,Docking Area 3
+item1895,Experiment Sample,81,14,10,51,73,N/A,54,Service Module
+item1896,Scientific Instrument,52,96,28,96,31,N/A,41,Japanese Laboratory
+item1897,First Aid Kit,65,67,87,36,32,2025-06-20,65,Docking Area 3
+item1898,Hygiene Kit,34,15,65,14,23,2026-02-11,14,Docking Area 1
+item1899,Hygiene Kit,35,64,99,44,10,2025-12-22,92,Docking Area 3
+item1900,Hygiene Kit,99,6,77,68,95,2025-08-04,8,Japanese Laboratory
+item1901,Microgravity Experiment Setup,64,77,67,74,10,2025-10-11,35,Service Module
+item1902,Communication Device,46,65,23,54,61,2025-06-26,97,Storage Area 2
+item1903,Microgravity Experiment Setup,61,19,47,67,54,2025-12-15,2,Russian Laboratory
+item1904,Battery Pack,61,62,65,18,28,N/A,61,Storage Area 2
+item1905,First Aid Kit,8,69,79,70,13,2026-01-20,23,Docking Area 3
+item1906,Microgravity Experiment Setup,25,27,90,94,63,N/A,59,Cupola
+item1907,Hygiene Kit,63,100,66,94,91,2025-09-09,69,Docking Area 1
+item1908,Dehydrated Meal Pack,66,16,54,3,67,2025-10-19,52,Japanese Laboratory
+item1909,Communication Device,45,15,7,17,27,N/A,55,Docking Area 1
+item1910,First Aid Kit,43,55,73,90,45,N/A,79,Docking Area 2
+item1911,Oxygen Cylinder,61,89,28,33,68,2026-01-20,23,Airlock
+item1912,Scientific Instrument,66,18,58,72,60,N/A,78,Cupola
+item1913,Battery Pack,21,82,39,27,14,2025-06-12,1,Russian Laboratory
+item1914,Battery Pack,56,35,71,24,84,N/A,63,Docking Area 3
+item1915,Experiment Sample,11,97,53,11,45,2025-04-14,57,Docking Area 3
+item1916,Medical Supply Kit,87,46,74,88,79,2025-12-14,96,Japanese Laboratory
+item1917,Oxygen Cylinder,41,54,7,27,78,2025-12-21,16,Docking Area 1
+item1918,Spare Part,88,20,63,81,92,2025-10-03,39,European Laboratory
+item1919,Water Container,69,60,61,67,28,N/A,7,Docking Area 2
+item1920,Hygiene Kit,30,34,43,63,2,2025-10-19,30,Crew Quarters
+item1921,Medical Supply Kit,25,46,88,75,29,N/A,92,Docking Area 3
+item1922,Battery Pack,84,51,92,37,43,N/A,39,Docking Area 1
+item1923,Scientific Instrument,32,53,32,100,62,2025-10-09,8,Airlock
+item1924,Solar Panel Part,52,84,15,32,61,N/A,89,European Laboratory
+item1925,Solar Panel Part,52,95,87,18,5,N/A,50,Cupola
+item1926,Medical Supply Kit,64,18,5,5,44,N/A,27,Cupola
+item1927,Oxygen Cylinder,52,93,47,5,32,2026-01-23,9,European Laboratory
+item1928,Communication Device,13,5,22,11,51,2025-12-08,79,Docking Area 1
+item1929,Scientific Instrument,9,23,37,72,23,N/A,22,Service Module
+item1930,Solar Panel Part,14,12,88,12,86,2026-01-03,7,Docking Area 3
+item1931,Spare Part,32,42,97,50,22,2025-05-03,35,Docking Area 4
+item1932,Oxygen Cylinder,37,43,48,22,31,N/A,38,Docking Area 1
+item1933,Tool Kit,29,39,96,12,12,2025-06-06,77,Service Module
+item1934,Solar Panel Part,22,50,40,72,11,N/A,10,Storage Area 2
+item1935,Spare Part,81,43,40,56,26,2025-09-15,40,Russian Laboratory
+item1936,Solar Panel Part,31,93,55,64,2,N/A,49,Service Module
+item1937,Food Ration,62,73,56,51,68,N/A,23,Docking Area 3
+item1938,Medical Supply Kit,85,98,84,2,59,N/A,56,Japanese Laboratory
+item1939,Medical Supply Kit,32,37,74,57,7,N/A,10,Docking Area 2
+item1940,Oxygen Cylinder,8,78,69,49,85,N/A,15,Crew Quarters
+item1941,Experiment Sample,97,29,63,14,73,N/A,21,Japanese Laboratory
+item1942,Hygiene Kit,38,76,19,79,8,N/A,29,US Laboratory
+item1943,Spare Part,38,16,8,3,81,N/A,50,Storage Area 3
+item1944,Food Ration,28,20,39,48,24,2026-03-23,52,Russian Laboratory
+item1945,Spare Part,63,19,87,16,25,2026-01-10,4,Storage Area 2
+item1946,Spare Part,53,30,18,88,89,2025-12-02,71,Cupola
+item1947,Medical Supply Kit,92,68,99,100,72,N/A,95,Russian Laboratory
+item1948,First Aid Kit,78,59,23,26,99,2025-05-10,44,Crew Quarters
+item1949,Scientific Instrument,88,24,90,79,13,N/A,33,Russian Laboratory
+item1950,Dehydrated Meal Pack,49,43,98,16,7,N/A,64,Docking Area 2
+item1951,Dehydrated Meal Pack,47,26,42,61,17,N/A,94,Russian Laboratory
+item1952,Food Ration,100,79,55,44,63,2026-02-12,8,Docking Area 2
+item1953,Hygiene Kit,87,68,63,80,22,2025-11-23,15,Crew Quarters
+item1954,First Aid Kit,91,94,93,57,88,2025-07-14,43,Docking Area 3
+item1955,Communication Device,26,55,28,34,5,2025-09-30,51,Docking Area 2
+item1956,Spare Part,94,60,52,89,13,2025-07-13,45,US Laboratory
+item1957,Solar Panel Part,38,24,22,59,26,2025-04-26,48,Docking Area 3
+item1958,Dehydrated Meal Pack,30,58,27,23,62,N/A,82,US Laboratory
+item1959,Oxygen Cylinder,99,37,36,93,25,N/A,26,Russian Laboratory
+item1960,Solar Panel Part,69,70,72,66,53,N/A,73,Airlock
+item1961,First Aid Kit,67,36,59,73,63,N/A,44,Cupola
+item1962,Dehydrated Meal Pack,42,54,35,85,19,N/A,71,Japanese Laboratory
+item1963,Experiment Sample,7,74,89,4,48,N/A,90,US Laboratory
+item1964,Dehydrated Meal Pack,5,94,27,52,65,2025-08-20,66,Japanese Laboratory
+item1965,Dehydrated Meal Pack,33,82,11,31,26,2025-06-06,19,Docking Area 2
+item1966,Microgravity Experiment Setup,34,55,75,62,1,N/A,42,Airlock
+item1967,Food Ration,100,84,54,96,26,N/A,60,Japanese Laboratory
+item1968,Food Ration,58,31,40,24,46,N/A,53,Cupola
+item1969,Hygiene Kit,77,33,47,6,24,N/A,53,Airlock
+item1970,Communication Device,92,65,81,96,50,N/A,1,Japanese Laboratory
+item1971,Communication Device,53,11,53,73,25,N/A,89,Storage Area 1
+item1972,Microgravity Experiment Setup,94,48,17,49,34,N/A,90,Cupola
+item1973,First Aid Kit,23,81,85,38,8,N/A,34,Docking Area 1
+item1974,Battery Pack,48,27,70,27,48,2025-06-04,63,Crew Quarters
+item1975,Microgravity Experiment Setup,22,29,62,26,47,N/A,9,Docking Area 3
+item1976,Food Ration,27,40,78,46,94,N/A,60,Crew Quarters
+item1977,Tool Kit,70,69,41,36,83,2025-06-26,32,Cupola
+item1978,Food Ration,6,69,82,74,50,2025-12-07,98,Docking Area 4
+item1979,Solar Panel Part,25,40,64,8,12,N/A,84,Storage Area 1
+item1980,Food Ration,46,38,42,92,25,2025-04-18,88,Docking Area 4
+item1981,Communication Device,11,39,67,48,3,N/A,27,Docking Area 1
+item1982,Dehydrated Meal Pack,42,57,7,55,39,2025-10-17,34,Docking Area 3
+item1983,Experiment Sample,41,52,82,14,77,2025-07-29,2,Storage Area 2
+item1984,First Aid Kit,62,47,80,82,16,N/A,88,Russian Laboratory
+item1985,Microgravity Experiment Setup,43,40,49,42,13,2025-05-06,26,Docking Area 4
+item1986,First Aid Kit,63,63,17,8,9,2025-12-06,29,Russian Laboratory
+item1987,First Aid Kit,27,8,56,45,45,N/A,66,Airlock
+item1988,Battery Pack,94,9,57,98,17,N/A,24,Docking Area 1
+item1989,Hygiene Kit,51,16,53,50,33,2025-09-15,8,Japanese Laboratory
+item1990,Solar Panel Part,68,100,18,83,97,N/A,88,Crew Quarters
+item1991,Scientific Instrument,85,72,76,84,54,2025-04-14,71,Cupola
+item1992,Communication Device,72,87,17,38,28,N/A,14,Storage Area 3
+item1993,Dehydrated Meal Pack,84,9,87,71,73,2025-08-24,62,Crew Quarters
+item1994,Food Ration,56,16,86,45,80,2025-06-11,38,Storage Area 3
+item1995,Food Ration,100,30,49,50,79,2025-07-31,56,Docking Area 4
+item1996,Oxygen Cylinder,83,24,62,51,98,N/A,42,Storage Area 3
+item1997,Water Container,12,97,41,69,98,N/A,85,Russian Laboratory
+item1998,Medical Supply Kit,56,66,71,79,8,N/A,56,Storage Area 3
+item1999,Dehydrated Meal Pack,27,86,69,30,11,2026-03-12,28,European Laboratory
+item2000,Communication Device,67,61,81,19,30,2025-10-25,54,European Laboratory
