@@ -1,0 +1,26 @@
+# Virtual environment
+venv/
+.env
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+logs/
+*.log
+
+# Bytecode
+*.py[cod]
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependency files
+requirements.txt.lock
