@@ -6,6 +6,8 @@ __pycache__/
 *.pyo
 *.pyd
 
+app/.venv
+
 # IDE files
 .vscode/
 .idea/
