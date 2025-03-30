@@ -78,18 +78,17 @@ export default function SpaceStationSVG({ zones, onSelectZone, hoveredZone, onZo
 function getZoneTextPosition(zoneName: string) {
   const positions: { [key: string]: { x: number, y: number, yOffset?: number } } = {
     // 'Service Module': { x: 452, y: 250 },
-    'US Laboratory': { x: 620, y: 290 },
-    'Russian Laboratory': { x: 90, y: 300 },
-    'European Laboratory': { x: 470, y: 410 },
-    'Japanese Laboratory': { x: 280, y: 300 },
+    'Docking Area 4': { x: 620, y: 290 },
+    'Docking Area 1': { x: 90, y: 300 },
+    'Docking Area 3': { x: 470, y: 410 },
+    'Storage Area 3': { x: 280, y: 300 },
     // 'Airlock': { x: 380, y: 260 },
-    'Crew Quarters': { x: 452, y: 770 },
+    'Cupola': { x: 452, y: 770 },
     // 'Cupola': { x: 452, y: 150 },
-    // 'Docking Area 1': { x: 90, y: 250 },
     // 'Docking Area 2': { x: 720, y: 270 },
     // 'Docking Area 3': { x: 530, y: 520 },
-    'Docking Area 4': { x: 452, y: 45 },
-    'Storage Area 1': { x: 450, y: 220 },
+    'Docking Area 2': { x: 452, y: 45 },
+    'Service module': { x: 450, y: 220 },
     // 'Storage Area 2': { x: 560, y: 350 },
     // 'Storage Area 3': { x: 380, y: 350 }
   };
