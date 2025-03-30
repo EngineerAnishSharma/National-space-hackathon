@@ -14,7 +14,7 @@ import os
 # from app.database import Item as DBItem, Container as DBContainer, Placement as DBPlacement, get_db
 
 # --- If models/database are in the same directory ---
-import models as pydantic_models # Pydantic models for validation/response
+import backend.app.models_db as pydantic_models # Pydantic models for validation/response
 import database as db_config    # SQLAlchemy setup, Base, engine
 from database import Item as DBItem, Container as DBContainer, Placement as DBPlacement, Base, engine, SessionLocal
 # --- End ---

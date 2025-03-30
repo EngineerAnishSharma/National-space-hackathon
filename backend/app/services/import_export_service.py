@@ -1,148 +1,340 @@
-# app/services/import_export_service.py
-import csv
+# /app/services/import_export_service.py
 from sqlalchemy.orm import Session
-from app.database import Item as ItemDB, Container as ContainerDB  # Import SQLAlchemy models
-from app.models import Item, Container #Import Model file to create those models
+from typing import List, Dict, Any, Optional
+import pandas as pd
+import io
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
+from app.models_db import Item as DBItem, Container as DBContainer, Placement as DBPlacement, LogActionType
+from app.models_api import ImportResponse, ImportErrorDetail
+from .logging_service import create_log_entry
 from datetime import datetime
-from io import StringIO
-from sqlalchemy.exc import IntegrityError
+import iso8601 # Use robust parser
 
-class ImportExportService:
-    def __init__(self):
-        pass
+def import_items_from_csv(db: Session, file: FileStorage, user_id: Optional[str] = None) -> ImportResponse:
+    """Imports item data from a CSV file."""
+    filename = secure_filename(file.filename)
+    if not filename.lower().endswith('.csv'):
+        return ImportResponse(success=False, errors=[ImportErrorDetail(message="Invalid file type. Please upload a CSV file.")])
 
-    def import_items_from_csv(self, csv_file: str, db: Session):
-        """Imports items from a CSV file into the database."""
-        items_imported = 0
-        errors = []
+    items_imported_count = 0
+    errors: List[ImportErrorDetail] = []
 
+    try:
+        # Read CSV using pandas - handle potential encoding issues
         try:
-            csv_data = StringIO(csv_file)
-            reader = csv.DictReader(csv_data)
+            df = pd.read_csv(file.stream, encoding='utf-8')
+        except UnicodeDecodeError:
+             file.stream.seek(0) # Reset stream position
+             df = pd.read_csv(file.stream, encoding='latin-1') # Try alternative encoding
 
-            for i, row in enumerate(reader):
-                try:
-                    item_id = row['Item ID']
-                    name = row['Name']
-                    width = float(row['Width'])
-                    depth = float(row['Depth'])
-                    height = float(row['Height'])
-                    mass = float(row['Mass'])
-                    priority = int(row['Priority'])
-                    preferred_zone = row['Preferred Zone']
 
-                    # Handle optional fields
-                    expiry_date_str = row.get('Expiry Date')
-                    # Updated expiry date processing
-                    if expiry_date_str and expiry_date_str not in ('N/A', '#'*10):
-                        try:
-                            expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
-                        except ValueError:
-                            expiry_date = None  # Or handle the error as you see fit
-                    else:
-                        expiry_date = None  # Set to None if 'N/A' or '##########'
+        # --- Define Expected Columns (Case Insensitive) ---
+        # Adjust these based on the exact expected CSV format
+        required_columns = {
+            'itemid': 'itemId', 'name': 'name', 'width': 'width', 'depth': 'depth',
+            'height': 'height', 'mass': 'mass', 'priority': 'priority'
+        }
+        optional_columns = {
+            'expirydate': 'expiryDate', 'usagelimit': 'usageLimit', 'preferredzone': 'preferredZone'
+        }
+        df.columns = df.columns.str.lower().str.replace(' ', '').str.replace('_', '') # Normalize column names
 
-                    usage_limit_str = row.get('Usage Limit')
-                    usage_limit = int(usage_limit_str) if usage_limit_str else None
+        missing_req = [col for col in required_columns.keys() if col not in df.columns]
+        if missing_req:
+            errors.append(ImportErrorDetail(message=f"Missing required columns: {', '.join(missing_req)}"))
+            return ImportResponse(success=False, errors=errors)
 
-                    #Create Item object.
-                    item_data = {
-                        "itemId": item_id,
-                        "name": name,
-                        "width": width,
-                        "depth": depth,
-                        "height": height,
-                        "mass": mass,
-                        "priority": priority,
-                        "expiryDate": expiry_date,
-                        "usageLimit": usage_limit,
-                        "preferredZone": preferred_zone,
-                    }
-                    item = Item(**item_data)
-                    #Create Item object
-                    item_db = ItemDB(
-                        itemId=item.itemId,
-                        name=item.name,
-                        width=item.width,
-                        depth=item.depth,
-                        height=item.height,
-                        mass=item.mass,
-                        priority=item.priority,
-                        expiryDate=item.expiryDate,
-                        usageLimit=item.usageLimit,
-                        preferredZone=item.preferredZone,
-                    )
 
-                    # Check if the item already exists before adding
-                    existing_item = db.query(ItemDB).filter(ItemDB.itemId == item.itemId).first()
-                    if not existing_item:
-                        db.add(item_db)
-                        items_imported += 1
+        # --- Iterate through rows and import ---
+        for index, row in df.iterrows():
+            row_num = index + 2 # Account for header and 0-based index
+            item_data = {}
+            current_row_errors = []
 
-                except ValueError as e:
-                    errors.append({"row": i + 2, "message": f"Invalid data format: {e}"})
-                except KeyError as e:
-                    errors.append({"row": i + 2, "message": f"Missing column: {e}"})
-                except IntegrityError as e:
-                    db.rollback()
-                    errors.append({"row": i + 2, "message": f"IntegrityError: {e}"})
-                    print(f"Skipping duplicate item with ID: {item.itemId}")
+            # Map required columns
+            for csv_col, model_field in required_columns.items():
+                 item_data[model_field] = row.get(csv_col)
 
-            db.commit()
-            return {"success": True, "itemsImported": items_imported, "errors": errors}
-        except Exception as e:
-            errors.append({"row": 0, "message": f"File processing error: {e}"})
-            return {"success": False, "itemsImported": 0, "errors": errors}
+            # Map optional columns
+            for csv_col, model_field in optional_columns.items():
+                 if csv_col in df.columns:
+                     item_data[model_field] = row.get(csv_col)
 
-    def import_containers_from_csv(self, csv_file: str, db: Session):
-        """Imports containers from a CSV file into the database."""
-        containers_imported = 0
-        errors = []
+            # --- Data Type Conversion and Validation ---
+            try:
+                item_data['itemId'] = str(item_data['itemId'])
+                item_data['name'] = str(item_data['name'])
+                item_data['width'] = float(item_data['width'])
+                item_data['depth'] = float(item_data['depth'])
+                item_data['height'] = float(item_data['height'])
+                item_data['mass'] = float(item_data['mass'])
+                item_data['priority'] = int(item_data['priority'])
 
+                if 'usageLimit' in item_data and pd.notna(item_data['usageLimit']):
+                     try:
+                         item_data['usageLimit'] = int(float(item_data['usageLimit'])) # Handle potential float like '10.0'
+                     except (ValueError, TypeError):
+                         current_row_errors.append(f"Invalid format for usageLimit ('{item_data['usageLimit']}')")
+                         item_data['usageLimit'] = None # Skip if invalid
+                else:
+                     item_data['usageLimit'] = None
+
+
+                if 'expiryDate' in item_data and pd.notna(item_data['expiryDate']):
+                     try:
+                        # Attempt parsing various common date formats or ISO 8601
+                         if isinstance(item_data['expiryDate'], datetime):
+                              item_data['expiryDate'] = item_data['expiryDate'] # Already datetime
+                         else:
+                             item_data['expiryDate'] = iso8601.parse_date(str(item_data['expiryDate']))
+                     except (ValueError, TypeError, iso8601.ParseError):
+                        current_row_errors.append(f"Invalid date format for expiryDate ('{item_data['expiryDate']}')")
+                        item_data['expiryDate'] = None # Skip if invalid
+                else:
+                    item_data['expiryDate'] = None
+
+                if 'preferredZone' in item_data and pd.notna(item_data['preferredZone']):
+                     item_data['preferredZone'] = str(item_data['preferredZone'])
+                else:
+                     item_data['preferredZone'] = None
+
+
+                # --- Check for mandatory field presence after potential nulls ---
+                if not all(k in item_data and pd.notna(item_data.get(k)) for k in required_columns.values()):
+                    current_row_errors.append("Missing value in one or more required columns")
+
+
+                # TODO: Add more specific validations (e.g., priority range, positive dimensions/mass)
+
+
+            except (ValueError, TypeError) as e:
+                 current_row_errors.append(f"Data type error: {e}")
+
+
+            if current_row_errors:
+                 errors.append(ImportErrorDetail(row=row_num, message="; ".join(current_row_errors)))
+                 continue # Skip this row
+
+            # --- Upsert Logic (Update if exists, else Create) ---
+            existing_item = db.query(DBItem).filter(DBItem.itemId == item_data['itemId']).first()
+            if existing_item:
+                 # Update existing item (be careful what you update)
+                 existing_item.name = item_data['name']
+                 existing_item.width = item_data['width']
+                 existing_item.depth = item_data['depth']
+                 existing_item.height = item_data['height']
+                 existing_item.mass = item_data['mass']
+                 existing_item.priority = item_data['priority']
+                 existing_item.expiryDate = item_data.get('expiryDate')
+                 existing_item.usageLimit = item_data.get('usageLimit')
+                 existing_item.preferredZone = item_data.get('preferredZone')
+                 # Should status or currentUses be reset on import? Assume not.
+                 print(f"Updated item: {item_data['itemId']}")
+            else:
+                 # Create new item
+                 new_item = DBItem(**item_data)
+                 db.add(new_item)
+                 items_imported_count += 1
+                 print(f"Created new item: {item_data['itemId']}")
+
+        # --- Commit changes after processing all rows ---
+        if items_imported_count > 0 or any(db.dirty): # Check if there's anything to commit
+             try:
+                 db.commit()
+             except Exception as e:
+                 db.rollback()
+                 errors.append(ImportErrorDetail(message=f"Database commit failed: {e}"))
+                 # Mark overall success as false if commit fails
+                 success_status = False
+             else:
+                  success_status = len(errors) == 0 # Success only if no errors occurred
+        else:
+             success_status = len(errors) == 0 # Success if no errors, even if nothing imported
+
+        # Log the import action
+        create_log_entry(
+            db=db,
+            actionType=LogActionType.IMPORT,
+            userId=user_id,
+            details={
+                "fileType": "items",
+                "fileName": filename,
+                "count": items_imported_count,
+                "errors": len(errors)
+            }
+        )
+        db.commit() # Commit the log entry
+
+
+        return ImportResponse(success=success_status, itemsImported=items_imported_count, errors=errors)
+
+
+    except pd.errors.ParserError as e:
+        errors.append(ImportErrorDetail(message=f"CSV Parsing Error: {e}"))
+        return ImportResponse(success=False, errors=errors)
+    except Exception as e:
+        db.rollback() # Rollback any partial additions
+        errors.append(ImportErrorDetail(message=f"An unexpected error occurred: {e}"))
+        # Log the error if possible
         try:
-            csv_data = StringIO(csv_file)
-            reader = csv.DictReader(csv_data)
-
-            for i, row in enumerate(reader):
-                try:
-                    zone = row['Zone']
-                    container_id = row['Container ID']
-                    width = float(row['Width'])
-                    depth = float(row['Depth'])
-                    height = float(row['Height'])
-
-                    # Validate using Pydantic model
-                    container_data = {
-                        "zone": zone,
-                        "containerId": container_id,
-                        "width": width,
-                        "depth": depth,
-                        "height": height,
-                    }
-                    container = Container(**container_data)  # Validate data with Pydantic Model
-
-                    # Create and add to the database
-                    container_db = ContainerDB(
-                        containerId=container.containerId,
-                        zone=container.zone,
-                        width=container.width,
-                        depth=container.depth,
-                        height=container.height,
-                    )
-                    db.add(container_db)
-                    containers_imported += 1
-
-                except ValueError as e:
-                    errors.append({"row": i + 2, "message": f"Invalid data format: {e}"})
-                except KeyError as e:
-                    errors.append({"row": i + 2, "message": f"Missing column: {e}"})
-                except IntegrityError as e:
-                    db.rollback()
-                    errors.append({"row": i + 2, "message": f"IntegrityError: {e}"})
-                    print(f"Skipping duplicate container with ID: {container.containerId}")
-
+            create_log_entry(db, LogActionType.SYSTEM_ERROR, userId=user_id, details={"error": f"Item Import Failed: {e}", "fileName": filename})
             db.commit()
-            return {"success": True, "containersImported": containers_imported, "errors": errors}
-        except Exception as e:
-            errors.append({"row": 0, "message": f"File processing error: {e}"})
-            return {"success": False, "containersImported": 0, "errors": errors}
+        except:
+            db.rollback() # Rollback log commit if it fails
+        return ImportResponse(success=False, errors=errors)
+
+
+def import_containers_from_csv(db: Session, file: FileStorage, user_id: Optional[str] = None) -> ImportResponse:
+    """Imports container data from a CSV file."""
+    filename = secure_filename(file.filename)
+    if not filename.lower().endswith('.csv'):
+        return ImportResponse(success=False, errors=[ImportErrorDetail(message="Invalid file type. Please upload a CSV file.")])
+
+    containers_imported_count = 0
+    errors: List[ImportErrorDetail] = []
+
+    try:
+        try:
+            df = pd.read_csv(file.stream, encoding='utf-8')
+        except UnicodeDecodeError:
+            file.stream.seek(0)
+            df = pd.read_csv(file.stream, encoding='latin-1')
+
+        # --- Define Expected Columns (Case Insensitive) ---
+        required_columns = {'containerid': 'containerId', 'zone': 'zone', 'width': 'width', 'depth': 'depth', 'height': 'height'}
+        df.columns = df.columns.str.lower().str.replace(' ', '').str.replace('_', '') # Normalize
+
+        missing_req = [col for col in required_columns.keys() if col not in df.columns]
+        if missing_req:
+            errors.append(ImportErrorDetail(message=f"Missing required columns: {', '.join(missing_req)}"))
+            return ImportResponse(success=False, errors=errors)
+
+        # --- Iterate and import ---
+        for index, row in df.iterrows():
+            row_num = index + 2
+            cont_data = {}
+            current_row_errors = []
+
+            for csv_col, model_field in required_columns.items():
+                 cont_data[model_field] = row.get(csv_col)
+
+            # --- Data Type Conversion and Validation ---
+            try:
+                cont_data['containerId'] = str(cont_data['containerId'])
+                cont_data['zone'] = str(cont_data['zone'])
+                cont_data['width'] = float(cont_data['width'])
+                cont_data['depth'] = float(cont_data['depth'])
+                cont_data['height'] = float(cont_data['height'])
+
+                if not all(k in cont_data and pd.notna(cont_data.get(k)) for k in required_columns.values()):
+                     current_row_errors.append("Missing value in one or more required columns")
+                # TODO: Add more specific validations (positive dimensions)
+
+            except (ValueError, TypeError) as e:
+                 current_row_errors.append(f"Data type error: {e}")
+
+            if current_row_errors:
+                 errors.append(ImportErrorDetail(row=row_num, message="; ".join(current_row_errors)))
+                 continue
+
+            # --- Upsert Logic ---
+            existing_cont = db.query(DBContainer).filter(DBContainer.containerId == cont_data['containerId']).first()
+            if existing_cont:
+                 # Update existing container
+                 existing_cont.zone = cont_data['zone']
+                 existing_cont.width = cont_data['width']
+                 existing_cont.depth = cont_data['depth']
+                 existing_cont.height = cont_data['height']
+                 print(f"Updated container: {cont_data['containerId']}")
+            else:
+                 # Create new container
+                 new_cont = DBContainer(**cont_data)
+                 db.add(new_cont)
+                 containers_imported_count += 1
+                 print(f"Created new container: {cont_data['containerId']}")
+
+
+        # --- Commit changes ---
+        if containers_imported_count > 0 or any(db.dirty):
+            try:
+                 db.commit()
+            except Exception as e:
+                 db.rollback()
+                 errors.append(ImportErrorDetail(message=f"Database commit failed: {e}"))
+                 success_status = False
+            else:
+                 success_status = len(errors) == 0
+        else:
+             success_status = len(errors) == 0
+
+
+        # Log import action
+        create_log_entry(
+            db=db,
+            actionType=LogActionType.IMPORT,
+            userId=user_id,
+            details={
+                "fileType": "containers",
+                "fileName": filename,
+                "count": containers_imported_count,
+                "errors": len(errors)
+            }
+        )
+        db.commit() # Commit log
+
+
+        return ImportResponse(success=success_status, containersImported=containers_imported_count, errors=errors)
+
+    except pd.errors.ParserError as e:
+        errors.append(ImportErrorDetail(message=f"CSV Parsing Error: {e}"))
+        return ImportResponse(success=False, errors=errors)
+    except Exception as e:
+        db.rollback()
+        errors.append(ImportErrorDetail(message=f"An unexpected error occurred: {e}"))
+        try:
+             create_log_entry(db, LogActionType.SYSTEM_ERROR, userId=user_id, details={"error": f"Container Import Failed: {e}", "fileName": filename})
+             db.commit()
+        except:
+             db.rollback()
+        return ImportResponse(success=False, errors=errors)
+
+
+def export_current_arrangement(db: Session, user_id: Optional[str] = None) -> io.BytesIO:
+    """Exports the current item placements as a CSV file in a BytesIO buffer."""
+    placements = db.query(DBPlacement).options(joinedload(DBPlacement.item)).all()
+
+    output = io.StringIO()
+    # Define columns as per requirement
+    columns = ['ItemID', 'ContainerID', 'Coordinates(W1,D1,H1)', 'Coordinates(W2,D2,H2)']
+    data = []
+    for p in placements:
+         # Format coordinates as required string
+         coord1 = f"({p.start_w},{p.start_d},{p.start_h})"
+         coord2 = f"({p.end_w},{p.end_d},{p.end_h})"
+         data.append({
+             'ItemID': p.itemId_fk,
+             'ContainerID': p.containerId_fk,
+             'Coordinates(W1,D1,H1)': coord1,
+             'Coordinates(W2,D2,H2)': coord2
+         })
+
+    df = pd.DataFrame(data, columns=columns)
+    df.to_csv(output, index=False, lineterminator='\n') # Use lineterminator for consistency
+
+    # Log export action
+    create_log_entry(
+        db=db,
+        actionType=LogActionType.EXPORT,
+        userId=user_id,
+        details={"exportType": "arrangement", "itemCount": len(placements)}
+    )
+    try:
+        db.commit() # Commit log
+    except Exception as e:
+        db.rollback()
+        print(f"Error committing export log: {e}") # Log error but still return data
+
+
+    # Return as BytesIO for Flask send_file
+    return io.BytesIO(output.getvalue().encode('utf-8'))
