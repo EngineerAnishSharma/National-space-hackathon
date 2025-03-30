@@ -85,3 +85,117 @@ body {
 .star:nth-child(3):before { animation-delay: 0.9s; }
 .star:nth-child(4):before { animation-delay: 1.4s; }
 .star:nth-child(5):before { animation-delay: 1.1s; }
+
+/* SVG Zone Styles */
+.zone-airlock path {
+  fill: #2563eb;
+  opacity: 0.6;
+}
+
+.zone-crew-quarters path {
+  fill: #7c3aed;
+  opacity: 0.6;
+}
+
+.zone-cupola path {
+  fill: #0891b2;
+  opacity: 0.6;
+}
+
+.zone-docking-1 path,
+.zone-docking-2 path,
+.zone-docking-3 path,
+.zone-docking-4 path {
+  fill: #4f46e5;
+  opacity: 0.6;
+}
+
+.zone-european-lab path {
+  fill: #059669;
+  opacity: 0.6;
+}
+
+.zone-japanese-lab path {
+  fill: #b91c1c;
+  opacity: 0.6;
+}
+
+.zone-russian-lab path {
+  fill: #9333ea;
+  opacity: 0.6;
+}
+
+.zone-service-module path {
+  fill: #0d9488;
+  opacity: 0.6;
+}
+
+.zone-storage-1 path,
+.zone-storage-2 path,
+.zone-storage-3 path {
+  fill: #6366f1;
+  opacity: 0.6;
+}
+
+.zone-us-lab path {
+  fill: #15803d;
+  opacity: 0.6;
+}
+
+/* Hover effects */
+[class^="zone-"]:hover path {
+  opacity: 0.8;
+  filter: brightness(1.2);
+}
+
+/* Interactive SVG Styles */
+.zone-hover {
+  transition: all 0.3s ease;
+}
+
+.zone-hover:hover {
+  fill-opacity: 0.8;
+  filter: brightness(1.2);
+  stroke-width: 3;
+}
+
+.zone-label {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.zone-hover:hover + .zone-label {
+  opacity: 1;
+}
+
+/* Zone Colors */
+.zone-service-module { fill: #4f46e5; }
+.zone-laboratory { fill: #059669; }
+.zone-airlock { fill: #2563eb; }
+.zone-crew-quarters { fill: #7c3aed; }
+.zone-cupola { fill: #0891b2; }
+.zone-docking { fill: #4338ca; }
+.zone-storage { fill: #6366f1; }
+
+/* SVG Text Styles */
+svg text {
+  font-family: Arial, sans-serif;
+  user-select: none;
+}
+
+/* Zone hover effects */
+g:hover rect {
+  filter: brightness(1.2);
+  transition: all 0.3s ease;
+}
+
+/* Make sure SVG is visible */
+svg {
+  overflow: visible;
+  z-index: 20;
+}
+
+/* Adjust star background */
+#stars {
+  z-index: 1;
+}

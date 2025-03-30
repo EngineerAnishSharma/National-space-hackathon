@@ -4,24 +4,25 @@ import { Zone, Container } from '../types/storage';
 import ZoneView from '../components/ZoneView';
 import ContainerView from '../components/ContainerView';
 import { loadMockData } from '../data/mockData';
+import SpaceStationSVG from '../components/SpaceStationSVG';
 
-function getZonePosition(index: number, totalZones: number) {
-  // Calculate grid dimensions based on total zones
-  const gridSize = Math.ceil(Math.sqrt(totalZones));
-  const row = Math.floor(index / gridSize);
-  const col = index % gridSize;
-  
-  // Calculate sizes with gaps
-  const cellSize = 250; // px
-  const gap = 20; // px
-  
-  return {
-    left: col * (cellSize + gap),
-    top: row * (cellSize + gap),
-    width: cellSize,
-    height: cellSize
-  };
-}
+const ZONE_PATHS = {
+  'Airlock': 'path-id-for-airlock',
+  'Crew Quarters': 'path-id-for-crew-quarters',
+  'Cupola': 'path-id-for-cupola',
+  'Docking Area 1': 'path-id-for-docking-area-1',
+  'Docking Area 2': 'path-id-for-docking-area-2',
+  'Docking Area 3': 'path-id-for-docking-area-3',
+  'Docking Area 4': 'path-id-for-docking-area-4',
+  'European Laboratory': 'path-id-for-european-laboratory',
+  'Japanese Laboratory': 'path-id-for-japanese-laboratory',
+  'Russian Laboratory': 'path-id-for-russian-laboratory',
+  'Service Module': 'path-id-for-service-module',
+  'Storage Area 1': 'path-id-for-storage-area-1',
+  'Storage Area 2': 'path-id-for-storage-area-2',
+  'Storage Area 3': 'path-id-for-storage-area-3',
+  'US Laboratory': 'path-id-for-us-laboratory'
+};
 
 function StarryBackground() {
   useEffect(() => {
@@ -159,36 +160,12 @@ export default function Home() {
                 transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               }}
             >
-              {zones.map((zone, index) => {
-                const pos = getZonePosition(index, zones.length);
-                return (
-                  <div
-                    key={zone.id}
-                    className="absolute transition-all duration-300 rounded-lg border-2 border-blue-400/30"
-                    style={{
-                      left: pos.left,
-                      top: pos.top,
-                      width: pos.width,
-                      height: pos.height,
-                    }}
-                    onClick={() => setSelectedZone(zone)}
-                    onMouseEnter={() => setHoveredZone(zone.id)}
-                    onMouseLeave={() => setHoveredZone(null)}
-                  >
-                    <div 
-                      className={`h-full w-full p-6 rounded-lg ${
-                        hoveredZone === zone.id ? 'bg-blue-500/50' : 'bg-gray-700/50'
-                      }`}
-                    >
-                      <h3 className="text-xl font-bold text-white mb-2">{zone.name}</h3>
-                      <div className="text-white/80 text-sm">
-                        <p>{zone.containers.length} containers</p>
-                        <p>{zone.containers.reduce((acc, cont) => acc + cont.items.length, 0)} items</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              <SpaceStationSVG
+                zones={zones}
+                onSelectZone={setSelectedZone}
+                hoveredZone={hoveredZone}
+                onZoneHover={setHoveredZone}
+              />
             </div>
           </div>
         ) : selectedContainer ? (
