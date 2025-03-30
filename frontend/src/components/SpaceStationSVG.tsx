@@ -77,21 +77,21 @@ export default function SpaceStationSVG({ zones, onSelectZone, hoveredZone, onZo
 
 function getZoneTextPosition(zoneName: string) {
   const positions: { [key: string]: { x: number, y: number, yOffset?: number } } = {
-    'Service Module': { x: 452, y: 280, yOffset: 0 },
-    'US Laboratory': { x: 560, y: 290, yOffset: 0 },
-    'Russian Laboratory': { x: 90, y: 290, yOffset: 0 },
-    'European Laboratory': { x: 470, y: 600, yOffset: 0 },
-    'Japanese Laboratory': { x: 300, y: 290, yOffset: 0 },
-    'Airlock': { x: 420, y: 290, yOffset: -10 },
-    'Crew Quarters': { x: 452, y: 770, yOffset: 0 },
-    'Cupola': { x: 452, y: 50, yOffset: 20 },
-    'Docking Area 1': { x: 120, y: 290, yOffset: 0 },
-    'Docking Area 2': { x: 680, y: 290, yOffset: 0 },
-    'Docking Area 3': { x: 452, y: 610, yOffset: 0 },
-    'Docking Area 4': { x: 452, y: 100, yOffset: 0 },
-    'Storage Area 1': { x: 440, y: 80, yOffset: 0 },
-    'Storage Area 2': { x: 500, y: 290, yOffset: 0 },
-    'Storage Area 3': { x: 452, y: 500, yOffset: 0 }
+    // 'Service Module': { x: 452, y: 250 },
+    'US Laboratory': { x: 620, y: 290 },
+    'Russian Laboratory': { x: 90, y: 300 },
+    'European Laboratory': { x: 470, y: 410 },
+    'Japanese Laboratory': { x: 280, y: 300 },
+    // 'Airlock': { x: 380, y: 260 },
+    'Crew Quarters': { x: 452, y: 770 },
+    // 'Cupola': { x: 452, y: 150 },
+    // 'Docking Area 1': { x: 90, y: 250 },
+    // 'Docking Area 2': { x: 720, y: 270 },
+    // 'Docking Area 3': { x: 530, y: 520 },
+    'Docking Area 4': { x: 452, y: 45 },
+    'Storage Area 1': { x: 450, y: 220 },
+    // 'Storage Area 2': { x: 560, y: 350 },
+    // 'Storage Area 3': { x: 380, y: 350 }
   };
-  return positions[zoneName] || { x: 0, y: 0, yOffset: 0 };
+  return positions[zoneName] || { x: 0, y: 0 };
 }
