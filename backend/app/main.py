@@ -23,6 +23,9 @@ def create_app(config_class=Config):
     app.register_blueprint(import_export_bp)
     app.register_blueprint(logs_bp)
 
+    # Initialize the database
+    init_db() # Call init_db here to create tables
+
     # Optional: Add a command to initialize the database
     @app.cli.command("init-db")
     def init_db_command():

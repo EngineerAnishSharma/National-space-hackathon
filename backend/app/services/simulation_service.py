@@ -1,4 +1,3 @@
-# /app/services/simulation_service.py
 from sqlalchemy.orm import Session
 from typing import List, Tuple, Optional
 from app.models_db import Item as DBItem, LogActionType, ItemStatus
@@ -6,11 +5,12 @@ from app.models_api import (SimulationRequest, SimulationResponse, SimulationCha
                             SimulationItemChange, SimulationItemUsedChange)
 from .logging_service import create_log_entry
 from datetime import datetime, timedelta
+import logging
+
+# Configure logging (you can customize this)
+logging.basicConfig(level=logging.DEBUG)
 
 # Global variable to store the current simulation time (In-memory approach)
-# WARNING: This is NOT suitable for production or multi-user environments.
-# A persistent store (DB table, config file) is needed for robust time tracking.
-# Initialize to current real time or a specific start date.
 _CURRENT_SIMULATION_TIME = datetime.utcnow()
 
 def get_current_simulation_time() -> datetime:
@@ -22,7 +22,6 @@ def _set_current_simulation_time(new_time: datetime):
     """Sets the current simulated time."""
     global _CURRENT_SIMULATION_TIME
     _CURRENT_SIMULATION_TIME = new_time
-
 
 def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id: Optional[str] = None) -> SimulationResponse:
     """
@@ -41,12 +40,13 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
         if request_data.toTimestamp <= start_sim_time:
             raise ValueError("toTimestamp must be after the current simulation time.")
         end_sim_time = request_data.toTimestamp
-        days_to_simulate = (end_sim_time - start_sim_time).days + 1 # Include partial days as full days for simplicity
+        days_to_simulate = (end_sim_time - start_sim_time).days
+        days_to_simulate += 1
     else:
         # Should be caught by Pydantic validation
         raise ValueError("Either numOfDays or toTimestamp is required.")
 
-    print(f"Simulating from {start_sim_time.isoformat()} to {end_sim_time.isoformat()} ({days_to_simulate} days)")
+    logging.debug(f"Simulating from {start_sim_time.isoformat()} to {end_sim_time.isoformat()} ({days_to_simulate} days)")
 
     items_used_changes: List[SimulationItemUsedChange] = []
     items_expired_changes: List[SimulationItemChange] = []
@@ -57,18 +57,18 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
     for day_index in range(days_to_simulate):
         current_day_processing = start_sim_time + timedelta(days=day_index)
         day_start = current_day_processing.replace(hour=0, minute=0, second=0, microsecond=0)
-        day_end = day_start + timedelta(days=1) - timedelta.microseconds(1) # End of the current simulated day
+        day_end = day_start + timedelta(days=1) - timedelta(microseconds=1)
 
-        print(f"--- Simulating Day {day_index + 1}: {day_start.date()} ---")
+        logging.debug(f"--- Simulating Day {day_index + 1}: {day_start.date()} ---")
 
         # 1. Process Items Used Today
         used_today_ids = set()
         items_to_use_query = [] # Collect item IDs/names to query efficiently
         for usage_request in request_data.itemsToBeUsedPerDay:
-             if usage_request.itemId:
-                  items_to_use_query.append(DBItem.itemId == usage_request.itemId)
-             elif usage_request.name:
-                  items_to_use_query.append(DBItem.name == usage_request.name)
+            if usage_request.itemId:
+                items_to_use_query.append(DBItem.itemId == usage_request.itemId)
+            elif usage_request.name:
+                items_to_use_query.append(DBItem.name == usage_request.name)
 
         if items_to_use_query:
             from sqlalchemy import or_
@@ -104,7 +104,6 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
                             details={"reason": "Usage limit reached during simulation"}
                         )
 
-
                 # Add to used list (even if depleted this step)
                 used_change = SimulationItemUsedChange(
                     itemId=item.itemId, name=item.name, remainingUses=remaining_uses
@@ -122,7 +121,6 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
                     details={"remainingUses": remaining_uses, "status_after": item.status.value}
                 )
 
-
         # 2. Check for Expiry Today (at the end of the simulated day)
         newly_expired_items = db.query(DBItem).filter(
             DBItem.status == ItemStatus.ACTIVE,
@@ -133,7 +131,7 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
         for item in newly_expired_items:
             item.status = ItemStatus.WASTE_EXPIRED
             expired_change = SimulationItemChange(itemId=item.itemId, name=item.name)
-             # Avoid duplicates if expired multiple times? Check if already added.
+            # Avoid duplicates if expired multiple times? Check if already added.
             if not any(c.itemId == item.itemId for c in items_expired_changes):
                 items_expired_changes.append(expired_change)
 
@@ -148,14 +146,11 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
 
         # Commit changes for the day
         try:
-             db.commit()
+            db.commit()
         except Exception as e:
-             db.rollback()
-             # Critical error during simulation - stop? Or just log and continue? Stop for now.
-             print(f"Error committing changes during simulation day {day_index + 1}: {e}")
-             # Roll back global time? No, state is inconsistent. Best to raise.
-             raise ValueError(f"Simulation failed during day {day_index + 1}: {e}")
-
+            db.rollback()
+            logging.error(f"Error committing changes during simulation day {day_index + 1}: {e}", exc_info=True)
+            raise ValueError(f"Simulation failed during day {day_index + 1}: {e}")
 
     # Update global simulation time *after* loop finishes successfully
     _set_current_simulation_time(end_sim_time)

@@ -1,7 +1,10 @@
 # /app/services/waste_service.py
+
 from sqlalchemy.orm import Session, joinedload
+
 from typing import List, Tuple, Optional
-from app.models_db import Item as DBItem, Container as DBContainer, Placement as DBPlacement, LogActionType, ItemStatus
+
+from app.models_db import Item as DBItem, Container as DBContainer, Placement as DBPlacement, LogActionType, ItemStatus, Log # Import Log
 from app.models_api import (WasteItemResponse, WasteIdentifyResponse, WasteReturnPlanRequest,
                             WasteReturnPlanStep, WasteReturnManifestItem, WasteReturnManifest,
                             WasteReturnPlanResponse, WasteCompleteUndockingRequest, WasteCompleteUndockingResponse,
@@ -9,6 +12,7 @@ from app.models_api import (WasteItemResponse, WasteIdentifyResponse, WasteRetur
 from .logging_service import create_log_entry
 from .retrieval_service import get_blocking_items # Reuse retrieval logic
 from datetime import datetime
+import app.utils.geometry as geometry # Assuming geometry module is in app package
 
 def identify_waste_items(db: Session) -> WasteIdentifyResponse:
     """Identifies items marked as expired or depleted."""
@@ -39,7 +43,6 @@ def identify_waste_items(db: Session) -> WasteIdentifyResponse:
         # Continue processing, but log the error
         create_log_entry(db, LogActionType.SYSTEM_ERROR, details={"error": f"Failed to update expired statuses: {e}"})
 
-
     # Query all items currently marked as waste (expired or depleted) that have a placement
     waste_placements = db.query(DBPlacement).\
         options(joinedload(DBPlacement.item)).\
@@ -64,7 +67,6 @@ def identify_waste_items(db: Session) -> WasteIdentifyResponse:
         ))
 
     return WasteIdentifyResponse(success=True, wasteItems=waste_items_response)
-
 
 def plan_waste_return(db: Session, request_data: WasteReturnPlanRequest, user_id: Optional[str] = None) -> WasteReturnPlanResponse:
     """
@@ -105,9 +107,8 @@ def plan_waste_return(db: Session, request_data: WasteReturnPlanRequest, user_id
             total_volume += geometry.calculate_volume(pos)
         else:
             # Stop adding items once max weight is reached/exceeded
-             print(f"Max weight {max_weight} kg reached. Stopping waste selection.")
-             break
-
+            print(f"Max weight {max_weight} kg reached. Stopping waste selection.")
+            break
 
     # 3. Generate Movement Plan and Retrieval Steps
     return_plan_steps: List[WasteReturnPlanStep] = []
@@ -149,11 +150,10 @@ def plan_waste_return(db: Session, request_data: WasteReturnPlanRequest, user_id
         ))
         movement_step_count += 1
 
-         # TODO: Add 'placeBack' steps for blockers if needed for the workflow
+        # TODO: Add 'placeBack' steps for blockers if needed for the workflow
         # for blocker_id, blocker_name, _ in reversed(blockers):
-        #    all_retrieval_steps.append(RetrievalStep(... action="placeBack" ...))
-        #    global_step_count += 1
-
+        #     all_retrieval_steps.append(RetrievalStep(... action="placeBack" ...))
+        #     global_step_count += 1
 
         # --- Log that this item is part of the plan ---
         create_log_entry(
@@ -185,14 +185,12 @@ def plan_waste_return(db: Session, request_data: WasteReturnPlanRequest, user_id
         # Log or raise? Raise for now as plan generation failed.
         raise ValueError(f"Failed to log waste plan actions: {e}")
 
-
     return WasteReturnPlanResponse(
         success=True,
         returnPlan=return_plan_steps,
         retrievalSteps=all_retrieval_steps,
         returnManifest=manifest
     )
-
 
 def complete_undocking_process(db: Session, request_data: WasteCompleteUndockingRequest, user_id: Optional[str] = None) -> WasteCompleteUndockingResponse:
     """
@@ -213,9 +211,9 @@ def complete_undocking_process(db: Session, request_data: WasteCompleteUndocking
     ).all()
 
     if not planned_logs:
-         print(f"Warning: No disposal plan logs found containing container ID {undocking_container_id}. Maybe the ID in logs is different?")
-         # Might still proceed to remove any items physically marked as waste in that container?
-         # For now, strictly follow items found via logs.
+        print(f"Warning: No disposal plan logs found containing container ID {undocking_container_id}. Maybe the ID in logs is different?")
+        # Might still proceed to remove any items physically marked as waste in that container?
+        # For now, strictly follow items found via logs.
 
     items_to_remove_ids = {log.itemId_fk for log in planned_logs if log.itemId_fk}
     items_removed_count = 0
@@ -223,7 +221,6 @@ def complete_undocking_process(db: Session, request_data: WasteCompleteUndocking
     if not items_to_remove_ids:
         print(f"No items found marked for disposal plan involving container {undocking_container_id}.")
         return WasteCompleteUndockingResponse(success=True, itemsRemoved=0)
-
 
     # Fetch items and their placements to remove/update status
     items_to_process = db.query(DBItem).filter(DBItem.itemId.in_(items_to_remove_ids)).all()
@@ -240,31 +237,31 @@ def complete_undocking_process(db: Session, request_data: WasteCompleteUndocking
             # Delete its placement record as it's no longer physically placed
             placement = db.query(DBPlacement).filter(DBPlacement.itemId_fk == item.itemId).first()
             if placement:
-                 # Log removal from specific container before deleting placement
-                 log_details = {
-                     "undockingContainerId": undocking_container_id, # From request
-                     "originalContainer": placement.containerId_fk,
-                     "reason": "Undocked"
-                 }
-                 create_log_entry(
-                     db=db,
-                     actionType=LogActionType.DISPOSAL_COMPLETE,
-                     itemId=item.itemId,
-                     userId=user_id,
-                     timestamp=timestamp,
-                     details=log_details
-                 )
-                 db.delete(placement)
+                # Log removal from specific container before deleting placement
+                log_details = {
+                    "undockingContainerId": undocking_container_id, # From request
+                    "originalContainer": placement.containerId_fk,
+                    "reason": "Undocked"
+                }
+                create_log_entry(
+                    db=db,
+                    actionType=LogActionType.DISPOSAL_COMPLETE,
+                    itemId=item.itemId,
+                    userId=user_id,
+                    timestamp=timestamp,
+                    details=log_details
+                )
+                db.delete(placement)
             else:
-                 # Item was planned but somehow lost its placement? Log this.
-                  create_log_entry(
-                     db=db,
-                     actionType=LogActionType.DISPOSAL_COMPLETE,
-                     itemId=item.itemId,
-                     userId=user_id,
-                     timestamp=timestamp,
-                     details={"status": "Item disposed (status updated)", "warning": "Placement record not found"}
-                 )
+                # Item was planned but somehow lost its placement? Log this.
+                create_log_entry(
+                    db=db,
+                    actionType=LogActionType.DISPOSAL_COMPLETE,
+                    itemId=item.itemId,
+                    userId=user_id,
+                    timestamp=timestamp,
+                    details={"status": "Item disposed (status updated)", "warning": "Placement record not found"}
+                )
 
     # Commit all deletions and status updates
     try:
