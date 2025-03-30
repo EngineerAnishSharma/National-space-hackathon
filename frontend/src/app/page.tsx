@@ -4,23 +4,75 @@ import { Zone, Container } from '../types/storage';
 import ZoneView from '../components/ZoneView';
 import ContainerView from '../components/ContainerView';
 import { loadMockData } from '../data/mockData';
+import SpaceStationSVG from '../components/SpaceStationSVG';
 
-function getZonePosition(index: number, totalZones: number) {
-  // Calculate grid dimensions based on total zones
-  const gridSize = Math.ceil(Math.sqrt(totalZones));
-  const row = Math.floor(index / gridSize);
-  const col = index % gridSize;
-  
-  // Calculate sizes with gaps
-  const cellSize = 250; // px
-  const gap = 20; // px
-  
-  return {
-    left: col * (cellSize + gap),
-    top: row * (cellSize + gap),
-    width: cellSize,
-    height: cellSize
-  };
+const ZONE_PATHS = {
+  'Airlock': 'path-id-for-airlock',
+  'Crew Quarters': 'path-id-for-crew-quarters',
+  'Cupola': 'path-id-for-cupola',
+  'Docking Area 1': 'path-id-for-docking-area-1',
+  'Docking Area 2': 'path-id-for-docking-area-2',
+  'Docking Area 3': 'path-id-for-docking-area-3',
+  'Docking Area 4': 'path-id-for-docking-area-4',
+  'European Laboratory': 'path-id-for-european-laboratory',
+  'Japanese Laboratory': 'path-id-for-japanese-laboratory',
+  'Russian Laboratory': 'path-id-for-russian-laboratory',
+  'Service Module': 'path-id-for-service-module',
+  'Storage Area 1': 'path-id-for-storage-area-1',
+  'Storage Area 2': 'path-id-for-storage-area-2',
+  'Storage Area 3': 'path-id-for-storage-area-3',
+  'US Laboratory': 'path-id-for-us-laboratory'
+};
+
+function StarryBackground() {
+  useEffect(() => {
+    const starCount = 45;
+    const shootingStarInterval = 8000;
+
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      document.getElementById("stars")?.appendChild(star);
+    }
+
+    function createShootingStar() {
+      const shootingStar = document.createElement("div");
+      shootingStar.className = "shooting-star";
+      shootingStar.style.top = `${Math.random() * 100}%`;
+      shootingStar.style.left = `${Math.random() * 100}%`;
+      const starsContainer = document.getElementById("stars");
+      if (starsContainer) {
+        starsContainer.appendChild(shootingStar);
+        setTimeout(() => shootingStar.remove(), 3000);
+      }
+    }
+
+    function generateStars() {
+      for (let i = 0; i < starCount; i++) {
+        createStar();
+      }
+    }
+
+    function randomizeShootingStars() {
+      const interval = Math.random() * shootingStarInterval;
+      setTimeout(() => {
+        createShootingStar();
+        randomizeShootingStars();
+      }, interval);
+    }
+
+    generateStars();
+    randomizeShootingStars();
+
+    return () => {
+      const stars = document.getElementById("stars");
+      if (stars) stars.innerHTML = '';
+    };
+  }, []);
+
+  return <div id="stars" className="absolute inset-0" />;
 }
 
 export default function Home() {
@@ -90,53 +142,30 @@ export default function Home() {
   return (
     <div className="p-8">
       <div className="max-w-full mx-auto overflow-hidden">
-        <h1 className="text-3xl font-bold mb-6">Space Station Storage Management</h1>
+        <h1 className="text-3xl font-bold mb-6 text-white relative z-10">Space Station Storage Management</h1>
         
         {!selectedZone ? (
           <div 
-            className="relative h-[800px] bg-gray-900 rounded-lg cursor-move overflow-hidden"
+            className="relative h-[800px] space-background rounded-lg cursor-move overflow-hidden"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onWheel={handleWheel}
           >
+            <StarryBackground />
             <div 
-              className="absolute origin-center transition-transform duration-100"
+              className="absolute origin-center transition-transform duration-100 z-10"
               style={{
                 transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               }}
             >
-              {zones.map((zone, index) => {
-                const pos = getZonePosition(index, zones.length);
-                return (
-                  <div
-                    key={zone.id}
-                    className="absolute transition-all duration-300 rounded-lg border-2 border-blue-400/30"
-                    style={{
-                      left: pos.left,
-                      top: pos.top,
-                      width: pos.width,
-                      height: pos.height,
-                    }}
-                    onClick={() => setSelectedZone(zone)}
-                    onMouseEnter={() => setHoveredZone(zone.id)}
-                    onMouseLeave={() => setHoveredZone(null)}
-                  >
-                    <div 
-                      className={`h-full w-full p-6 rounded-lg ${
-                        hoveredZone === zone.id ? 'bg-blue-500/50' : 'bg-gray-700/50'
-                      }`}
-                    >
-                      <h3 className="text-xl font-bold text-white mb-2">{zone.name}</h3>
-                      <div className="text-white/80 text-sm">
-                        <p>{zone.containers.length} containers</p>
-                        <p>{zone.containers.reduce((acc, cont) => acc + cont.items.length, 0)} items</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              <SpaceStationSVG
+                zones={zones}
+                onSelectZone={setSelectedZone}
+                hoveredZone={hoveredZone}
+                onZoneHover={setHoveredZone}
+              />
             </div>
           </div>
         ) : selectedContainer ? (
