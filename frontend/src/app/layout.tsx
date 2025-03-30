@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         <div className="flex min-h-screen">
           <div className="flex-1">{children}</div>
-          <div className="w-64 bg-gray-800 text-white p-6">
+          {/* <div className="w-64 bg-gray-800 text-white p-6">
             <div className="text-xl font-bold mb-8">Space Station Storage</div>
             <nav className="space-y-4">
               <Link href="/" className="block hover:text-blue-400">Overview</Link>
@@ -38,7 +38,7 @@ export default function RootLayout({
               <Link href="/waste-management" className="block hover:text-blue-400">Waste Management</Link>
               <Link href="/settings" className="block hover:text-blue-400">Settings</Link>
             </nav>
-          </div>
+          </div> */}
         </div>
       </body>
     </html>
