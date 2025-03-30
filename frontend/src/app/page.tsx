@@ -23,6 +23,57 @@ function getZonePosition(index: number, totalZones: number) {
   };
 }
 
+function StarryBackground() {
+  useEffect(() => {
+    const starCount = 45;
+    const shootingStarInterval = 8000;
+
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      document.getElementById("stars")?.appendChild(star);
+    }
+
+    function createShootingStar() {
+      const shootingStar = document.createElement("div");
+      shootingStar.className = "shooting-star";
+      shootingStar.style.top = `${Math.random() * 100}%`;
+      shootingStar.style.left = `${Math.random() * 100}%`;
+      const starsContainer = document.getElementById("stars");
+      if (starsContainer) {
+        starsContainer.appendChild(shootingStar);
+        setTimeout(() => shootingStar.remove(), 3000);
+      }
+    }
+
+    function generateStars() {
+      for (let i = 0; i < starCount; i++) {
+        createStar();
+      }
+    }
+
+    function randomizeShootingStars() {
+      const interval = Math.random() * shootingStarInterval;
+      setTimeout(() => {
+        createShootingStar();
+        randomizeShootingStars();
+      }, interval);
+    }
+
+    generateStars();
+    randomizeShootingStars();
+
+    return () => {
+      const stars = document.getElementById("stars");
+      if (stars) stars.innerHTML = '';
+    };
+  }, []);
+
+  return <div id="stars" className="absolute inset-0" />;
+}
+
 export default function Home() {
   const [zones, setZones] = useState<Zone[]>([]);
   const [loading, setLoading] = useState(true);
@@ -90,19 +141,20 @@ export default function Home() {
   return (
     <div className="p-8">
       <div className="max-w-full mx-auto overflow-hidden">
-        <h1 className="text-3xl font-bold mb-6">Space Station Storage Management</h1>
+        <h1 className="text-3xl font-bold mb-6 text-white relative z-10">Space Station Storage Management</h1>
         
         {!selectedZone ? (
           <div 
-            className="relative h-[800px] bg-gray-900 rounded-lg cursor-move overflow-hidden"
+            className="relative h-[800px] space-background rounded-lg cursor-move overflow-hidden"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onWheel={handleWheel}
           >
+            <StarryBackground />
             <div 
-              className="absolute origin-center transition-transform duration-100"
+              className="absolute origin-center transition-transform duration-100 z-10"
               style={{
                 transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               }}
