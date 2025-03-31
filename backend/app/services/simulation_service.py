@@ -1,3 +1,5 @@
+from operator import or_
+from sqlite3 import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List, Tuple, Optional
 from app.models_db import Item as DBItem, LogActionType, ItemStatus
@@ -10,159 +12,78 @@ import logging
 # Configure logging (you can customize this)
 logging.basicConfig(level=logging.DEBUG)
 
-# Global variable to store the current simulation time (In-memory approach)
+# Global simulation time
 _CURRENT_SIMULATION_TIME = datetime.utcnow()
 
 def get_current_simulation_time() -> datetime:
-    """Gets the current simulated time."""
-    global _CURRENT_SIMULATION_TIME
     return _CURRENT_SIMULATION_TIME
 
 def _set_current_simulation_time(new_time: datetime):
-    """Sets the current simulated time."""
     global _CURRENT_SIMULATION_TIME
     _CURRENT_SIMULATION_TIME = new_time
 
 def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id: Optional[str] = None) -> SimulationResponse:
-    """
-    Simulates the passage of time, updating item statuses and usage counts.
-    """
     global _CURRENT_SIMULATION_TIME
     start_sim_time = _CURRENT_SIMULATION_TIME
 
-    # Determine end time
-    if request_data.numOfDays is not None:
-        if request_data.numOfDays <= 0:
-            raise ValueError("numOfDays must be positive.")
+    # Determine end simulation time
+    if request_data.numOfDays and request_data.numOfDays > 0:
         end_sim_time = start_sim_time + timedelta(days=request_data.numOfDays)
-        days_to_simulate = request_data.numOfDays
-    elif request_data.toTimestamp is not None:
-        if request_data.toTimestamp <= start_sim_time:
-            raise ValueError("toTimestamp must be after the current simulation time.")
+    elif request_data.toTimestamp and request_data.toTimestamp > start_sim_time:
         end_sim_time = request_data.toTimestamp
-        days_to_simulate = (end_sim_time - start_sim_time).days
-        days_to_simulate += 1
     else:
-        # Should be caught by Pydantic validation
-        raise ValueError("Either numOfDays or toTimestamp is required.")
+        raise ValueError("Either a valid numOfDays or future toTimestamp is required.")
 
-    logging.debug(f"Simulating from {start_sim_time.isoformat()} to {end_sim_time.isoformat()} ({days_to_simulate} days)")
+    logging.debug(f"Simulating from {start_sim_time} to {end_sim_time}")
 
     items_used_changes: List[SimulationItemUsedChange] = []
     items_expired_changes: List[SimulationItemChange] = []
     items_depleted_changes: List[SimulationItemChange] = []
 
-    # --- Simulate day by day ---
-    current_day_processing = start_sim_time
-    for day_index in range(days_to_simulate):
-        current_day_processing = start_sim_time + timedelta(days=day_index)
-        day_start = current_day_processing.replace(hour=0, minute=0, second=0, microsecond=0)
-        day_end = day_start + timedelta(days=1) - timedelta(microseconds=1)
+    # Optimize query: Fetch all relevant items at once
+    item_filters = []
+    for usage_request in request_data.itemsToBeUsedPerDay:
+        if usage_request.itemId:
+            item_filters.append(DBItem.itemId == usage_request.itemId)
+        elif usage_request.name:
+            item_filters.append(DBItem.name == usage_request.name)
+    
+    items_to_process = db.query(DBItem).filter(or_(*item_filters), DBItem.status == ItemStatus.ACTIVE).all()
 
-        logging.debug(f"--- Simulating Day {day_index + 1}: {day_start.date()} ---")
+    for current_day in range((end_sim_time - start_sim_time).days + 1):
+        current_time = start_sim_time + timedelta(days=current_day)
+        day_end = current_time.replace(hour=23, minute=59, second=59, microsecond=999999)
+        
+        # Process item usage
+        for item in items_to_process:
+            if item.usageLimit is not None and item.currentUses < item.usageLimit:
+                item.currentUses += 1
+                remaining_uses = max(0, item.usageLimit - item.currentUses)
+                if remaining_uses == 0:
+                    item.status = ItemStatus.WASTE_DEPLETED
+                    if not any(c.itemId == item.itemId for c in items_depleted_changes):
+                        items_depleted_changes.append(SimulationItemChange(itemId=item.itemId, name=item.name))
+                items_used_changes.append(SimulationItemUsedChange(itemId=item.itemId, name=item.name, remainingUses=remaining_uses))
+                create_log_entry(db, LogActionType.SIMULATION_USE, item.itemId, current_time, {"remainingUses": remaining_uses})
 
-        # 1. Process Items Used Today
-        used_today_ids = set()
-        items_to_use_query = [] # Collect item IDs/names to query efficiently
-        for usage_request in request_data.itemsToBeUsedPerDay:
-            if usage_request.itemId:
-                items_to_use_query.append(DBItem.itemId == usage_request.itemId)
-            elif usage_request.name:
-                items_to_use_query.append(DBItem.name == usage_request.name)
-
-        if items_to_use_query:
-            from sqlalchemy import or_
-            items_to_process_today = db.query(DBItem).filter(
-                or_(*items_to_use_query),
-                DBItem.status == ItemStatus.ACTIVE # Only use active items
-            ).all()
-
-            for item in items_to_process_today:
-                if item.itemId in used_today_ids: continue # Prevent double counting if requested by ID and name
-
-                remaining_uses = None
-                was_depleted_this_step = False
-                if item.usageLimit is not None:
-                    item.currentUses += 1
-                    remaining_uses = item.usageLimit - item.currentUses
-                    if remaining_uses < 0: remaining_uses = 0 # Cap
-
-                    if remaining_uses == 0 and item.status == ItemStatus.ACTIVE:
-                        item.status = ItemStatus.WASTE_DEPLETED
-                        was_depleted_this_step = True
-                        depleted_change = SimulationItemChange(itemId=item.itemId, name=item.name)
-                        # Avoid duplicates if depleted multiple times in simulation? Check if already added.
-                        if not any(c.itemId == item.itemId for c in items_depleted_changes):
-                            items_depleted_changes.append(depleted_change)
-
-                        # Log depletion
-                        create_log_entry(
-                            db=db,
-                            actionType=LogActionType.SIMULATION_DEPLETED,
-                            itemId=item.itemId,
-                            timestamp=current_day_processing, # Time within the day it happened
-                            details={"reason": "Usage limit reached during simulation"}
-                        )
-
-                # Add to used list (even if depleted this step)
-                used_change = SimulationItemUsedChange(
-                    itemId=item.itemId, name=item.name, remainingUses=remaining_uses
-                )
-                # Avoid duplicates if used multiple times in simulation? Append always for now.
-                items_used_changes.append(used_change)
-                used_today_ids.add(item.itemId)
-
-                # Log usage
-                create_log_entry(
-                    db=db,
-                    actionType=LogActionType.SIMULATION_USE,
-                    itemId=item.itemId,
-                    timestamp=current_day_processing,
-                    details={"remainingUses": remaining_uses, "status_after": item.status.value}
-                )
-
-        # 2. Check for Expiry Today (at the end of the simulated day)
-        newly_expired_items = db.query(DBItem).filter(
-            DBItem.status == ItemStatus.ACTIVE,
-            DBItem.expiryDate != None,
-            DBItem.expiryDate <= day_end # If expiry date is today or earlier
-        ).all()
-
-        for item in newly_expired_items:
+        # Check for expired items
+        expired_items = db.query(DBItem).filter(DBItem.status == ItemStatus.ACTIVE, DBItem.expiryDate <= day_end).all()
+        for item in expired_items:
             item.status = ItemStatus.WASTE_EXPIRED
-            expired_change = SimulationItemChange(itemId=item.itemId, name=item.name)
-            # Avoid duplicates if expired multiple times? Check if already added.
             if not any(c.itemId == item.itemId for c in items_expired_changes):
-                items_expired_changes.append(expired_change)
+                items_expired_changes.append(SimulationItemChange(itemId=item.itemId, name=item.name))
+            create_log_entry(db, LogActionType.SIMULATION_EXPIRED, item.itemId, day_end, {"reason": "Item expired"})
 
-            # Log expiry
-            create_log_entry(
-                db=db,
-                actionType=LogActionType.SIMULATION_EXPIRED,
-                itemId=item.itemId,
-                timestamp=day_end, # Mark as expired at end of day
-                details={"reason": f"Expiry date {item.expiryDate} reached during simulation"}
-            )
-
-        # Commit changes for the day
+        # Commit daily changes
         try:
             db.commit()
-        except Exception as e:
+        except IntegrityError as e:
             db.rollback()
-            logging.error(f"Error committing changes during simulation day {day_index + 1}: {e}", exc_info=True)
-            raise ValueError(f"Simulation failed during day {day_index + 1}: {e}")
+            logging.error(f"Database commit error on day {current_day + 1}: {e}")
+            raise ValueError("Simulation failed due to database error.")
 
-    # Update global simulation time *after* loop finishes successfully
     _set_current_simulation_time(end_sim_time)
 
-    changes = SimulationChanges(
-        itemsUsed=items_used_changes,
-        itemsExpired=items_expired_changes,
-        itemsDepletedToday=items_depleted_changes # Renamed from API spec for clarity
-    )
-
-    return SimulationResponse(
-        success=True,
-        newDate=end_sim_time, # Return the final simulation time
-        changes=changes
-    )
+    return SimulationResponse(success=True, newDate=end_sim_time, changes=SimulationChanges(
+        itemsUsed=items_used_changes, itemsExpired=items_expired_changes, itemsDepletedToday=items_depleted_changes
+    ))
