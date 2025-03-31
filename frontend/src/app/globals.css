@@ -54,6 +54,12 @@ body {
   animation: dash 1s linear infinite;
 }
 
+.hover-group:hover path {
+  stroke: #00ff00;
+  stroke-width: 2;
+  transition: all 0.2s ease;
+}
+
 @keyframes dash {
   to {
     stroke-dashoffset: -6;
@@ -280,6 +286,16 @@ svg {
 /* Adjust star background */
 #stars {
   z-index: 1;
+}
+
+.tooltip {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 :root {

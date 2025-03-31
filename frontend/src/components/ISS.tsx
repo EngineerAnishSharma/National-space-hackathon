@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import "@/app/globals.css";
+import { useRouter } from "next/navigation";
 
 const ISS = ({
   translateX,
@@ -11,6 +12,8 @@ const ISS = ({
   setScale,
   tooltip,
   setTooltip,
+  containers,
+  items,
 }: {
   translateX: number;
   setTranslateX: React.Dispatch<React.SetStateAction<number>>;
@@ -23,8 +26,8 @@ const ISS = ({
     x: number;
     y: number;
     title: string;
-    totalContainers: number;
-    totalItems: number;
+    totalModules: number;
+    totalEquipment: number;
   };
   setTooltip: React.Dispatch<
     React.SetStateAction<{
@@ -32,38 +35,84 @@ const ISS = ({
       x: number;
       y: number;
       title: string;
-      totalContainers: number;
-      totalItems: number;
+      totalModules: number;
+      totalEquipment: number;
     }>
   >;
+  containers: Array<{ id: string; zoneId: string }>;
+  items: Array<{ id: string; containerId: string }>;
 }) => {
-  console.log("scale", scale);
-  console.log("translateX", translateX);
-  console.log("translateY", translateY);
+  const router = useRouter();
 
-  // Refs for dragging state and starting position
+  const handleZoneClick = (zoneId: string) => {
+    router.push(`/zone/${zoneId}`);
+  };
+
+  const getZoneStats = (zoneId: string) => {
+    const zoneContainers = containers.filter((c) => c.zoneId === zoneId);
+    const zoneItems = items.filter((i) =>
+      zoneContainers.some((c) => c.id === i.containerId)
+    );
+    return {
+      totalContainers: zoneContainers.length,
+      totalItems: zoneItems.length,
+    };
+  };
+
+  const handleMouseEnter = (
+    e: React.MouseEvent,
+    zoneId: string,
+    title: string
+  ) => {
+    const stats = getZoneStats(zoneId);
+    const rect = (e.target as SVGElement).getBoundingClientRect();
+    setTooltip({
+      visible: true,
+      x: rect.left,
+      y: rect.top,
+      title,
+      totalContainers: stats.totalContainers,
+      totalItems: stats.totalItems,
+    });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setTooltip((prev) => ({
+      ...prev,
+      x: e.clientX,
+      y: e.clientY,
+    }));
+  };
+
+  const handleMouseLeave = () => {
+    setTooltip({
+      visible: false,
+      x: 0,
+      y: 0,
+      title: "",
+      totalModules: 0,
+      totalEquipment: 0,
+    });
+  };
+
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
   const startY = useRef(0);
 
-  // Zoom limits
-  const scaleMin = 0.7; // Minimum zoom level
-  const scaleMax = 10; // Maximum zoom level
+  const scaleMin = 0.7;
+  const scaleMax = 10;
   const translateMax = 100;
 
-  // SVG dimensions
   const svgWidth = 1804;
   const svgHeight = 811;
 
-  // Handle start of dragging
   const onMouseDown = (event: React.MouseEvent) => {
     isDragging.current = true;
     startX.current = event.clientX;
     startY.current = event.clientY;
   };
 
-  // Handle dragging movement
   const onMouseMove = (event: React.MouseEvent) => {
     if (isDragging.current) {
       const dx = (event.clientX - startX.current) / scale;
@@ -77,12 +126,10 @@ const ISS = ({
     }
   };
 
-  // Handle end of dragging
   const onMouseUp = () => {
     isDragging.current = false;
   };
 
-  // Handle zooming with mouse wheel
   const onWheel = (event: React.WheelEvent) => {
     event.preventDefault();
 
@@ -106,41 +153,6 @@ const ISS = ({
     }
   };
 
-  const handleMouseEnter = (
-    event: any,
-    title: string,
-    totalContainers: number = 0,
-    totalItems: number = 0
-  ) => {
-    setTooltip({
-      visible: true,
-      x: event.clientX + 15,
-      y: event.clientY + 15,
-      title,
-      totalContainers,
-      totalItems,
-    });
-  };
-
-  const handleMouseMove = (event: any) => {
-    setTooltip((prev) => ({
-      ...prev,
-      x: event.clientX + 15,
-      y: event.clientY + 15,
-    }));
-  };
-
-  const handleMouseLeave = () => {
-    setTooltip({
-      visible: false,
-      x: 0,
-      y: 0,
-      title: "",
-      totalContainers: 0,
-      totalItems: 0,
-    });
-  };
-
   return (
     <div
       ref={containerRef}
@@ -157,20 +169,16 @@ const ISS = ({
     >
       {tooltip.visible && (
         <div
-          className="absolute bg-black border border-white text-white rounded-lg shadow-lg p-[8px] max-w-[200px] pointer-events-none z-50"
-          style={{ top: tooltip.y, left: tooltip.x }}
+          className="tooltip"
+          style={{
+            position: "fixed",
+            left: tooltip.x + 10,
+            top: tooltip.y + 10,
+          }}
         >
-          <strong className="block text-[12px]"> {tooltip.title} </strong>
-          {tooltip.totalContainers > 0 && (
-            <p className="text-gray-300 mt-1 text-[10px]">
-              Total Containers: {tooltip.totalContainers}
-            </p>
-          )}
-          {tooltip.totalItems > 0 && (
-            <p className="text-gray-300 mt-1 text-[10px]">
-              Total Items: {tooltip.totalItems}
-            </p>
-          )}
+          <h3>{tooltip.title}</h3>
+          <p>Total Containers: {tooltip.totalModules}</p>
+          <p>Total Items: {tooltip.totalEquipment}</p>
         </div>
       )}
       <svg
@@ -186,7 +194,8 @@ const ISS = ({
           <g
             id="Progress 1"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Progress 1", 5, 10)}
+            onClick={() => handleZoneClick("storage-1")}
+            onMouseEnter={(e) => handleMouseEnter(e, "storage-1", "Progress 1")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -207,7 +216,8 @@ const ISS = ({
           <g
             id="Progress 2"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Progress 2", 3, 8)}
+            onClick={() => handleZoneClick("storage-2")}
+            onMouseEnter={(e) => handleMouseEnter(e, "storage-2", "Progress 2")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -226,7 +236,7 @@ const ISS = ({
           <g
             id="Soyuz 1"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Soyuz 1", 4, 9)}
+            onMouseEnter={(e) => handleMouseEnter(e, "soyuz-1", "Soyuz 1")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -245,7 +255,7 @@ const ISS = ({
           <g
             id="Soyuz 2"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Soyuz 2", 4, 9)}
+            onMouseEnter={(e) => handleMouseEnter(e, "soyuz-2", "Soyuz 2")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -264,7 +274,8 @@ const ISS = ({
           <g
             id="Zvezda"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Zvezda", 2, 5)}
+            onClick={() => handleZoneClick("service-module")}
+            onMouseEnter={(e) => handleMouseEnter(e, "service-module", "Zvezda")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -300,7 +311,7 @@ const ISS = ({
           <g
             id="Poisk"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Poisk", 3, 7)}
+            onMouseEnter={(e) => handleMouseEnter(e, "poisk", "Poisk")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -334,7 +345,7 @@ const ISS = ({
           <g
             id="Nauka"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Nauka", 4, 8)}
+            onMouseEnter={(e) => handleMouseEnter(e, "nauka", "Nauka")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -371,7 +382,8 @@ const ISS = ({
           <g
             id="Zarya"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Zarya", 1, 6)}
+            onClick={() => handleZoneClick("fgb")}
+            onMouseEnter={(e) => handleMouseEnter(e, "fgb", "Zarya")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -402,7 +414,7 @@ const ISS = ({
           <g
             id="Rassvet"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Rassvet", 2, 5)}
+            onMouseEnter={(e) => handleMouseEnter(e, "rassvet", "Rassvet")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -485,7 +497,8 @@ const ISS = ({
           <g
             id="Harmony"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Harmony", 3, 7)}
+            onClick={() => handleZoneClick("node-2")}
+            onMouseEnter={(e) => handleMouseEnter(e, "node-2", "Harmony")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -516,7 +529,8 @@ const ISS = ({
           <g
             id="Destiny"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Destiny", 4, 8)}
+            onClick={() => handleZoneClick("us-lab")}
+            onMouseEnter={(e) => handleMouseEnter(e, "us-lab", "Destiny")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -541,7 +555,7 @@ const ISS = ({
             id="Boeing CST-100 Starliner"
             className="hover-group"
             onMouseEnter={(e) =>
-              handleMouseEnter(e, "Boeing CST-100 Starliner", 5, 9)
+              handleMouseEnter(e, "boeing-cst-100-starliner", "Boeing CST-100 Starliner")
             }
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -576,7 +590,8 @@ const ISS = ({
           <g
             id="Kibo"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Kibo", 6, 10)}
+            onClick={() => handleZoneClick("jap-lab")}
+            onMouseEnter={(e) => handleMouseEnter(e, "jap-lab", "Kibo")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -599,7 +614,7 @@ const ISS = ({
           <g
             id="SpaceX Dragon"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "SpaceX Dragon", 7, 11)}
+            onMouseEnter={(e) => handleMouseEnter(e, "spacex-dragon", "SpaceX Dragon")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -627,7 +642,8 @@ const ISS = ({
           <g
             id="Unity"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Unity", 8, 12)}
+            onClick={() => handleZoneClick("node-1")}
+            onMouseEnter={(e) => handleMouseEnter(e, "node-1", "Unity")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -653,7 +669,8 @@ const ISS = ({
           <g
             id="Quest Airlock"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Quest Airlock", 9, 13)}
+            onClick={() => handleZoneClick("airlock")}
+            onMouseEnter={(e) => handleMouseEnter(e, "airlock", "Quest Airlock")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -671,7 +688,7 @@ const ISS = ({
           <g
             id="Truss Structure"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Truss Structure", 10, 14)}
+            onMouseEnter={(e) => handleMouseEnter(e, "truss-structure", "Truss Structure")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -697,7 +714,7 @@ const ISS = ({
           <g
             id="Radiators"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Radiators")}
+            onMouseEnter={(e) => handleMouseEnter(e, "radiators", "Radiators")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -739,7 +756,7 @@ const ISS = ({
           <g
             id="Solar Panels"
             className="hover-group"
-            onMouseEnter={(e) => handleMouseEnter(e, "Solar Panels")}
+            onMouseEnter={(e) => handleMouseEnter(e, "solar-panels", "Solar Panels")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -788,7 +805,7 @@ const ISS = ({
                 fill="black"
               />
               <path
-                d="M166 82.5L165 87.5M164 92.5L165 87.5M165 87.5L171 84L180 95.5L193 87.5L202 100L215.5 91L224.5 104.5L236.5 94L246 108.5L257.5 98L266 111.5L279.5 102L288 115L301 105.5L309 118.5L323 109.5L331 122.5L343.5 113L352.5 126L365.5 117L374.5 130.5L386.5 120.5L396 134.5L408.5 124.5L416.5 137.5L422 132M165 87.5L170 94L181.5 85L191.5 98L203 88.5L213 101.5L224.5 92L234 105.5L246 96L255.5 109.5L267.5 99.5L277 113L288.5 103L298 117L310.5 107.5L320.5 120.5L332 110.5L340.5 125L353.5 114.5L362 128L375.5 118.5L384 132L397.5 122.5L405.5 136L418 126L422 132M165 87.5L422 132M157 168.5L157.75 162.25M158.5 156L157.75 162.25M157.75 162.25L788.5 217.5M157.75 162.25L163.5 156L173.5 169L185 158L195.5 171L206.5 160.5L217 173L228.5 162.5L238 174.5L250 164L259 176L271 166.5L281.5 178L292 168L302.5 180.5L313.5 170L324 181.5L335.5 172L345.5 184L356.5 174L366.5 186L378 175.5L388.5 187.5L399.5 177L410 189.5L420.5 179.5L431 191.5L441.5 181L452.5 193.5L463.5 182.5L473 195L485.5 184L496 197L507 187L517.5 199L528.5 189L538.5 201L550 191L560 202.5L571.5 193L581.5 204.5L593.5 194.5L602.5 206.5L615 196.5L624.5 208.5L636.5 198L645.5 210L658 200L667 212L679 201.5L688.5 213.5L700.5 203.5L710.5 215.5L721 206.5L732 217L743.5 207L752 218L764.5 209L770.5 217L785.5 211.5L788 217L796.5 213M157.75 162.25L162.5 168L174 158L184 169.5L195 160L206.5 171L217 161.5L227.5 173.5L238.5 163.5L249 175.5L259.5 165L270.5 177L281.5 167.5L292 179.5L303 169L313 180.5L324.5 170.5L334 182.5L346 172.5L356.5 185.5L367.5 174.5L378 187L389 177L399.5 189L410 178L420.5 190.5L430.5 181L442.5 192L453.5 182.5L463.5 193.5L474 184L483.5 196.5L496 186L506.5 197.5L518.5 188L528.5 200L539 189.5L549 201.5L560.5 191L571.5 203.5L582.5 193.5L592.5 205.5L603.5 195.5L614 207.5L625 197.5L635.5 209L646.5 199.5L657 211L669 202L679 213L690 203L699.5 214.5L710.5 204.5L721 216L732 207L742.5 217.5L753.5 209L763.5 218L771.5 210L778.5 218M871.5 225L954 232L950 226.5L937.5 235.5L927 225L915 233.5L905.5 223.5L894 232L887.5 223.5L874 230L867 223M1070.5 207L1777 264M1070.5 207L1076 201L1086.5 214.5L1098.5 203L1107 216L1119.5 204.5L1128.5 217L1140.5 207L1150.5 219L1163 208L1172 220.5L1184.5 210L1193 222L1205.5 212L1214.5 224L1227 213.5L1236.5 225.5L1248.5 215L1257.5 227.5L1269.5 216.5L1280 230.5L1292 218.5L1300 230.5L1313 220L1322 233.5L1333.5 222L1344 235L1356 224L1365 236.5L1377.5 225.5L1386.5 238.5L1398.5 227.5L1408 240L1419.5 229L1429.5 241.5L1441 230.5L1450.5 243.5L1462 232.5L1471.5 244.5L1483.5 234.5L1493 246.5L1505.5 236.5L1515 248.5L1527 238L1535.5 249.5L1548 240L1558 252L1569 241.5L1579.5 253.5L1590.5 243.5L1601 255L1612 245L1622 257.5L1633.5 247L1643 258.5L1655 248.5L1664.5 260L1675.5 250L1686 262L1697.5 252L1707.5 264L1719 254L1729 265.5L1740.5 255.5L1751 267.5L1762 257.5L1771 269L1777 264M1070.5 207L1076 213L1087.5 202.5L1096.5 214.5L1108 204L1118.5 216.5L1129.5 205.5L1139 218L1151.5 207L1160 220.5L1172.5 209L1182.5 221.5L1194.5 210.5L1203 224L1215.5 212L1225.5 225L1236.5 214.5L1247 226.5L1258.5 216L1268.5 229L1280 218L1289.5 230L1301.5 220L1310.5 232L1322.5 221L1332 233.5L1344 222L1354 235.5L1365.5 224.5L1375.5 237.5L1387 226L1397 238.5L1408.5 228.5L1418 240.5L1430 230L1440 242.5L1451.5 231.5L1461 244L1472.5 233.5L1482 245.5L1494 235L1503.5 247.5L1515 237L1524.5 249L1536.5 238.5L1546.5 251L1558 240.5L1568 252.5L1579.5 242L1589.5 254L1601 244L1611 256L1622.5 245.5L1632 257.5L1644 247L1654 259.5L1664.5 249L1675.5 261.5L1686.5 250.5L1696.5 263L1707.5 252.5L1717.5 265L1729.5 254L1738.5 266.5L1751 255.5L1761 268.5L1772.5 258L1777 264M1777 270V257M1190 239.5L1090.5 222M1190 239.5L1185 233L1172.5 241.5L1164.5 229L1151.5 238L1142 225L1129.5 234.5L1120.5 221L1107.5 230.5L1098.5 217L1090.5 222M1190 239.5L1184 243.5L1174.5 230.5L1161.5 240L1153 226.5L1140.5 236L1131 222.5L1118.5 232.5L1108 218.5L1096.5 228.5L1090.5 222M1451 287L1788.5 347.5M1451 287L1456.5 281L1465.5 294.5L1478 286L1487 298.5L1499.5 289L1507.5 302.5L1521 293L1529 305.5L1542 297.5L1550.5 309.5L1563 300.5L1571.5 314L1584 305.5L1593 317L1605.5 308.5L1613 321L1626 312.5L1635 325.5L1647.5 317L1656.5 329.5L1669 319.5L1678 333L1690 324L1698.5 336.5L1711.5 328L1720 341L1732.5 331L1741 344.5L1753.5 335.5L1761.5 348.5L1775 338.5L1782.5 352.5L1788.5 347.5M1451 287L1456 292.5L1466.5 283L1477 296.5L1488 286L1497.5 300.5L1509.5 290L1518.5 304L1530.5 294.5L1540 307.5L1551.5 298.5L1560 312.5L1572.5 302L1582 316L1594.5 305.5L1603.5 319.5L1615 310L1624 323L1636.5 314L1646 328L1658 317L1666.5 331L1679 321.5L1688.5 334.5L1700 325.5L1709.5 338.5L1721.5 329L1730.5 343L1742.5 333L1751 347.5L1763 336.5L1773 351L1784.5 340L1788.5 347.5M1787 354.5L1790 340M484.5 144L867 210.5L863 204L851.5 214L842.5 200.5L830 210L822 197L808.5 206.5L799.5 192.5L787.5 202.5L779 189.5L766 199L758 186L743.5 195L736.5 182L723.5 191L715.5 178L702 188L693.5 174.5L681.5 184.5L672.5 171L659.5 180L651 167L639 177L630.5 163L617.5 173L608.5 159.5L596 169L587 156L574 165.5L566 152L553 162L545 148.5L532 157.5L524 144L510 154.5L502.5 140L490 150.5L484.5 144ZM484.5 144L491.5 139L500 152L512.5 143L522 156L534.5 146.5L542.5 159.5L555.5 150.5L563.5 163L577 153.5L585 167L598.5 158L607 171L619.5 161L627.5 174.5L640.5 165L649.5 178L662.5 169L670.5 183L683.5 172L692 186L704.5 176L713.5 189.5L726.5 179.5L733.5 193.5L746.5 183L756 197L768.5 187.5L776.5 200.5L789.5 191L798 204.5L810.5 194.5L819 209L832.5 198L840.5 211.5L853.5 202.5L863.5 215.5M948.5 236.5L937.5 225L927 234.5L915 223.5L903 232L896 223.5L884 231L879.5 223M1075.5 216.5V224M1078.5 217C1078.5 223.8 1078.5 224.5 1078.5 224M1081.5 217.5V224H1084.5V218L1087.5 218.5V224M1393 280L1385 268.5L1371.5 278.5L1362 265.5L1348.5 273.5L1338.5 261L1325 269.5L1315 257L1301.5 265.5L1292 252.5L1280 261L1274.5 255L1398.5 277.5C1396.5 271.5 1396.67 271 1397 271.5L1383 280L1372.5 266.5L1359 276L1350 263L1336.5 271.5L1327 258.5L1313 267L1303.5 255L1291 263L1281.5 252"
+                d="M166 82.5L165 87.5M164 92.5L165 87.5M165 87.5L171 84L180 95.5L193 87.5L202 100L215.5 91L224.5 104.5L236.5 94L246 108.5L257.5 98L266 111.5L279.5 102L288 115L301 105.5L309 118.5L323 109.5L331 122.5L343.5 113L352.5 126L365.5 117L374.5 130.5L386.5 120.5L396 134.5L408.5 124.5L416.5 137.5L422 132M165 87.5L170 94L181.5 85L191.5 98L203 88.5L213 101.5L224.5 92L234 105.5L246 96L255.5 109.5L267.5 99.5L277 113L288.5 103L298 117L310.5 107.5L320.5 120.5L332 110.5L340.5 125L353.5 114.5L362 128L375.5 118.5L384 132L397.5 122.5L405.5 136L418 126L422 132M165 87.5L422 132M157 168.5L157.75 162.25M158.5 156L157.75 162.25M157.75 162.25L788.5 217.5M157.75 162.25L163.5 156L173.5 169L185 158L195.5 171L206.5 160.5L217 173L228.5 162.5L238.5 174.5L250 164L259 176L271 166.5L281.5 178L292 168L302.5 180.5L313.5 170L324 181.5L335.5 172L345.5 184L356.5 174L366.5 186L378 175.5L388.5 187.5L399.5 177L410 189.5L420.5 179.5L431 191.5L441.5 181L452.5 193.5L463.5 182.5L473 195L485.5 184L496 197L507 187L517.5 199L528.5 189L538.5 201L550 191L560 202.5L571.5 193L581.5 204.5L593.5 194.5L602.5 206.5L615 196.5L624.5 208.5L636.5 198L645.5 210L658 200L667 212L679 201.5L688.5 213.5L700.5 203.5L710.5 215.5L721 206.5L732 217L743.5 207L752 218L764.5 209L770.5 217L785.5 211.5L788 217L796.5 213M157.75 162.25L162.5 168L174 158L184 169.5L195 160L206.5 171L217 161.5L227.5 173.5L238.5 163.5L249 175.5L259.5 165L270.5 177L281.5 167.5L292 179.5L303 169L313 180.5L324.5 170.5L334 182.5L346 172.5L356.5 185.5L367.5 174.5L378 187L389 177L399.5 189L410 178L420.5 190.5L430.5 181L442.5 192L453.5 182.5L463.5 193.5L474 184L483.5 196.5L496 186L506.5 197.5L518.5 188L528.5 200L539 189.5L549 201.5L560.5 191L571.5 203.5L582.5 193.5L592.5 205.5L603.5 195.5L614 207.5L625 197.5L635.5 209L646.5 199.5L657 211L669 202L679 213L690 203L699.5 214.5L710.5 204.5L721 216L732 207L742.5 217.5L753.5 209L763.5 218L771.5 210L778.5 218M871.5 225L954 232L950 226.5L937.5 235.5L927 225L915 233.5L905.5 223.5L894 232L887.5 223.5L874 230L867 223M1070.5 207L1777 264M1070.5 207L1076 201L1086.5 214.5L1098.5 203L1107 216L1119.5 204.5L1128.5 217L1140.5 207L1150.5 219L1163 208L1172 220.5L1184.5 210L1193 222L1205.5 212L1214.5 224L1227 213.5L1236.5 225.5L1248.5 215L1257.5 227.5L1269.5 216.5L1280 230.5L1292 218.5L1300 230.5L1313 220L1322 233.5L1333.5 222L1344 235L1356 224L1365 236.5L1377.5 225.5L1386.5 238.5L1398.5 227.5L1408 240L1419.5 229L1429.5 241.5L1441 230.5L1450.5 243.5L1462 232.5L1471.5 244.5L1483.5 234.5L1493 246.5L1505.5 236.5L1515 248.5L1527 238L1535.5 249.5L1548 240L1558 252L1569 241.5L1579.5 253.5L1590.5 243.5L1601 255L1612 245L1622 257.5L1633.5 247L1644 258.5L1655 248.5L1664.5 260L1675.5 250L1686 262L1697.5 252L1707.5 264L1719 254L1729 265.5L1740.5 255.5L1751 267.5L1762 257.5L1771 269L1777 264M1070.5 207L1076 213L1087.5 202.5L1096.5 214.5L1108 204L1118.5 216.5L1129.5 205.5L1139 218L1151.5 207L1160 220.5L1172.5 209L1182.5 221.5L1194.5 210.5L1203 224L1215.5 212L1225.5 225L1236.5 214.5L1247 226.5L1258.5 216L1268.5 229L1280 218L1289.5 230L1301.5 220L1310.5 232L1322.5 221L1332 233.5L1344 222L1354 235.5L1365.5 224.5L1375.5 237.5L1387 226L1397 238.5L1408.5 228.5L1418 240.5L1430 230L1440 242.5L1451.5 231.5L1461 244L1472.5 233.5L1482 245.5L1494 235L1503.5 247.5L1515 237L1524.5 249L1536.5 238.5L1546.5 251L1558 240.5L1568 252.5L1579.5 242L1589.5 254L1601 244L1611 256L1622.5 245.5L1632 257.5L1644 247L1654 259.5L1664.5 249L1675.5 261.5L1686.5 250.5L1696.5 263L1707.5 252.5L1717.5 265L1729.5 254L1738.5 266.5L1751 255.5L1761 268.5L1772.5 258L1777 264M1777 270V257M1190 239.5L1090.5 222M1190 239.5L1185 233L1172.5 241.5L1164.5 229L1151.5 238L1142 225L1129.5 234.5L1120.5 221L1107.5 230.5L1098.5 217L1090.5 222M1190 239.5L1184 243.5L1174.5 230.5L1161.5 240L1153 226.5L1140.5 236L1131 222.5L1118.5 232.5L1108 218.5L1096.5 228.5L1090.5 222M1451 287L1788.5 347.5M1451 287L1456.5 281L1465.5 294.5L1478 286L1487 298.5L1499.5 289L1507.5 302.5L1521 293L1529 305.5L1542 297.5L1550.5 309.5L1563 300.5L1571.5 314L1584 305.5L1593 317L1605.5 308.5L1613 321L1626 312.5L1635 325.5L1647.5 317L1656.5 329.5L1669 319.5L1678 333L1690 324L1698.5 336.5L1711.5 328L1720 341L1732.5 331L1741 344.5L1753.5 335.5L1761.5 348.5L1775 338.5L1782.5 352.5L1788.5 347.5M1451 287L1456 292.5L1466.5 283L1477 296.5L1488 286L1497.5 300.5L1509.5 290L1518.5 304L1530.5 294.5L1540 307.5L1551.5 298.5L1560 312.5L1572.5 302L1582 316L1594.5 305.5L1603.5 319.5L1615 310L1624 323L1636.5 314L1646 328L1658 317L1666.5 331L1679 321.5L1688.5 334.5L1700 325.5L1709.5 338.5L1721.5 329L1730.5 343L1742.5 333L1751 347.5L1763 336.5L1773 351L1784.5 340L1788.5 347.5M1787 354.5L1790 340M484.5 144L867 210.5L863 204L851.5 214L842.5 200.5L830 210L822 197L808.5 206.5L799.5 192.5L787.5 202.5L779 189.5L766 199L758 186L743.5 195L736.5 182L723.5 191L715.5 178L702 188L693.5 174.5L681.5 184.5L672.5 171L659.5 180L651 167L639 177L630.5 163L617.5 173L608.5 159.5L596 169L587 156L574 165.5L566 152L553 162L545 148.5L532 157.5L524 144L510 154.5L502.5 140L490 150.5L484.5 144ZM484.5 144L491.5 139L500 152L512.5 143L522 156L534.5 146.5L542.5 159.5L555.5 150.5L563.5 163L577 153.5L585 167L598.5 158L607 171L619.5 161L627.5 174.5L640.5 165L649.5 178L662.5 169L670.5 183L683.5 172L692 186L704.5 176L713.5 189.5L726.5 179.5L733.5 193.5L746.5 183L756 197L768.5 187.5L776.5 200.5L789.5 191L798 204.5L810.5 194.5L819 209L832.5 198L840.5 211.5L853.5 202.5L863.5 215.5M948.5 236.5L937.5 225L927 234.5L915 223.5L903 232L896 223.5L884 231L879.5 223M1075.5 216.5V224M1078.5 217C1078.5 223.8 1078.5 224.5 1078.5 224M1081.5 217.5V224H1084.5V218L1087.5 218.5V224M1393 280L1385 268.5L1371.5 278.5L1362 265.5L1348.5 273.5L1338.5 261L1325 269.5L1315 257L1301.5 265.5L1292 252.5L1280 261L1274.5 255L1398.5 277.5C1396.5 271.5 1396.67 271 1397 271.5L1383 280L1372.5 266.5L1359 276L1350 263L1336.5 271.5L1327 258.5L1313 267L1303.5 255L1291 263L1281.5 252"
                 stroke="white"
               />
             </g>

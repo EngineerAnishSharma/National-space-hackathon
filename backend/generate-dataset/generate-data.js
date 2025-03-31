@@ -1,72 +1,110 @@
-const { faker } = require('@faker-js/faker');
 const fs = require('fs');
+const { faker } = require('@faker-js/faker');
 
-// Set current date to March 29, 2025, for consistency
-const currentDate = new Date('2025-03-29');
-
-// Define zones based on ISS modules
-const zones = [
-  'Crew Quarters', 'US Laboratory', 'European Laboratory', 'Japanese Laboratory',
-  'Russian Laboratory', 'Storage Area 1', 'Storage Area 2', 'Storage Area 3',
-  'Docking Area 1', 'Docking Area 2', 'Docking Area 3', 'Docking Area 4',
-  'Airlock', 'Service Module', 'Cupola'
+// Define the standard zone IDs matching ISS.tsx
+const ZONES = [
+  { id: 'storage-1', name: 'Progress 1 Storage' },
+  { id: 'storage-2', name: 'Progress 2 Storage' },
+  { id: 'service-module', name: 'Zvezda Service Module' },
+  { id: 'fgb', name: 'Zarya FGB' },
+  { id: 'node-1', name: 'Unity Node 1' },
+  { id: 'airlock', name: 'Quest Airlock' },
+  { id: 'us-lab', name: 'Destiny Lab' },
+  { id: 'node-2', name: 'Harmony Node 2' },
+  { id: 'jap-lab', name: 'Kibo Japanese Lab' }
 ];
 
-// Define space-relevant item names
-const itemNames = [
-  'Dehydrated Meal Pack', 'Oxygen Cylinder', 'First Aid Kit', 'Water Container',
-  'Microgravity Experiment Setup', 'Solar Panel Part', 'Communication Device',
-  'Tool Kit', 'Medical Supply Kit', 'Scientific Instrument', 'Battery Pack',
-  'Food Ration', 'Hygiene Kit', 'Experiment Sample', 'Spare Part'
+// Container types appropriate for space station
+const CONTAINER_TYPES = [
+  'Storage Rack',
+  'Equipment Rack',
+  'Science Rack',
+  'Cargo Bag',
+  'Stowage Box',
+  'Supply Container',
+  'Experiment Container'
 ];
 
-// Function to generate random future date within 365 days
-function getRandomFutureDate() {
-  const daysToAdd = faker.number.int({ min: 1, max: 365 });
-  const futureDate = new Date(currentDate);
-  futureDate.setDate(currentDate.getDate() + daysToAdd);
-  return futureDate.toISOString().split('T')[0];
-}
+// Item categories relevant to ISS operations
+const ITEM_CATEGORIES = [
+  'Food Supply',
+  'Medical Supply',
+  'Science Equipment',
+  'Maintenance Tools',
+  'Emergency Equipment',
+  'Crew Supply',
+  'Experimental Materials',
+  'Spare Parts',
+  'Life Support'
+];
 
-// Generate containers (500 entries)
-const containers = [];
-for (let i = 0; i < 500; i++) {
-  const zone = faker.helpers.arrayElement(zones);
-  const containerId = `${zone.replace(/\s/g, '')}_${String(i + 1).padStart(3, '0')}`;
-  const width = faker.number.int({ min: 50, max: 250 });
-  const depth = faker.number.int({ min: 50, max: 250 });
-  const height = faker.number.int({ min: 50, max: 250 });
-  containers.push({ Zone: zone, 'Container ID': containerId, Width: width, Depth: depth, Height: height });
-}
-
-// Generate items (2000 entries)
-const items = [];
-for (let i = 0; i < 2000; i++) {
-  const itemId = `item${String(i + 1).padStart(4, '0')}`;
-  const name = faker.helpers.arrayElement(itemNames);
-  const width = faker.number.int({ min: 5, max: 100 });
-  const depth = faker.number.int({ min: 5, max: 100 });
-  const height = faker.number.int({ min: 5, max: 100 });
-  const mass = faker.number.int({ min: 1, max: 100 });
-  const priority = faker.number.int({ min: 0, max: 100 });
-  const expiryDate = faker.datatype.boolean() ? getRandomFutureDate() : 'N/A';
-  const usageLimit = faker.number.int({ min: 1, max: 100 });
-  const preferredZone = faker.helpers.arrayElement(zones);
-  items.push({
-    'Item ID': itemId, Name: name, Width: width, Depth: depth, Height: height,
-    Mass: mass, Priority: priority, 'Expiry Date': expiryDate, 'Usage Limit': usageLimit,
-    'Preferred Zone': preferredZone
+function generateContainers(count) {
+  const containers = [];
+  
+  // Ensure each zone has at least 2 containers
+  ZONES.forEach(zone => {
+    for (let i = 0; i < 2; i++) {
+      containers.push({
+        id: faker.string.uuid(),
+        name: `${zone.name} Container ${i + 1}`,
+        type: faker.helpers.arrayElement(CONTAINER_TYPES),
+        zoneId: zone.id,
+        capacity: faker.number.int({ min: 10, max: 50 })
+      });
+    }
   });
+
+  // Add remaining random containers
+  const remainingCount = count - (ZONES.length * 2);
+  for (let i = 0; i < remainingCount; i++) {
+    const zone = faker.helpers.arrayElement(ZONES);
+    containers.push({
+      id: faker.string.uuid(),
+      name: `${zone.name} Container ${faker.number.int({ min: 3, max: 99 })}`,
+      type: faker.helpers.arrayElement(CONTAINER_TYPES),
+      zoneId: zone.id,
+      capacity: faker.number.int({ min: 10, max: 50 })
+    });
+  }
+
+  return containers;
 }
 
-// Write containers to CSV
-const containersCsv = 'Zone,Container ID,Width,Depth,Height\n' +
-  containers.map(row => `${row.Zone},${row['Container ID']},${row.Width},${row.Depth},${row.Height}`).join('\n');
-fs.writeFileSync('containers.csv', containersCsv);
+function generateItems(containers, itemsPerContainer) {
+  const items = [];
 
-// Write items to CSV
-const itemsCsv = 'Item ID,Name,Width,Depth,Height,Mass,Priority,Expiry Date,Usage Limit,Preferred Zone\n' +
-  items.map(row => `${row['Item ID']},${row.Name},${row.Width},${row.Depth},${row.Height},${row.Mass},${row.Priority},${row['Expiry Date']},${row['Usage Limit']},${row['Preferred Zone']}`).join('\n');
-fs.writeFileSync('items.csv', itemsCsv);
+  containers.forEach(container => {
+    const itemCount = faker.number.int({ min: 1, max: itemsPerContainer });
+    
+    for (let i = 0; i < itemCount; i++) {
+      items.push({
+        id: faker.string.uuid(),
+        name: faker.commerce.productName(),
+        category: faker.helpers.arrayElement(ITEM_CATEGORIES),
+        containerId: container.id,
+        quantity: faker.number.int({ min: 1, max: 10 }),
+        mass: faker.number.float({ min: 0.1, max: 25, precision: 0.1 }),
+        expirationDate: faker.date.future().toISOString().split('T')[0]
+      });
+    }
+  });
 
-console.log('Datasets generated: containers.csv and items.csv');
+  return items;
+}
+
+// Generate the data
+const containers = generateContainers(50); // 50 total containers
+const items = generateItems(containers, 10); // Up to 10 items per container
+
+// Convert to CSV
+function toCSV(data) {
+  const header = Object.keys(data[0]).join(',');
+  const rows = data.map(obj => Object.values(obj).join(','));
+  return [header, ...rows].join('\n');
+}
+
+// Save the files
+fs.writeFileSync('../../frontend/public/data/containers.csv', toCSV(containers));
+fs.writeFileSync('../../frontend/public/data/items.csv', toCSV(items));
+
+console.log(`Generated ${containers.length} containers and ${items.length} items`);
