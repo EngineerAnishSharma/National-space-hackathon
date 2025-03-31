@@ -76,3 +76,46 @@ def handle_export_arrangement():
     finally:
         next(db_gen, None)
         db.close()
+        
+
+@import_export_bp.route('/export/containers', methods=['GET'])
+def handle_export_containers():
+    db_gen = get_db()
+    db = next(db_gen)
+    try:
+        user_id = request.headers.get("X-User-ID")
+        csv_buffer = import_export_service.export_containers(db, user_id)
+        return send_file(
+            csv_buffer,
+            mimetype='text/csv',
+            as_attachment=True,
+            download_name='containers.csv' # Use download_name
+        )
+    except Exception as e:
+        # No rollback needed for export usually, unless log commit fails (handled in service)
+        print(f"Error in /api/export/containers route: {e}")
+        return jsonify({"success": False, "error": "An internal server error occurred during export."}), 500
+    finally:
+        next(db_gen, None)
+        db.close()
+
+@import_export_bp.route('/export/items', methods=['GET'])
+def handle_export_items():
+    db_gen = get_db()
+    db = next(db_gen)
+    try:
+        user_id = request.headers.get("X-User-ID")
+        items_json = import_export_service.export_items(db, user_id)
+
+        return jsonify({
+            "success": True,
+            "data": items_json
+        })
+
+    except Exception as e:
+        print(f"Error in /export/items route: {e}")
+        return jsonify({"success": False, "error": "An internal server error occurred during export."}), 500
+    
+    finally:
+        next(db_gen, None)
+        db.close()
