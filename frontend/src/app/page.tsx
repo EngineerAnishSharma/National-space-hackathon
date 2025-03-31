@@ -18,8 +18,14 @@ export default function HomePage() {
     totalModules: 0,
     totalEquipment: 0
   });
-  const [containers, setContainers] = useState([]);
-  const [items, setItems] = useState([]);
+  interface Item {
+    id: string;
+    containerId: string;
+    [key: string]: any;
+  }
+  
+  const [containers, setContainers] = useState<any[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
     // Load containers
@@ -34,7 +40,7 @@ export default function HomePage() {
     fetch('/data/items.csv')
       .then(response => response.text())
       .then(csv => {
-        const data = Papa.parse(csv, { header: true }).data;
+        const data = Papa.parse(csv, { header: true }).data as Item[];
         setItems(data);
       });
   }, []);

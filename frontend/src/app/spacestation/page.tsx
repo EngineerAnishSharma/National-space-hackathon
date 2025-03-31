@@ -17,8 +17,8 @@ export default function SpaceStationPage() {
     totalModules: 0,
     totalEquipment: 0
   });
-  const [containers, setContainers] = useState([]);
-  const [items, setItems] = useState([]);
+  const [containers, setContainers] = useState<any[]>([]);
+  const [items, setItems] = useState<any[]>([]);
 
   useEffect(() => {
     // Load containers
