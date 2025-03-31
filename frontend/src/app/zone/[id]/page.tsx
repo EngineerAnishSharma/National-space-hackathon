@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import StarBackground from '@/components/StarBackground';
+import ContainerViewer3D from '@/components/ContainerViewer3D';
 
 interface Container {
   id: string;
@@ -64,7 +65,8 @@ export default function ZonePage() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
+          {/* Container Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {containers.map(container => (
               <Link 
                 key={container.id}
@@ -116,6 +118,16 @@ export default function ZonePage() {
                 </div>
               </Link>
             ))}
+          </div>
+          
+          {/* 3D Viewer Section */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              3D Zone Visualization
+            </h2>
+            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-1">
+              <ContainerViewer3D containers={containers} />
+            </div>
           </div>
         </div>
       </div>

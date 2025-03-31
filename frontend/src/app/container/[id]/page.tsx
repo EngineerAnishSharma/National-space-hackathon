@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import StarBackground from '@/components/StarBackground';
+import ItemViewer3D from '@/components/ItemViewer3D';
 
 interface Item {
   id: string;
@@ -129,6 +130,21 @@ export default function ContainerPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* 3D Items Viewer */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              3D Items Visualization
+            </h2>
+            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-1">
+                <ItemViewer3D items={items.map(item => ({
+                  ...item,
+                  width: item.position_end_width - item.position_start_width,
+                  depth: item.position_end_depth - item.position_start_depth,
+                  height: item.position_end_height - item.position_start_height
+                }))} />
+              </div>
           </div>
         </div>
       </div>
