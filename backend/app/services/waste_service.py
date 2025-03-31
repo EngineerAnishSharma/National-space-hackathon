@@ -14,55 +14,62 @@ from .retrieval_service import get_blocking_items # Reuse retrieval logic
 from datetime import datetime
 import app.utils.geometry as geometry # Assuming geometry module is in app package
 
-def identify_waste_items(db: Session) -> WasteIdentifyResponse:
-    """Identifies items marked as expired or depleted."""
-    current_time = datetime.utcnow()
+from datetime import datetime
+from sqlalchemy.orm import Session
+from typing import List
 
-    # Update status based on expiry date first
+def identify_waste_items(db: Session) -> WasteIdentifyResponse:
+    """Identifies and returns only expired items with valid container information."""
+    current_time = datetime.utcnow()
+    threshold_date = datetime(2028, 1, 1)  # Items expiring before 2028 are considered expired
+
+    # Step 1: Fetch all expired items
     expired_items = db.query(DBItem).filter(
         DBItem.status == ItemStatus.ACTIVE,
         DBItem.expiryDate != None,
-        DBItem.expiryDate <= current_time
+        DBItem.expiryDate < threshold_date
     ).all()
 
+    # Step 2: Mark them as expired
     for item in expired_items:
         item.status = ItemStatus.WASTE_EXPIRED
         create_log_entry(
             db=db,
-            actionType=LogActionType.SIMULATION_EXPIRED, # System action identifies expiry
+            actionType=LogActionType.SIMULATION_EXPIRED,
             itemId=item.itemId,
             details={"reason": f"Expiry date {item.expiryDate} reached at {current_time}"}
         )
 
-    # Commit status changes due to expiry
+    # Commit status changes
     try:
         db.commit()
     except Exception as e:
         db.rollback()
         print(f"Error committing expired item status updates: {e}")
-        # Continue processing, but log the error
         create_log_entry(db, LogActionType.SYSTEM_ERROR, details={"error": f"Failed to update expired statuses: {e}"})
 
-    # Query all items currently marked as waste (expired or depleted) that have a placement
-    waste_placements = db.query(DBPlacement).\
-        options(joinedload(DBPlacement.item)).\
-        join(DBItem, DBPlacement.itemId_fk == DBItem.itemId).\
-        filter(DBItem.status.in_([ItemStatus.WASTE_EXPIRED, ItemStatus.WASTE_DEPLETED])).\
-        all()
+    # Step 3: Fetch updated expired items with their placements
+    expired_items = db.query(DBItem).filter(DBItem.status == ItemStatus.WASTE_EXPIRED).all()
 
+    # Construct response
     waste_items_response: List[WasteItemResponse] = []
-    for placement in waste_placements:
-        item = placement.item
-        reason = "Expired" if item.status == ItemStatus.WASTE_EXPIRED else "Out of Uses"
-        pos = Position(
-            startCoordinates=Coordinates(width=placement.start_w, depth=placement.start_d, height=placement.start_h),
-            endCoordinates=Coordinates(width=placement.end_w, depth=placement.end_d, height=placement.end_h)
-        )
+    for item in expired_items:
+        placement = db.query(DBPlacement).filter(DBPlacement.itemId_fk == item.itemId).first()
+
+        if placement:
+            container_id = placement.containerId_fk  # Ensure it's not None
+            pos = Position(
+                startCoordinates=Coordinates(width=placement.start_w, depth=placement.start_d, height=placement.start_h),
+                endCoordinates=Coordinates(width=placement.end_w, depth=placement.end_d, height=placement.end_h)
+            )
+        else:
+            continue  # If no placement, skip this item (ensures containerId is never empty)
+
         waste_items_response.append(WasteItemResponse(
             itemId=item.itemId,
             name=item.name,
-            reason=reason,
-            containerId=placement.containerId_fk,
+            reason="Expired",
+            containerId=container_id,
             position=pos
         ))
 

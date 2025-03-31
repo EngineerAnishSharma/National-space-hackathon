@@ -11,6 +11,77 @@ from .logging_service import create_log_entry
 from datetime import datetime
 import iso8601 # Use robust parser
 
+def export_containers(db: Session, user_id: Optional[str] = None) -> io.BytesIO:
+    """Exports the current container data as a CSV file in a BytesIO buffer."""
+    containers = db.query(DBContainer).all()
+
+    output = io.StringIO()
+    # Define columns as per requirement
+    columns = ['ContainerID', 'Zone', 'Width', 'Depth', 'Height']
+    data = []
+    for c in containers:
+        data.append({
+            'ContainerID': c.containerId,
+            'Zone': c.zone,
+            'Width': c.width,
+            'Depth': c.depth,
+            'Height': c.height
+        })
+
+    df = pd.DataFrame(data, columns=columns)
+    df.to_csv(output, index=False, lineterminator='\n')  # Use lineterminator for consistency
+
+    # Log export action
+    create_log_entry(
+        db=db,
+        actionType=LogActionType.EXPORT,
+        userId=user_id,
+        details={"exportType": "containers", "containerCount": len(containers)}
+    )
+    try:
+        db.commit()  # Commit log
+    except Exception as e:
+        db.rollback()
+        print(f"Error committing export log: {e}")  # Log error but still return data
+
+    # Return as BytesIO for Flask send_file
+    return io.BytesIO(output.getvalue().encode('utf-8'))
+
+def export_items(db: Session, user_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Exports the current item data as JSON."""
+    items = db.query(DBItem).all()
+
+    data = []
+    for item in items:
+        data.append({
+            'ItemID': item.itemId,
+            'Name': item.name,
+            'Width': item.width,
+            'Depth': item.depth,
+            'Height': item.height,
+            'Mass': item.mass,
+            'Priority': item.priority,
+            'ExpiryDate': item.expiryDate.isoformat() if item.expiryDate else None,
+            'UsageLimit': item.usageLimit,
+            'PreferredZone': item.preferredZone
+        })
+
+    # Log export action
+    create_log_entry(
+        db=db,
+        actionType=LogActionType.EXPORT,
+        userId=user_id,
+        details={"exportType": "items", "itemCount": len(items)}
+    )
+    try:
+        db.commit()  # Commit log
+    except Exception as e:
+        db.rollback()
+        print(f"Error committing export log: {e}")  # Log error but still return data
+
+    return data
+
+
 def import_items_from_csv(db: Session, file: FileStorage, user_id: Optional[str] = None) -> ImportResponse:
     """Imports item data from a CSV file."""
     filename = secure_filename(file.filename)
