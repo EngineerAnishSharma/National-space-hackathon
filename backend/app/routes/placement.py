@@ -1,4 +1,5 @@
 # /app/routes/placement.py
+import traceback
 from flask import Blueprint, request, jsonify
 from sqlalchemy.orm import Session # Import Session type hint
 
@@ -9,7 +10,29 @@ from app.models_api import PlacementRequest, PlacementResponse
 from pydantic import ValidationError
 
 placement_bp = Blueprint('placement_bp', __name__, url_prefix='/api/placement')
+@placement_bp.route('/get-placement', methods=['GET'])
+def get_placement():
+    db_gen = get_db()
+    db: Session = next(db_gen)  # Get the actual session object
+    try:
+        # Call the service function to get all current placements
+        placements = placement_service.get_all_current_placements(db)
 
+        # Serialize the response using PlacementResponseItem models
+        response_data = [placement.dict(exclude_none=True) for placement in placements]
+
+        return jsonify({"success": True, "placements": response_data}), 200
+    except Exception as e:
+        print(f"Error in /api/placement/get-placement route: {e}")
+        traceback.print_exc()
+        return jsonify({"success": False, "error": "An internal server error occurred."}), 500
+    finally:
+        try:
+            next(db_gen, None)  # Exhaust generator
+        except Exception as e:
+            print(f"Error during DB generator exhaustion: {e}")
+            
+            
 @placement_bp.route('', methods=['POST'])
 def handle_placement():
     """
