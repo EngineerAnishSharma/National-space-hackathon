@@ -94,8 +94,10 @@ class PlacementRequest(BaseModel):
 
 class PlacementResponse(BaseModel):
     success: bool
-    placements: List[PlacementResponseItem]
+    error: Optional[str] = None # Add error field for better reporting
+    placements: List[PlacementResponseItem] # Use PlacementResponseItem here
     rearrangements: List[RearrangementStep]
+    details: Optional[Dict] = None # Keep details for validation errors
 
 # --- Search/Retrieval Models ---
 
