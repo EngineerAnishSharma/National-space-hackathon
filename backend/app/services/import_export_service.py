@@ -63,7 +63,10 @@ def export_items(db: Session, user_id: Optional[str] = None) -> List[Dict[str, A
             'Priority': item.priority,
             'ExpiryDate': item.expiryDate.isoformat() if item.expiryDate else None,
             'UsageLimit': item.usageLimit,
-            'PreferredZone': item.preferredZone
+            'PreferredZone': item.preferredZone,
+            'Status': item.status,
+            'CurrentUses': item.currentUses
+            
         })
 
     # Log export action

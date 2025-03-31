@@ -87,10 +87,13 @@ body {
 
 .star {
   position: absolute;
-  background-color: #fff;
-  width: 1px;
-  height: 1px;
+  width: 2px;
+  height: 2px;
+  background-color: white;
   border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 3s infinite ease-in-out;
+  box-shadow: 0 0 3px #fff, 0 0 5px #fff;
 }
 
 .star:before {
@@ -108,13 +111,30 @@ body {
 
 .shooting-star {
   position: absolute;
-  width: 2px;
-  height: 10px;
-  background-color: #fff;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
   opacity: 1;
-  z-index: 1;
-  transform: rotate(45deg);
-  animation: shootingStarAnimation 0.5s linear forwards;
+  transform: rotate(-45deg);
+  animation: shooting 1s linear forwards;
+  box-shadow: 0 0 3px #fff;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes shooting {
+  from {
+    transform: translateX(-100px) translateY(0) rotate(-45deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(200px) translateY(-200px) rotate(-45deg);
+    opacity: 0;
+  }
 }
 
 @keyframes starTwinkle {
@@ -129,17 +149,6 @@ body {
   100% {
     transform: scale(0.5);
     opacity: 0;
-  }
-}
-
-@keyframes shootingStarAnimation {
-  0% {
-    opacity: 1;
-    transform: translateX(-200px) translateY(-200px) rotate(70deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(200px) translateY(-300px) rotate(70deg);
   }
 }
 

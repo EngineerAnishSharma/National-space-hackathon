@@ -1,51 +1,26 @@
-import { ListRestart, Minus, Plus } from "lucide-react";
-import React from "react";
+'use client'
 
-interface ZoomControlProps {
-  scale: number;
-  setScale: React.Dispatch<React.SetStateAction<number>>;
-  resetView: () => void;
-}
+export default function ZoomControl({ scale, setScale, resetView }) {
+  const zoomIn = () => setScale(prev => Math.min(prev * 1.2, 10));
+  const zoomOut = () => setScale(prev => Math.max(prev / 1.2, 0.1));
 
-const ZoomControl: React.FC<ZoomControlProps> = ({
-  scale,
-  setScale,
-  resetView,
-}) => {
   return (
-    <>
-      {/* Reset Button */}
-      <div
-        className="absolute w-auto flex items-center justify-center rounded-xl bottom-14 right-4 bg-gray-900 p-2 shadow-lg z-10 text-white border border-gray-700 cursor-pointer hover:bg-gray-800 transition-colors"
-        onClick={resetView}
+    <div className="fixed bottom-4 right-4 flex items-center gap-2 bg-black/50 rounded-lg p-2">
+      <button
+        onClick={zoomOut}
+        className="w-8 h-8 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-lg text-white"
       >
-        <ListRestart size={18} />
+        -
+      </button>
+      <div className="text-white min-w-[60px] text-center">
+        {Math.round(scale * 100)}%
       </div>
-
-      {/* Zoom Controls */}
-      <div className="absolute w-auto flex items-center justify-center rounded-xl bottom-4 right-4 bg-gray-900 p-1 shadow-lg z-10 text-white border border-gray-700">
-        <div
-          className="flex items-center justify-center p-1 cursor-pointer hover:text-gray-300 transition-colors"
-          onClick={() => setScale((prev) => Math.max(prev - 0.1, 0.7))}
-          aria-label="Zoom out"
-        >
-          <Minus size={16} />
-        </div>
-        <div className="w-[1px] h-[16px] bg-gray-700 mx-1"></div>
-        <div className="flex items-center justify-center px-2 pointer-events-none text-xs font-medium text-gray-300">
-          {Math.round(scale * 100) - 70}%
-        </div>
-        <div className="w-[1px] h-[16px] bg-gray-700 mx-1"></div>
-        <div
-          className="flex items-center justify-center p-1 cursor-pointer hover:text-gray-300 transition-colors"
-          onClick={() => setScale((prev) => Math.min(prev + 0.1, 2))}
-          aria-label="Zoom in"
-        >
-          <Plus size={16} />
-        </div>
-      </div>
-    </>
+      <button
+        onClick={zoomIn}
+        className="w-8 h-8 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-lg text-white"
+      >
+        +
+      </button>
+    </div>
   );
-};
-
-export default ZoomControl;
+}

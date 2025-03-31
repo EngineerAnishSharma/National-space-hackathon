@@ -1,12 +1,16 @@
 'use client'
 
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 
-export default function ContainerPage({ params }: { params: { id: string } }) {
+export default function ContainerPage() {
+  const params = useParams();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
+    if (!params?.id) return;
+    
     fetch('/data/items.csv')
       .then(response => response.text())
       .then(csv => {
@@ -14,7 +18,9 @@ export default function ContainerPage({ params }: { params: { id: string } }) {
         const containerItems = data.filter(i => i.containerId === params.id);
         setItems(containerItems);
       });
-  }, [params.id]);
+  }, [params?.id]);
+
+  if (!params?.id) return null;
 
   return (
     <div className="p-4">
