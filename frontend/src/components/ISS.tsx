@@ -68,11 +68,11 @@ const ISS = ({
     const rect = (e.target as SVGElement).getBoundingClientRect();
     setTooltip({
       visible: true,
-      x: rect.left,
-      y: rect.top,
+      x: e.clientX,
+      y: e.clientY,
       title,
-      totalContainers: stats.totalContainers,
-      totalItems: stats.totalItems,
+      totalModules: stats.totalContainers,
+      totalEquipment: stats.totalItems,
     });
   };
 
@@ -176,9 +176,9 @@ const ISS = ({
             top: tooltip.y + 10,
           }}
         >
-          <h3>{tooltip.title}</h3>
-          <p>Total Containers: {tooltip.totalModules}</p>
-          <p>Total Items: {tooltip.totalEquipment}</p>
+          <h3 className="font-bold">{tooltip.title}</h3>
+          <p>Containers: {tooltip.totalModules}</p>
+          <p>Items: {tooltip.totalEquipment}</p>
         </div>
       )}
       <svg

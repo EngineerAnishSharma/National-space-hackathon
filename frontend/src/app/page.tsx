@@ -1,185 +1,72 @@
 'use client'
-import { useState, useRef, useEffect } from 'react';
-import { Zone, Container } from '../types/storage';
-import ZoneView from '../components/ZoneView';
-import ContainerView from '../components/ContainerView';
-import { loadMockData } from '../data/mockData';
-import SpaceStationSVG from '../components/SpaceStationSVG';
 
-const ZONE_PATHS = {
-  'Airlock': 'path-id-for-airlock',
-  'Crew Quarters': 'path-id-for-crew-quarters',
-  'Cupola': 'path-id-for-cupola',
-  'Docking Area 1': 'path-id-for-docking-area-1',
-  'Docking Area 2': 'path-id-for-docking-area-2',
-  'Docking Area 3': 'path-id-for-docking-area-3',
-  'Docking Area 4': 'path-id-for-docking-area-4',
-  'European Laboratory': 'path-id-for-european-laboratory',
-  'Japanese Laboratory': 'path-id-for-japanese-laboratory',
-  'Russian Laboratory': 'path-id-for-russian-laboratory',
-  'Service Module': 'path-id-for-service-module',
-  'Storage Area 1': 'path-id-for-storage-area-1',
-  'Storage Area 2': 'path-id-for-storage-area-2',
-  'Storage Area 3': 'path-id-for-storage-area-3',
-  'US Laboratory': 'path-id-for-us-laboratory'
-};
+import { useState, useEffect } from 'react';
+import Papa from 'papaparse';
+import ISS from "@/components/ISS";
+import ZoomControl from "@/components/ZoomControl";
+import { StarryBackground } from '@/components/StarryBackground';
 
-function StarryBackground() {
-  useEffect(() => {
-    const starCount = 45;
-    const shootingStarInterval = 8000;
-
-    function createStar() {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      document.getElementById("stars")?.appendChild(star);
-    }
-
-    function createShootingStar() {
-      const shootingStar = document.createElement("div");
-      shootingStar.className = "shooting-star";
-      shootingStar.style.top = `${Math.random() * 100}%`;
-      shootingStar.style.left = `${Math.random() * 100}%`;
-      const starsContainer = document.getElementById("stars");
-      if (starsContainer) {
-        starsContainer.appendChild(shootingStar);
-        setTimeout(() => shootingStar.remove(), 3000);
-      }
-    }
-
-    function generateStars() {
-      for (let i = 0; i < starCount; i++) {
-        createStar();
-      }
-    }
-
-    function randomizeShootingStars() {
-      const interval = Math.random() * shootingStarInterval;
-      setTimeout(() => {
-        createShootingStar();
-        randomizeShootingStars();
-      }, interval);
-    }
-
-    generateStars();
-    randomizeShootingStars();
-
-    return () => {
-      const stars = document.getElementById("stars");
-      if (stars) stars.innerHTML = '';
-    };
-  }, []);
-
-  return <div id="stars" className="absolute inset-0" />;
-}
-
-export default function Home() {
-  const [zones, setZones] = useState<Zone[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedZone, setSelectedZone] = useState<Zone | null>(null);
-  const [selectedContainer, setSelectedContainer] = useState<Container | null>(null);
-  const [hoveredZone, setHoveredZone] = useState<string | null>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [scale, setScale] = useState(1);
-  const isDragging = useRef(false);
-  const startPosition = useRef({ x: 0, y: 0 });
+export default function HomePage() {
+  const [translateX, setTranslateX] = useState<number>(0);
+  const [translateY, setTranslateY] = useState<number>(0);
+  const [scale, setScale] = useState<number>(0.7);
+  const [tooltip, setTooltip] = useState({
+    visible: false,
+    x: 0,
+    y: 0, 
+    title: "",
+    totalModules: 0,
+    totalEquipment: 0
+  });
+  const [containers, setContainers] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        setLoading(true);
-        const data = await loadMockData();
-        console.log('Loaded data:', data); // Debug log
-        setZones(data);
-      } catch (err) {
-        console.error('Error:', err);
-        setError('Failed to load data');
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-  }, []);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    startPosition.current = {
-      x: e.clientX - position.x,
-      y: e.clientY - position.y
-    };
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging.current) {
-      setPosition({
-        x: e.clientX - startPosition.current.x,
-        y: e.clientY - startPosition.current.y
+    // Load containers
+    fetch('/data/containers.csv')
+      .then(response => response.text())
+      .then(csv => {
+        const data = Papa.parse(csv, { header: true }).data;
+        setContainers(data);
       });
-    }
+
+    // Load items
+    fetch('/data/items.csv')
+      .then(response => response.text())
+      .then(csv => {
+        const data = Papa.parse(csv, { header: true }).data;
+        setItems(data);
+      });
+  }, []);
+
+  const resetView = () => {
+    setTranslateX(0);
+    setTranslateY(0);
+    setScale(0.7);
   };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const newScale = Math.min(Math.max(0.5, scale - e.deltaY * 0.001), 2);
-    setScale(newScale);
-  };
-
-  if (loading) {
-    return <div className="p-8 text-center">Loading space station data...</div>;
-  }
-
-  if (error) {
-    return <div className="p-8 text-center text-red-600">{error}</div>;
-  }
 
   return (
-    <div className="p-8">
-      <div className="max-w-full mx-auto overflow-hidden">
-        <h1 className="text-3xl font-bold mb-6 text-white relative z-10">Space Station Storage Management</h1>
-        
-        {!selectedZone ? (
-          <div 
-            className="relative h-[800px] space-background rounded-lg cursor-move overflow-hidden"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            onWheel={handleWheel}
-          >
-            <StarryBackground />
-            <div 
-              className="absolute origin-center transition-transform duration-100 z-10"
-              style={{
-                transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-              }}
-            >
-              <SpaceStationSVG
-                zones={zones}
-                onSelectZone={setSelectedZone}
-                hoveredZone={hoveredZone}
-                onZoneHover={setHoveredZone}
-              />
-            </div>
-          </div>
-        ) : selectedContainer ? (
-          <ContainerView 
-            container={selectedContainer} 
-            onBack={() => setSelectedContainer(null)}
+    <div className="h-screen">
+      <div className="relative h-screen bg-[#01041f]">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#01041f] to-[#082b33]" />
+          <StarryBackground />
+        </div>
+        <div className="relative z-10">
+          <ISS
+            translateX={translateX}
+            setTranslateX={setTranslateX}
+            translateY={translateY}
+            setTranslateY={setTranslateY}
+            scale={scale}
+            setScale={setScale}
+            tooltip={tooltip}
+            setTooltip={setTooltip}
+            containers={containers}
+            items={items}
           />
-        ) : (
-          <ZoneView 
-            zone={selectedZone} 
-            onBack={() => setSelectedZone(null)}
-            onSelectContainer={setSelectedContainer}
-          />
-        )}
+          <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
+        </div>
       </div>
     </div>
   );

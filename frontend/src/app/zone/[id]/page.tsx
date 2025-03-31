@@ -1,13 +1,17 @@
 'use client'
 
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Papa from 'papaparse';
 
-export default function ZonePage({ params }: { params: { id: string } }) {
+export default function ZonePage() {
+  const params = useParams();
   const [containers, setContainers] = useState([]);
 
   useEffect(() => {
+    if (!params?.id) return;
+
     fetch('/data/containers.csv')
       .then(response => response.text())
       .then(csv => {
@@ -15,7 +19,9 @@ export default function ZonePage({ params }: { params: { id: string } }) {
         const zoneContainers = data.filter(c => c.zoneId === params.id);
         setContainers(zoneContainers);
       });
-  }, [params.id]);
+  }, [params?.id]);
+
+  if (!params?.id) return null;
 
   return (
     <div className="p-4">
