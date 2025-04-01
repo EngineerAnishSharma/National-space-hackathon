@@ -26,3 +26,6 @@ Thumbs.db
 
 # Dependency files
 requirements.txt.lock
+
+
+iss_cargo.db
