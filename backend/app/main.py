@@ -12,6 +12,7 @@ from .routes.import_export import import_export_bp
 from .routes.logs import logs_bp
 from .routes.client_waste import client_waste_bp
 from .routes.client_simulation import client_sim_bp
+from .routes.client_search_retrieve import client_search_retrieve_bp
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -26,6 +27,7 @@ def create_app(config_class=Config):
     app.register_blueprint(logs_bp)
     app.register_blueprint(client_waste_bp)
     app.register_blueprint(client_sim_bp)
+    app.register_blueprint(client_search_retrieve_bp)
     # Initialize the database
     init_db() # Call init_db here to create tables
 
