@@ -14,8 +14,8 @@ export default function SpaceStationPage() {
     x: 0,
     y: 0, 
     title: "",
-    totalModules: 0,
-    totalEquipment: 0
+    totalContainers : 0,
+    totalItems : 0
   });
   const [containers, setContainers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);

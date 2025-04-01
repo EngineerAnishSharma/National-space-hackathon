@@ -26,8 +26,8 @@ const ISS = ({
     x: number;
     y: number;
     title: string;
-    totalModules: number;
-    totalEquipment: number;
+    totalContainers: number;
+    totalItems: number;
   };
   setTooltip: React.Dispatch<
     React.SetStateAction<{
@@ -35,8 +35,8 @@ const ISS = ({
       x: number;
       y: number;
       title: string;
-      totalModules: number;
-      totalEquipment: number;
+      totalContainers: number;
+      totalItems: number;
     }>
   >;
   containers: Array<{ id: string; zoneId: string }>;
@@ -71,8 +71,8 @@ const ISS = ({
       x: e.clientX,
       y: e.clientY,
       title,
-      totalModules: stats.totalContainers,
-      totalEquipment: stats.totalItems,
+      totalContainers : stats.totalContainers,
+      totalItems : stats.totalItems,
     });
   };
 
@@ -90,8 +90,8 @@ const ISS = ({
       x: 0,
       y: 0,
       title: "",
-      totalModules: 0,
-      totalEquipment: 0,
+      totalContainers: 0,
+      totalItems: 0,
     });
   };
 
@@ -177,8 +177,8 @@ const ISS = ({
           }}
         >
           <h3 className="font-bold">{tooltip.title}</h3>
-          <p>Containers: {tooltip.totalModules}</p>
-          <p>Items: {tooltip.totalEquipment}</p>
+          <p>Containers: {tooltip.totalContainers}</p>
+          <p>Items: {tooltip.totalItems}</p>
         </div>
       )}
       <svg

@@ -26,6 +26,11 @@ const Page: React.FC = () => {
     totalContainers: 0,
     totalItems: 0,
   });
+  
+
+const [containers, setContainers] = useState<{ id: string; zoneId: string }[]>([]);
+const [items, setItems] = useState<{ id: string; containerId: string }[]>([]);
+
   const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   const resetView = () => {
@@ -45,6 +50,8 @@ const Page: React.FC = () => {
         setScale={setScale}
         tooltip={tooltip}
         setTooltip={setTooltip}
+        containers={containers}
+        items={items}
       />
       <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
       <Controls date={date} setDate={setDate} />

@@ -15,8 +15,8 @@ export default function HomePage() {
     x: 0,
     y: 0, 
     title: "",
-    totalModules: 0,
-    totalEquipment: 0
+    totalContainers: 0,
+    totalItems: 0
   });
   interface Item {
     id: string;
