@@ -327,174 +327,399 @@ def suggest_placements(db: Session, request_data: PlacementRequest, user_id: Opt
             print(f"    INFO (Phase 1): Could not place {item_req.itemId} in preferred zone. Needs further processing.")
             items_requiring_placement_pass_2.append(item_req)
 
+# --- Replace/Update Phase 2 in your suggest_placements function ---
+
     # --- Phase 2: Rearrangement Simulation ---
     print("\n--- Phase 2: Evaluating Rearrangements ---")
     items_requiring_placement_pass_3: List[ItemCreate] = [] # Items for final non-preferred placement attempt
     rearrangement_step_counter = 0
-    items_to_evaluate_for_rearrangement = list(items_requiring_placement_pass_2)
-    # items_requiring_placement_pass_2 = [] # Clear original list (or just use the copy)
+    items_to_evaluate_for_rearrangement = sorted(
+        items_requiring_placement_pass_2, 
+        key=lambda x: x.priority, 
+        reverse=True  # Ensure highest priority first
+    )
 
     for high_prio_item in items_to_evaluate_for_rearrangement:
         if high_prio_item.itemId in processed_item_ids: continue # Skip if handled
 
-        print(f"Reviewing: {high_prio_item.itemId} (Prio: {high_prio_item.priority}) needs preferred spot")
+        print(f"Reviewing: {high_prio_item.itemId} (Prio: {high_prio_item.priority}) needs placement")
         rearrangement_done_for_this_item = False
 
+        # Get preferred containers for this high priority item
         preferred_container_ids = [
             cid for cid, c in containers_data.items() if c.zone == high_prio_item.preferredZone
         ] if high_prio_item.preferredZone else []
 
-        if not preferred_container_ids:
+        # If no preferred zone defined, try other containers anyway for high-priority items
+        if not preferred_container_ids and high_prio_item.priority > 80:
+            print(f"    No preferred zone defined but high priority. Considering all containers.")
+            preferred_container_ids = list(containers_data.keys())
+        elif not preferred_container_ids:
             print(f"    No preferred zone defined. Moving {high_prio_item.itemId} to final placement pass.")
             items_requiring_placement_pass_3.append(high_prio_item)
             continue
 
-        # Identify existing, lower-priority items currently in the preferred zone (based on simulation)
-        potential_displacees = []
-        for pref_cid in preferred_container_ids:
-            for existing_itemId, start_coords, end_coords in temp_placements_by_container.get(pref_cid, []):
-                # Check if it's an existing item (not a newcomer) and its priority is lower
+        # === Attempt direct placement first ===
+        # Check again if space opened up in preferred zone after other placements
+        placed_without_rearrange = False
+        for container_id in preferred_container_ids:
+            if container_id not in containers_data: continue
+            container = containers_data[container_id]
+            current_placements_in_pref_container = temp_placements_by_container.get(container_id, [])
+            spot_info = find_spot_in_container(high_prio_item, container, current_placements_in_pref_container, True)
+            if spot_info:
+                start_coords, end_coords, _ = spot_info
+                temp_placements_by_container.setdefault(container_id, []).append((high_prio_item.itemId, start_coords, end_coords))
+                placements_result.append(PlacementResponseItem(
+                    itemId=high_prio_item.itemId, 
+                    containerId=container_id, 
+                    position=Position(startCoordinates=start_coords, endCoordinates=end_coords)
+                ))
+                processed_item_ids.add(high_prio_item.itemId)
+                print(f"    SUCCESS (Phase 2 Direct): Placed {high_prio_item.itemId} in preferred {container_id}.")
+                placed_without_rearrange = True
+                rearrangement_done_for_this_item = True
+                break
+
+        if placed_without_rearrange:
+            continue  # Go to next high_prio_item
+
+        # === Look for items to displace based on priority ===
+        # For each preferred container, identify all potential displacees
+        all_potential_displacees = []
+        for container_id in preferred_container_ids:
+            current_container_placements = temp_placements_by_container.get(container_id, [])
+            
+            # Create a simulation state without any items that are less important than our target
+            # This helps check if removing those items would make enough space
+            for existing_itemId, start_coords, end_coords in current_container_placements:
+                # Only consider existing items with known priorities that are lower than our target
                 if existing_itemId in existing_item_priorities and existing_item_priorities[existing_itemId] < high_prio_item.priority:
-                    potential_displacees.append({
+                    all_potential_displacees.append({
                         "itemId": existing_itemId,
                         "priority": existing_item_priorities[existing_itemId],
-                        "fromContainerId": pref_cid,
+                        "fromContainerId": container_id,
                         "fromPosition": Position(startCoordinates=start_coords, endCoordinates=end_coords)
                     })
-
-        if not potential_displacees:
-            # Check again if space *miraculously* opened up in preferred zone before giving up
-            placed_without_rearrange = False
-            for container_id in preferred_container_ids:
-                 if container_id not in containers_data: continue
-                 container = containers_data[container_id]
-                 current_placements_in_pref_container = temp_placements_by_container.get(container_id, [])
-                 spot_info = find_spot_in_container(high_prio_item, container, current_placements_in_pref_container, True)
-                 if spot_info:
-                    start_coords, end_coords, _ = spot_info
-                    temp_placements_by_container.setdefault(container_id, []).append((high_prio_item.itemId, start_coords, end_coords))
-                    placements_result.append(PlacementResponseItem(itemId=high_prio_item.itemId, containerId=container_id, position=Position(startCoordinates=start_coords, endCoordinates=end_coords)))
-                    processed_item_ids.add(high_prio_item.itemId)
-                    print(f"    SUCCESS (Phase 2 Direct): Placed {high_prio_item.itemId} in preferred {container_id} after other placements.")
-                    placed_without_rearrange = True
-                    rearrangement_done_for_this_item = True
-                    break
-            if not placed_without_rearrange:
-                print(f"    No displaceable items and no direct space found for {high_prio_item.itemId}. Moving to Pass 3.")
-                items_requiring_placement_pass_3.append(high_prio_item)
-            continue # Go to next high_prio_item
-
-        # Sort potential displacees by *their* priority (lowest first = easiest to displace)
-        potential_displacees.sort(key=lambda x: x["priority"])
-
-        # --- Try displacing items one by one ---
-        for low_prio_displacee_data in potential_displacees:
-            low_prio_itemId = low_prio_displacee_data["itemId"]
-            # Priority check already done when creating the list, but double-check for clarity
-            if high_prio_item.priority <= low_prio_displacee_data["priority"]: continue
-
-            print(f"    Considering displacing {low_prio_itemId} (Prio: {low_prio_displacee_data['priority']}) from {low_prio_displacee_data['fromContainerId']}")
-
-            # Fetch displacee's Item details from DB for dimensions etc.
-            low_prio_item_db = db.query(Item).filter(Item.itemId == low_prio_itemId).first()
-            if not low_prio_item_db: # Should not happen if priority was found, but safety check
-                print(f"      ERROR: Cannot find DB data for displacee {low_prio_itemId}. Skipping.")
+        
+        # Sort potential displacees by priority (lowest first)
+        all_potential_displacees.sort(key=lambda x: x["priority"])
+        
+        if not all_potential_displacees:
+            print(f"    No displaceable items found for {high_prio_item.itemId}. Moving to Pass 3.")
+            items_requiring_placement_pass_3.append(high_prio_item)
+            continue
+        
+        print(f"    Found {len(all_potential_displacees)} potential items to displace")
+        
+        # === Attempt strategic displacement of items ===
+        # First, find which container has most space (without touching items)
+        container_volume_avail = {}
+        for container_id in container_ids:
+            if container_id not in containers_data: continue
+            container = containers_data[container_id]
+            # Calculate simple volume (no packing considerations)
+            container_volume = container.width * container.depth * container.height
+            used_volume = 0
+            for _, _, _ in temp_placements_by_container.get(container_id, []):
+                # We could calculate exact volume used, but for simplicity just count items
+                used_volume += 1  # Just a proxy for space used
+            container_volume_avail[container_id] = container_volume - used_volume
+        
+        # Sort containers by available space (most first)
+        target_containers = sorted(
+            [(cid, avail) for cid, avail in container_volume_avail.items()],
+            key=lambda x: x[1],
+            reverse=True
+        )
+        
+        # Collect items to displace by container
+        displacements_by_container = {}
+        for displacee in all_potential_displacees:
+            container_id = displacee["fromContainerId"]
+            if container_id not in displacements_by_container:
+                displacements_by_container[container_id] = []
+            displacements_by_container[container_id].append(displacee)
+        
+        # === Try displacement strategies ===
+        # Strategy 1: Try removing items from a single container first
+        rearrangement_successful = False
+        
+        for source_container_id in preferred_container_ids:
+            if source_container_id not in displacements_by_container:
                 continue
-
-            low_prio_item_req_like = ItemCreate(**low_prio_item_db.__dict__) # Simple conversion if fields match
-
-            # Attempt to relocate the low_prio_displacee to ANY OTHER container
-            relocated_spot_info = None
-            relocation_container_id = None
-            # Exclude the container it's currently in
-            other_container_ids = [cid for cid in container_ids if cid != low_prio_displacee_data['fromContainerId']]
-
-            for target_cid in other_container_ids:
-                if target_cid not in containers_data: continue
-                target_container = containers_data[target_cid]
-                current_placements_in_target = temp_placements_by_container.get(target_cid, [])
-
-                relocated_spot_info = find_spot_in_container(
-                    low_prio_item_req_like, target_container, current_placements_in_target, False # Place as low priority
-                )
-                if relocated_spot_info:
-                    relocation_container_id = target_cid
-                    print(f"        Found relocation spot for {low_prio_itemId} in {relocation_container_id}")
-                    break # Found a spot
-
-            # --- If relocation was successful ---
-            if relocated_spot_info and relocation_container_id:
-                new_start_coords, new_end_coords, _ = relocated_spot_info
-                new_position = Position(startCoordinates=new_start_coords, endCoordinates=new_end_coords)
-
-                # --- Simulate the move ---
-                rearrangement_step_counter += 1
-                rearrangements_result.append(RearrangementStep(
-                    step=rearrangement_step_counter, action="move", itemId=low_prio_itemId,
-                    fromContainer=low_prio_displacee_data['fromContainerId'], fromPosition=low_prio_displacee_data['fromPosition'],
-                    toContainer=relocation_container_id, toPosition=new_position
-                ))
-                # Update simulation state
-                temp_placements_by_container[low_prio_displacee_data['fromContainerId']] = [
-                    p for p in temp_placements_by_container[low_prio_displacee_data['fromContainerId']] if p[0] != low_prio_itemId
-                ]
-                temp_placements_by_container.setdefault(relocation_container_id, []).append(
-                    (low_prio_itemId, new_start_coords, new_end_coords)
-                )
-                # Update provisional results for the MOVED item
-                for i, p_item in enumerate(placements_result):
-                     if p_item.itemId == low_prio_itemId:
-                          placements_result[i] = PlacementResponseItem(itemId=low_prio_itemId, containerId=relocation_container_id, position=new_position)
-                          break
-                else: # If moved item wasn't in results (wasn't new), add it
-                     placements_result.append(PlacementResponseItem(itemId=low_prio_itemId, containerId=relocation_container_id, position=new_position))
-
-                # --- Now, try again to place the high_prio_item in the original preferred container ---
-                target_pref_container_id = low_prio_displacee_data['fromContainerId']
-                print(f"      Trying again to place {high_prio_item.itemId} in {target_pref_container_id}")
-                spot_info_high_prio = find_spot_in_container(
-                    high_prio_item, containers_data[target_pref_container_id],
-                    temp_placements_by_container.get(target_pref_container_id, []), True # Use updated state
-                )
-
-                if spot_info_high_prio:
-                    hp_start_coords, hp_end_coords, _ = spot_info_high_prio
-                    hp_position = Position(startCoordinates=hp_start_coords, endCoordinates=hp_end_coords)
-                    # Success! Add high-prio item placement to results & simulation
+                
+            # Get lowest priority items from this container
+            displacees = sorted(
+                displacements_by_container[source_container_id],
+                key=lambda x: x["priority"]
+            )
+            
+            # Create a simulated state with these items removed
+            temp_container_simulation = temp_placements_by_container.copy()
+            temp_container_simulation[source_container_id] = [
+                p for p in temp_container_simulation[source_container_id] 
+                if p[0] not in [d["itemId"] for d in displacees]
+            ]
+            
+            # Check if high priority item fits now
+            container = containers_data[source_container_id]
+            spot_info = find_spot_in_container(
+                high_prio_item, 
+                container, 
+                temp_container_simulation[source_container_id], 
+                True
+            )
+            
+            if spot_info:
+                print(f"    Found spot in {source_container_id} after simulated displacement")
+                start_coords, end_coords, _ = spot_info
+                
+                # Now we need to actually find homes for all the displaced items
+                displacement_success = True
+                displacement_moves = []
+                
+                # For each item we're displacing, find a new home
+                for displacee in displacees:
+                    relocated = False
+                    displacee_id = displacee["itemId"]
+                    # Fetch item details for the displacee
+                    displacee_db = db.query(Item).filter(Item.itemId == displacee_id).first()
+                    if not displacee_db:
+                        print(f"      ERROR: Missing DB data for {displacee_id}. Skipping.")
+                        displacement_success = False
+                        break
+                        
+                    displacee_item = ItemCreate(**displacee_db.__dict__)
+                    
+                    # Try placing in containers with most space first
+                    for target_container_id, _ in target_containers:
+                        if target_container_id == source_container_id:
+                            continue  # Don't try the container we're removing from
+                            
+                        target_container = containers_data[target_container_id]
+                        current_target_placements = temp_placements_by_container.get(target_container_id, [])
+                        
+                        # Try to find spot
+                        relocated_spot = find_spot_in_container(
+                            displacee_item, 
+                            target_container, 
+                            current_target_placements,
+                            False  # Lower priority placement strategy 
+                        )
+                        
+                        if relocated_spot:
+                            # Found a spot for this displacee
+                            new_start, new_end, _ = relocated_spot
+                            
+                            # Record the move
+                            rearrangement_step_counter += 1
+                            move = RearrangementStep(
+                                step=rearrangement_step_counter,
+                                action="move",
+                                itemId=displacee_id,
+                                fromContainer=source_container_id,
+                                fromPosition=displacee["fromPosition"],
+                                toContainer=target_container_id,
+                                toPosition=Position(
+                                    startCoordinates=new_start,
+                                    endCoordinates=new_end
+                                )
+                            )
+                            displacement_moves.append(move)
+                            
+                            # Update simulation state for next items
+                            temp_placements_by_container.setdefault(target_container_id, []).append(
+                                (displacee_id, new_start, new_end)
+                            )
+                            
+                            relocated = True
+                            break  # Found a spot for this item
+                            
+                    if not relocated:
+                        print(f"      Could not relocate {displacee_id}. Rearrangement failed.")
+                        displacement_success = False
+                        break
+                
+                # If all displacements worked, place the high-priority item
+                if displacement_success:
+                    # Add all the rearrangement steps
+                    rearrangements_result.extend(displacement_moves)
+                    
+                    # Place the high priority item
+                    hp_position = Position(startCoordinates=start_coords, endCoordinates=end_coords)
                     placements_result.append(PlacementResponseItem(
-                         itemId=high_prio_item.itemId, containerId=target_pref_container_id, position=hp_position
+                        itemId=high_prio_item.itemId,
+                        containerId=source_container_id,
+                        position=hp_position
                     ))
-                    temp_placements_by_container.setdefault(target_pref_container_id, []).append(
-                        (high_prio_item.itemId, hp_start_coords, hp_end_coords)
+                    
+                    # Update simulation state
+                    temp_placements_by_container[source_container_id].append(
+                        (high_prio_item.itemId, start_coords, end_coords)
                     )
+                    
                     processed_item_ids.add(high_prio_item.itemId)
                     rearrangement_done_for_this_item = True
-                    print(f"      SUCCESS (Phase 2): Moved {low_prio_itemId} -> {relocation_container_id}. Placed {high_prio_item.itemId} -> {target_pref_container_id}.")
-                    break # Stop trying to displace other items for *this* high_prio_item
+                    rearrangement_successful = True
+                    
+                    print(f"    SUCCESS (Phase 2): Completed rearrangement for {high_prio_item.itemId}")
+                    
+                    # Update tracking for the displaced items
+                    for move in displacement_moves:
+                        for i, p_item in enumerate(placements_result):
+                            if p_item.itemId == move.itemId:
+                                placements_result[i] = PlacementResponseItem(
+                                    itemId=move.itemId,
+                                    containerId=move.toContainer,
+                                    position=move.toPosition
+                                )
+                                break
+                        else:
+                            # If item wasn't already in placements, add it
+                            placements_result.append(PlacementResponseItem(
+                                itemId=move.itemId,
+                                containerId=move.toContainer,
+                                position=move.toPosition
+                            ))
+                    
+                    break  # Successfully placed, don't try more container displacement strategies
                 else:
-                    # --- Failed even AFTER displacement --- REVERT simulation
-                    print(f"      ERROR: Could not place {high_prio_item.itemId} even after displacing {low_prio_itemId}. Reverting.")
-                    rearrangements_result.pop()
-                    rearrangement_step_counter -= 1
-                    temp_placements_by_container[relocation_container_id] = [
-                        p for p in temp_placements_by_container[relocation_container_id] if p[0] != low_prio_itemId
-                    ]
-                    temp_placements_by_container.setdefault(low_prio_displacee_data['fromContainerId'], []).append(
-                        (low_prio_itemId, low_prio_displacee_data['fromPosition'].startCoordinates, low_prio_displacee_data['fromPosition'].endCoordinates)
-                    )
-                    for i, p_item in enumerate(placements_result):
-                       if p_item.itemId == low_prio_itemId:
-                            placements_result[i] = PlacementResponseItem(
-                                 itemId=low_prio_itemId, containerId=low_prio_displacee_data['fromContainerId'], position=low_prio_displacee_data['fromPosition']
+                    # Rearrangement attempt failed - restore simulation state
+                    print("      Rearrangement attempt failed. Restoring state.")
+                    temp_placements_by_container = temp_placements_by_container.copy()  # Reset to original
+        
+        # Try individual item displacement if container-level displacement failed
+        if not rearrangement_successful and not rearrangement_done_for_this_item:
+            # If displacing entire container didn't work, try individual items
+            for displacee_data in all_potential_displacees:
+                processed_individual_rearrangement = False
+                low_prio_itemId = displacee_data["itemId"]
+                source_container_id = displacee_data["fromContainerId"]
+                
+                print(f"    Trying individual displacement of {low_prio_itemId}")
+                
+                # Verify this item exists
+                low_prio_item_db = db.query(Item).filter(Item.itemId == low_prio_itemId).first()
+                if not low_prio_item_db:
+                    print(f"      ERROR: Missing DB data for {low_prio_itemId}. Skipping.")
+                    continue
+                    
+                # Convert to ItemCreate format for our placement logic
+                low_prio_item = ItemCreate(**low_prio_item_db.__dict__)
+                
+                # Create a temporary simulation state with this item removed
+                temp_container_sim = temp_placements_by_container.copy()
+                temp_container_sim[source_container_id] = [
+                    p for p in temp_container_sim[source_container_id] 
+                    if p[0] != low_prio_itemId
+                ]
+                
+                # Does the high priority item fit now?
+                container = containers_data[source_container_id]
+                spot_info = find_spot_in_container(
+                    high_prio_item, 
+                    container, 
+                    temp_container_sim[source_container_id], 
+                    True
+                )
+                
+                if spot_info:
+                    # Found a spot if we remove this item. Now try to relocate it.
+                    print(f"      Found spot for {high_prio_item.itemId} if {low_prio_itemId} is moved")
+                    relocated = False
+                    
+                    # Try to relocate the displacee to any other container
+                    for target_container_id, _ in target_containers:
+                        if target_container_id == source_container_id:
+                            continue
+                            
+                        target_container = containers_data[target_container_id]
+                        current_target_placements = temp_placements_by_container.get(target_container_id, [])
+                        
+                        relocated_spot = find_spot_in_container(
+                            low_prio_item, 
+                            target_container, 
+                            current_target_placements,
+                            False
+                        )
+                        
+                        if relocated_spot:
+                            new_start, new_end, _ = relocated_spot
+                            new_position = Position(
+                                startCoordinates=new_start, 
+                                endCoordinates=new_end
                             )
-                            break
-                    print(f"        Revert complete. Trying next potential displacee...")
-            else: # Relocation of low_prio_item failed
-                print(f"        Could not find relocation spot for {low_prio_itemId}. Trying next potential displacee.")
-
-        # If no rearrangement worked for this high_prio_item
+                            
+                            # Record the move
+                            rearrangement_step_counter += 1
+                            move = RearrangementStep(
+                                step=rearrangement_step_counter,
+                                action="move",
+                                itemId=low_prio_itemId,
+                                fromContainer=source_container_id,
+                                fromPosition=displacee_data["fromPosition"],
+                                toContainer=target_container_id,
+                                toPosition=new_position
+                            )
+                            rearrangements_result.append(move)
+                            
+                            # Update simulation state
+                            temp_placements_by_container[source_container_id] = [
+                                p for p in temp_placements_by_container[source_container_id] 
+                                if p[0] != low_prio_itemId
+                            ]
+                            temp_placements_by_container.setdefault(target_container_id, []).append(
+                                (low_prio_itemId, new_start, new_end)
+                            )
+                            
+                            # Update placements_result for the moved item
+                            for i, p_item in enumerate(placements_result):
+                                if p_item.itemId == low_prio_itemId:
+                                    placements_result[i] = PlacementResponseItem(
+                                        itemId=low_prio_itemId,
+                                        containerId=target_container_id,
+                                        position=new_position
+                                    )
+                                    break
+                            else:
+                                placements_result.append(PlacementResponseItem(
+                                    itemId=low_prio_itemId,
+                                    containerId=target_container_id,
+                                    position=new_position
+                                ))
+                            
+                            # Now place the high priority item
+                            hp_start, hp_end, _ = spot_info
+                            hp_position = Position(
+                                startCoordinates=hp_start, 
+                                endCoordinates=hp_end
+                            )
+                            
+                            placements_result.append(PlacementResponseItem(
+                                itemId=high_prio_item.itemId,
+                                containerId=source_container_id,
+                                position=hp_position
+                            ))
+                            
+                            temp_placements_by_container[source_container_id].append(
+                                (high_prio_item.itemId, hp_start, hp_end)
+                            )
+                            
+                            processed_item_ids.add(high_prio_item.itemId)
+                            rearrangement_done_for_this_item = True
+                            processed_individual_rearrangement = True
+                            
+                            print(f"      SUCCESS (Phase 2): Moved {low_prio_itemId} to {target_container_id}")
+                            print(f"                         Placed {high_prio_item.itemId} in {source_container_id}")
+                            break  # Successfully placed high priority item
+                    
+                    if processed_individual_rearrangement:
+                        break  # Exit the displacee loop if we successfully processed
+                
+        # If rearrangement logic didn't work for this item, try again in final phase
         if not rearrangement_done_for_this_item:
-            print(f"    INFO (Phase 2): No suitable rearrangement found for {high_prio_item.itemId}. Moving to final pass.")
+            print(f"    All rearrangement attempts failed for {high_prio_item.itemId}. Moving to Phase 3.")
             items_requiring_placement_pass_3.append(high_prio_item)
 
     # --- Phase 3: Final Placement Attempt (Anywhere) ---
