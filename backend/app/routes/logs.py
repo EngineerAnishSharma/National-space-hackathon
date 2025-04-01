@@ -1,4 +1,5 @@
 # /app/routes/logs.py
+from typing import List
 from flask import Blueprint, request, jsonify
 from app.database import get_db
 from app.models_db import Log # Import DB model for querying
