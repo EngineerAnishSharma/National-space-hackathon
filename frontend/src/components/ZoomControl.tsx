@@ -1,6 +1,14 @@
-'use client'
+'use client';
 
-export default function ZoomControl({ scale, setScale, resetView }) {
+import React from 'react';
+
+interface ZoomControlProps {
+  scale: number;
+  setScale: React.Dispatch<React.SetStateAction<number>>;
+  resetView?: () => void; // optional if you're not using it, or make it required if you need it
+}
+
+const ZoomControl: React.FC<ZoomControlProps> = ({ scale, setScale, resetView }) => {
   const zoomIn = () => setScale(prev => Math.min(prev * 1.2, 10));
   const zoomOut = () => setScale(prev => Math.max(prev / 1.2, 0.1));
 
@@ -23,4 +31,6 @@ export default function ZoomControl({ scale, setScale, resetView }) {
       </button>
     </div>
   );
-}
+};
+
+export default ZoomControl;
