@@ -58,12 +58,12 @@ export default function ContainerPage() {
                 Container Details
               </h1>
               <div className="space-x-4">
-                <Link 
+                {/* <Link 
                   href={`/zone/${items[0]?.zoneId || ''}`}
                   className="px-4 py-2 backdrop-blur-sm bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all"
                 >
                   ← Back to Zone
-                </Link>
+                </Link> */}
                 <Link 
                   href="/"
                   className="px-4 py-2 backdrop-blur-sm bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all"
