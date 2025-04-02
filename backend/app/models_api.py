@@ -253,7 +253,7 @@ class SimulationItemUsage(BaseModel):
 
 class SimulationRequest(BaseModel):
     numOfDays: Optional[int] = Field(None, ge=1)
-    toTimestamp: Optional[datetime] = None # Expect ISO format
+    toTimestamp: Optional[datetime] = None  # Expect ISO format
     itemsToBeUsedPerDay: List[SimulationItemUsage] = []
 
     @validator('toTimestamp', pre=True, always=True)
@@ -265,10 +265,9 @@ class SimulationRequest(BaseModel):
         try:
             return iso8601.parse_date(value)
         except iso8601.ParseError as e:
-             raise ValueError(f"Invalid ISO 8601 timestamp format: {value}. Error: {e}")
+            raise ValueError(f"Invalid ISO 8601 timestamp format: {value}. Error: {e}")
         except Exception as e:
-             raise ValueError(f"Error parsing timestamp '{value}': {e}")
-
+            raise ValueError(f"Error parsing timestamp '{value}': {e}")
 
     @validator('toTimestamp')
     def check_days_or_timestamp(cls, toTimestamp, values):
@@ -277,6 +276,12 @@ class SimulationRequest(BaseModel):
         if values.get('numOfDays') and toTimestamp:
             raise ValueError('Provide either numOfDays or toTimestamp, not both')
         return toTimestamp
+
+    @validator('itemsToBeUsedPerDay', each_item=True)
+    def validate_items_to_be_used(cls, item):
+        if not item.itemId and not item.name:
+            raise ValueError('Each item in itemsToBeUsedPerDay must have either itemId or name')
+        return item
 
 class SimulationItemChange(BaseModel):
     itemId: str

@@ -6,9 +6,9 @@ from app.models_api import WasteReturnPlanRequest, WasteCompleteUndockingRequest
 from pydantic import ValidationError
 
 
-waste_bp = Blueprint('waste_bp', __name__, url_prefix='/api/waste')
+client_waste_bp = Blueprint('client_waste_bp', __name__, url_prefix='/api/client/waste')
 
-@waste_bp.route('/identify', methods=['GET'])
+@client_waste_bp.route('/identify', methods=['GET'])
 def handle_identify_waste():
     db_gen = get_db()
     db = next(db_gen)
@@ -25,7 +25,7 @@ def handle_identify_waste():
         db.close()
 
 
-@waste_bp.route('/return-plan', methods=['POST'])
+@client_waste_bp.route('/return-plan', methods=['POST'])
 def handle_return_plan():
     db_gen = get_db()
     db = next(db_gen)
@@ -54,7 +54,7 @@ def handle_return_plan():
         db.close()
 
 
-@waste_bp.route('/complete-undocking', methods=['POST'])
+@client_waste_bp.route('/complete-undocking', methods=['POST'])
 def handle_complete_undocking():
     db_gen = get_db()
     db = next(db_gen)

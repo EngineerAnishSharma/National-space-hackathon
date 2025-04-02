@@ -2,9 +2,9 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 from app.database import get_db, Item as ItemDB, Container as ContainerDB  # Import SQLAlchemy models
-from app.models import Item, Container #Import classes from the models directory
+from app.models_db import Item
 from app.services.import_export_service import ImportExportService
-from typing import List
+from typing import Container, List
 
 router = APIRouter()
 

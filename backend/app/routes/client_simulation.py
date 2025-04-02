@@ -6,9 +6,9 @@ from app.services import simulation_service
 from app.models_api import SimulationRequest
 from pydantic import ValidationError
 
-sim_bp = Blueprint('sim_bp', __name__, url_prefix='/api/simulate')
+client_sim_bp = Blueprint('client_sim_bp', __name__, url_prefix='/api/client/simulate')
 
-@sim_bp.route('/day', methods=['POST'])
+@client_sim_bp.route('/day', methods=['POST'])
 def handle_simulate_day():
     """ NOTE: Uses global in-memory time - not production safe! """
     db_gen = get_db()
