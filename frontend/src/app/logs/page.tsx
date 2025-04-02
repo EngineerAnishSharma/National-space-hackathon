@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { format } from "date-fns";
-import { User, ArrowRight, Package, Clock } from "lucide-react";
+import { User, ArrowRight, Package, Clock, Trash } from "lucide-react";
 
 // Define types
 type ActionType = "placement" | "retrieval" | "rearrangement" | "disposal";
@@ -141,11 +141,9 @@ const getActionBadge = (actionType: ActionType) => {
 // Row styling
 const getRowStyle = (actionType: ActionType) => {
   const styles = {
-    placement:
-      "border-l-4 border-emerald-500  hover:bg-emerald-600/30",
+    placement: "border-l-4 border-emerald-500  hover:bg-emerald-600/30",
     retrieval: "border-l-4 border-blue-500  hover:bg-blue-600/30",
-    rearrangement:
-      "border-l-4 border-amber-500  hover:bg-amber-600/30",
+    rearrangement: "border-l-4 border-amber-500  hover:bg-amber-600/30",
     disposal: "border-l-4 border-rose-600  hover:bg-rose-600/30",
   };
   return styles[actionType] || "border-l-4 border-gray-500 hover:bg-gray-700";
@@ -224,7 +222,7 @@ export default function LogsTable() {
             Activity Logs
           </h2>
         </div>
-        <div className="text-sm px-3 py-1 rounded-md bg-gray-700 text-gray-300">
+        <div className="text-md px-3 mr-2 py-1 rounded-md bg-gray-700 text-gray-300">
           {filteredLogs.length} entries
         </div>
       </div>
@@ -380,9 +378,13 @@ export default function LogsTable() {
                             {log.details.fromContainer}
                           </span>
                           <ArrowRight size={14} className="inline mx-1" />
-                          <span className="font-medium">
-                            {log.details.toContainer}
-                          </span>
+                          {log.actionType === "disposal" ? (
+                            <Trash size={18} className="text-red-500" />
+                          ) : (
+                            <span className="font-medium">
+                              {log.details.toContainer}
+                            </span>
+                          )}
                         </div>
                         <div className="text-xs text-gray-400 mt-1">
                           {log.details.reason}
