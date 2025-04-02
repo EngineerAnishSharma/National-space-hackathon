@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Providers from "@/providers/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,23 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 dark:bg-gray-900`}
-      >
-        <div className="flex min-h-screen">
-          <div className="flex-1">{children}</div>
-          {/* <div className="w-64 bg-gray-800 text-white p-6">
-            <div className="text-xl font-bold mb-8">Space Station Storage</div>
-            <nav className="space-y-4">
-              <Link href="/" className="block hover:text-blue-400">Overview</Link>
-              <Link href="/dashboard" className="block hover:text-blue-400">Inventory</Link>
-              <Link href="/waste-management" className="block hover:text-blue-400">Waste Management</Link>
-              <Link href="/settings" className="block hover:text-blue-400">Settings</Link>
-            </nav>
-          </div> */}
-        </div>
-      </body>
+    <html lang="en" suppressHydrationWarning={true}>
+      <Providers>
+        <body
+          suppressHydrationWarning={true}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 dark:bg-gray-900`}
+        >
+          {children}
+        </body>
+      </Providers>
     </html>
   );
 }
