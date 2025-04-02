@@ -4,7 +4,7 @@ from .database import init_db, db_session # Use db_session for teardown if neede
 from .config import Config
 
 # Import blueprints
-from .routes.placement import placement_bp
+from .routes.placement import placement_bp, client_placement_bp
 from .routes.search_retrieve import search_retrieve_bp
 from .routes.waste import waste_bp
 from .routes.simulation import sim_bp
@@ -14,6 +14,7 @@ from .routes.logs import logs_bp
 from .routes.client_waste import client_waste_bp
 from .routes.client_simulation import client_sim_bp
 from .routes.client_search_retrieve import client_search_retrieve_bp
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -30,6 +31,7 @@ def create_app(config_class=Config):
     app.register_blueprint(client_waste_bp)
     app.register_blueprint(client_sim_bp)
     app.register_blueprint(client_search_retrieve_bp)
+    app.register_blueprint(client_placement_bp)
     # Initialize the database
     init_db() # Call init_db here to create tables
 

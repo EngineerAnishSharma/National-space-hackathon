@@ -13,7 +13,7 @@ from pydantic import ValidationError
 placement_bp = Blueprint('placement_bp', __name__, url_prefix='/api/placement')
 
 # --- Blueprint for Frontend API (/frontend/placement) ---
-frontend_placement_bp = Blueprint('frontend_placement_bp', __name__, url_prefix='/frontend/placement')
+client_placement_bp = Blueprint('client_placement_bp', __name__, url_prefix='/client/placement')
 
 
 # === Routes for /api/placement ===
@@ -82,10 +82,10 @@ def handle_placement_api(): # Renamed slightly for clarity
 
 
 # === Routes for /frontend/placement ===
-# NOTE: These currently mirror the API logic but use the frontend_placement_bp
+# NOTE: These currently mirror the API logic but use the client_placement_bp
 #       and can be modified independently in the future.
 
-@frontend_placement_bp.route('/get-placement', methods=['GET'])
+@client_placement_bp.route('/get-placement', methods=['GET'])
 def get_placement_frontend():
     """ Frontend API: Get all current placements """
     db_gen = get_db()
@@ -107,7 +107,7 @@ def get_placement_frontend():
             print(f"Error during DB generator exhaustion in Frontend GET: {e}")
 
 
-@frontend_placement_bp.route('', methods=['POST'])
+@client_placement_bp.route('', methods=['POST'])
 def handle_placement_frontend():
     """
     Frontend API: Endpoint for Placement Recommendations.
