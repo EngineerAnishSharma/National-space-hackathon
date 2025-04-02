@@ -9,7 +9,6 @@ from .routes.search_retrieve import search_retrieve_bp
 from .routes.waste import waste_bp
 from .routes.simulation import sim_bp
 from .routes.import_export import import_export_bp
-from .routes.placement import frontend_placement_bp
 from .routes.logs import logs_bp
 from .routes.client_waste import client_waste_bp
 from .routes.client_simulation import client_sim_bp
@@ -22,7 +21,7 @@ def create_app(config_class=Config):
 
     # Register Blueprints
     app.register_blueprint(placement_bp)
-    app.register_blueprint(frontend_placement_bp)
+    app.register_blueprint(client_placement_bp)
     app.register_blueprint(search_retrieve_bp)
     app.register_blueprint(waste_bp)
     app.register_blueprint(sim_bp)
@@ -31,7 +30,7 @@ def create_app(config_class=Config):
     app.register_blueprint(client_waste_bp)
     app.register_blueprint(client_sim_bp)
     app.register_blueprint(client_search_retrieve_bp)
-    app.register_blueprint(client_placement_bp)
+
     # Initialize the database
     init_db() # Call init_db here to create tables
 

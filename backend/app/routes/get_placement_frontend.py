@@ -3,9 +3,9 @@ from app.database import db_session
 from app.services.get_placement_frontend_service import PlacementFrontendService
 
 # Create a blueprint for frontend placement routes
-frontend_placement_bp = Blueprint('frontend_placement', __name__, url_prefix='/api/frontend')
+client_placement_bp = Blueprint('frontend_placement', __name__, url_prefix='/api/frontend')
 
-@frontend_placement_bp.route('/placements', methods=['GET'])
+@client_placement_bp.route('/placements', methods=['GET'])
 def get_placements_frontend():
     """
     Get placement information for items and containers in a format matching 
