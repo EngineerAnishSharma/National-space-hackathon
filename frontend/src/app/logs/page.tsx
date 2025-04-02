@@ -142,11 +142,11 @@ const getActionBadge = (actionType: ActionType) => {
 const getRowStyle = (actionType: ActionType) => {
   const styles = {
     placement:
-      "border-l-4 border-emerald-500 bg-emerald-700/20 hover:bg-emerald-600/30",
-    retrieval: "border-l-4 border-blue-500 bg-blue-700/20 hover:bg-blue-600/30",
+      "border-l-4 border-emerald-500  hover:bg-emerald-600/30",
+    retrieval: "border-l-4 border-blue-500  hover:bg-blue-600/30",
     rearrangement:
-      "border-l-4 border-amber-500 bg-amber-700/20 hover:bg-amber-600/30",
-    disposal: "border-l-4 border-rose-600 bg-rose-700/20 hover:bg-rose-600/30",
+      "border-l-4 border-amber-500  hover:bg-amber-600/30",
+    disposal: "border-l-4 border-rose-600  hover:bg-rose-600/30",
   };
   return styles[actionType] || "border-l-4 border-gray-500 hover:bg-gray-700";
 };
