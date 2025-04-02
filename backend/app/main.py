@@ -54,7 +54,7 @@ def create_app(config_class=Config):
     def index():
         return jsonify({"message": "Cargo Management API Operational"})
     
-    @app.route('/iss_cargo', methods=['GET'])
+    @app.route('/api/client/iss_cargo', methods=['GET'])
     def iss_cargo():
         """Endpoint for ISS Cargo Management API"""
         # Path to the JSON file
