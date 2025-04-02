@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import ISS from "@/components/ISS";
-import ZoomControl from "@/components/ZoomControl";
+import ZoomControl from "@/components/ZoomControl"; 
 import { StarryBackground } from '@/components/StarryBackground';
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
 
 export default function HomePage() {
   const [translateX, setTranslateX] = useState<number>(0);
@@ -71,8 +73,17 @@ export default function HomePage() {
             containers={containers}
             items={items}
           />
-          <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
+          <ZoomControl scale={scale} setScale={setScale} resetView={resetView} /> {/* Re-added */}
         </div>
+        <Link 
+          href="/management"
+          className="fixed bottom-4 right-2 z-50 px-6 py-3 bg-blue-600 hover:bg-blue-700 
+            text-white rounded-full shadow-lg backdrop-blur-sm flex items-center gap-2
+            transition-all hover:scale-105"
+        >
+          <Plus className="w-5 h-5" />
+          Manage Items & Containers
+        </Link>
       </div>
     </div>
   );
