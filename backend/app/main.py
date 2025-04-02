@@ -13,6 +13,8 @@ from .routes.logs import logs_bp
 from .routes.client_waste import client_waste_bp
 from .routes.client_simulation import client_sim_bp
 from .routes.client_search_retrieve import client_search_retrieve_bp
+import os
+import json
 
 
 def create_app(config_class=Config):
@@ -51,6 +53,22 @@ def create_app(config_class=Config):
     @app.route('/')
     def index():
         return jsonify({"message": "Cargo Management API Operational"})
+    
+    @app.route('/iss_cargo', methods=['GET'])
+    def iss_cargo():
+        """Endpoint for ISS Cargo Management API"""
+        # Path to the JSON file
+        json_file_path = os.path.join(os.getcwd(), 'generate-dataset', 'iss_data.json')
+
+        try:
+            # Read the JSON file
+            with open(json_file_path, 'r') as file:
+                data = json.load(file)
+            return jsonify(data)
+        except FileNotFoundError:
+            return jsonify({"error": "File not found"}), 404
+        except json.JSONDecodeError:
+            return jsonify({"error": "Error decoding JSON file"}), 500
 
     return app
 
