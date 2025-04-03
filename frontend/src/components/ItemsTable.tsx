@@ -145,9 +145,7 @@ export function ItemsTable() {
             className="w-[180px] bg-gray-700 text-white border-gray-600"
           />
         </div>
-        <Button onClick={handleExport} variant="outline">
-          Export to CSV
-        </Button>
+  
       </div>
 
       {/* Table */}
