@@ -1,6 +1,6 @@
-# /app/main.py
 from flask import Flask, jsonify
-from .database import init_db, db_session # Use db_session for teardown if needed
+from flask_cors import CORS  # Import CORS
+from .database import init_db, db_session
 from .config import Config
 
 # Import blueprints
@@ -13,6 +13,7 @@ from .routes.logs import logs_bp
 from .routes.client_waste import client_waste_bp
 from .routes.client_simulation import client_sim_bp
 from .routes.client_search_retrieve import client_search_retrieve_bp
+from app.routes.client_tables import tables_bp
 import os
 import json
 
@@ -20,6 +21,9 @@ import json
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    # Enable CORS for all routes and origins
+    CORS(app)  # Apply CORS to the entire app
 
     # Register Blueprints
     app.register_blueprint(placement_bp)
@@ -32,9 +36,10 @@ def create_app(config_class=Config):
     app.register_blueprint(client_waste_bp)
     app.register_blueprint(client_sim_bp)
     app.register_blueprint(client_search_retrieve_bp)
+    app.register_blueprint(tables_bp)
 
     # Initialize the database
-    init_db() # Call init_db here to create tables
+    init_db()
 
     # Optional: Add a command to initialize the database
     @app.cli.command("init-db")
@@ -46,7 +51,7 @@ def create_app(config_class=Config):
     # Teardown context to remove database session after each request
     @app.teardown_appcontext
     def shutdown_session(exception=None):
-        db_session.remove() # Remove the scoped session
+        db_session.remove()
         # print("DB Session removed.") # For debugging
 
     # Simple root endpoint
@@ -69,6 +74,8 @@ def create_app(config_class=Config):
             return jsonify({"error": "File not found"}), 404
         except json.JSONDecodeError:
             return jsonify({"error": "Error decoding JSON file"}), 500
+        
+        
 
     return app
 
