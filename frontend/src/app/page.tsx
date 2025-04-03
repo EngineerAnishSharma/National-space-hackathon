@@ -1,12 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import Papa from 'papaparse';
 import ISS from "@/components/ISS";
 import ZoomControl from "@/components/ZoomControl"; 
 import { StarryBackground } from '@/components/StarryBackground';
 import Link from 'next/link';
-import { Plus } from 'lucide-react';
+import { Plus, ZoomIn, ZoomOut } from 'lucide-react';
 
 export default function HomePage() {
   const [translateX, setTranslateX] = useState<number>(0);
@@ -20,31 +19,34 @@ export default function HomePage() {
     totalContainers: 0,
     totalItems: 0
   });
+  const [isLoading, setIsLoading] = useState(true);
+
   interface Item {
     id: string;
     containerId: string;
     [key: string]: any;
+  }
+
+  interface ApiResponse {
+    containers: any[];
+    items: Item[];
   }
   
   const [containers, setContainers] = useState<any[]>([]);
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
-    // Load containers
-    fetch('/data/containers.csv')
-      .then(response => response.text())
-      .then(csv => {
-        const data = Papa.parse(csv, { header: true }).data;
-        setContainers(data);
-      });
-
-    // Load items
-    fetch('/data/items.csv')
-      .then(response => response.text())
-      .then(csv => {
-        const data = Papa.parse(csv, { header: true }).data as Item[];
-        setItems(data);
-      });
+    setIsLoading(true);
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/frontend/placements`)
+      .then(response => response.json())
+      .then((data: ApiResponse) => {
+        setContainers(data.containers);
+        setItems(data.items);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const resetView = () => {
@@ -52,6 +54,26 @@ export default function HomePage() {
     setTranslateY(0);
     setScale(0.7);
   };
+
+  const zoomIn = () => {
+    setScale(prev => Math.min(prev * 1.2, 2));
+  };
+
+  const zoomOut = () => {
+    setScale(prev => Math.max(prev * 0.8, 0.3));
+  };
+
+  const formatZoomPercentage = () => {
+    return `${Math.round(scale * 100)}%`;
+  };
+
+  if (isLoading) {
+    return (
+      <div className="h-screen bg-[#01041f] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen">
@@ -61,29 +83,55 @@ export default function HomePage() {
           <StarryBackground />
         </div>
         <div className="relative z-10">
-          <ISS
-            translateX={translateX}
-            setTranslateX={setTranslateX}
-            translateY={translateY}
-            setTranslateY={setTranslateY}
-            scale={scale}
-            setScale={setScale}
-            tooltip={tooltip}
-            setTooltip={setTooltip}
-            containers={containers}
-            items={items}
-          />
-          <ZoomControl scale={scale} setScale={setScale} resetView={resetView} /> {/* Re-added */}
+          {!isLoading && (
+            <>
+              <ISS
+                translateX={translateX}
+                setTranslateX={setTranslateX}
+                translateY={translateY}
+                setTranslateY={setTranslateY}
+                scale={scale}
+                setScale={setScale}
+                tooltip={tooltip}
+                setTooltip={setTooltip}
+                containers={containers}
+                items={items}
+              />
+              <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
+              
+              <div className="fixed bottom-20 right-4 z-50 flex items-center gap-1 bg-black/20 backdrop-blur-md 
+                border border-white/10 rounded-full shadow-lg px-2">
+                <button
+                  onClick={zoomOut}
+                  className="p-2 hover:bg-white/10 text-white/90 rounded-full
+                    transition-all duration-200 hover:scale-105"
+                >
+                  <ZoomOut className="w-5 h-5" />
+                </button>
+                <span className="text-white/90 font-medium min-w-[60px] text-center">
+                  {formatZoomPercentage()}
+                </span>
+                <button
+                  onClick={zoomIn}
+                  className="p-2 hover:bg-white/10 text-white/90 rounded-full
+                    transition-all duration-200 hover:scale-105"
+                >
+                  <ZoomIn className="w-5 h-5" />
+                </button>
+              </div>
+
+              <Link 
+                href="/management"
+                className="fixed bottom-4 left-2 z-50 px-6 py-3 bg-black/20 backdrop-blur-md 
+                  border border-white/10 text-white/90 rounded-full shadow-lg flex items-center gap-2
+                  transition-all duration-200 hover:scale-105 hover:bg-white/10"
+              >
+                <Plus className="w-5 h-5" />
+                Manage Items & Containers
+              </Link>
+            </>
+          )}
         </div>
-        <Link 
-          href="/management"
-          className="fixed bottom-4 right-2 z-50 px-6 py-3 bg-blue-600 hover:bg-blue-700 
-            text-white rounded-full shadow-lg backdrop-blur-sm flex items-center gap-2
-            transition-all hover:scale-105"
-        >
-          <Plus className="w-5 h-5" />
-          Manage Items & Containers
-        </Link>
       </div>
     </div>
   );
