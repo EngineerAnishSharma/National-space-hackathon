@@ -1,9 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { User, ArrowRight, Package, Clock, Trash } from "lucide-react";
 
-// Define types
 type ActionType = "placement" | "retrieval" | "rearrangement" | "disposal";
 
 interface LogDetails {
@@ -23,101 +22,6 @@ interface Log {
 interface LogsData {
   logs: Log[];
 }
-
-// Sample data (replace with your actual data if different)
-const sampleData: LogsData = {
-  logs: [
-    {
-      timestamp: "2025-03-30T10:23:15Z",
-      userId: "user_789",
-      actionType: "placement",
-      itemId: "item_5612",
-      details: {
-        fromContainer: "Warehouse A",
-        toContainer: "Shelf B3",
-        reason: "New stock arrival",
-      },
-    },
-    {
-      timestamp: "2025-03-31T14:45:22Z",
-      userId: "user_456",
-      actionType: "retrieval",
-      itemId: "item_7890",
-      details: {
-        fromContainer: "Shelf C1",
-        toContainer: "Checkout",
-        reason: "Customer order",
-      },
-    },
-    {
-      timestamp: "2025-04-01T09:15:30Z",
-      userId: "user_123",
-      actionType: "rearrangement",
-      itemId: "item_2345",
-      details: {
-        fromContainer: "Shelf A1",
-        toContainer: "Shelf A2",
-        reason: "Inventory optimization",
-      },
-    },
-    {
-      timestamp: "2025-04-02T11:00:00Z",
-      userId: "user_789",
-      actionType: "disposal",
-      itemId: "item_6789",
-      details: {
-        fromContainer: "Warehouse B",
-        toContainer: "",
-        reason: "Expired item",
-      },
-    },
-    {
-      timestamp: "2025-04-03T16:30:45Z",
-      userId: "user_456",
-      actionType: "placement",
-      itemId: "item_1234",
-      details: {
-        fromContainer: "Warehouse C",
-        toContainer: "Shelf D1",
-        reason: "New stock arrival",
-      },
-    },
-    {
-      timestamp: "2025-04-04T08:00:00Z",
-      userId: "user_123",
-      actionType: "retrieval",
-      itemId: "item_5678",
-      details: {
-        fromContainer: "Shelf E2",
-        toContainer: "Checkout",
-        reason: "Customer order",
-      },
-    },
-
-    {
-      timestamp: "2025-04-05T12:45:00Z",
-      userId: "user_789",
-      actionType: "rearrangement",
-      itemId: "item_9101",
-      details: {
-        fromContainer: "Shelf F3",
-        toContainer: "Shelf F4",
-        reason: "Inventory optimization",
-      },
-    },
-    {
-      timestamp: "2025-04-06T15:30:00Z",
-      userId: "user_456",
-      actionType: "disposal",
-      itemId: "item_2345",
-      details: {
-        fromContainer: "Warehouse A",
-        toContainer: "",
-        reason: "Expired item",
-      },
-    },
-  ],
-};
 
 // Action badge styling
 const getActionBadge = (actionType: ActionType) => {
@@ -163,17 +67,43 @@ const formatTimestamp = (timestamp: string) => {
 };
 
 export default function LogsTable() {
-  // State for filters
+  // State for logs data and filters
+  const [logs, setLogs] = useState<Log[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [itemId, setItemId] = useState("");
   const [userId, setUserId] = useState("");
   const [actionType, setActionType] = useState("");
-  const [filteredLogs, setFilteredLogs] = useState(sampleData.logs);
+  const [filteredLogs, setFilteredLogs] = useState<Log[]>([]);
+
+  // Fetch logs from the API
+  useEffect(() => {
+    const fetchLogs = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/logs`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch logs");
+        }
+        const data: LogsData = await response.json();
+        setLogs(data.logs);
+        setFilteredLogs(data.logs); // Initially set filtered logs to all logs
+        setLoading(false);
+      } catch (err) {
+        setError((err as Error).message);
+        setLoading(false);
+      }
+    };
+
+    fetchLogs();
+  }, []);
 
   // Apply filters function
   const applyFilters = () => {
-    let filtered = sampleData.logs;
+    let filtered = [...logs];
 
     if (startDate) {
       const start = `${startDate}T00:00:00Z`;
@@ -207,8 +137,21 @@ export default function LogsTable() {
     setItemId("");
     setUserId("");
     setActionType("");
-    setFilteredLogs(sampleData.logs);
+    setFilteredLogs(logs);
   };
+
+  // Loading and error handling
+  if (loading) {
+    return (
+      <div className="text-gray-100">
+        <p className="text-center text-gray-400">Loading logs...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-red-500">Error: {error}</div>;
+  }
 
   return (
     <div className="w-full h-full bg-gray-800 text-gray-100 rounded-lg shadow-xl overflow-hidden">
