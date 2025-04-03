@@ -1,10 +1,19 @@
 "use client";
 
-import { Toaster } from "react-hot-toast";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+const Toaster = dynamic(
+  () => import('react-hot-toast').then((mod) => mod.Toaster),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
+    <Suspense fallback={null}>
       <Toaster
         position="top-center"
         toastOptions={{
@@ -16,7 +25,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         }}
       />
       {children}
-    </>
+    </Suspense>
   );
 };
 
