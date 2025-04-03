@@ -27,7 +27,6 @@ export function ItemsTable() {
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
@@ -85,16 +84,17 @@ export function ItemsTable() {
   };
 
   const getStatusBadge = (status: ItemStatus) => {
-    const colorMap = {
-      ACTIVE: 'bg-green-600',
+    const colorMap: Record<string, string> = {
+      ACTIVE : 'bg-green-600',
       WASTE_EXPIRED: 'bg-rose-600',
       WASTE_DEPLETED: 'bg-amber-500',
     };
+  
+    const colorClass = colorMap[status] ?? 'bg-gray-500';
+  
     return (
       <span
-        className={`px-2 py-1 rounded-full text-xs font-medium text-white ${
-          colorMap[status] || 'bg-gray-500'
-        }`}
+        className={`px-2 py-1 rounded-full text-xs font-medium text-white ${colorClass}`}
       >
         {status.replace('_', ' ').toLowerCase().replace(/(^\w|\s\w)/g, (m) =>
           m.toUpperCase()
@@ -153,8 +153,8 @@ export function ItemsTable() {
       {/* Table */}
       <div className="overflow-x-auto">
         <Table>
-          <TableHeader >
-            <TableRow className="!bg-white-800  border-b border-gray-700">
+          <TableHeader>
+            <TableRow className="!bg-white-800 border-b border-gray-700">
               <TableHead>Name</TableHead>
               <TableHead>Item ID</TableHead>
               <TableHead>Status</TableHead>
@@ -169,51 +169,50 @@ export function ItemsTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-  {isLoading ? (
-    <TableRow key="loading">
-      <TableCell colSpan={11} className="text-center py-6">
-        Loading...
-      </TableCell>
-    </TableRow>
-  ) : error ? (
-    <TableRow key="error">
-      <TableCell colSpan={11} className="text-center text-red-500 py-6">
-        {error}
-      </TableCell>
-    </TableRow>
-  ) : items.length === 0 ? (
-    <TableRow key="no-items">
-      <TableCell colSpan={11} className="text-center py-6">
-        No items found.
-      </TableCell>
-    </TableRow>
-  ) : (
-    items.map((item) => (
-      <TableRow key={item.id} className="hover:bg-indigo-900/20 transition">
-        <TableCell className="font-medium">{item.name}</TableCell>
-        <TableCell className="font-mono text-sm">{item.id}</TableCell>
-        <TableCell>{getStatusBadge(item.status)}</TableCell>
-        <TableCell>{item.containerId || 'N/A'}</TableCell>
-        <TableCell>{item.currentZone || 'N/A'}</TableCell>
-        <TableCell>{item.preferredZone || 'N/A'}</TableCell>
-        <TableCell>
-          {item.expirationDate
-            ? format(new Date(item.expirationDate), 'PP')
-            : 'N/A'}
-        </TableCell>
-        <TableCell>
-          {item.currentUses} / {item.usageLimit ?? '∞'}
-        </TableCell>
-        <TableCell>{item.priority}</TableCell>
-        <TableCell className="text-xs">
-          {`${item.width}×${item.depth}×${item.height}`}
-        </TableCell>
-        <TableCell>{item.mass} kg</TableCell>
-      </TableRow>
-    ))
-  )}
-</TableBody>
-
+            {isLoading ? (
+              <TableRow key="loading">
+                <TableCell colSpan={11} className="text-center py-6">
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : error ? (
+              <TableRow key="error">
+                <TableCell colSpan={11} className="text-center text-red-500 py-6">
+                  {error}
+                </TableCell>
+              </TableRow>
+            ) : items.length === 0 ? (
+              <TableRow key="no-items">
+                <TableCell colSpan={11} className="text-center py-6">
+                  No items found.
+                </TableCell>
+              </TableRow>
+            ) : (
+              items.map((item) => (
+                <TableRow key={item.id} className="hover:bg-indigo-900/20 transition">
+                  <TableCell className="font-medium">{item.name}</TableCell>
+                  <TableCell className="font-mono text-sm">{item.id}</TableCell>
+                  <TableCell>{getStatusBadge(item.status)}</TableCell>
+                  <TableCell>{item.containerId || 'N/A'}</TableCell>
+                  <TableCell>{item.currentZone || 'N/A'}</TableCell>
+                  <TableCell>{item.preferredZone || 'N/A'}</TableCell>
+                  <TableCell>
+                    {item.expirationDate
+                      ? format(new Date(item.expirationDate), 'PP')
+                      : 'N/A'}
+                  </TableCell>
+                  <TableCell>
+                    {item.currentUses} / {item.usageLimit ?? '∞'}
+                  </TableCell>
+                  <TableCell>{item.priority}</TableCell>
+                  <TableCell className="text-xs">
+                    {`${item.width}×${item.depth}×${item.height}`}
+                  </TableCell>
+                  <TableCell>{item.mass} kg</TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
         </Table>
       </div>
 

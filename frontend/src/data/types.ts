@@ -1,11 +1,13 @@
 // /data/types.ts
 
+
+
 export enum ItemStatus {
-    ACTIVE = "active",
-    WASTE_EXPIRED = "expired",
-    WASTE_DEPLETED = "depleted",
-    DISPOSED = "disposed",
-}
+    ACTIVE = 'active',
+    WASTE_EXPIRED = 'waste_expired',
+    WASTE_DEPLETED = 'waste_depleted',
+  }
+  
 
 export interface Container {
     containerId: string; // Corresponds to containerId
