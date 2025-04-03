@@ -1,11 +1,12 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import ISS from "@/components/ISS";
-import ZoomControl from "@/components/ZoomControl"; 
-import { StarryBackground } from '@/components/StarryBackground';
-import Link from 'next/link';
-import { Plus, ZoomIn, ZoomOut } from 'lucide-react';
+import ZoomControl from "@/components/ZoomControl";
+import { StarryBackground } from "@/components/StarryBackground";
+import SearchRetrieve from "@/components/SearchRetrieve"; // Import SearchRetrieve
+import Link from "next/link";
+import { Plus, ZoomIn, ZoomOut } from "lucide-react";
 
 export default function HomePage() {
   const [translateX, setTranslateX] = useState<number>(0);
@@ -14,10 +15,10 @@ export default function HomePage() {
   const [tooltip, setTooltip] = useState({
     visible: false,
     x: 0,
-    y: 0, 
+    y: 0,
     title: "",
     totalContainers: 0,
-    totalItems: 0
+    totalItems: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,20 +32,20 @@ export default function HomePage() {
     containers: any[];
     items: Item[];
   }
-  
+
   const [containers, setContainers] = useState<any[]>([]);
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/frontend/placements`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((data: ApiResponse) => {
         setContainers(data.containers);
         setItems(data.items);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       })
       .finally(() => setIsLoading(false));
   }, []);
@@ -56,11 +57,11 @@ export default function HomePage() {
   };
 
   const zoomIn = () => {
-    setScale(prev => Math.min(prev * 1.2, 2));
+    setScale((prev) => Math.min(prev * 1.2, 2));
   };
 
   const zoomOut = () => {
-    setScale(prev => Math.max(prev * 0.8, 0.3));
+    setScale((prev) => Math.max(prev * 0.8, 0.3));
   };
 
   const formatZoomPercentage = () => {
@@ -82,29 +83,42 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#01041f] to-[#082b33]" />
           <StarryBackground />
         </div>
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col items-center">
           {!isLoading && (
             <>
-              <ISS
-                translateX={translateX}
-                setTranslateX={setTranslateX}
-                translateY={translateY}
-                setTranslateY={setTranslateY}
+              {/* SearchRetrieve at Top Center */}
+              <div className="fixed top-4 z-50 w-full max-w-3xl">
+                <SearchRetrieve />
+              </div>
+
+              {/* ISS Visualization */}
+              <div className="flex-1 w-full">
+                <ISS
+                  translateX={translateX}
+                  setTranslateX={setTranslateX}
+                  translateY={translateY}
+                  setTranslateY={setTranslateY}
+                  scale={scale}
+                  setScale={setScale}
+                  tooltip={tooltip}
+                  setTooltip={setTooltip}
+                  containers={containers}
+                  items={items}
+                />
+              </div>
+
+              {/* Zoom Control */}
+              <ZoomControl
                 scale={scale}
                 setScale={setScale}
-                tooltip={tooltip}
-                setTooltip={setTooltip}
-                containers={containers}
-                items={items}
+                resetView={resetView}
               />
-              <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
-              
-              <div className="fixed bottom-20 right-4 z-50 flex items-center gap-1 bg-black/20 backdrop-blur-md 
-                border border-white/10 rounded-full shadow-lg px-2">
+
+              {/* Zoom Buttons */}
+              <div className="fixed bottom-20 right-4 z-50 flex items-center gap-1 bg-black/20 backdrop-blur-md border border-white/10 rounded-full shadow-lg px-2">
                 <button
                   onClick={zoomOut}
-                  className="p-2 hover:bg-white/10 text-white/90 rounded-full
-                    transition-all duration-200 hover:scale-105"
+                  className="p-2 hover:bg-white/10 text-white/90 rounded-full transition-all duration-200 hover:scale-105"
                 >
                   <ZoomOut className="w-5 h-5" />
                 </button>
@@ -113,18 +127,16 @@ export default function HomePage() {
                 </span>
                 <button
                   onClick={zoomIn}
-                  className="p-2 hover:bg-white/10 text-white/90 rounded-full
-                    transition-all duration-200 hover:scale-105"
+                  className="p-2 hover:bg-white/10 text-white/90 rounded-full transition-all duration-200 hover:scale-105"
                 >
                   <ZoomIn className="w-5 h-5" />
                 </button>
               </div>
 
-              <Link 
+              {/* Manage Items Link */}
+              <Link
                 href="/management"
-                className="fixed bottom-4 left-2 z-50 px-6 py-3 bg-black/20 backdrop-blur-md 
-                  border border-white/10 text-white/90 rounded-full shadow-lg flex items-center gap-2
-                  transition-all duration-200 hover:scale-105 hover:bg-white/10"
+                className="fixed bottom-4 left-2 z-50 px-6 py-3 bg-black/20 backdrop-blur-md border border-white/10 text-white/90 rounded-full shadow-lg flex items-center gap-2 transition-all duration-200 hover:scale-105 hover:bg-white/10"
               >
                 <Plus className="w-5 h-5" />
                 Manage Items & Containers

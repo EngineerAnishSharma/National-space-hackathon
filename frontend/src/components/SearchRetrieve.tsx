@@ -10,8 +10,8 @@ import {
   XCircle,
   ChevronRight,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
-// Define types
 interface Item {
   itemId: string;
   name: string;
@@ -41,8 +41,12 @@ interface RetrievalStep {
 interface SearchResponse {
   success: boolean;
   found: boolean;
-  item: Item;
+  item?: Item;
   retrievalSteps: RetrievalStep[];
+}
+
+interface RetrieveResponse {
+  success: boolean;
 }
 
 export default function SearchRetrieve() {
@@ -53,134 +57,131 @@ export default function SearchRetrieve() {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [showResults, setShowResults] = useState<boolean>(false);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
+  const [allItems, setAllItems] = useState<Item[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Dummy suggestion data - would be replaced with actual recently searched items
-  const dummyRecentSearches = [
-    "Medical Kit",
-    "Oxygen Tank",
-    "Repair Tools",
-    "Food Ration",
-    "Water Filter",
-  ];
+  // Fetch all items for suggestions on component mount
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/frontend/placements`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch items");
+        }
+        const data = await response.json();
+        setAllItems(
+          data.items.map((item: any) => ({
+            itemId: item.id,
+            name: item.name,
+            containerId: item.containerId,
+            zone: item.preferredZone,
+            position: item.position,
+          })) || []
+        );
+      } catch (err) {
+        console.error("Error fetching items:", err);
+      }
+    };
+    fetchItems();
+  }, []);
 
-  // Handle search submission
-  const handleSearch = async () => {
-    if (!searchTerm.trim()) return;
+  // Handle search submission or suggestion selection
+  const handleSearch = async (query?: string) => {
+    const searchValue = query || searchTerm.trim();
+    if (!searchValue) return;
 
     setIsSearching(true);
     setShowSuggestions(false);
     setShowResults(true);
 
     try {
-      // Add to search history
-      if (!searchHistory.includes(searchTerm)) {
+      if (!query && !searchHistory.includes(searchTerm)) {
         setSearchHistory((prev) => [searchTerm, ...prev].slice(0, 5));
       }
 
-      // For this demo, we'll use dummy data
-      // In a real app, this would be an API call:
-      // const response = await fetch(`/api/search?itemName=${encodeURIComponent(searchTerm)}`);
-      // const data = await response.json();
+      const isItemId = allItems.some((item) => item.itemId === searchValue);
+      const endpoint = isItemId
+        ? `/api/search?itemId=${encodeURIComponent(searchValue)}`
+        : `/api/search?itemName=${encodeURIComponent(searchValue)}`;
 
-      // Simulate API delay
-      setTimeout(() => {
-        // Create 1-3 dummy results
-        const numResults = Math.floor(Math.random() * 3) + 1;
-        const dummyResults: SearchResponse[] = [];
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}`
+      );
+      if (!response.ok) {
+        throw new Error("Search failed");
+      }
+      const data: SearchResponse | SearchResponse[] = await response.json();
 
-        for (let i = 0; i < numResults; i++) {
-          dummyResults.push({
-            success: true,
-            found: true,
-            item: {
-              itemId: `item_${Math.floor(Math.random() * 10000)}`,
-              name: i === 0 ? searchTerm : `${searchTerm} (Variant ${i + 1})`,
-              containerId: `container_${String.fromCharCode(
-                65 + i
-              )}${Math.floor(Math.random() * 100)}`,
-              zone: ["Science Lab", "Storage Bay", "Medical Wing"][i % 3],
-              position: {
-                startCoordinates: { width: 10 + i, depth: 20 + i, height: 5 },
-                endCoordinates: { width: 15 + i, depth: 25 + i, height: 10 },
-              },
-            },
-            retrievalSteps: [
-              {
-                step: 1,
-                action: "remove",
-                itemId: `item_blocking${i}1`,
-                itemName: "Storage Box",
-              },
-              {
-                step: 2,
-                action: "retrieve",
-                itemId: `item_${Math.floor(Math.random() * 10000)}`,
-                itemName:
-                  i === 0 ? searchTerm : `${searchTerm} (Variant ${i + 1})`,
-              },
-            ],
-          });
-        }
-
-        setSearchResults(dummyResults);
-        setIsSearching(false);
-      }, 800);
+      const results = Array.isArray(data) ? data : [data];
+      setSearchResults(results);
+      setIsSearching(false);
     } catch (error) {
       console.error("Search failed:", error);
       setIsSearching(false);
-      setShowResults(true);
       setSearchResults([
         {
           success: false,
           found: false,
-          item: null,
+          item: undefined,
           retrievalSteps: [],
-        } as any,
+        },
       ]);
     }
   };
 
-  // Handle item retrieval
+  // Handle item retrieval with /api/retrieve
   const handleRetrieve = async (itemId: string) => {
     setIsRetrieving(itemId);
-
     try {
-      // For this demo, we'll use dummy data
-      // In a real app, this would be an API call:
-      /*
-      const response = await fetch('/api/retrieve', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          itemId: itemId,
-          userId: 'user123', // Replace with actual user ID
-          timestamp: new Date().toISOString()
-        }),
-      });
-      const data = await response.json();
-      */
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/retrieve`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            itemId: itemId,
+            userId: "user123",
+            timestamp: new Date().toISOString(),
+          }),
+        }
+      );
 
-      // Simulate API delay
-      setTimeout(() => {
-        // Remove the retrieved item from results
+      if (response.status === 404) {
+        const errorData = await response.json();
+        toast.error(errorData.error || "Failed to retrieve item.");
+        setIsRetrieving(null);
+        return;
+      }
+
+      const data: RetrieveResponse = await response.json();
+
+      if (data.success) {
+        toast.success(`Item ${itemId} has been successfully retrieved!`);
+
+        // Remove the retrieved item from search results
         setSearchResults((prev) =>
           prev.filter((result) => result.item?.itemId !== itemId)
         );
-        setIsRetrieving(null);
 
-        // If no more results, clear search
+        // Clear search if no results remain
         if (searchResults.length <= 1) {
           setSearchTerm("");
           setShowResults(false);
         }
-      }, 800);
+      } else {
+        toast.error(`Failed to retrieve item ${itemId}.`);
+      }
+
+      setIsRetrieving(null);
     } catch (error) {
       console.error("Retrieval failed:", error);
       setIsRetrieving(null);
+      // Optionally, notify the user of the error here
     }
   };
 
@@ -189,7 +190,6 @@ export default function SearchRetrieve() {
     if (e.key === "Enter") {
       handleSearch();
     }
-
     if (e.key === "Escape") {
       setShowSuggestions(false);
       setShowResults(false);
@@ -209,28 +209,36 @@ export default function SearchRetrieve() {
         setShowResults(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  // Focus search input when clearing
+  // Clear search and refocus
   const handleClearSearch = () => {
     setSearchTerm("");
     setSearchResults([]);
     setShowResults(false);
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
+    searchInputRef.current?.focus();
   };
 
+  // Filter suggestions based on search term
+  const suggestions = searchTerm
+    ? allItems
+        .filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 5)
+    : [];
+
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto">
+      {" "}
+      {/* Reduced from max-w-4xl to max-w-3xl */}
       <div className="relative">
-        {/* Search Bar */}
-        <div className="flex h-14 w-full items-center overflow-hidden rounded-full bg-gray-800 border-2 border-gray-700 focus-within:border-indigo-500 transition-all duration-300 shadow-lg shadow-indigo-900/10">
+        {/* Search Bar - Reduced height from h-14 to h-12 */}
+        <div className="flex h-12 w-full items-center overflow-hidden rounded-full bg-gray-800 border-2 border-gray-700 focus-within:border-indigo-500 transition-all duration-300 shadow-lg shadow-indigo-900/10">
           <div className="flex h-full items-center justify-center px-4 text-indigo-400">
             <Search size={20} />
           </div>
@@ -239,13 +247,7 @@ export default function SearchRetrieve() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={handleKeyDown}
-            onFocus={() => {
-              if (searchTerm.trim()) {
-                setShowResults(true);
-              } else {
-                setShowSuggestions(true);
-              }
-            }}
+            onFocus={() => setShowSuggestions(true)}
             placeholder="Search for items by name or ID..."
             className="h-full flex-1 bg-transparent text-lg text-gray-100 outline-none placeholder:text-gray-400"
           />
@@ -258,7 +260,7 @@ export default function SearchRetrieve() {
             </button>
           )}
           <button
-            onClick={handleSearch}
+            onClick={() => handleSearch()}
             disabled={isSearching || !searchTerm.trim()}
             className={`h-full px-6 lg:px-8 flex items-center justify-center font-medium transition-all duration-300 ${
               isSearching || !searchTerm.trim()
@@ -296,50 +298,83 @@ export default function SearchRetrieve() {
             {/* Search Suggestions */}
             {showSuggestions && !isSearching && !showResults && (
               <div className="p-2">
-                {searchHistory.length > 0 && (
-                  <div className="mb-2">
-                    <div className="px-3 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
-                      Recent Searches
-                    </div>
-                    {searchHistory.map((term, index) => (
-                      <div
-                        key={`history-${index}`}
-                        className="px-3 py-2 flex items-center rounded-md hover:bg-indigo-600/20 cursor-pointer text-gray-200"
-                        onClick={() => {
-                          setSearchTerm(term);
-                          setShowSuggestions(false);
-                          handleSearch();
-                        }}
-                      >
-                        <Clock size={14} className="mr-2 text-gray-400" />
-                        {term}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {dummyRecentSearches.length > 0 && (
+                {searchTerm ? (
                   <div>
                     <div className="px-3 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
                       Suggestions
                     </div>
-                    {dummyRecentSearches
-                      .filter((term) => !searchHistory.includes(term))
-                      .map((term, index) => (
+                    {suggestions.length > 0 ? (
+                      suggestions.map((item, index) => (
                         <div
                           key={`suggestion-${index}`}
                           className="px-3 py-2 flex items-center rounded-md hover:bg-indigo-600/20 cursor-pointer text-gray-200"
                           onClick={() => {
-                            setSearchTerm(term);
+                            setSearchTerm(item.name);
                             setShowSuggestions(false);
-                            handleSearch();
+                            handleSearch(item.itemId);
                           }}
                         >
                           <Search size={14} className="mr-2 text-gray-400" />
-                          {term}
+                          {item.name}{" "}
+                          <span className="ml-2 text-xs text-gray-500">
+                            ({item.itemId})
+                          </span>
                         </div>
-                      ))}
+                      ))
+                    ) : (
+                      <div className="px-3 py-2 text-gray-400">
+                        No matching items found
+                      </div>
+                    )}
                   </div>
+                ) : (
+                  <>
+                    {searchHistory.length > 0 && (
+                      <div className="mb-2">
+                        <div className="px-3 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                          Recent Searches
+                        </div>
+                        {searchHistory.map((term, index) => (
+                          <div
+                            key={`history-${index}`}
+                            className="px-3 py-2 flex items-center rounded-md hover:bg-indigo-600/20 cursor-pointer text-gray-200"
+                            onClick={() => {
+                              setSearchTerm(term);
+                              setShowSuggestions(false);
+                              handleSearch(term);
+                            }}
+                          >
+                            <Clock size={14} className="mr-2 text-gray-400" />
+                            {term}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {allItems.length > 0 && (
+                      <div>
+                        <div className="px-3 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                          Suggested Items
+                        </div>
+                        {allItems.slice(0, 5).map((item, index) => (
+                          <div
+                            key={`suggested-${index}`}
+                            className="px-3 py-2 flex items-center rounded-md hover:bg-indigo-600/20 cursor-pointer text-gray-200"
+                            onClick={() => {
+                              setSearchTerm(item.name);
+                              setShowSuggestions(false);
+                              handleSearch(item.itemId);
+                            }}
+                          >
+                            <Search size={14} className="mr-2 text-gray-400" />
+                            {item.name}{" "}
+                            <span className="ml-2 text-xs text-gray-500">
+                              ({item.itemId})
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -352,124 +387,129 @@ export default function SearchRetrieve() {
                     key={`result-${index}`}
                     className="p-4 hover:bg-gray-700/50 transition-colors"
                   >
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-medium text-white mb-1">
-                          {result.item.name}
-                        </h3>
-
-                        <div className="flex items-center space-x-2 mb-2">
-                          <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-indigo-900/50 text-indigo-300 border border-indigo-700/50">
-                            {result.item.itemId}
-                          </span>
-                          {result.item.containerId && (
-                            <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-gray-700 text-gray-300 border border-gray-600">
-                              {result.item.containerId}
+                    {result.found && result.item ? (
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-medium text-white mb-1">
+                            {result.item.name}
+                          </h3>
+                          <div className="flex items-center space-x-2 mb-2">
+                            <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-indigo-900/50 text-indigo-300 border border-indigo-700/50">
+                              {result.item.itemId}
                             </span>
-                          )}
-                        </div>
-
-                        {/* Location Info */}
-                        <div className="flex items-center text-sm text-gray-300 mb-2">
-                          <MapPin size={14} className="text-indigo-400 mr-1" />
-                          <span className="mr-1">{result.item.zone}</span>
-                          {result.item.position && (
-                            <span className="text-gray-400 text-xs">
-                              (Position:{" "}
-                              {result.item.position.startCoordinates.width}-
-                              {result.item.position.endCoordinates.width},
-                              {result.item.position.startCoordinates.depth}-
-                              {result.item.position.endCoordinates.depth},
-                              {result.item.position.startCoordinates.height}-
-                              {result.item.position.endCoordinates.height})
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Retrieval Steps Preview */}
-                        <div className="text-xs text-gray-400">
-                          <div className="flex items-center mb-1">
-                            <Box size={12} className="mr-1" />
-                            <span>
-                              {result.retrievalSteps.length} retrieval steps
-                              required
-                              {result.retrievalSteps.length > 1 &&
-                                ` (${
-                                  result.retrievalSteps.length - 1
-                                } items need to be moved)`}
-                            </span>
+                            {result.item.containerId && (
+                              <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-gray-700 text-gray-300 border border-gray-600">
+                                {result.item.containerId}
+                              </span>
+                            )}
                           </div>
-                        </div>
-                      </div>
-
-                      {/* Retrieve Button */}
-                      <button
-                        onClick={() => handleRetrieve(result.item.itemId)}
-                        disabled={isRetrieving === result.item.itemId}
-                        className={`px-4 py-2 rounded-md flex items-center space-x-2 transition-all ${
-                          isRetrieving === result.item.itemId
-                            ? "bg-gray-700 text-gray-300"
-                            : "bg-indigo-600 hover:bg-indigo-500 text-white"
-                        } shadow-md border border-indigo-700 ml-3 min-w-24`}
-                      >
-                        {isRetrieving === result.item.itemId ? (
-                          <>
-                            <Loader2 size={16} className="animate-spin" />
-                            <span>Wait...</span>
-                          </>
-                        ) : (
-                          <>
-                            <CheckCircle size={16} />
-                            <span>Retrieve</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    {/* Expandable Retrieval Steps */}
-                    <details className="mt-2 text-sm">
-                      <summary className="cursor-pointer text-indigo-400 hover:text-indigo-300 flex items-center">
-                        <ChevronRight
-                          size={16}
-                          className="inline transition-transform duration-200"
-                        />
-                        <span>View retrieval steps</span>
-                      </summary>
-                      <div className="pl-6 pt-2 pb-1 space-y-2">
-                        {result.retrievalSteps.map((step, stepIndex) => (
-                          <div
-                            key={`step-${stepIndex}`}
-                            className="flex items-start"
-                          >
-                            <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs text-gray-300 mr-2">
-                              {step.step}
-                            </div>
-                            <div>
-                              <span
-                                className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                                  step.action === "remove"
-                                    ? "bg-amber-900/30 text-amber-300 border border-amber-700"
-                                    : step.action === "setAside"
-                                    ? "bg-blue-900/30 text-blue-300 border border-blue-700"
-                                    : step.action === "retrieve"
-                                    ? "bg-indigo-900/30 text-indigo-300 border border-indigo-700"
-                                    : "bg-green-900/30 text-green-300 border border-green-700"
-                                }`}
-                              >
-                                {step.action.charAt(0).toUpperCase() +
-                                  step.action.slice(1)}
+                          <div className="flex items-center text-sm text-gray-300 mb-2">
+                            <MapPin
+                              size={14}
+                              className="text-indigo-400 mr-1"
+                            />
+                            <span className="mr-1">{result.item.zone}</span>
+                            {result.item.position && (
+                              <span className="text-gray-400 text-xs">
+                                (Position:{" "}
+                                {result.item.position.startCoordinates.width}-
+                                {result.item.position.endCoordinates.width},{" "}
+                                {result.item.position.startCoordinates.depth}-
+                                {result.item.position.endCoordinates.depth},{" "}
+                                {result.item.position.startCoordinates.height}-
+                                {result.item.position.endCoordinates.height})
                               </span>
-                              <span className="ml-2 text-gray-300">
-                                {step.itemName}
-                              </span>
-                              <span className="ml-1 text-xs text-gray-500">
-                                ({step.itemId})
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-400">
+                            <div className="flex items-center mb-1">
+                              <Box size={12} className="mr-1" />
+                              <span>
+                                {result.retrievalSteps.length} retrieval steps
+                                required
+                                {result.retrievalSteps.length > 1 &&
+                                  ` (${
+                                    result.retrievalSteps.length - 1
+                                  } items need to be moved)`}
                               </span>
                             </div>
                           </div>
-                        ))}
+                        </div>
+                        <button
+                          onClick={() =>
+                            result.item && handleRetrieve(result.item.itemId)
+                          }
+                          disabled={isRetrieving === result.item.itemId}
+                          className={`px-4 py-2 rounded-md flex items-center space-x-2 transition-all ${
+                            isRetrieving === result.item.itemId
+                              ? "bg-gray-700 text-gray-300"
+                              : "bg-indigo-600 hover:bg-indigo-500 text-white"
+                          } shadow-md border border-indigo-700 ml-3 min-w-24`}
+                        >
+                          {isRetrieving === result.item.itemId ? (
+                            <>
+                              <Loader2 size={16} className="animate-spin" />
+                              <span>Wait...</span>
+                            </>
+                          ) : (
+                            <>
+                              <CheckCircle size={16} />
+                              <span>Retrieve</span>
+                            </>
+                          )}
+                        </button>
                       </div>
-                    </details>
+                    ) : (
+                      <div className="text-gray-400">
+                        Item not found for this search.
+                      </div>
+                    )}
+
+                    {result.found && result.item && (
+                      <details className="mt-2 text-sm">
+                        <summary className="cursor-pointer text-indigo-400 hover:text-indigo-300 flex items-center">
+                          <ChevronRight
+                            size={16}
+                            className="inline transition-transform duration-200"
+                          />
+                          <span>View retrieval steps</span>
+                        </summary>
+                        <div className="pl-6 pt-2 pb-1 space-y-2">
+                          {result.retrievalSteps.map((step, stepIndex) => (
+                            <div
+                              key={`step-${stepIndex}`}
+                              className="flex items-start"
+                            >
+                              <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs text-gray-300 mr-2">
+                                {step.step}
+                              </div>
+                              <div>
+                                <span
+                                  className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                                    step.action === "remove"
+                                      ? "bg-amber-900/30 text-amber-300 border border-amber-700"
+                                      : step.action === "setAside"
+                                      ? "bg-blue-900/30 text-blue-300 border border-blue-700"
+                                      : step.action === "retrieve"
+                                      ? "bg-indigo-900/30 text-indigo-300 border border-indigo-700"
+                                      : "bg-green-900/30 text-green-300 border border-green-700"
+                                  }`}
+                                >
+                                  {step.action.charAt(0).toUpperCase() +
+                                    step.action.slice(1)}
+                                </span>
+                                <span className="ml-2 text-gray-300">
+                                  {step.itemName}
+                                </span>
+                                <span className="ml-1 text-xs text-gray-500">
+                                  ({step.itemId})
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    )}
                   </div>
                 ))}
               </div>
