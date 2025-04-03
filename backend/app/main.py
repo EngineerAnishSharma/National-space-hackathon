@@ -1,6 +1,6 @@
-# /app/main.py
 from flask import Flask, jsonify
-from .database import init_db, db_session # Use db_session for teardown if needed
+from flask_cors import CORS  # Import CORS
+from .database import init_db, db_session
 from .config import Config
 
 # Import blueprints
@@ -22,6 +22,9 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+    # Enable CORS for all routes and origins
+    CORS(app)  # Apply CORS to the entire app
+
     # Register Blueprints
     app.register_blueprint(placement_bp)
     app.register_blueprint(client_placement_bp)
@@ -36,7 +39,7 @@ def create_app(config_class=Config):
     app.register_blueprint(tables_bp)
 
     # Initialize the database
-    init_db() # Call init_db here to create tables
+    init_db()
 
     # Optional: Add a command to initialize the database
     @app.cli.command("init-db")
@@ -48,7 +51,7 @@ def create_app(config_class=Config):
     # Teardown context to remove database session after each request
     @app.teardown_appcontext
     def shutdown_session(exception=None):
-        db_session.remove() # Remove the scoped session
+        db_session.remove()
         # print("DB Session removed.") # For debugging
 
     # Simple root endpoint
