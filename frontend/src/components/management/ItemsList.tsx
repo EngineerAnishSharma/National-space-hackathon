@@ -8,6 +8,13 @@ interface ItemsListProps {
   onSelect?: (item: any) => void;
 }
 
+interface Item {
+  id: string;
+  name: string;
+  category: string;
+  updatedAt: string; // Assuming `updatedAt` is a date string
+}
+
 export default function ItemsList({ mode, onSelect }: ItemsListProps) {
   const [items, setItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,14 +26,30 @@ export default function ItemsList({ mode, onSelect }: ItemsListProps) {
     try {
       const file = mode === 'items' ? '/data/items.csv' : '/data/containers.csv';
       const response = await fetch(file);
-
+  
       if (!response.ok) {
         throw new Error(`Failed to load ${mode} data`);
       }
-
+  
       const csv = await response.text();
-      const data = Papa.parse(csv, { header: true }).data;
-      setItems(data.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()));
+  
+      // Define the type for the parsed data
+      interface Item {
+        id: string;
+        name: string;
+        category: string;
+        updatedAt: string; // Assuming `updatedAt` is a date string
+      }
+  
+      // Parse the CSV and assert the type
+      const parsedData = Papa.parse<Item>(csv, { header: true }).data;
+  
+      // Sort the data by `updatedAt` in descending order
+      const sortedData = parsedData.sort(
+        (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      );
+  
+      setItems(sortedData);
     } catch (error) {
       console.error('Error loading data:', error);
       setError('Failed to load data. Please try again.');
@@ -34,7 +57,6 @@ export default function ItemsList({ mode, onSelect }: ItemsListProps) {
       setIsLoading(false);
     }
   };
-
   useEffect(() => {
     fetchData();
   }, [mode]);
