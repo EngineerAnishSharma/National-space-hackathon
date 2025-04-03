@@ -5,6 +5,7 @@ from .config import Config
 
 # Import blueprints
 from .routes.placement import placement_bp, client_placement_bp
+from .routes.get_placement_frontend import client_placement_bp_frontend
 from .routes.search_retrieve import search_retrieve_bp
 from .routes.waste import waste_bp
 from .routes.simulation import sim_bp
@@ -28,6 +29,7 @@ def create_app(config_class=Config):
     # Register Blueprints
     app.register_blueprint(placement_bp)
     app.register_blueprint(client_placement_bp)
+    app.register_blueprint(client_placement_bp_frontend)
     app.register_blueprint(search_retrieve_bp)
     app.register_blueprint(waste_bp)
     app.register_blueprint(sim_bp)
