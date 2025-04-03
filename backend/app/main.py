@@ -14,6 +14,7 @@ from .routes.logs import logs_bp
 from .routes.client_waste import client_waste_bp
 from .routes.client_simulation import client_sim_bp
 from .routes.client_search_retrieve import client_search_retrieve_bp
+from .routes.search_frontend import search_frontend_bp
 from app.routes.client_tables import tables_bp
 import os
 import json
@@ -39,6 +40,7 @@ def create_app(config_class=Config):
     app.register_blueprint(client_sim_bp)
     app.register_blueprint(client_search_retrieve_bp)
     app.register_blueprint(tables_bp)
+    app.register_blueprint(search_frontend_bp)
 
     # Initialize the database
     init_db()
