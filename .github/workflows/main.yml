@@ -22,13 +22,19 @@ jobs:
         export_default_credentials: true
 
     - name: Configure Docker for Artifact Registry
-      run: gcloud auth configure-docker us-docker.pkg.dev
+      run: |
+        gcloud auth configure-docker us-docker.pkg.dev --quiet
+        # Explicitly authenticate with service account
+        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
     - name: Build and push Docker image
       run: |
         IMAGE_NAME="us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/backend-repo/backend:${{ github.sha }}"
         docker build -t $IMAGE_NAME -f backend/Dockerfile backend/
-        docker push $IMAGE_NAME
+        
+        # Add debug: Verify credentials work
+        echo "Attempting to push image..."
+        docker push $IMAGE_NAME --verbose
 
     - name: Deploy to Google Cloud VM
       run: |
