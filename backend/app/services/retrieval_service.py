@@ -180,7 +180,9 @@ def log_item_retrieval(db: Session, request_data: RetrieveRequest) -> SuccessRes
         raise ValueError(f"Item {item_id} not found.") # Or return SuccessResponse(success=False)?
 
     if item.status != ItemStatus.ACTIVE:
-         raise ValueError(f"Item {item_id} is not active (status: {item.status}). Cannot retrieve.")
+        raise ValueError(f"Item {item_id} is not active (status: {item.status}). Cannot retrieve.")
+
+
 
 
     # --- Decrement Usage Count ---
@@ -192,6 +194,7 @@ def log_item_retrieval(db: Session, request_data: RetrieveRequest) -> SuccessRes
              # This shouldn't ideally happen if checks are done, but handle defensively
              print(f"Warning: Item {item_id} used more times ({item.currentUses}) than limit ({item.usageLimit}).")
              remaining_uses = 0 # Cap at 0
+             return SuccessResponse(success=False, error="Usage limit exceeded.")
 
         # --- Update Status if Depleted ---
         if remaining_uses == 0:
