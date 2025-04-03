@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import Papa from 'papaparse';
 import ISS from "@/components/ISS";
 import ZoomControl from "@/components/ZoomControl"; 
 import { StarryBackground } from '@/components/StarryBackground';
@@ -27,26 +26,27 @@ export default function HomePage() {
     containerId: string;
     [key: string]: any;
   }
+
+  interface ApiResponse {
+    containers: any[];
+    items: Item[];
+  }
   
   const [containers, setContainers] = useState<any[]>([]);
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
-    Promise.all([
-      fetch('/data/containers.csv')
-        .then(response => response.text())
-        .then(csv => {
-          const data = Papa.parse(csv, { header: true }).data;
-          setContainers(data);
-        }),
-      fetch('/data/items.csv')
-        .then(response => response.text())
-        .then(csv => {
-          const data = Papa.parse(csv, { header: true }).data as Item[];
-          setItems(data);
-        })
-    ]).finally(() => setIsLoading(false));
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/frontend/placements`)
+      .then(response => response.json())
+      .then((data: ApiResponse) => {
+        setContainers(data.containers);
+        setItems(data.items);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const resetView = () => {
@@ -122,7 +122,7 @@ export default function HomePage() {
 
               <Link 
                 href="/management"
-                className="fixed bottom-4 right-2 z-50 px-6 py-3 bg-black/20 backdrop-blur-md 
+                className="fixed bottom-4 left-2 z-50 px-6 py-3 bg-black/20 backdrop-blur-md 
                   border border-white/10 text-white/90 rounded-full shadow-lg flex items-center gap-2
                   transition-all duration-200 hover:scale-105 hover:bg-white/10"
               >
