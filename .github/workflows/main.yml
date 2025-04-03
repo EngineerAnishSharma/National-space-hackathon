@@ -21,29 +21,34 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         export_default_credentials: true
 
-    - name: Configure Docker for Artifact Registry
+    - name: Authenticate Docker with Artifact Registry
       run: |
-        gcloud auth configure-docker us-docker.pkg.dev --quiet
-        # Explicitly authenticate with service account
-        gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
+        gcloud auth configure-docker --quiet  # Auth for all registries
 
     - name: Build and push Docker image
       run: |
         IMAGE_NAME="us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/backend-repo/backend:${{ github.sha }}"
         docker build -t $IMAGE_NAME -f backend/Dockerfile backend/
         
-        # Add debug: Verify credentials work
-        echo "Attempting to push image..."
-        docker push $IMAGE_NAME --verbose
+        echo "Pushing Docker image..."
+        docker push $IMAGE_NAME
 
     - name: Deploy to Google Cloud VM
       run: |
         gcloud compute ssh ${{ secrets.GCP_VM_NAME }} --zone ${{ secrets.GCP_ZONE }} --command "
-          docker pull us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/backend-repo/backend:${{ github.sha }} && \
-          docker stop backend-container || true && \
-          docker rm backend-container || true && \
-          docker run -d --name backend-container -p 8000:8000 us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/backend-repo/backend:${{ github.sha }}
+          echo 'Pulling latest Docker image...'
+          docker pull us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/backend-repo/backend:${{ github.sha }}
+
+          echo 'Stopping old container if running...'
+          docker stop backend-container || true
+          docker rm backend-container || true
+
+          echo 'Starting new container...'
+          docker run -d --name backend-container -p 8000:8000 --restart unless-stopped \
+            us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/backend-repo/backend:${{ github.sha }}
         "
 
-    - name: Output Base URL
-      run: echo "Your backend is deployed at http://$(gcloud compute instances describe ${{ secrets.GCP_VM_NAME }} --zone ${{ secrets.GCP_ZONE }} --format='get(networkInterfaces[0].accessConfigs[0].natIP)'):8000"
+    - name: Output Backend URL
+      run: |
+        BACKEND_IP=$(gcloud compute instances describe ${{ secrets.GCP_VM_NAME }} --zone ${{ secrets.GCP_ZONE }} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+        echo "Your backend is deployed at http://${BACKEND_IP}:8000"
