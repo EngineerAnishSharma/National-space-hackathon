@@ -16,8 +16,11 @@ export default function ManagementPage() {
   const [showAddContainer, setShowAddContainer] = useState(false);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [listView, setListView] = useState<'items' | 'containers'>('items');
-  const [items, setItems] = useState([]);
-  const [containers, setContainers] = useState([]);
+  interface Item {
+    [key: string]: string;
+  }
+  const [items, setItems] = useState<Item[]>([]);
+  const [containers, setContainers] = useState<Item[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -35,8 +38,8 @@ export default function ManagementPage() {
         const itemsText = await itemsRes.text();
         const containersText = await containersRes.text();
 
-        const itemsData = Papa.parse(itemsText, { header: true }).data;
-        const containersData = Papa.parse(containersText, { header: true }).data;
+        const itemsData = Papa.parse(itemsText, { header: true }).data as Item[];
+        const containersData = Papa.parse(containersText, { header: true }).data as Item[];
 
         setItems(itemsData);
         setContainers(containersData);
@@ -141,7 +144,7 @@ export default function ManagementPage() {
         </main>
       </div>
 
-      {showAddItem && <AddItemModal onClose={() => setShowAddItem(false)} />}
+      {showAddItem && <AddItemModal onClose={() => setShowAddItem(false)} onAdd={(item) => setItems([...items, item])} />}
       {showAddContainer && <AddContainerModal onClose={() => setShowAddContainer(false)} />}
     </div>
   );

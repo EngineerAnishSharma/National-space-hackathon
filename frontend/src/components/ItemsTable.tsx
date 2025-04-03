@@ -56,7 +56,7 @@ export function ItemsTable() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/tables/items?${params.toString()}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/tables/items?${params.toString()}`
       );
       if (!response.ok) throw new Error(`Error ${response.status}`);
       const data: PaginatedItemResponse = await response.json();
@@ -153,8 +153,8 @@ export function ItemsTable() {
       {/* Table */}
       <div className="overflow-x-auto">
         <Table>
-          <TableHeader>
-            <TableRow className="bg-gray-800 text-gray-300 border-b border-gray-700">
+          <TableHeader >
+            <TableRow className="!bg-white-800  border-b border-gray-700">
               <TableHead>Name</TableHead>
               <TableHead>Item ID</TableHead>
               <TableHead>Status</TableHead>
@@ -169,53 +169,51 @@ export function ItemsTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={11} className="text-center py-6">
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) : error ? (
-              <TableRow>
-                <TableCell colSpan={11} className="text-center text-red-500 py-6">
-                  {error}
-                </TableCell>
-              </TableRow>
-            ) : items.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={11} className="text-center py-6">
-                  No items found.
-                </TableCell>
-              </TableRow>
-            ) : (
-              items.map((item) => (
-                <TableRow
-                  key={item.id}
-                  className="hover:bg-indigo-900/20 transition"
-                >
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell className="font-mono text-sm">{item.id}</TableCell>
-                  <TableCell>{getStatusBadge(item.status)}</TableCell>
-                  <TableCell>{item.containerId || 'N/A'}</TableCell>
-                  <TableCell>{item.currentZone || 'N/A'}</TableCell>
-                  <TableCell>{item.preferredZone || 'N/A'}</TableCell>
-                  <TableCell>
-                    {item.expirationDate
-                      ? format(new Date(item.expirationDate), 'PP')
-                      : 'N/A'}
-                  </TableCell>
-                  <TableCell>
-                    {item.currentUses} / {item.usageLimit ?? '∞'}
-                  </TableCell>
-                  <TableCell>{item.priority}</TableCell>
-                  <TableCell className="text-xs">
-                    {`${item.width}×${item.depth}×${item.height}`}
-                  </TableCell>
-                  <TableCell>{item.mass} kg</TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
+  {isLoading ? (
+    <TableRow key="loading">
+      <TableCell colSpan={11} className="text-center py-6">
+        Loading...
+      </TableCell>
+    </TableRow>
+  ) : error ? (
+    <TableRow key="error">
+      <TableCell colSpan={11} className="text-center text-red-500 py-6">
+        {error}
+      </TableCell>
+    </TableRow>
+  ) : items.length === 0 ? (
+    <TableRow key="no-items">
+      <TableCell colSpan={11} className="text-center py-6">
+        No items found.
+      </TableCell>
+    </TableRow>
+  ) : (
+    items.map((item) => (
+      <TableRow key={item.id} className="hover:bg-indigo-900/20 transition">
+        <TableCell className="font-medium">{item.name}</TableCell>
+        <TableCell className="font-mono text-sm">{item.id}</TableCell>
+        <TableCell>{getStatusBadge(item.status)}</TableCell>
+        <TableCell>{item.containerId || 'N/A'}</TableCell>
+        <TableCell>{item.currentZone || 'N/A'}</TableCell>
+        <TableCell>{item.preferredZone || 'N/A'}</TableCell>
+        <TableCell>
+          {item.expirationDate
+            ? format(new Date(item.expirationDate), 'PP')
+            : 'N/A'}
+        </TableCell>
+        <TableCell>
+          {item.currentUses} / {item.usageLimit ?? '∞'}
+        </TableCell>
+        <TableCell>{item.priority}</TableCell>
+        <TableCell className="text-xs">
+          {`${item.width}×${item.depth}×${item.height}`}
+        </TableCell>
+        <TableCell>{item.mass} kg</TableCell>
+      </TableRow>
+    ))
+  )}
+</TableBody>
+
         </Table>
       </div>
 

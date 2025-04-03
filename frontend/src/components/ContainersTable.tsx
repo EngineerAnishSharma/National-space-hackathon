@@ -47,7 +47,7 @@ export function ContainersTable() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/tables/containers?${params.toString()}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/tables/containers?${params.toString()}`
       );
       if (!response.ok) throw new Error(`Error ${response.status}`);
       const data: PaginatedContainerResponse = await response.json();
