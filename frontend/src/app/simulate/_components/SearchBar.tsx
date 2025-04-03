@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Package } from "lucide-react";
 import { Command as CommandPrimitive } from "cmdk";
 import {
@@ -17,7 +17,7 @@ interface Item {
 interface SearchBarProps {
   selectedItems: Item[];
   setSelectedItems: React.Dispatch<React.SetStateAction<Item[]>>;
-  dummyItems: Item[];
+  items: Item[]; // Updated from dummyItems
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -25,12 +25,13 @@ interface SearchBarProps {
 export function SearchBar({
   selectedItems,
   setSelectedItems,
-  dummyItems,
+  items,
   isOpen,
   setOpen,
 }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const commandRef = useRef<HTMLDivElement>(null);
+  const [searchTerm, setSearchTerm] = useState<string>(""); // Added for filtering
 
   const handleSelectOption = useCallback(
     (item: Item) => {
@@ -41,6 +42,7 @@ export function SearchBar({
       if (inputRef.current) {
         inputRef.current.blur();
         inputRef.current.value = "";
+        setSearchTerm(""); // Reset search term
       }
     },
     [selectedItems, setOpen, setSelectedItems]
@@ -52,7 +54,7 @@ export function SearchBar({
       if (!input) return;
 
       if (event.key === "Enter" && input.value) {
-        const optionToSelect = dummyItems.find(
+        const optionToSelect = items.find(
           (item) => item.name.toLowerCase() === input.value.toLowerCase()
         );
         if (optionToSelect) {
@@ -66,18 +68,24 @@ export function SearchBar({
         setOpen(false);
       }
     },
-    [handleSelectOption, dummyItems, setOpen]
+    [handleSelectOption, items, setOpen]
   );
 
   const handleBlur = useCallback(() => {
     setTimeout(() => {
       setOpen(false);
-    }, 100);
+    }, 100); // Delay to allow click events
   }, [setOpen]);
 
   const handleFocus = useCallback(() => {
     setOpen(true);
   }, [setOpen]);
+
+  const filteredItems = items.filter(
+    (item) =>
+      !selectedItems.find((i) => i.itemId === item.itemId) &&
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="relative w-full md:w-3/5">
@@ -92,36 +100,33 @@ export function SearchBar({
             onFocus={handleFocus}
             placeholder="Search Items..."
             className="text-base bg-transparent text-gray-100 pl-10 py-6 focus:outline-none"
+            value={searchTerm}
+            onValueChange={setSearchTerm} // Use onValueChange instead of onChange
           />
-          {isOpen && (
+          {isOpen && filteredItems.length > 0 && (
             <div className="absolute top-full left-0 right-0 z-50 mt-1 rounded-md bg-gray-800 border-2 border-gray-700 shadow-xl">
               <CommandList className="max-h-60 overflow-y-auto">
                 <CommandGroup heading="Available Items">
-                  {dummyItems
-                    .filter(
-                      (item) =>
-                        !selectedItems.find((i) => i.itemId === item.itemId)
-                    )
-                    .map((item) => (
-                      <CommandItem
-                        key={item.itemId}
-                        value={item.name}
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                        onSelect={() => handleSelectOption(item)}
-                        className="flex w-full items-center gap-2 hover:bg-indigo-600/20 cursor-pointer px-3 py-2 rounded-md my-1 mx-1 transition-colors duration-200 text-gray-100"
-                      >
-                        <Package size={16} className="text-indigo-400" />
-                        <div>
-                          <div>{item.name}</div>
-                          <div className="text-xs text-gray-400">
-                            {item.itemId}
-                          </div>
+                  {filteredItems.map((item) => (
+                    <CommandItem
+                      key={item.itemId}
+                      value={item.name}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}
+                      onSelect={() => handleSelectOption(item)}
+                      className="flex w-full items-center gap-2 hover:bg-indigo-600/20 cursor-pointer px-3 py-2 rounded-md my-1 mx-1 transition-colors duration-200 text-gray-100"
+                    >
+                      <Package size={16} className="text-indigo-400" />
+                      <div>
+                        <div>{item.name}</div>
+                        <div className="text-xs text-gray-400">
+                          {item.itemId}
                         </div>
-                      </CommandItem>
-                    ))}
+                      </div>
+                    </CommandItem>
+                  ))}
                 </CommandGroup>
               </CommandList>
             </div>

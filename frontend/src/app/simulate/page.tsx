@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Clock } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { SearchBar } from "./_components/SearchBar";
@@ -23,28 +23,7 @@ interface SimulationResponse {
   };
 }
 
-const dummyItems: Item[] = [
-  { itemId: "item_5612", name: "Widget A" },
-  { itemId: "item_7890", name: "Gadget B" },
-  { itemId: "item_1234", name: "Tool C" },
-  { itemId: "item_5678", name: "Device D" },
-  { itemId: "item_9012", name: "Gear E" },
-];
-
-const dummySimulationResponse: SimulationResponse = {
-  success: true,
-  newDate: "2025-04-10T00:00:00Z",
-  changes: {
-    itemsUsed: [
-      { itemId: "item_5612", name: "Widget A", remainingUses: 5 },
-      { itemId: "item_7890", name: "Gadget B", remainingUses: 2 },
-    ],
-    itemsExpired: [{ itemId: "item_1234", name: "Tool C" }],
-    itemsDepletedToday: [{ itemId: "item_5678", name: "Device D" }],
-  },
-};
-
-export default function page() {
+export default function SimulatePage() {
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [simulationResult, setSimulationResult] =
@@ -54,12 +33,37 @@ export default function page() {
   >("itemsUsed");
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [allItems, setAllItems] = useState<Item[]>([]);
+
+  // Fetch items from /api/frontend/placements on mount
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/frontend/placements`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch items");
+        }
+        const data = await response.json();
+        const items = data.items.map((item: any) => ({
+          itemId: item.id,
+          name: item.name,
+        }));
+        setAllItems(items);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+        toast.error("Failed to load items for simulation.");
+      }
+    };
+    fetchItems();
+  }, []);
 
   const handleRemoveItem = (itemId: string) => {
     setSelectedItems((prev) => prev.filter((item) => item.itemId !== itemId));
   };
 
-  const handleSimulate = () => {
+  const handleSimulate = async () => {
     if (!selectedDate || selectedItems.length === 0) {
       toast.error("Please select a date and at least one item.");
       return;
@@ -67,11 +71,57 @@ export default function page() {
 
     setIsLoading(true);
 
-    setTimeout(() => {
-      setSimulationResult(dummySimulationResponse);
+    try {
+      // Calculate numOfDays from current date to selectedDate
+      const currentDate = new Date();
+      const diffTime = selectedDate.getTime() - currentDate.getTime();
+      const numOfDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert ms to days and round up
+
+      if (numOfDays <= 0) {
+        throw new Error("Selected date must be in the future.");
+      }
+
+      const requestBody = {
+        numOfDays, // Send numOfDays instead of toTimestamp
+        itemsToBeUsedPerDay: selectedItems.map((item) => ({
+          itemId: item.itemId,
+          name: item.name,
+        })),
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/simulate/day`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Simulation failed");
+      }
+
+      const data: SimulationResponse = await response.json();
+
+      if (data.success) {
+        setSimulationResult(data);
+        toast.success("Simulation completed successfully!");
+      } else {
+        toast.error("Simulation failed according to the server response.");
+      }
+    } catch (error) {
+      console.error("Simulation error:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "An error occurred during simulation."
+      );
+    } finally {
       setIsLoading(false);
-      toast.success("Simulation completed successfully!");
-    }, 800);
+    }
   };
 
   return (
@@ -92,7 +142,7 @@ export default function page() {
           <SearchBar
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
-            dummyItems={dummyItems}
+            items={allItems}
             isOpen={isOpen}
             setOpen={setOpen}
           />
