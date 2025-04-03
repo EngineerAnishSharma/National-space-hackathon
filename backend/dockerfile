@@ -1,0 +1,20 @@
+# Use Python 3.11 as the base image
+FROM python:3.11-slim
+
+# Set working directory (backend, not app/)
+WORKDIR /backend
+
+# Copy only the requirements file first for better caching
+COPY backend/requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entire backend directory
+COPY backend/ . 
+
+# Expose the port your app runs on
+EXPOSE 8000
+
+# Command to run the application
+CMD ["python", "-m", "app.main"]
