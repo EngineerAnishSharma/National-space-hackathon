@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ItemsTable } from "@/components/ItemsTable";
 import { ContainersTable } from "@/components/ContainersTable";
@@ -32,49 +33,55 @@ export function DataTablesTabs() {
   };
 
   return (
-    <div className="w-full bg-gray-800 text-gray-100 rounded-lg shadow-lg overflow-hidden">
+    <div className="w-full h-full bg-gray-900 text-gray-100 rounded-lg shadow-xl">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700 bg-gray-800">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-indigo-500 rounded flex items-center justify-center">
+      <div className="flex items-center justify-between px-6 py-3 bg-gradient-to-r from-gray-900 to-gray-800 border-b border-indigo-900/30">
+        <div className="flex items-center space-x-4">
+          <div className="w-10 h-10 rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-700/20">
             <Package size={18} className="text-white" />
           </div>
-          <h2 className="text-xl font-bold tracking-tight">Inventory Data</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-white">
+            Inventory Data
+          </h2>
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Tabs Navigation */}
       <Tabs defaultValue="items" className="w-full">
-        <div className="flex justify-between items-center">
-        <TabsList className="grid w-auto grid-cols-2 border-b border-gray-700 bg-gray-800">
-          <TabsTrigger
-            value="items"
-            className="data-[state=active]:bg-gray-700 data-[state=active]:text-white data-[state=inactive]:text-gray-400"
-          >
-            Items
-          </TabsTrigger>
-          <TabsTrigger
-            value="containers"
-            className="data-[state=active]:bg-gray-700 data-[state=active]:text-white data-[state=inactive]:text-gray-400"
-          >
-            Containers
-          </TabsTrigger>
-        </TabsList>
-
-        <button
-          onClick={handleExport}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded mr-4"
-        >
-          Export CSV
-        </button>
+        <div className="p-2 bg-gray-900 border-b border-gray-800">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-800 p-1 rounded-md border-2 border-gray-700 shadow-lg shadow-black/10 h-auto">
+            <TabsTrigger
+              value="items"
+              className="py-3 flex items-center justify-center gap-2 rounded-md transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-indigo-700/20 data-[state=active]:border-indigo-700 data-[state=inactive]:text-gray-300 data-[state=inactive]:hover:bg-gray-700 data-[state=inactive]:hover:text-gray-100"
+            >
+              <Package
+                size={16}
+                className="data-[state=active]:text-white data-[state=inactive]:text-indigo-400"
+              />
+              <span>Items</span>
+            </TabsTrigger>
+            <TabsTrigger
+              value="containers"
+              className="py-3 flex items-center justify-center gap-2 rounded-md transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-indigo-700/20 data-[state=active]:border-indigo-700 data-[state=inactive]:text-gray-300 data-[state=inactive]:hover:bg-gray-700 data-[state=inactive]:hover:text-gray-100"
+            >
+              <Archive
+                size={16}
+                className="data-[state=active]:text-white data-[state=inactive]:text-indigo-400"
+              />
+              <span>Containers</span>
+            </TabsTrigger>
+          </TabsList>
         </div>
 
-        <TabsContent value="items" className="p-4">
-          <ItemsTable />
-        </TabsContent>
-        <TabsContent value="containers" className="p-4">
-          <ContainersTable />
-        </TabsContent>
+        {/* Tab Contents */}
+        <div className="p-6 bg-gray-900">
+          <TabsContent value="items" className="mt-0">
+            <ItemsTable />
+          </TabsContent>
+          <TabsContent value="containers" className="mt-0">
+            <ContainersTable />
+          </TabsContent>
+        </div>
       </Tabs>
     </div>
   );
