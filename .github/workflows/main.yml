@@ -25,7 +25,7 @@ jobs:
       run: |
         gcloud auth configure-docker us-docker.pkg.dev --quiet
         # Explicitly authenticate with service account
-        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+        gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
 
     - name: Build and push Docker image
       run: |
