@@ -195,7 +195,7 @@ const ISS = ({
             id="Progress 1"
             className="hover-group"
             onClick={() => handleZoneClick("storage-1")}
-            onMouseEnter={(e) => handleMouseEnter(e, "storage-1", "Progress 1")}
+            onMouseEnter={(e) => handleMouseEnter(e, "storage-1", "Storage 1")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -217,7 +217,7 @@ const ISS = ({
             id="Progress 2"
             className="hover-group"
             onClick={() => handleZoneClick("storage-2")}
-            onMouseEnter={(e) => handleMouseEnter(e, "storage-2", "Progress 2")}
+            onMouseEnter={(e) => handleMouseEnter(e, "storage-2", "Storage- 2")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -275,7 +275,7 @@ const ISS = ({
             id="Zvezda"
             className="hover-group"
             onClick={() => handleZoneClick("service-module")}
-            onMouseEnter={(e) => handleMouseEnter(e, "service-module", "Zvezda")}
+            onMouseEnter={(e) => handleMouseEnter(e, "service-module", "Service Module")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -383,7 +383,7 @@ const ISS = ({
             id="Zarya"
             className="hover-group"
             onClick={() => handleZoneClick("fgb")}
-            onMouseEnter={(e) => handleMouseEnter(e, "fgb", "Zarya")}
+            onMouseEnter={(e) => handleMouseEnter(e, "fgb", "FGB")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -498,7 +498,7 @@ const ISS = ({
             id="Harmony"
             className="hover-group"
             onClick={() => handleZoneClick("node-2")}
-            onMouseEnter={(e) => handleMouseEnter(e, "node-2", "Harmony")}
+            onMouseEnter={(e) => handleMouseEnter(e, "node-2", "Node-2")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -530,7 +530,7 @@ const ISS = ({
             id="Destiny"
             className="hover-group"
             onClick={() => handleZoneClick("us-lab")}
-            onMouseEnter={(e) => handleMouseEnter(e, "us-lab", "Destiny")}
+            onMouseEnter={(e) => handleMouseEnter(e, "us-lab", "US Lab")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -591,7 +591,7 @@ const ISS = ({
             id="Kibo"
             className="hover-group"
             onClick={() => handleZoneClick("jap-lab")}
-            onMouseEnter={(e) => handleMouseEnter(e, "jap-lab", "Kibo")}
+            onMouseEnter={(e) => handleMouseEnter(e, "jap-lab", "Jap Lab")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -643,7 +643,7 @@ const ISS = ({
             id="Unity"
             className="hover-group"
             onClick={() => handleZoneClick("node-1")}
-            onMouseEnter={(e) => handleMouseEnter(e, "node-1", "Unity")}
+            onMouseEnter={(e) => handleMouseEnter(e, "node-1", "Node 1")}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
