@@ -27,7 +27,6 @@ def get_all_current_placements(db: Session) -> List[PlacementResponseItem]:
 
     Args:
         db: The SQLAlchemy database session.
-
     Returns:
         A list of PlacementResponseItem objects for all items currently placed.
         Returns an empty list if no placements exist in the database.
