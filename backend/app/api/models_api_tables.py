@@ -68,7 +68,7 @@ class ItemApiSchema(BaseModel):
     depleted: bool = Field(..., description="True if status is WASTE_DEPLETED")
 
     class Config:
-        orm_mode = True # For Pydantic V1
+        from_attributes = True
         # from_attributes = True # For Pydantic V2+
         allow_population_by_field_name = True # Allow using 'itemId' and 'expiryDate'
 
