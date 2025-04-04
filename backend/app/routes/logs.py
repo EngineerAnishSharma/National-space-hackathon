@@ -1,9 +1,9 @@
 # /app/routes/logs.py
-from typing import List
+from typing import List, get_type_hints
 from flask import Blueprint, request, jsonify
 from app.database import get_db
 from app.models_db import Log # Import DB model for querying
-from app.models_api import LogsResponse, LogResponseItem # Import response models
+from app.models_api import LogDetail, LogsResponse, LogResponseItem # Import response models
 from sqlalchemy import desc, asc
 from datetime import datetime
 import iso8601
@@ -25,49 +25,54 @@ def handle_get_logs():
 
         query = db.query(Log)
 
-        # Apply filters based on query parameters
+        # Apply filters
         if start_date_str:
             try:
                 start_date = iso8601.parse_date(start_date_str)
                 query = query.filter(Log.timestamp >= start_date)
             except (iso8601.ParseError, ValueError):
-                 return jsonify({"error": f"Invalid startDate format: {start_date_str}. Use ISO 8601."}), 400
+                return jsonify({"error": f"Invalid startDate format: {start_date_str}. Use ISO 8601."}), 400
+
         if end_date_str:
-             try:
-                 end_date = iso8601.parse_date(end_date_str)
-                 # Add time component to make it inclusive of the end date
-                 end_date = end_date.replace(hour=23, minute=59, second=59, microsecond=999999)
-                 query = query.filter(Log.timestamp <= end_date)
-             except (iso8601.ParseError, ValueError):
-                  return jsonify({"error": f"Invalid endDate format: {end_date_str}. Use ISO 8601."}), 400
+            try:
+                end_date = iso8601.parse_date(end_date_str)
+                end_date = end_date.replace(hour=23, minute=59, second=59, microsecond=999999)
+                query = query.filter(Log.timestamp <= end_date)
+            except (iso8601.ParseError, ValueError):
+                return jsonify({"error": f"Invalid endDate format: {end_date_str}. Use ISO 8601."}), 400
 
         if item_id:
             query = query.filter(Log.itemId_fk == item_id)
         if user_id:
             query = query.filter(Log.userId == user_id)
         if action_type:
-             # Assuming actionType values match LogActionType enum members
             query = query.filter(Log.actionType == action_type)
 
-        # Order results (e.g., newest first)
+        # Get logs from DB
         logs_db = query.order_by(desc(Log.timestamp)).all()
 
-        # Prepare response using Pydantic models
+        # ✅ Get allowed keys from LogDetail model
+        allowed_detail_keys = set(get_type_hints(LogDetail).keys())
+
         logs_response_items: List[LogResponseItem] = []
         for log in logs_db:
             details_dict = None
             if log.details_json:
                 try:
-                    details_dict = json.loads(log.details_json)
+                    raw_details = json.loads(log.details_json)
+
+                    allowed_detail_keys = {"fromContainer", "toContainer", "reason"}
+                    details_dict = {k: v for k, v in raw_details.items() if k in allowed_detail_keys}
+
                 except json.JSONDecodeError:
-                     print(f"Warning: Could not parse details_json for log ID {log.id}")
-                     details_dict = {"error": "Failed to parse details JSON"}
+                    print(f"Warning: Could not parse details_json for log ID {log.id}")
+                    details_dict = {"error": "Failed to parse details JSON"}
 
             logs_response_items.append(LogResponseItem(
                 timestamp=log.timestamp,
                 userId=log.userId,
-                actionType=log.actionType.value, # Get string value from enum
-                itemId=log.itemId_fk, # Map from DB field name
+                actionType=log.actionType.value,
+                itemId=log.itemId_fk,
                 details=details_dict
             ))
 
