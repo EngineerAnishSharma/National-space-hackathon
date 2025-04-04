@@ -167,6 +167,8 @@ def get_items_service(
     # --- Prepare Response DTOs ---
     items_dto: List[ItemApiSchema] = []
     for item_db, container_id_fk, current_zone in results_db:
+        
+        print(item_db.usageLimit)
         item_dto = ItemApiSchema(
             itemId=item_db.itemId,
             name=item_db.name,
