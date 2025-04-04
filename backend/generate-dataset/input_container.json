@@ -1,0 +1,396 @@
+{
+    "containers":[
+    {
+      "containerId": "SB01",
+      "zone": "Sanitation_Bay",
+      "width": 25,
+      "depth": 42.5,
+      "height": 200
+    },
+    {
+      "containerId": "SB02",
+      "zone": "Sanitation_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "SB03",
+      "zone": "Sanitation_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "SB04",
+      "zone": "Sanitation_Bay",
+      "width": 200,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "CC01",
+      "zone": "Command_Center",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "CC02",
+      "zone": "Command_Center",
+      "width": 100,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "CC03",
+      "zone": "Command_Center",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "EB01",
+      "zone": "Engineering_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 50
+    },
+    {
+      "containerId": "EB02",
+      "zone": "Engineering_Bay",
+      "width": 25,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "PB01",
+      "zone": "Power_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "PB02",
+      "zone": "Power_Bay",
+      "width": 200,
+      "depth": 21.25,
+      "height": 100
+    },
+    {
+      "containerId": "PB03",
+      "zone": "Power_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "PB04",
+      "zone": "Power_Bay",
+      "width": 100,
+      "depth": 42.5,
+      "height": 200
+    },
+    {
+      "containerId": "PB05",
+      "zone": "Power_Bay",
+      "width": 200,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "ES01",
+      "zone": "External_Storage",
+      "width": 100,
+      "depth": 42.5,
+      "height": 50
+    },
+    {
+      "containerId": "ES02",
+      "zone": "External_Storage",
+      "width": 100,
+      "depth": 42.5,
+      "height": 200
+    },
+    {
+      "containerId": "ES03",
+      "zone": "External_Storage",
+      "width": 100,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "ES04",
+      "zone": "External_Storage",
+      "width": 25,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "L01",
+      "zone": "Lab",
+      "width": 100,
+      "depth": 21.25,
+      "height": 400
+    },
+    {
+      "containerId": "L02",
+      "zone": "Lab",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "L03",
+      "zone": "Lab",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "L04",
+      "zone": "Lab",
+      "width": 200,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "TA01",
+      "zone": "Storage_Bay",
+      "width": 100,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "TA02",
+      "zone": "Storage_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "TA03",
+      "zone": "Storage_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 50
+    },
+    {
+      "containerId": "NA01",
+      "zone": "Engine_Bay",
+      "width": 200,
+      "depth": 21.25,
+      "height": 200
+    },
+    {
+      "containerId": "NA02",
+      "zone": "Engine_Bay",
+      "width": 100,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "NA03",
+      "zone": "Engine_Bay",
+      "width": 200,
+      "depth": 85,
+      "height": 400
+    },
+    {
+      "containerId": "LS01",
+      "zone": "Life_Support",
+      "width": 25,
+      "depth": 42.5,
+      "height": 200
+    },
+    {
+      "containerId": "LS02",
+      "zone": "Life_Support",
+      "width": 25,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "LS03",
+      "zone": "Life_Support",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "LS04",
+      "zone": "Life_Support",
+      "width": 100,
+      "depth": 42.5,
+      "height": 100
+    },
+    {
+      "containerId": "LS05",
+      "zone": "Life_Support",
+      "width": 100,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "MB01",
+      "zone": "Maintenance_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 100
+    },
+    {
+      "containerId": "MB02",
+      "zone": "Maintenance_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "MB03",
+      "zone": "Maintenance_Bay",
+      "width": 50,
+      "depth": 85,
+      "height": 50
+    },
+    {
+      "containerId": "MB04",
+      "zone": "Maintenance_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "CQ01",
+      "zone": "Crew_Quarters",
+      "width": 50,
+      "depth": 21.25,
+      "height": 400
+    },
+    {
+      "containerId": "CQ02",
+      "zone": "Crew_Quarters",
+      "width": 50,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "CQ03",
+      "zone": "Crew_Quarters",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "CQ04",
+      "zone": "Crew_Quarters",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "EA01",
+      "zone": "Medical_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "EA02",
+      "zone": "Medical_Bay",
+      "width": 100,
+      "depth": 21.25,
+      "height": 400
+    },
+    {
+      "containerId": "EA03",
+      "zone": "Medical_Bay",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "C01",
+      "zone": "Cockpit",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "C02",
+      "zone": "Cockpit",
+      "width": 50,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "C03",
+      "zone": "Cockpit",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "C04",
+      "zone": "Cockpit",
+      "width": 25,
+      "depth": 42.5,
+      "height": 200
+    },
+    {
+      "containerId": "C05",
+      "zone": "Cockpit",
+      "width": 100,
+      "depth": 21.25,
+      "height": 200
+    },
+    {
+      "containerId": "A01",
+      "zone": "Airlock",
+      "width": 100,
+      "depth": 170,
+      "height": 200
+    },
+    {
+      "containerId": "A02",
+      "zone": "Airlock",
+      "width": 100,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "A03",
+      "zone": "Airlock",
+      "width": 100,
+      "depth": 170,
+      "height": 400
+    },
+    {
+      "containerId": "G01",
+      "zone": "Greenhouse",
+      "width": 200,
+      "depth": 85,
+      "height": 200
+    },
+    {
+      "containerId": "G02",
+      "zone": "Greenhouse",
+      "width": 100,
+      "depth": 85,
+      "height": 400
+    },
+    {
+      "containerId": "G03",
+      "zone": "Greenhouse",
+      "width": 100,
+      "depth": 85,
+      "height": 400
+    },
+    {
+      "containerId": "G04",
+      "zone": "Greenhouse",
+      "width": 100,
+      "depth": 42.5,
+      "height": 200
+    }
+]
+}
