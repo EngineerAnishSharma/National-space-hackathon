@@ -30,3 +30,4 @@ requirements.txt.lock
 
 # iss_cargo.db
 
+cpp_placement_service/*
