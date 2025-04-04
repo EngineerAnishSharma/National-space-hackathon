@@ -21,6 +21,17 @@ import {
 import { Item, PaginatedItemResponse, ItemStatus } from "@/data/types";
 import { format } from "date-fns";
 import { Search, FileDown, Filter } from "lucide-react";
+import { MoreVertical } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -35,6 +46,15 @@ export function ItemsTable() {
   const [statusFilter, setStatusFilter] = useState<ItemStatus | "">("");
   const [preferredZoneFilter, setPreferredZoneFilter] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+  const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [containerId, setContainerId] = useState("");
+  const [startWidth, setStartWidth] = useState(0);
+  const [startDepth, setStartDepth] = useState(0);
+  const [startHeight, setStartHeight] = useState(0);
+  const [endWidth, setEndWidth] = useState(0);
+  const [endDepth, setEndDepth] = useState(0);
+  const [endHeight, setEndHeight] = useState(0);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -87,6 +107,71 @@ export function ItemsTable() {
     console.log("Export Items Table Data...");
   };
 
+  const handlePlaceSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedItem) return;
+  
+    const toastId = toast.loading("Placing item...");
+  
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/place`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          itemId: selectedItem.itemId,
+          userId: "current-user-id", // Replace with actual user ID
+          timestamp: new Date().toISOString(),
+          containerId: containerId,
+          position: {
+            startCoordinates: {
+              width: startWidth,
+              depth: startDepth,
+              height: startHeight
+            },
+            endCoordinates: {
+              width: endWidth,
+              depth: endDepth,
+              height: endHeight
+            }
+          }
+        })
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to place item');
+      }
+  
+      toast.success("Item placed successfully!", {
+        id: toastId,
+        icon: '✅',
+        style: {
+          background: '#1f2937',
+          color: '#fff',
+          border: '1px solid #374151',
+        },
+      });
+  
+      // Close modal and refetch data
+      setIsPlaceModalOpen(false);
+      fetchData();
+    } catch (err: any) {
+      toast.error(err.message || "Error placing item", {
+        id: toastId,
+        icon: '❌',
+        style: {
+          background: '#1f2937',
+          color: '#fff',
+          border: '1px solid #374151',
+        },
+      });
+      console.error('Error placing item:', err);
+    }
+  };
+
   const getStatusBadge = (status: ItemStatus) => {
     // Normalize status to uppercase to match colorMap keys
     const normalizedStatus = status.toUpperCase();
@@ -113,6 +198,13 @@ export function ItemsTable() {
   return (
     <div className="w-full bg-gray-800 text-gray-100 rounded-lg shadow-lg overflow-hidden border-2 border-gray-700">
       {/* Header */}
+      <Toaster
+    position="top-center"
+    toastOptions={{
+      className: 'bg-gray-800 text-gray-100 border border-gray-700',
+      duration: 3000,
+    }}
+  />;
       <div className="flex items-center justify-between px-6 py-3 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-750">
         <h2 className="text-xl font-bold">Items Overview</h2>
         <div className="text-sm text-gray-400">{totalItems} entries</div>
@@ -213,6 +305,9 @@ export function ItemsTable() {
               <TableHead className="text-gray-300 font-semibold">
                 Mass
               </TableHead>
+              <TableHead className="text-gray-300 font-semibold">
+              Actions
+            </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -297,13 +392,13 @@ export function ItemsTable() {
             ) : (
               items.map((item) => (
                 <TableRow
-                  key={item.id}
+                  key={item.itemId}
                   className="hover:bg-indigo-900/20 transition border-b border-gray-700"
                 >
                   <TableCell className="font-medium">{item.name}</TableCell>
                   <TableCell className="font-mono text-sm">
                     <span className="px-2 py-1 bg-gray-700 rounded-md text-gray-300 border border-gray-600">
-                      {item.id}
+                      {item.itemId}
                     </span>
                   </TableCell>
                   <TableCell>{getStatusBadge(item.status)}</TableCell>
@@ -335,9 +430,9 @@ export function ItemsTable() {
                     )}
                   </TableCell>
                   <TableCell>
-                    {item.expirationDate ? (
+                    {item.expiryDate ? (
                       <span className="text-amber-300">
-                        {format(new Date(item.expirationDate), "PP")}
+                        {format(new Date(item.expiryDate), "PP")}
                       </span>
                     ) : (
                       <span className="text-gray-500">N/A</span>
@@ -384,6 +479,19 @@ export function ItemsTable() {
                     <span className="font-medium">{item.mass}</span>
                     <span className="text-gray-400 text-xs ml-1">kg</span>
                   </TableCell>
+                <TableCell>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => {
+                      setSelectedItem(item);
+                      setIsPlaceModalOpen(true);
+                    }}
+                    className="hover:bg-gray-700"
+                  >
+                    <MoreVertical size={16} />
+                  </Button>
+                </TableCell>
                 </TableRow>
               ))
             )}
@@ -419,6 +527,120 @@ export function ItemsTable() {
           </div>
         </div>
       )}
+
+      {/* Place Modal */}
+<Dialog open={isPlaceModalOpen} onOpenChange={setIsPlaceModalOpen}>
+  <DialogContent className="bg-gray-800 border-2 border-gray-700 text-white max-w-md">
+    <DialogHeader>
+      <DialogTitle className="text-lg font-semibold">
+        Place Item: {selectedItem?.name}
+      </DialogTitle>
+    </DialogHeader>
+    
+    <form onSubmit={handlePlaceSubmit} className="space-y-4 pt-4">
+      <div className="space-y-2">
+        <Label htmlFor="containerId">Container ID</Label>
+        <Input
+          id="containerId"
+          value={containerId}
+          onChange={(e) => setContainerId(e.target.value)}
+          className="bg-gray-700 border-gray-600"
+          required
+        />
+      </div>
+      
+      <div className="space-y-2">
+        <Label>Start Coordinates</Label>
+        <div className="flex gap-2">
+          <div className="flex-1">
+            <Input
+              type="number"
+              placeholder="Width"
+              value={startWidth}
+              onChange={(e) => setStartWidth(Number(e.target.value))}
+              className="bg-gray-700 border-gray-600"
+              required
+            />
+          </div>
+          <div className="flex-1">
+            <Input
+              type="number"
+              placeholder="Depth"
+              value={startDepth}
+              onChange={(e) => setStartDepth(Number(e.target.value))}
+              className="bg-gray-700 border-gray-600"
+              required
+            />
+          </div>
+          <div className="flex-1">
+            <Input
+              type="number"
+              placeholder="Height"
+              value={startHeight}
+              onChange={(e) => setStartHeight(Number(e.target.value))}
+              className="bg-gray-700 border-gray-600"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <Label>End Coordinates</Label>
+        <div className="flex gap-2">
+          <div className="flex-1">
+            <Input
+              type="number"
+              placeholder="Width"
+              value={endWidth}
+              onChange={(e) => setEndWidth(Number(e.target.value))}
+              className="bg-gray-700 border-gray-600"
+              required
+            />
+          </div>
+          <div className="flex-1">
+            <Input
+              type="number"
+              placeholder="Depth"
+              value={endDepth}
+              onChange={(e) => setEndDepth(Number(e.target.value))}
+              className="bg-gray-700 border-gray-600"
+              required
+            />
+          </div>
+          <div className="flex-1">
+            <Input
+              type="number"
+              placeholder="Height"
+              value={endHeight}
+              onChange={(e) => setEndHeight(Number(e.target.value))}
+              className="bg-gray-700 border-gray-600"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      
+      <DialogFooter>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => setIsPlaceModalOpen(false)}
+          className="bg-gray-700 border-gray-600 hover:bg-gray-600"
+        >
+          Cancel
+        </Button>
+        <Button 
+          type="submit"
+          className="bg-indigo-600 hover:bg-indigo-700"
+        >
+          Place Item
+        </Button>
+      </DialogFooter>
+    </form>
+  </DialogContent>
+</Dialog>
+
     </div>
   );
 }

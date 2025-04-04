@@ -20,12 +20,12 @@ export interface Container {
 }
 
 export interface Item {
-    id: string; // Corresponds to itemId
+    itemId: string; // Corresponds to itemId
     name: string;
     containerId: string | null;
     quantity: number; // Always 1 in this implementation
     mass: number;
-    expirationDate: string | null; // ISO date string
+    expiryDate: string | null; // ISO date string
     width: number;
     depth: number;
     height: number;
