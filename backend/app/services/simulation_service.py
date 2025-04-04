@@ -1,4 +1,4 @@
-from operator import or_
+from sqlalchemy import or_
 from sqlite3 import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List, Tuple, Optional
@@ -41,7 +41,6 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
     items_expired_changes: List[SimulationItemChange] = []
     items_depleted_changes: List[SimulationItemChange] = []
 
-    # Optimize query: Fetch all relevant items at once
     item_filters = []
     for usage_request in request_data.itemsToBeUsedPerDay:
         if usage_request.itemId:
@@ -49,10 +48,16 @@ def simulate_time_passage(db: Session, request_data: SimulationRequest, user_id:
         elif usage_request.name:
             item_filters.append(DBItem.name == usage_request.name)
 
+    # Ensure all filters are valid before applying
+    item_filters = [f for f in item_filters if f is not None]
+
+
     # Build the query
     query = db.query(DBItem).filter(DBItem.status == ItemStatus.ACTIVE) # Default filter
-    if item_filters:
-        query = query.filter(or_(*item_filters)) # Add usage filters
+    if len(item_filters) == 1:
+        query = query.filter(item_filters[0])
+    elif len(item_filters) > 1:
+        query = query.filter(or_(*item_filters))
 
 
     try:
