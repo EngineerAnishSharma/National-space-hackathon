@@ -1,65 +1,106 @@
-# National Space Hackathon
+# National Space Hackathon Project
 
-Welcome to the **National Space Hackathon** project! 🚀 This repository contains the backend and other components needed to run the application.
+This repository contains a full-stack application for the National Space Hackathon with a Python Flask backend and Next.js frontend.
 
-## Getting Started
+## Project Structure
 
-Follow the steps below to set up and run the backend successfully.
+```
+├── backend/               # Python Flask backend
+│   ├── app/               # Main application code
+│   │   ├── main.py        # Entry point for the backend
+│   ├── requirements.txt   # Python dependencies
+│
+├── frontend/              # Next.js frontend
+│   ├── src/               # Source code
+│   ├── package.json       # Node.js dependencies
+│
+├── dockerfile             # Docker configuration
+├── start.sh               # Service startup script
+```
 
-### Prerequisites
-Ensure you have the following installed:
-- Python (3.11 better choice)
-- pip (latest version recommended)
-- Virtual environment (venv or conda)
+## Setup Instructions
 
-### Backend Setup
+### Using Docker (Recommended)
 
-1. **Navigate to the backend directory:**
-   ```sh
-   cd backend
-   ```
+The easiest way to run the application is using Docker:
 
-2. **Set up a virtual environment:**
-   - Using `venv`:
-     ```sh
-     python -m venv venv
-     ```
-   - Using `conda`:
-     ```sh
-     conda create --name myenv python=3.8
-     ```
+1. Build the Docker image:
+```bash
+docker build -t space-app .
+```
 
-3. **Activate the virtual environment:**
-   - For `venv`:
-     - On Windows:
-       ```sh
-       venv\Scripts\activate
-       ```
-     - On macOS/Linux:
-       ```sh
-       source venv/bin/activate
-       ```
-   - For `conda`:
-     ```sh
-     conda activate myenv
-     ```
+2. Run the container:
+```bash
+docker run -p 8000:8000 -p 3000:3000 space-app
+```
 
-4. **Install dependencies:**
-   ```sh
-   pip install -r requirements.txt
-   ```
+This will start both the backend and frontend services in a single container.
 
-5. **Run the backend:**
-   ```sh
-   python -m app.main
-   ```
-   **⚠️ Do not run:**
-   ```sh
-   cd app
-   python main.py  # This won't work ❌
-   ```
+### Manual Setup
 
-Now your backend should be running successfully! 🎉
+If you prefer to run the services separately without Docker:
+
+#### Backend Setup
+
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run the Flask application
+python -m app.main
+```
+
+#### Frontend Setup
+
+```bash
+# Navigate to the frontend directory
+cd frontend
+
+# Install Node.js dependencies
+npm i --legacy-peer-deps
+
+# Build the frontend
+npm run build
+
+# Start the frontend server
+npm run start
+```
+
+## Accessing the Application
+
+Once running, the application can be accessed at:
+
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+
+## API Endpoints
+
+The backend provides several API endpoints including:
+
+- `GET /`: API status endpoint
+- `GET /api/client/iss_cargo`: ISS cargo management data
+
+Additional endpoints are available for placement, simulation, waste management, and search functionality.
+
+## Development
+
+When making changes to the codebase:
+
+1. For backend changes, restart the Flask server
+2. For frontend changes, Next.js supports hot-reloading in development mode
+
+## Troubleshooting
+
+If you encounter issues with Node.js dependencies, try using the `--legacy-peer-deps` flag:
+
+```bash
+npm i --legacy-peer-deps
+```
+
+For Docker-related issues, ensure Docker is correctly installed and running on your system.
 
 ## Contributing
 Feel free to contribute by opening issues or submitting pull requests.
