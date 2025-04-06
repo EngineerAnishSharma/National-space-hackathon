@@ -1,16 +1,16 @@
-#!/bin/bash
-# Start the backend server
+#!/bin/sh
+# Start the backend
 cd /app/backend
 python -m app.main &
 BACKEND_PID=$!
 
-# Start the frontend server
+# Start the frontend
 cd /app/frontend
-npm start &
+npm run start &
 FRONTEND_PID=$!
 
-# Handle termination signals
+# Handle termination properly
 trap "kill $BACKEND_PID $FRONTEND_PID; exit" SIGINT SIGTERM
 
-# Keep the script running
+# Wait for processes to finish
 wait 

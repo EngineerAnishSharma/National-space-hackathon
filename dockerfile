@@ -10,31 +10,27 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-# Copy and install backend requirements
-COPY backend/requirements.txt /app/backend/
-RUN pip install --no-cache-dir -r /app/backend/requirements.txt
-
-# Copy and install frontend requirements
-COPY frontend/package*.json /app/frontend/
-WORKDIR /app/frontend
-RUN npm install
-
-# Copy the rest of the application
-COPY backend/ /app/backend/
+# Copy application files
 COPY frontend/ /app/frontend/
-COPY start.sh /app/
+COPY backend/ /app/backend/
 
-# Build frontend (production build)
+# Install backend dependencies
+WORKDIR /app/backend
+RUN pip install -r requirements.txt
+
+# Install frontend dependencies
 WORKDIR /app/frontend
+RUN npm i --legacy-peer-deps
 RUN npm run build
 
-# Make the startup script executable
+# Create startup script
 WORKDIR /app
-RUN chmod +x /app/start.sh
+RUN echo '#!/bin/sh\ncd /app/backend && python -m app.main & \ncd /app/frontend && npm run start\nwait' > /app/start.sh && \
+    chmod +x /app/start.sh
 
 # Expose ports
 EXPOSE 8000 3000
 
-# Run the application
+# Run both services
 CMD ["/app/start.sh"]
 
