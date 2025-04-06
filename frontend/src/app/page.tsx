@@ -70,7 +70,9 @@ export default function HomePage() {
   if (isLoading) {
     return (
       <div className="h-screen bg-[#01041f] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+        <div className="text-white/90 text-lg animate-pulse font-space">
+          Initializing System...
+        </div>
       </div>
     );
   }
@@ -79,10 +81,25 @@ export default function HomePage() {
     <div className="h-screen">
       <div className="relative h-screen bg-[#01041f]">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#01041f] to-[#082b33]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#01041f] via-[#041835] to-[#082b33]" />
           <StarryBackground />
         </div>
         <div className="relative z-10">
+          <div className="pt-6 pb-4 text-center">
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r 
+              from-blue-400 to-cyan-300 font-space tracking-wider">
+              SPACE INVENTORY MANAGEMENT SYSTEM
+            </h1>
+            <p className="text-blue-400/70 mt-2 text-sm font-space tracking-widest">
+              ISS CARGO TRACKING AND MANAGEMENT
+            </p>
+            <div className="absolute top-6 right-6 flex items-center gap-2 bg-black/20 
+              backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <span className="text-white/70 text-sm font-space">SYSTEM ONLINE</span>
+            </div>
+          </div>
+
           {!isLoading && (
             <>
               <ISS
@@ -97,25 +114,14 @@ export default function HomePage() {
                 containers={containers}
                 items={items}
               />
-<ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
-
-{/* <div
-  className="fixed bottom-20 right-4 z-50 flex items-center gap-1 bg-black/20 backdrop-blur-md 
-    border border-white/10 rounded-full shadow-lg px-2"
->
-  <button
-    onClick={zoomIn}
-    className="p-2 hover:bg-white/10 text-white/90 rounded-full
-      transition-all duration-200 hover:scale-105"
-  >
-    <ZoomIn className="w-5 h-5" />
-  </button>
-</div> */}
+              <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
+              
               <Link 
                 href="/management"
-                className="fixed bottom-30 right-2 z-50 px-6 py-3 bg-black/20 backdrop-blur-md 
-                  border border-white/10 text-white/90 rounded-full shadow-lg flex items-center gap-2
-                  transition-all duration-200 hover:scale-105 hover:bg-white/10"
+                className="fixed bottom-20 right-4 z-50 px-6 py-3 bg-black/30 backdrop-blur-md 
+                  border border-blue-500/20 text-white/90 rounded-full shadow-lg flex items-center gap-2
+                  transition-all duration-200 hover:scale-105 hover:bg-blue-900/20
+                  hover:border-blue-400/30 font-space tracking-wide"
               >
                 <Plus className="w-5 h-5" />
                 Manage Items & Containers
