@@ -91,8 +91,69 @@ export default function ManagementPage() {
   const [showAddContainerModal, setShowAddContainerModal] = useState(false);
   const [listView, setListView] = useState<'items' | 'containers'>('items');
 
-  const [items, setItems] = useState<Item[]>([]);
-  const [containers, setContainers] = useState<Container[]>([]);
+  // Add initial items data
+  const [items, setItems] = useState<Item[]>([
+    {
+      _key: 'default-1',
+      itemId: 'ITEM-001',
+      name: 'Medical Supplies Kit',
+      width: 45,
+      depth: 30,
+      height: 20,
+      mass: 5.5,
+      priority: 1,
+      expiryDate: '2024-12-31',
+      usageLimit: 100,
+      preferredZone: 'medical-bay'
+    },
+    {
+      _key: 'default-2',
+      itemId: 'ITEM-002',
+      name: 'Emergency Food Rations',
+      width: 60,
+      depth: 40,
+      height: 30,
+      mass: 10,
+      priority: 2,
+      expiryDate: '2024-06-30',
+      usageLimit: 50,
+      preferredZone: 'storage'
+    },
+    {
+      _key: 'default-3',
+      itemId: 'ITEM-003',
+      name: 'Space Suit Repair Kit',
+      width: 50,
+      depth: 35,
+      height: 25,
+      mass: 7.5,
+      priority: 1,
+      expiryDate: '2025-12-31',
+      usageLimit: 20,
+      preferredZone: 'airlock'
+    }
+  ]);
+
+  // Add initial containers data
+  const [containers, setContainers] = useState<Container[]>([
+    {
+      _key: 'default-container-1',
+      containerId: 'CONT-001',
+      zone: 'medical-bay',
+      width: 200,
+      depth: 150,
+      height: 180,
+    },
+    {
+      _key: 'default-container-2',
+      containerId: 'CONT-002',
+      zone: 'storage',
+      width: 300,
+      depth: 200,
+      height: 220,
+    }
+  ]);
+
   const [isLoadingPlacement, setIsLoadingPlacement] = useState(false);
   const [placementStatus, setPlacementStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
@@ -132,8 +193,8 @@ export default function ManagementPage() {
 
   const processItemCsvData = (data: Record<string, string>[]) => {
     const newItems: Item[] = data.map((row, index) => ({
-      _key: `csv-<span class="math-inline">\{Date\.now\(\)\}\-</span>{index}`,
-      itemId: row['item_id'] || `generated-<span class="math-inline">\{Date\.now\(\)\}\-</span>{index}`,
+      _key: `csv-${Date.now()}-${index}`,
+      itemId: row['item_id'] || `generated-${Date.now()}-${index}`,
       name: row['name'] || 'Unnamed Item',
       width: parseFloat(row['width_cm']) || null,
       depth: parseFloat(row['depth_cm']) || null,
@@ -150,8 +211,8 @@ export default function ManagementPage() {
 
   const processContainerCsvData = (data: Record<string, string>[]) => {
     const newContainers: Container[] = data.map((row, index) => ({
-      _key: `csv-cont-<span class="math-inline">\{Date\.now\(\)\}\-</span>{index}`,
-      containerId: row['container_id'] || `generated-cont-<span class="math-inline">\{Date\.now\(\)\}\-</span>{index}`,
+      _key: `csv-cont-${Date.now()}-${index}`,
+      containerId: row['container_id'] || `generated-cont-${Date.now()}-${index}`,
       zone: row['zone'] || 'Default Zone',
       width: parseFloat(row['width_cm']) || null,
       depth: parseFloat(row['depth_cm']) || null,

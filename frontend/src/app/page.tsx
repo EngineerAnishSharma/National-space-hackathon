@@ -117,14 +117,14 @@ export default function HomePage() {
               <ZoomControl scale={scale} setScale={setScale} resetView={resetView} />
               
               <Link 
-                href="/management"
+                href="/simulate"
                 className="fixed bottom-20 right-4 z-50 px-6 py-3 bg-black/30 backdrop-blur-md 
                   border border-blue-500/20 text-white/90 rounded-full shadow-lg flex items-center gap-2
                   transition-all duration-200 hover:scale-105 hover:bg-blue-900/20
                   hover:border-blue-400/30 font-space tracking-wide"
               >
                 <Plus className="w-5 h-5" />
-                Manage Items & Containers
+               Simulate
               </Link>
             </>
           )}

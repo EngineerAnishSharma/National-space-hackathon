@@ -280,11 +280,11 @@ export default function WasteManagement() {
             </label>
             <input
               type="date"
+              className="mt-1 block w-full px-3 py-2 bg-black/20 border border-gray-700 
+                rounded-md text-gray-300 shadow-sm focus:border-indigo-500 focus:ring 
+                focus:ring-indigo-500/20 focus:ring-opacity-50"
               value={undockingDate}
               onChange={(e) => setUndockingDate(e.target.value)}
-              defaultValue={currentDate}
-              disabled={showReturnPlan}
-              className="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-60"
             />
           </div>
           <div className="flex-1 min-w-[200px]">
